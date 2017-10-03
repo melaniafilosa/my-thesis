@@ -1,22 +1,21 @@
 \chapter{Non imaging optics}
-This chapter provides some basic notions of illumination optics needed in this thesis.
+This chapter provides the notions of illumination optics needed in this thesis. We start expaining the difference between radiometry and photometry.
+Then we focus the photometric variables defining those both in tree and two dimensions. The reflection and refraction laws and the phenmomenon of total internal reflection are explained. The last paragraph of the chapter gives a brief introduction of the Fresnel's equations. 
 \section{Radiometric and photometric variables}
-
-\indent The radiant flux $\Phi_{\textrm{r}}$ (unit watt, [\textrm{W}]) is the total energy emitted from a source or received by a target per unit time:
+Radiometry is the measurement of the electromagnetic radiation across the entire electromagnetic spectrum. Photometry the subfield of radiometry that takes into account only the portion of the electromagnetic spectrum corresponding to the visible light, \cite{zalewski1995radiometry}. Radiometry  deals with radiometric quantities. An important radiometric quantity  is the radiant flux $\Phi_{\textrm{r}}$ (unit watt, [\textrm{W}]). It is the total energy emitted from a source or received by a target per unit time:
 \begin{equation}
 \Phi_{\textrm{r}} = \frac{\textrm{d}Q}{\textrm{d}T}\,,
 \end{equation}
 where $Q$ is the energy and $T$ the time.\\
-\indent The photometric variables differ from their radiometric counterparts in the sense that they only take into account the part of the spectrum perceived by the human eye as light.
- Therefore, the luminous flux $\Phi$ (unit lumen, [\textrm{lm}]) is defined as the perceived power of light by the human eye, \cite{chaves2015introduction}.
- These radiant and the luminous flux are related by the luminous efficacy function, unit [lm/W], that tells us how many lumen there are for each Watt of power at a given wavelength.
+\indent In Illumination optics the measurement of light is given in terms of the impression that it gives on the human eyes. Therefore, illumination optics deals with the photometric variables. The most important photometric variables are defined as in the following. The luminous flux $\Phi$ (unit lumen, [\textrm{lm}]) is defined as the perceived power of light by the human eye, \cite{chaves2015introduction}.
+ The radiant and the luminous flux are related by the luminous efficacy function, unit [lm/W], that tells us how many lumen there are for each Watt of power at a given wavelength.
  The luminous efficacy reaches its maximum  at a wavelength of $555$ $\textrm{nm}$ where it is equal to $683$ $\textrm{lm}/\textrm{W}$.
   We may normalize the luminous efficacy function with its maximum value of $683$.
   This normalized function is the dimensionless luminosity function $\bar{y}(\lambda)$ shown in Figure $\ref{fig:luminosityfunction}$ where $\lambda$ is the wavelength.
 \begin{figure}[htbp]
 %\label{fig:luminousfunction}
   \begin{center}
-  \includegraphics[width=7cm]{Luminosity}
+  \includegraphics[width=7cm]{CIELuminosity}
   \end{center}
   \caption{Luminosity function $\bar{y}(\lambda)$: relation between the eye's sensitivity and the wavelength of the light. The luminous function is dimensionless.}
   \label{fig:luminosityfunction}
@@ -33,7 +32,6 @@ and is defined as:
  E=\frac{\textrm{d}\Phi}{\textrm{d}A}\;,
  \end{equation}
  where $\textrm{d}A$ is an infinitesimal area receiving energy.
- Hence the illuminance is only defined at the target.
 The luminous intensity $I$ (unit candela (\textrm{cd}), $[\textrm{cd}=\textrm{lm}/\textrm{sr}]$) is defined as the luminous flux $\textrm{d}\Phi$ per solid angle
 $\textrm{d}\Omega$ and is given by:
 \begin{equation}\label{intensity}
@@ -42,31 +40,72 @@ I = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}\;.
  \begin{figure}[htbp]
 %\label{fig:cup}
   \begin{center}
-  \includegraphics[width=6 cm]{radiation}
+  \includegraphics[width=6 cm]{immagine}
   \end{center}
   \caption{Radiation emitted in a solid angle $\textrm{d}\Omega$ in a direction making an angle $t$ with the normal to the area $\textrm{d}A$.}
   \label{fig:rad}
   \end{figure}
-The luminance $L$ \big(unit $\big[\textrm{cd} / \textrm{m}^2\big]$\big) is the luminous flux per unit area $\cos(t)\,\textrm{d}A$ perpendicular to the ray and per unit solid angle $\textrm{d}\Omega$
-and it is given by:
+The luminance $L$ \big(unit $\big[\textrm{cd} / \textrm{m}^2\big]$\big) is the luminous flux per unit solid angle $\textrm{d}\Omega$ and  per unit projected area $\cos(t)\,\textrm{d}A$ that is the projection of the area element $\textrm{d}A$ on a line perpendicular to the ray.  $L$  is given by:
 \begin{equation}\label{luminance1}
   L=\frac{\textrm{d}^2\Phi}{\cos t\textrm{d}A\textrm{d}\Omega}\;,
 \end{equation}
 where $t$ is the angle that the normal to area $\textrm{d}A$ makes with the direction of the solid angle $\textrm{d}\Omega$, as shown in Figure $\ref{fig:rad}$.
 \noindent Note that from ($\ref{intensity}$) and ($\ref{luminance1}$) we can derive a relation between the intensity and the luminance.\\
-The elementary intensity emitted by an elementary area $\textrm{d}A$ is given by:
+The infinitesimal intensity $\textrm{d}I $ emitted by the area element $\textrm{d}A$ is given by:
 \begin{equation}
-\textrm{d}I = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}= L(\textrm{x},t)\cos(t)\textrm{d}A \,,,
+\textrm{d}I = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}= L(\textrm{x},t)\cos(t)\textrm{d}A \,.
 \end{equation}
-where $\cos(t) \textrm{d}A$ is the projection of the area element $\textrm{d}A$ on a line perpendicular to the ray.
 When the luminance is uniform over a finite area $A$, the luminous intensity emitted in the direction $t$ is equal to:
 \begin{equation}
-I(t) = L A \cos(t)\,.
+I(t) = L(\variabile{t}) A \cos(t)\,.
 \end{equation}
 Thus, when $L(\textrm{x},t)$ does not depend on the position and the direction (i.e. $L(\textrm{x},t)=L$), we deduce Lambert's cosine law:
 \begin{equation}
 I(t) = I_0\cos(t)\,.
 \end{equation}
+where $I_0 = I(0) = LA$. \\
+Finally the \'{e}tendue $U$ (unit $[m \cdot srad]$)  is a measure of the flux gathering capability of the optical system, it is also called throughput of the optical system.
+The quantity $ \textrm{d}U $ is defined as:
+\begin{equation}\label{etendue}
+\textrm{d}U = n^2 \cos(t) \textrm{d}A\textrm{d}\Omega.
+\end{equation}
+where $n$ is the index of refraction of the medium in which the infinitesimal surface $A$ is immersed. In optics the \'{e}tendue is considered to be a volume in phase space. This concept will be clarified in Chapter \ref{chap:PS}.
+An important property of the \'{e}tendue is that it is conserved in an optical system where the flux is constant. In the following we show how the conservation of this quantity can be derived.
+Consider a light ray emitted from an infinitesimal area $\textrm{d}A_1$ in the direction of  $\textrm{d}A_2$,  see Figure \ref{fig:etendue_conservation}.
+\begin{figure}[htbp]
+ \label{fig:etendue_conservation}
+     \begin{center}
+     \includegraphics[width=10cm]{Etendue-Free_space.jpg}
+     \end{center}
+     \caption{\footnotesize{$\textrm{d}a_1$ and $\textrm{d}a_2$ are two line segments with normal $\nu_1$ and $\nu_2$, respectively, that make an angle $t_1$ and $t_2$ with the central ray.}}
+\label{fig:etendue_conservation}
+ \end{figure}
+The two areas $\textrm{d}A_1$ and $\textrm{d}A_2$ are located at a distance $r$. The flux passing though $\textrm{d}A_2$ coming from $\textrm{d}A_1$ is equal to:
+\begin{equation}
+\textrm{d}\Phi_1 = L_1 \cos(t_1) \textrm{d}A_1 \textrm{d}\Omega_1
+\end{equation}
+with \begin{equation}
+\textrm{d}\Omega_1 = \frac{\textrm{d}A_2\cos(t_2)}{r}
+\end{equation}
+and
+\begin{equation}
+\textrm{d}\Omega_2 = \frac{\textrm{d}A_1\cos(t_1)}{r}\,.
+\end{equation}
+Then \begin{equation}
+\label{etendue1}
+\textrm{d}U_1 = n^2 \textrm{d}A_1\cos(t_1)\textrm{d}\Omega_1= \frac{n^2 \textrm{d}A_1\cos(t_1)\textrm{d}A_2\cos(t_2)}{r},
+\end{equation}
+and
+\begin{equation}
+\label{etendue2}
+\textrm{d}U_2 = n^2 \textrm{d}A_2\cos(t_2)\textrm{d}t_2= \frac{ n^2 \textrm{d}A_2\cos(t_2)\textrm{d}A_1\cos(t_2)}{r}\,.
+\end{equation}
+From equation ($\ref{etendue1}$) and ($\ref{etendue2}$) we see that $\textrm{d}U_1=\textrm{d}U_2$.
+For a light beam, all the light passing through $\textrm{d}a_1$ coincides with the light passing through $\textrm{d}a_2$, hence $\textrm{d}U = \textrm{d}U_1$. Moreover, for the same light beam, all the light passing from $\textrm{d}a_2$ corresponds to the light emitted from $\textrm{d}A_1$, then $\textrm{d}U=\textrm{d}U_2$. Finally we can conclude that the \'{e}tendue $\textrm{d}U$ is conserved along a beam of light. Since also the flux through the areas $\textrm{d}A_1$ and $\textrm{d}A_2$ is conserved, the following relation holds:
+\begin{equation}\label{basicluminance}
+L := n \frac{\textrm{d}\Phi}{\textrm{d}U} = constant\,.
+\end{equation}
+ In the optical systems we will consider in this work, the source and the target are located in the same media (air) with $n=1$, so the luminance equals the basic luminance at the source and the target of the system.\\
 \indent In this thesis we consider two-dimensional optical systems. 
  Hence, we need to find two-dimensional analogies for the definitions given above.
 In two dimensions the illuminance \big(unit $\big[\textrm{lm}/\textrm{m}\big]$\big) denotes the luminous flux falling on a line segment $\textrm{d}x$ and is given by:
@@ -81,58 +120,20 @@ In two dimensions the illuminance \big(unit $\big[\textrm{lm}/\textrm{m}\big]$\b
  \begin{equation}
  \textrm{d}I = L\cos(t)\textrm{d}x\,.
  \end{equation}
- Finally, the luminance \big(unit $\big[\textrm{lm}/(\textrm{rad}\; \textrm{m})\big]$\big) is given by:
+ The luminance \big(unit $\big[\textrm{lm}/(\textrm{rad}\; \textrm{m})\big]$\big) is given by:
  \begin{equation}
  L = \frac{\textrm {d}^2 \Phi}{\cos t\,\textrm{d}x \,\textrm{d}t}.
  \end{equation}
- \indent In a homogeneous medium the luminance is conserved along a ray.
-%It is important to recall the conservation property of the luminance along rays.
-Consider a light ray emitted from a segment with infinitesimal length $\textrm{d}a_1$ that hits an infinitesimal segment $\textrm{d}a_2$. %as presented in Figure
-We suppose that the line segments are located at a distance $r$, see Figure $\ref{fig:grafico}$. The flux passing though $\textrm{d}a_2$ coming from $\textrm{d}a_1$ is equal to:
-\begin{equation}
-\textrm{d}\Phi_1 = L_1 \cos(t_1) \textrm{d}a_1 \textrm{d}t_1
+ \indent The \'{e}tendue $\textrm{d}U $ (unit $[m\cdot rad]$) in $2$D is given by:
+\begin{equation}\label{etendue2d}
+\textrm{d}U = n\cos(t) \textrm{d}a\textrm{d}\variabile{t}
 \end{equation}
-with \begin{equation}
-\textrm{d}t_1 = \frac{\textrm{d}a_2\cos(t_2)}{r}
-\end{equation}
-and
-\begin{equation}
-\textrm{d}t_2 = \frac{\textrm{d}a_1\cos(t_1)}{r}\,.
-\end{equation}
-Let us consider the quantity
-\begin{equation}\label{etendue}
-\textrm{d}U = n \cos(t)\textrm{d}a\textrm{d}t= \textrm{d}a\textrm{d}(\tau).
-\end{equation}
-The quantity $U$ (unit $[m\; rad]$) is called \'{e}tendue and it characterizes the ability of an optical system to accept light. The \'{e}tendue is a measure of the flux gathering capability of the optical system, it is also called throughput of the optical system.\\
-Then \begin{equation}
-\label{etendue1}
-\textrm{d}U_1 = n \textrm{d}a_1\cos(t_1)\textrm{d}t_1= \frac{n \textrm{d}a_1\cos(t_1)\textrm{d}a_2\cos(t_2)}{r},
-\end{equation}
-and
-\begin{equation}
-\label{etendue2}
-\textrm{d}U_2 = n \textrm{d}a_2\cos(t_2)\textrm{d}t_2= \frac{ n \textrm{d}a_2\cos(t_2)\textrm{d}a_1\cos(t_2)}{r}\,.
-\end{equation}
-From equation ($\ref{etendue1}$) and ($\ref{etendue2}$) we see that $\textrm{d}U_1=\textrm{d}U_2$.
-For a light beam, all the light passing through $\textrm{d}a_1$ coincides with the light passing through $\textrm{d}a_2$, hence $\textrm{d}U = \textrm{d}U_1$. Moreover, for the same light beam, all the light passing from $\textrm{d}a_2$ corresponds to the light emitted from $\textrm{d}a_1$, then $\textrm{d}U=\textrm{d}U_2$. Finally we can conclude that the \'{e}tendue $\textrm{d}U$ is conserved along a beam of light. Since also the flux through the areas $\textrm{d}a_1$ and $\textrm{d}a_2$ is conserved, the following relation holds:
-\begin{equation}\label{basicluminance}
-L := n \frac{\textrm{d}\Phi}{\textrm{d}U} = constant\,.
-\end{equation}
-The previous relation is also valid when the light propagates through two media with different refractive indexes. In that case both the luminance $L$ and the basic luminance $L^*:= L/n$ are conserved with $n$ the refractive index of the medium. In the optical systems we will consider in this work, the source and the target are located in the same media (air) with $n=1$, so the luminance and the basic luminance are equal at the source and the target of the system.\\
-\begin{figure}[htbp]
- \label{fig:grafico}
-     \begin{center}
-     \includegraphics[width=10cm]{grafico.jpg}
-     \end{center}
-     \caption{\footnotesize{$\textrm{d}a_1$ and $\textrm{d}a_2$ are two line segments with normal $\nu_1$ and $\nu_2$, respectively, that make an angle $t_1$ and $t_2$ with the central ray.}}
-\label{fig:rays}
- \end{figure}
-
+where $\textrm{d}a$ is the infinitesimal length of a segment.
 \section{Reflection and refraction law}
 The propagation of a light ray traveling through  different media is described by the reflection and refraction law.
 In this section we introduce these two laws and we explain the total internal reflection phenomenon.
-A light ray is described by a position vector \vect{x} and a direction vector \vect{t} and can be parameterized by the arc length \variabileiabileiabile{s}.
-Light rays travel in an homogeneous medium along straight lines, once they hit a reflective surfaces their direction changes.
+A light ray is described by a position vector \vect{x} and a direction vector \vect{t} and can be parameterized by the arc length \variabile{s}.
+Light rays travel in an homogeneous medium along straight lines, once they hit a reflective surface their direction changes.
  Denoting with $\vect{t}_1$ the direction of the incident ray and with $\boldsymbol{\nu}$ the unit normal to the surface at the location of the incidence, the direction $\vect{t}_2$ of the reflected ray is given by:
  \begin{equation}\label{Reflection}
   \vect{t}_2 = \vect{t}_1-2(\vect{t}_1,\boldsymbol{\nu})\boldsymbol{\nu}\,,
@@ -143,7 +144,11 @@ From Eq. (\ref{Reflection}) it follows that the vector  $\vect{t}_2$ is a unit v
 (\vect{t}_2,\vect{t}_1) = (\vect{t}_1,\vect{t}_1) - 4(\vect{t}_1,\boldsymbol{\nu})(\vect{t}_1,\boldsymbol{\nu})+
 4(\vect{t}_1,\boldsymbol{\nu})^2(\boldsymbol{\nu},\boldsymbol{\nu})=1 .
 \end{equation} 
-The reflection law states that the incident angle $\alpha_\textrm{i}$ is equal to the reflective angle $\alpha_\textrm{r}$ which are measured counterclockwise with respect to the normal $\boldsymbol{\nu}$ of the surface, see Fig. \ref{Snell}.
+Denoting the incident angle with $\alpha_{\textrm{i}}$ and the reflective angle with $\alpha_\textrm{r}$ such that
+\begin{equation}
+\cos{\alpha_{\textrm{i}}} = -\vect{t}_1\cdot \boldsymbol{\nu}
+\end{equation}
+The reflection law states that $\alpha_\textrm{i}$ equals $\alpha_\textrm{r}$ which are measured counterclockwise with respect to the normal $\boldsymbol{\nu}$ of the surface, see Fig. \ref{Snell}.
 When a ray propagates through two media with two different indices of refraction, $n_1$ and $n_2$, the direction of the refractive ray is given by:
 \begin{equation}\label{Refraction}
 \vect{t}_2 = n_{1,2}\,\vect{t}_1+
