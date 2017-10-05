@@ -12,7 +12,7 @@ where $Q$ is the energy and $T$ the time.\\
  The luminous efficacy reaches its maximum  at a wavelength of $555$ $\textrm{nm}$ where it is equal to $683$ $\textrm{lm}/\textrm{W}$.
   We may normalize the luminous efficacy function with its maximum value of $683$.
   This normalized function is the dimensionless luminosity function $\bar{y}(\lambda)$ shown in Figure $\ref{fig:luminosityfunction}$ where $\lambda$ is the wavelength.
-\begin{figure}[htbp]
+\begin{figure}[h]
 %\label{fig:luminousfunction}
   \begin{center}
   \includegraphics[width=7cm]{CIELuminosity}
@@ -39,7 +39,7 @@ $\textrm{d}\Omega$ and is given by:
 \begin{equation}\label{intensity}
 I = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}\;.
 \end{equation}
- \begin{figure}[htbp]
+ \begin{figure}[h]
 %\label{fig:cup}
   \begin{center}
   \includegraphics[width=6 cm]{immagine}
@@ -74,7 +74,7 @@ The quantity $ \textrm{d}U $ is defined as:
 where $n$ is the index of refraction of the medium in which the infinitesimal surface $A$ is immersed. In optics the \'{e}tendue is considered to be a volume in phase space  (or an area for two-dimensional systems). This concept will be clarified in Chapter \ref{chap:PS} where we treat the phase space in more details.
 An important property of the \'{e}tendue is that it is conserved in an optical system where the flux is constant. In the following we show how the conservation of this quantity can be derived following the same approched used by J. Chaves in \cite{chaves2015introduction}.
 Consider a light ray emitted from an infinitesimal area $\textrm{d}A_1$ in the direction of  $\textrm{d}A_2$,  see Figure \ref{fig:etendue_conservation}.
-\begin{figure}[htbp]
+\begin{figure}[h]
  \label{fig:etendue_conservation}
      \begin{center}
      \includegraphics[width=10cm]{Etendue-Free_space.jpg}
@@ -141,7 +141,7 @@ The propagation of a light ray traveling through  different media is described b
 In this section we introduce these two laws and we explain the total internal reflection phenomenon.
 A light ray is described by a position vector \vect{x} and a direction vector \vect{t} and can be parameterized by the arc length \variabile{s}.
 Light rays travel in an homogeneous medium along straight lines, once they hit a reflective surface their direction changes.
- Denoting with $\vect{t}_1$ the direction of the incident ray and with $\boldsymbol{\nu}$ the unit normal to the surface at the location of the incidence, the direction $\vect{t}_2$ of the reflected ray is given by:
+ Denoting with $\vect{t}_i$ the direction of the incident ray and with $\boldsymbol{\nu}$ the unit normal to the surface at the location of the incidence, the direction $\vect{t}_r$ of the reflected ray is given by:
  \begin{equation}\label{Reflection}
   \vect{t}_2 = \vect{t}_1-2(\vect{t}_1,\boldsymbol{\nu})\boldsymbol{\nu}\,,
 \end{equation}
@@ -155,7 +155,15 @@ Denoting the incident angle with $\alpha_{\textrm{i}}$ and the reflective angle 
 \begin{equation}
 \cos{\alpha_{\textrm{i}}} = -\vect{t}_1\cdot \boldsymbol{\nu} \qquad \mbox{and} \qquad \cos{\alpha_{\textrm{r}}} = \vect{t}_2 \cdot\boldsymbol{\nu}\,,
 \end{equation}
-the reflection law states that $\alpha_\textrm{i}$ equals $\alpha_\textrm{r}$ which are measured counterclockwise with respect to the normal $\boldsymbol{\nu}$ of the surface, see Fig. \ref{Snell}.
+the reflection law states that $\alpha_\textrm{i}$ equals $\alpha_\textrm{r}$ which are measured counterclockwise with respect to the normal $\boldsymbol{\nu}$ of the surface, see Fig. \ref{fig:Snell}.
+\begin{figure}[h]
+ \label{fig:Snell}
+     \begin{center}
+     \includegraphics[width=8cm]{Snell.png}
+     \end{center}
+     \caption{\footnotesize{$\textrm{d}A_1$ and $\textrm{d}A_2$ are two line surfaces with normal $\nu_1$ and $\nu_2$, respectively. $t_1$ and $t_2$ are the angles made by the central ray with the normals $\nu_1$ and $\nu_2$, respectively.}}
+\label{fig:Snell}
+ \end{figure}
 When a ray propagates through two media with two different indices of refraction, $n_1$ and $n_2$, the direction of the refractive ray is given by:
 \begin{equation}\label{Refraction}
 \vect{t}_2 = n_{1,2}\,\vect{t}_1+
@@ -180,23 +188,32 @@ Eq. (\ref{Refraction}) is only valid for
 \end{equation} and it is called the critical angle, \cite{chaves2015introduction}.
 Note that the condition $\frac{n_2}{n_1}<1$ is verified as in this case $\sin(\alpha_\textrm{i})<1$.
 When the incident angle $\alpha_{\textrm{i}}$ is exactly equal to the critical angle $\alpha_{\textrm{c}}$ the refractive ray propagates parallel to the refractive surface, 
-when $\alpha_{\textrm{i}}>\alpha_{\textrm{c}}$ the light ray is no longer refracted but it is reflected by the surface. This phenomenon is called total internal reflection (TIR). When there is TIR the $100\%$ of light is reflected and there is no loss of energy. Therefore, optical systems designed such that TIR occurs are very efficient. While light that hits a normal refractive mirror can be both reflected and refracted. Therefore, some part of the energy is transmitted and some part is reflected. The percentual of light that is reflected and refracted is determined by the Fresnel's coefficients.
+when $\alpha_{\textrm{i}}>\alpha_{\textrm{c}}$ the light ray is no longer refracted but it is reflected by the surface. This phenomenon is called total internal reflection (TIR). When there is TIR the $100\%$ of light is reflected and there is no loss of energy. Therefore, optical systems designed such that TIR occurs are very efficient. In general, light that hits a normal refractive mirror can be both reflected and refracted. Therefore, some part of the energy is transmitted and some part is reflected. The percentual of light that is reflected and refracted is determined by the Fresnel's coefficients.
 In the next paragraph an overview of the Fresnel equations is given.
 
 \section{The Fresnel equations}
-It is useful to describe light propagation from the perspective of Electromagnetic Theory which gives information about the incident, reflected and transmitted radiant flux density that are denoted with $I_i$, $I_r$ and $I_t$, respectively. \\
-In the following we make use of the same notation adopted in \cite{hecht1998hecht}, Chapter $4$.
-Define the electric filed\\
-Picture
- \begin{equation}
-I = \frac{c\varepsilon_0}{2}E_0^2
-\end{equation} where $c$ is the speed of light in vacuum, $\varepsilon_0$ is the permeability in the vacuum.\\
-The incident, reflected and transmitted power are $I_i A \cos(\variabile{t}_i)$, $I_r A \cos(\variabile{t}_r)$ and $I_t A \cos(\variabile{t}_t)$, respectively.
+It is useful to describe light propagation from the perspective of Electromagnetic Theory which gives information about the incident, reflected and transmitted radiant flux density that are denoted with $J_i$, $J_r$ and $J_t$, respectively. In the field of electromagnetism a very important concept is the Poynting vector \vect{P}. It defines the energy flux of an electromagnetic field that is the energy transferred per unit area per unit time, it is measured in $[W/m^2]$ and it is defined as:
+\begin{equation}
+\end{equation}
+where... 
+Light can be described as an electromagnetic wave. Therefore, assuming $\mu = 1$ the light intensity is given by:
+\begin{equation}
+\end{equation}
+The amount of energy which is incident of a unit area per unit time is therefore:
+\begin{equation}
+J_i = S_i \cos(t_i) = \frac{cn_1}{4\pi}E_{0 i}\cos(t_i)
+\end{equation}
+and the energy of the reflected and transmitted wave leaving a unit area per unit time are:
+
+% \begin{equation}
+%I = \frac{c\varepsilon_0}{2}E_0^2
+%\end{equation} where $c$ is the speed of light in vacuum, $\varepsilon_0$ is the permeability in the vacuum.\\
+%The incident, reflected and transmitted power are $I_i A \cos(\variabile{t}_i)$, $I_r A \cos(\variabile{t}_r)$ and $I_t A \cos(\variabile{t}_t)$, respectively.
 The reflectance $R$ is the ratio of the reflected power to the incident power:
 \begin{equation}\label{reflectance}
 R = \frac{I_r A \cos(\variabile{t}_r)}{I_i A \cos(\variabile{t}_t)} = \frac{I_r}{I_i}
 \end{equation}
-Similarly, the transmittance $T$ is the ratio between the ratio of the transmitted to the incident power:
+Similarly, the transmittance $T$ is the ratio between the transmitted to the incident power:
 \begin{equation}\label{transmittance}
 T = \frac{I_t A \cos(\variabile{t}_t)}{I_i A \cos(\variabile{t}_i)} .
 \end{equation}\\
@@ -209,11 +226,28 @@ while: \begin{equation}\label{T}
 T = \frac{n_t \cos(t_t)}{n_t \cos(t_i)}\Big(\frac{E_{0 t}}{E_{0 i}}\Big)^2
 \end{equation}
 where we assumed that $\mu_i = \mu_t  = \mu_0$ and we used the fact that $\mu_0 v_t\varepsilon_t=n_t/c$.
+Furthermore, employing the fact that the total energy passing through an area $A$ per unit time has to be equal to the total energy flowing outward from it per unit time, that is:
+\begin{equation}
+I_i A\cos(t_i) = I_r A\cos(t_r)+I_t A\cos(t_t)\,,
+\end{equation}
+multiplying the previous equation by $c$, it becomes:
+\begin{equation}
+n_i E_{0 t}^2 \cos(t_i) = n_r E_{0r}^2\cos(t_r)+n_tE_{0t}\cos(t_t)
+\end{equation}
+that is
+\begin{equation}
+1 = \Bigg(\frac{E_{0r}}{E_{0i}}\Bigg)^2+\Bigg(\frac{n_t\cos(t_t)}{n_i\cos(t_i)}\Bigg)\Bigg(\frac{E_{0t}}{E_{0i}}\Bigg)^2
+\end{equation}
+as $n_i = n_r$. \\ 
+Therefore:
+\begin{equation}
+R+T=1\,.
+\end{equation}
 The values $r = \Big(\frac{E_{0 i}}{E_{0 i}}\Big)$ and $t = \Big(\frac{E_{0 t}}{E_{0 i}}\Big)$ are called the amplitude coefficients.  
 The intensity of the reflected and transmitted light depends not only on the angle of incident but also on the direction of the electric field \vect{E}, 
 \cite{feynman1964feynman}.
 It is necessary to derive separately the parallel and perpendicular components of $r$ and $t$. 
-To do that, the Maxwell equations need to be considered. 
+To do that, the Maxwell's equations need to be considered. 
 Then the boundaries condition that guarantees that the electric field \vect{E} tangent to the interface is continuous across it is imposed. 
 After some calculations the Fresnel equations are derived for the cases of the electric field both perpendicular and parallel to the plane of incident, (see  \cite{born2013principles, hecht1998hecht} for more details). In case \vect{E} is perpendicular to the plane of incidence the following equations are obtained:
 \begin{equation} \label{Fresnel_perpendicular}
@@ -245,8 +279,22 @@ t_s+(-r_s) &= 1 \\
 t_p+r_p &=  1
 \end{split}
 \end{equation}
+Fresnel's coefficients can also be derived using a different approach that does not involves Marxwell's equations, this method is widely explained in \cite{feynman2011feynman}
+\begin{figure}[h]
+  \begin{minipage}[h]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{amplitude_coefficients.png}
+    \caption{Picture 1}
+    \label{fig:1}
+  \end{minipage}
+  \begin{minipage}[h]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{amplitude_coefficients2.png}
+    \caption{Picture 2}
+   \label{fig:2}
+ \end{minipage}
+\end{figure}
+
 Writing the parallel and perpendicular components of $R$ and $T$ as:
-\begin{equation}
+\begin{equation}\label{Fresnel_pands}
 \begin{split}
 R_p &= r_p^2\\
 T_p &= \frac{n_t \cos(t_t)}{n_t \cos(t_i)}t_p^2\\
@@ -261,14 +309,80 @@ R_s+R_p &= 1\\
 T_s+t_p &=1\,.
 \end{split}
 \end{equation}
-Furthermore, employing the fact that the total energy passing through an area $A$ per unit time has to be equal to the total energy flowing outward from it per unit time, that is:
+For normal incidence, i.e. $t_i = 0$, there is no polarization and Eqs. (\ref{Fresnel_pands}) lead to:
 \begin{equation}
-I_i A\cos(t_i) = I_r A\cos(t_r)+I_t A\cos(t_t)
+R = R_p = R_s = \Bigg(\frac{n_i-n_t}{n_t+n_i}\Bigg)^2
 \end{equation}
-We obtain:
+and 
 \begin{equation}
-R+T=1
+T = T_p = T_s = \frac{4n_i n_t}{(n_t+n_i)^2}
 \end{equation}
+\begin{figure}[h]
+ \label{fig:Reflectance_transmittance}
+     \begin{center}
+     \includegraphics[width=10cm]{Reflectance_transmittance.png}
+     \end{center}
+     \caption{\footnotesize{$\textrm{d}A_1$ and $\textrm{d}A_2$ are two line surfaces with normal $\nu_1$ and $\nu_2$, respectively. $t_1$ and $t_2$ are the angles made by the central ray with the normals $\nu_1$ and $\nu_2$, respectively.}}
+\label{fig:amplitude_coefficients}
+ \end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
