@@ -192,59 +192,66 @@ when $\alpha_{\textrm{i}}>\alpha_{\textrm{c}}$ the light ray is no longer refrac
 In the next paragraph an overview of the Fresnel equations is given.
 
 \section{The Fresnel equations}
-It is useful to describe light propagation from the perspective of Electromagnetic Theory which gives information about the incident, reflected and transmitted radiant flux density that are denoted with $J_i$, $J_r$ and $J_t$, respectively. In the field of electromagnetism a very important concept is the Poynting vector \vect{P}. It defines the energy flux of an electromagnetic field that is the energy transferred per unit area per unit time, it is measured in $[W/m^2]$ and it is defined as:
+Light can be described as an electromagnetic wave.
+It is useful to study the light propagation from the perspective of Electromagnetic Theory which gives information about the incident, reflected and transmitted radiant flux density that are denoted with $E_i$, $E_r$ and $E_t$, respectively.  
+Any component of the electric field $\mathcal{E}$ can be written in the form
 \begin{equation}
+\boldsymbol{\mathcal{E}}(\vect{x}, t) = \boldsymbol{\mathcal{E}}_0(\vect{x} )e^{i(\omega t - \vect{k}\cdot \vect{r})}
+\end{equation}
+Similarly, the magnetic field has the form:
+\begin{equation}
+\boldsymbol{\mathcal{B}}(\vect{x}, t) = \boldsymbol{\mathcal{B}}_0(\vect{x}) e^{i(\omega t - \vect{k}\cdot \vect{r})}
+\end{equation}
+In the field of electromagnetism a very important concept is the Poynting vector \vect{P}. 
+It defines the energy flux of an electromagnetic field,  it is measured in $[W/m^2]$ and it is defined as:
+\begin{equation}
+\vect{P} = \frac{1}{\mu}\Big(\mathcal{E}\times \mathcal{B}\Big)
 \end{equation}
 where... 
-Light can be described as an electromagnetic wave. Therefore, assuming $\mu = 1$ the light intensity is given by:
+The irradiance $E$ is defined as the average energy that crosses in unit time a unit area perpedicular to the direction of the energy flow.
+Therefore:
 \begin{equation}
+\vect{E} = <\vect{P}>_{T} = \frac{c}{2\mu_0}\boldsymbol{\mathcal{E}}_0^2\,.
 \end{equation}
-The amount of energy which is incident of a unit area per unit time is therefore:
-\begin{equation}
-J_i = S_i \cos(t_i) = \frac{cn_1}{4\pi}E_{0 i}\cos(t_i)
-\end{equation}
-and the energy of the reflected and transmitted wave leaving a unit area per unit time are:
-
-% \begin{equation}
-%I = \frac{c\varepsilon_0}{2}E_0^2
-%\end{equation} where $c$ is the speed of light in vacuum, $\varepsilon_0$ is the permeability in the vacuum.\\
-%The incident, reflected and transmitted power are $I_i A \cos(\variabile{t}_i)$, $I_r A \cos(\variabile{t}_r)$ and $I_t A \cos(\variabile{t}_t)$, respectively.
+Considering a beam of light that hit a surface such that an area $A$ is illuminated, the incident, reflected and transitted beams are $\vect{E}_i A\cos(t_i)$ $\vect{E}_r A\cos(t_r)$ and $\vect{E}_t A\cos(t_t)$ , respectively.
 The reflectance $R$ is the ratio of the reflected power to the incident power:
 \begin{equation}\label{reflectance}
-R = \frac{I_r A \cos(\variabile{t}_r)}{I_i A \cos(\variabile{t}_t)} = \frac{I_r}{I_i}
+R = \frac{\vect{E}_r A\cos(t_r)}{\vect{E}_i A\cos(t_i)} =\Bigg(\frac{\boldsymbol{\mathcal{E}}_{0r}}{\boldsymbol{\mathcal{E}_{0i}}}\Bigg)^2
 \end{equation}
 Similarly, the transmittance $T$ is the ratio between the transmitted to the incident power:
 \begin{equation}\label{transmittance}
-T = \frac{I_t A \cos(\variabile{t}_t)}{I_i A \cos(\variabile{t}_i)} .
+T = \frac{\vect{E}_tA\cos(t_t)}{\vect{E}_r A\cos(t_r)}= \frac{n_t \cos(t_t)}{n_i\cos(t_i)}\Bigg(\frac{\boldsymbol{\mathcal{E}}_{0 t}}{\boldsymbol{\mathcal{E}}_{0 i}}\Bigg)^2.
 \end{equation}\\
 Note that 
 \begin{equation}\label{R}
-R = \Big(\frac{E_{0 r}}{E_{0 i}}\Big)^2
+R = \Big(\frac{\boldsymbol{\mathcal{E}}_{0 r}}{\boldsymbol{\mathcal{E}}_{0 i}}\Big)^2
 \end{equation}
-since $ I_r/I_t = (v_r\varepsilon_r E_{0r}^2/2)/(v_i\varepsilon_i E_{0i}^2/2)$, 
+because $\vect{E} _r/\vect{E}_t = (v_r\varepsilon_r \boldsymbol{\mathcal{E_{0r}}}^2/2)/(v_i\varepsilon_i \boldsymbol{\mathcal{E}}_{0i}^2/2)$, 
 while: \begin{equation}\label{T}
-T = \frac{n_t \cos(t_t)}{n_t \cos(t_i)}\Big(\frac{E_{0 t}}{E_{0 i}}\Big)^2
+T = \frac{n_t \cos(t_t)}{n_t \cos(t_i)}\Bigg(\frac{\boldsymbol{\mathcal{E}}_{0 t}}{\boldsymbol{\mathcal{E}}_{0 i}}\Bigg)^2
 \end{equation}
 where we assumed that $\mu_i = \mu_t  = \mu_0$ and we used the fact that $\mu_0 v_t\varepsilon_t=n_t/c$.
-Furthermore, employing the fact that the total energy passing through an area $A$ per unit time has to be equal to the total energy flowing outward from it per unit time, that is:
+Employing the total energy conservation, that is:
 \begin{equation}
-I_i A\cos(t_i) = I_r A\cos(t_r)+I_t A\cos(t_t)\,,
+\vect{E}_i A\cos(t_i) = \vect{E}_r A\cos(t_r)+\vect{E}_t A\cos(t_t)\,,
 \end{equation}
-multiplying the previous equation by $c$, it becomes:
-\begin{equation}
-n_i E_{0 t}^2 \cos(t_i) = n_r E_{0r}^2\cos(t_r)+n_tE_{0t}\cos(t_t)
-\end{equation}
-that is
-\begin{equation}
-1 = \Bigg(\frac{E_{0r}}{E_{0i}}\Bigg)^2+\Bigg(\frac{n_t\cos(t_t)}{n_i\cos(t_i)}\Bigg)\Bigg(\frac{E_{0t}}{E_{0i}}\Bigg)^2
-\end{equation}
-as $n_i = n_r$. \\ 
-Therefore:
+%multiplying the previous equation by $c$, it becomes:
+%\begin{equation}
+%n_i E_{0 t}^2 \cos(t_i) = n_r E_{0r}^2\cos(t_r)+n_tE_{0t}\cos(t_t)
+%\end{equation}
+%that is
+%\begin{equation}
+%1 = \Bigg(\frac{E_{0r}}{E_{0i}}\Bigg)^2+\Bigg(\frac{n_t\cos(t_t)}{n_i\cos(t_i)}\Bigg)\Bigg(\frac{E_{0t}}{E_{0i}}\Bigg)^2
+%\end{equation}
+%as $n_i = n_r$. \\ 
+%Therefore:
+it can be easily proved that:
 \begin{equation}
 R+T=1\,.
 \end{equation}
-The values $r = \Big(\frac{E_{0 i}}{E_{0 i}}\Big)$ and $t = \Big(\frac{E_{0 t}}{E_{0 i}}\Big)$ are called the amplitude coefficients.  
-The intensity of the reflected and transmitted light depends not only on the angle of incident but also on the direction of the electric field \vect{E}, 
+The values $r = \Big(\frac{\boldsymbol{\mathcal{E}}_{0 i}}{\boldsymbol{\mathcal{E}}_{0 i}}\Big)$ and 
+$t = \Big(\frac{\boldsymbol{\mathcal{E}}_{0 t}}{\boldsymbol{\mathcal{E}}_{0 i}}\Big)$ are called the amplitude coefficients.  
+The intensity of the reflected and transmitted light depends not only on the angle of incident but also on the direction of the electric field $\boldsymbol{\mathcal{E}}$, 
 \cite{feynman1964feynman}.
 It is necessary to derive separately the parallel and perpendicular components of $r$ and $t$. 
 To do that, the Maxwell's equations need to be considered. 
