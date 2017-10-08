@@ -143,17 +143,17 @@ A light ray is described by a position vector \vect{x} and a direction vector \v
 Light rays travel in an homogeneous medium along straight lines, once they hit a reflective surface their direction changes.
  Denoting with $\vect{t}_i$ the direction of the incident ray and with $\boldsymbol{\nu}$ the unit normal to the surface at the location of the incidence, the direction $\vect{t}_r$ of the reflected ray is given by:
  \begin{equation}\label{Reflection}
-  \vect{t}_2 = \vect{t}_1-2(\vect{t}_1,\boldsymbol{\nu})\boldsymbol{\nu}\,,
+  \vect{t}_r = \vect{t}_i-2(\vect{t}_i,\boldsymbol{\nu})\boldsymbol{\nu}\,,
 \end{equation}
-where the vectors $\vect{t}_1$ and $\boldsymbol{\nu}$ are unit vectors. 
-From Eq. (\ref{Reflection}) it follows that the vector  $\vect{t}_2$ is a unit vector too, indeed considering the scalar product $(\vect{t}_2,\vect{t}_1)$ it holds:
+where the vectors $\vect{t}_i$ and $\boldsymbol{\nu}$ are unit vectors. 
+From Eq. (\ref{Reflection}) it follows that the vector  $\vect{t}_r$ is a unit vector too, indeed considering the scalar product $(\vect{t}_r,\vect{t}_i)$ it holds:
 \begin{equation}\label{unit_vector}
-(\vect{t}_2,\vect{t}_1) = (\vect{t}_1,\vect{t}_1) - 4(\vect{t}_1,\boldsymbol{\nu})(\vect{t}_1,\boldsymbol{\nu})+
-4(\vect{t}_1,\boldsymbol{\nu})^2(\boldsymbol{\nu},\boldsymbol{\nu})=1 .
+(\vect{t}_r,\vect{t}_i) = (\vect{t}_r,\vect{t}_i) - 4(\vect{t}_r,\boldsymbol{\nu})(\vect{t}_i,\boldsymbol{\nu})+
+4(\vect{t}_i,\boldsymbol{\nu})^2(\boldsymbol{\nu},\boldsymbol{\nu})=1 .
 \end{equation} 
 Denoting the incident angle with $\alpha_{\textrm{i}}$ and the reflective angle with $\alpha_\textrm{r}$ such that
 \begin{equation}
-\cos{\alpha_{\textrm{i}}} = -\vect{t}_1\cdot \boldsymbol{\nu} \qquad \mbox{and} \qquad \cos{\alpha_{\textrm{r}}} = \vect{t}_2 \cdot\boldsymbol{\nu}\,,
+\cos{\alpha_{\textrm{i}}} = -\vect{t}_i\cdot \boldsymbol{\nu} \qquad \mbox{and} \qquad \cos{\alpha_{\textrm{r}}} = \vect{t}_r \cdot\boldsymbol{\nu}\,,
 \end{equation}
 the reflection law states that $\alpha_\textrm{i}$ equals $\alpha_\textrm{r}$ which are measured counterclockwise with respect to the normal $\boldsymbol{\nu}$ of the surface, see Fig. \ref{fig:Snell}.
 \begin{figure}[h]
@@ -161,32 +161,32 @@ the reflection law states that $\alpha_\textrm{i}$ equals $\alpha_\textrm{r}$ wh
      \begin{center}
      \includegraphics[width=8cm]{Snell.png}
      \end{center}
-     \caption{\footnotesize{$\textrm{d}A_1$ and $\textrm{d}A_2$ are two line surfaces with normal $\nu_1$ and $\nu_2$, respectively. $t_1$ and $t_2$ are the angles made by the central ray with the normals $\nu_1$ and $\nu_2$, respectively.}}
+     \caption{\footnotesize{$\textrm{d}A_1$ and $\textrm{d}A_2$ are two line surfaces with normal $\nu_1$ and $\nu_2$, respectively. $t_i$ and $t_2$ are the angles made by the central ray with the normals $\nu_1$ and $\nu_2$, respectively.}}
 \label{fig:Snell}
  \end{figure}
-When a ray propagates through two media with two different indices of refraction, $n_1$ and $n_2$, the direction of the refractive ray is given by:
+When a ray propagates through two media with two different indices of refraction, $n_i$ and $n_t$, the direction of the transmitted ray $\vect{t}_t$ is given by:
 \begin{equation}\label{Refraction}
-\vect{t}_2 = n_{1,2}\,\vect{t}_1+
-\Big[\sqrt{1-n_{1,2}^2+n_{1,2}^2(\boldsymbol{\nu},\vect{t}_1)^2}-n_{1,2}(\boldsymbol{\nu},\vect{t}_1) \Big]\boldsymbol{\nu}\,,
+\vect{t}_t = n_{i,t}\,\vect{t}_i+
+\Big[\sqrt{1-n_{i,t}^2+n_{i,t}^2(\boldsymbol{\nu},\vect{t}_i)^2}-n_{i,t}(\boldsymbol{\nu},\vect{t}_i) \Big]\boldsymbol{\nu}\,,
 \end{equation}
-where $n_{1,2}=n_1/n_2$. \\
+where $n_{i,t}=n_i/n_t$. \\
  \indent Note that in Eq. (\ref{Reflection}) the direction of the normal $\boldsymbol{\nu}$ to the surface is not relevant for the computation of the direction of the reflective ray, since:
 \begin{equation}
-\vect{t}_2 = \vect{t}_1-2(\vect{t}_1,\boldsymbol{\nu})\boldsymbol{\nu}= \vect{t}_1-2(\vect{t}_1,-\boldsymbol{\nu})(-\boldsymbol{\nu}) ,
+\vect{t}_r = \vect{t}_i-2(\vect{t}_i,\boldsymbol{\nu})\boldsymbol{\nu}= \vect{t}_i-2(\vect{t}_i,-\boldsymbol{\nu})(-\boldsymbol{\nu}) ,
 \end{equation}
-while this is not the case of Eq. (\ref{Refraction}), therefore in the latter case we need to specify the direction of the vector $\boldsymbol{\nu}$ which is chosen in such a way that the angle that it forms with the incident ray $\vect{t}_1$ is smaller than or equal to $\pi/2$. Hence, if $(\vect{t}_1, \boldsymbol{\nu})\geq0$ the normal $\boldsymbol{\nu}$ directed inside the same medium in which travels the incident ray is taken, otherwise the normal $-\boldsymbol{\nu}$ directed inside the same medium in which the transmitted ray will travel has to be considered. \\ \indent
+while this is not the case of Eq. (\ref{Refraction}), therefore in the latter case we need to specify the direction of the vector $\boldsymbol{\nu}$ which is chosen in such a way that the angle that it forms with the incident ray $\vect{t}_i$ is smaller than or equal to $\pi/2$. Hence, if $(\vect{t}_i, \boldsymbol{\nu})\geq0$ the normal $\boldsymbol{\nu}$ directed inside the same medium in which travels the incident ray is taken, otherwise the normal $-\boldsymbol{\nu}$ directed inside the same medium in which the transmitted ray will travel has to be considered. \\ \indent
 Eq. (\ref{Refraction}) is only valid for 
 \begin{equation}\label{tir}\begin{split}
-1-n_{1,2}^2+n_{1,2}^2(\boldsymbol{\nu},\vect{t}_1)^2\geq 0 & \Rightarrow \frac{n_2}{n_1}\geq \sqrt{1-(\boldsymbol{\nu},\vect{t}_1)^2}\\
-\Rightarrow n_2\geq n_1\sqrt{1-\cos^2(\alpha_\textrm{i})} & \Rightarrow  n_2\geq n_1 \sin(\alpha_\textrm{i})
+1-n_{i,t}^2+n_{i,t}^2(\boldsymbol{\nu},\vect{t}_i)^2\geq 0 & \Rightarrow \frac{n_t}{n_i}\geq \sqrt{1-(\boldsymbol{\nu},\vect{t}_i)^2}\\
+\Rightarrow n_t\geq n_i\sqrt{1-\cos^2(\alpha_\textrm{i})} & \Rightarrow  n_t\geq n_i \sin(\alpha_\textrm{i})
 \end{split}
 \end{equation}
 \\ \indent
  The angle for which the equality holds is
 \begin{equation}\label{critical}
-\alpha_{\textrm{c}} = \arcsin\Big(\frac{n_2}{n_1}\Big)
+\alpha_{\textrm{c}} = \arcsin\Big(\frac{n_t}{n_i}\Big)
 \end{equation} and it is called the critical angle, \cite{chaves2015introduction}.
-Note that the condition $\frac{n_2}{n_1}<1$ is verified as in this case $\sin(\alpha_\textrm{i})<1$.
+Note that the condition $\frac{n_t}{n_i}<1$ is verified as in this case $\sin(\alpha_\textrm{i})<1$.
 When the incident angle $\alpha_{\textrm{i}}$ is exactly equal to the critical angle $\alpha_{\textrm{c}}$ the refractive ray propagates parallel to the refractive surface, 
 when $\alpha_{\textrm{i}}>\alpha_{\textrm{c}}$ the light ray is no longer refracted but it is reflected by the surface. This phenomenon is called total internal reflection (TIR). When there is TIR the $100\%$ of light is reflected and there is no loss of energy. Therefore, optical systems designed such that TIR occurs are very efficient. In general, light that hits a normal refractive mirror can be both reflected and refracted. Therefore, some part of the energy is transmitted and some part is reflected. The percentual of light that is reflected and refracted is determined by the Fresnel's coefficients.
 In the next paragraph an overview of the Fresnel equations is given.
