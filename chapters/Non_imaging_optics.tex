@@ -1,8 +1,8 @@
 \chapter{Non imaging optics}
-This chapter provides the notions of illumination optics needed in this thesis. We start expaining the difference between radiometry and photometry.
+This chapter provides the notions of illumination optics needed in this thesis. We start explaining the difference between radiometry and photometry.
 We define the photometric variables  both in three and two dimensions. The reflection and refraction laws and the phenomenon of total internal reflection are explained. The last paragraph of the chapter gives a brief introduction of the Fresnel's equations. 
 \section{Radiometric and photometric variables}
-Radiometry is the measurement of the electromagnetic radiation across the entire electromagnetic spectrum. Photometry is the subfield of radiometry that takes into account only the portion of the electromagnetic spectrum corresponding to the visible light, \cite{zalewski1995radiometry}. Radiometry  deals with radiometric quantities. An important radiometric quantity  is the radiant flux $\Phi_{\textrm{r}}$ (unit watt, [\textrm{W}]) which is the total energy emitted from a source or received by a target per unit time:
+Radiometry is the measurement of the electromagnetic radiation across the entire electromagnetic spectrum. Photometry is the subfield of radiometry that takes into account only the portion of the electromagnetic spectrum corresponding to the visible light, \cite{zalewski1995radiometry}. Radiometry deals with radiometric quantities. An important radiometric quantity  is the radiant flux $\Phi_{\textrm{r}}$ (unit watt, [\textrm{W}]) which is the total energy emitted from a source or received by a target per unit time:
 \begin{equation}
 \Phi_{\textrm{r}} = \frac{\textrm{d}Q}{\textrm{d}T}\,,
 \end{equation}
@@ -42,7 +42,7 @@ I = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}\;.
  \begin{figure}[h]
 %\label{fig:cup}
   \begin{center}
-  \includegraphics[width=6 cm]{immagine}
+  \includegraphics[width=6 cm]{solid_Angle}
   \end{center}
   \caption{Radiation emitted in a solid angle $\textrm{d}\Omega$ in a direction making an angle $t$ with the normal to the area $\textrm{d}A$.}
   \label{fig:rad}
@@ -188,52 +188,54 @@ Eq. (\ref{Refraction}) is only valid for
 \end{equation} and it is called the critical angle, \cite{chaves2015introduction}.
 Note that the condition $\frac{n_t}{n_i}<1$ is verified as in this case $\sin(\alpha_\textrm{i})<1$.
 When the incident angle $\alpha_{\textrm{i}}$ is exactly equal to the critical angle $\alpha_{\textrm{c}}$ the refractive ray propagates parallel to the refractive surface, 
-when $\alpha_{\textrm{i}}>\alpha_{\textrm{c}}$ the light ray is no longer refracted but it is reflected by the surface. This phenomenon is called total internal reflection (TIR). When there is TIR the $100\%$ of light is reflected and there is no loss of energy. Therefore, optical systems designed such that TIR occurs are very efficient. In general, light that hits a normal refractive mirror can be both reflected and refracted. Therefore, some part of the energy is transmitted and some part is reflected. The percentual of light that is reflected and refracted is determined by the Fresnel's coefficients.
+when $\alpha_{\textrm{i}}>\alpha_{\textrm{c}}$ the light ray is no longer refracted but it is reflected by the surface. This phenomenon is called total internal reflection (TIR). When there is TIR the $100\%$ of light is reflected and there is no loss of energy. Therefore, optical systems designed such that TIR occurs are very efficient. In general, light that hits a normal refractive mirror can be both reflected and refracted. Therefore, some part of the energy is transmitted and some part is reflected. The amount of light that is reflected and refracted is determined by the Fresnel's coefficients.
 In the next paragraph an overview of the Fresnel equations is given.
 
 \section{The Fresnel equations}
 Light can be described as an electromagnetic wave.
 It is useful to study the light propagation from the perspective of Electromagnetic Theory which gives information about the incident, reflected and transmitted radiant flux density that are denoted with $E_i$, $E_r$ and $E_t$, respectively.  
-Any component of the electric field $\mathcal{E}$ can be written in the form
+Any component of the electric field $\boldsymbol{\mathcal{E}}$ can be written in the form
 \begin{equation}
-\boldsymbol{\mathcal{E}}(\vect{x}, t) = \boldsymbol{\mathcal{E}}_0(\vect{x} )e^{i(\omega t - \vect{k}\cdot \vect{r})}
+\boldsymbol{\mathcal{E}}(\vect{x}, \mytime) = \boldsymbol{\mathcal{E}}_0(\vect{x} )e^{i(\omega \mytime - \vect{k}\cdot \vect{r})}
 \end{equation}
+where the amplitude $\boldsymbol{\mathcal{E}}_0(\vect{x})$ is constant in time. The vector \vect{k} has the same direction of the wave and its absolute value 
+$|\vect{k}| = k = \frac{2\pi}{\lambda}$ is the wave number in vacuum, with $\lambda$ the wavelength. The value of the angular frequency is $\omega = \frac{c k}{n}$ with $c$ the velocity of the light and $n$ the index of refraction in which the wave is traveling which is the ratio of the speed of light $v$ in the material and the speed of light $c$ in vacuum.
 Similarly, the magnetic field has the form:
 \begin{equation}
-\boldsymbol{\mathcal{B}}(\vect{x}, t) = \boldsymbol{\mathcal{B}}_0(\vect{x}) e^{i(\omega t - \vect{k}\cdot \vect{r})}
+\boldsymbol{\mathcal{B}}(\vect{x}, \mytime) = \boldsymbol{\mathcal{B}}_0(\vect{x}) e^{i(\omega \mytime - \vect{k}\cdot \vect{r})}\,.
 \end{equation}
 In the field of electromagnetism a very important concept is the Poynting vector \vect{P}. 
 It defines the energy flux of an electromagnetic field,  it is measured in $[W/m^2]$ and it is defined as:
 \begin{equation}
 \vect{P} = \frac{1}{\mu}\Big(\mathcal{E}\times \mathcal{B}\Big)
 \end{equation}
-where... 
-The irradiance $E$ is defined as the average energy that crosses in unit time a unit area perpedicular to the direction of the energy flow.
+where $\mu = \frac{1}{\varepsilon v^2}$ is the permeability and $\varepsilon$ the permittivity. In the following, the vacuum parameters are indicated with the subscript $0$. All the quantities defined in the medium of the incident, reflective and transmitted light are indicated with the subscripts $i$, $r$ and $t$, respectively.
+The irradiance $E$ is defined as the average energy that crosses in unit time a unit area $A$ perpedicular to the direction of the energy flow.
 Therefore:
 \begin{equation}
-\vect{E} = <\vect{P}>_{T} = \frac{c}{2\mu_0}\boldsymbol{\mathcal{E}}_0^2\,.
+\vect{E} = <\vect{P}>_{\mytime} = \frac{c}{2\mu_0}\boldsymbol{\mathcal{E}}_0^2\,,
 \end{equation}
-Considering a beam of light that hit a surface such that an area $A$ is illuminated, the incident, reflected and transitted beams are $\vect{E}_i A\cos(t_i)$ $\vect{E}_r A\cos(t_r)$ and $\vect{E}_t A\cos(t_t)$ , respectively.
-The reflectance $R$ is the ratio of the reflected power to the incident power:
+where $<\cdot>_\mytime$ indicates the average in time.
+Considering a beam of light that hit a surface such that an area $A$ is illuminated, the incident, reflected and transmitted beams are $\vect{E}_i A\cos(\alpha_i)$ $\vect{E}_r A\cos(\alpha_r)$ and $\vect{E}_t A\cos(\alpha_t)$ , respectively.
+The reflectance $\mathcal{R}$ is the ratio of the reflected power to the incident power:
 \begin{equation}\label{reflectance}
-R = \frac{\vect{E}_r A\cos(t_r)}{\vect{E}_i A\cos(t_i)} =\Bigg(\frac{\boldsymbol{\mathcal{E}}_{0r}}{\boldsymbol{\mathcal{E}_{0i}}}\Bigg)^2
+\mathcal{R} = \frac{\vect{E}_r A\cos(\alpha_r)}{\vect{E}_i A\cos(\alpha_i)} =\Bigg(\frac{\boldsymbol{\mathcal{E}}_{0r}}{\boldsymbol{\mathcal{E}_{0i}}}\Bigg)^2
 \end{equation}
 Similarly, the transmittance $T$ is the ratio between the transmitted to the incident power:
 \begin{equation}\label{transmittance}
-T = \frac{\vect{E}_tA\cos(t_t)}{\vect{E}_r A\cos(t_r)}= \frac{n_t \cos(t_t)}{n_i\cos(t_i)}\Bigg(\frac{\boldsymbol{\mathcal{E}}_{0 t}}{\boldsymbol{\mathcal{E}}_{0 i}}\Bigg)^2.
+\mathcal{T} = \frac{\vect{E}_tA\cos(\alpha_t)}{\vect{E}_r A\cos(\alpha_r)}= \frac{n_t \cos(\alpha_t)}{n_i\cos(\alpha_i)}\Bigg(\frac{\boldsymbol{\mathcal{E}}_{0 t}}{\boldsymbol{\mathcal{E}}_{0 i}}\Bigg)^2.
 \end{equation}\\
-Note that 
+Note that, since  $\vect{E} _r/\vect{E}_t = (v_r\varepsilon_r \boldsymbol{\mathcal{E}}_{0r}^2/2)/(v_i\varepsilon_i \boldsymbol{\mathcal{E}}_{0i}^2/2)$,
 \begin{equation}\label{R}
-R = \Big(\frac{\boldsymbol{\mathcal{E}}_{0 r}}{\boldsymbol{\mathcal{E}}_{0 i}}\Big)^2
-\end{equation}
-because $\vect{E} _r/\vect{E}_t = (v_r\varepsilon_r \boldsymbol{\mathcal{E_{0r}}}^2/2)/(v_i\varepsilon_i \boldsymbol{\mathcal{E}}_{0i}^2/2)$, 
+\mathcal{R} = \Big(\frac{\boldsymbol{\mathcal{E}}_{0 r}}{\boldsymbol{\mathcal{E}}_{0 i}}\Big)^2\,,
+\end{equation} 
 while: \begin{equation}\label{T}
-T = \frac{n_t \cos(t_t)}{n_t \cos(t_i)}\Bigg(\frac{\boldsymbol{\mathcal{E}}_{0 t}}{\boldsymbol{\mathcal{E}}_{0 i}}\Bigg)^2
+\mathcal{T} = \frac{n_t \cos(\alpha_t)}{n_t \cos(\alpha_i)}\Bigg(\frac{\boldsymbol{\mathcal{E}}_{0 t}}{\boldsymbol{\mathcal{E}}_{0 i}}\Bigg)^2
 \end{equation}
 where we assumed that $\mu_i = \mu_t  = \mu_0$ and we used the fact that $\mu_0 v_t\varepsilon_t=n_t/c$.
 Employing the total energy conservation, that is:
 \begin{equation}
-\vect{E}_i A\cos(t_i) = \vect{E}_r A\cos(t_r)+\vect{E}_t A\cos(t_t)\,,
+\vect{E}_i A\cos(\alpha_i) = \vect{E}_r A\cos(\alpha_r)+\vect{E}_t A\cos(\alpha_t)\,,
 \end{equation}
 %multiplying the previous equation by $c$, it becomes:
 %\begin{equation}
@@ -245,38 +247,43 @@ Employing the total energy conservation, that is:
 %\end{equation}
 %as $n_i = n_r$. \\ 
 %Therefore:
+
 it can be easily proved that:
 \begin{equation}
-R+T=1\,.
+\mathcal{R}+\mathcal{T}=1\,.
 \end{equation}
 The values $r = \Big(\frac{\boldsymbol{\mathcal{E}}_{0 i}}{\boldsymbol{\mathcal{E}}_{0 i}}\Big)$ and 
 $t = \Big(\frac{\boldsymbol{\mathcal{E}}_{0 t}}{\boldsymbol{\mathcal{E}}_{0 i}}\Big)$ are called the amplitude coefficients.  
-The intensity of the reflected and transmitted light depends not only on the angle of incident but also on the direction of the electric field $\boldsymbol{\mathcal{E}}$, 
-\cite{feynman1964feynman}.
-It is necessary to derive separately the parallel and perpendicular components of $r$ and $t$. 
-To do that, the Maxwell's equations need to be considered. 
-Then the boundaries condition that guarantees that the electric field \vect{E} tangent to the interface is continuous across it is imposed. 
-After some calculations the Fresnel equations are derived for the cases of the electric field both perpendicular and parallel to the plane of incident, (see  \cite{born2013principles, hecht1998hecht} for more details). In case \vect{E} is perpendicular to the plane of incidence the following equations are obtained:
+The intensity of the reflected and transmitted light depends not only on the angle of incidence but also on the polarization of the electromagnetic field.
+By convention, we refer to the polarization of electromagnetic waves as the direction of the electric field $\boldsymbol{\mathcal{E}}$, 
+\cite{feynman1964feynman}. When $\boldsymbol{\mathcal{E}}$ is perpendicular to the plane of incidence, light is called $s$-polarized, while when
+$\boldsymbol{\mathcal{E}}$ is parallel to the plane of incidence, it is said that light is $p$-polarized.
+For $s$-polarized light the parallel components $r_s$ and $t_s$ of $r$ and $t$ are defined. 
+For $p$-polarized light the perpendicular components $r_p$ and $t_p$ of $r$ and $t$ are given. 
+Those coefficients are obtained considering the Maxwell's equations and the boundaries conditions due to the conservation of energy.
+For the first case ($s$-polarization), the boundaries conditions are given by the conservation of the tangent component of $\boldsymbol{\mathcal{E}}$ and of the normal component of $\boldsymbol{\mathcal{B}}$. For the second case ($p$-polarization), the boundaries conditions are given by the conservation of the tangential component $\boldsymbol{\mathcal{E}}$ and of the tangent component of $\boldsymbol{\mathcal{B}}$. These conditions together with Maxwell's equations lead to four equations with four unknowns.
+Solving those equations the Fresnel coefficients are derived, (see  \cite{born2013principles, hecht1998hecht} for more details). 
+In case \vect{E} is perpendicular to the plane of incidence the following equations are obtained:
 \begin{equation} \label{Fresnel_perpendicular}
 \begin{split}
-r_{s} & = \frac{n_i\cos(t_i)-n_t \cos(t_t)}{n_i \cos(t_i)+n_t\cos(t_t)}\\
-t_{s} & =  \frac{2n_i\cos(t_i)}{n_i\cos(t_i)+n_t\cos(t_t)}
+r_{s} & = \frac{n_i\cos(\alpha_i)-n_t \cos(\alpha_t)}{n_i \cos(\alpha_i)+n_t\cos(\alpha_t)}\\
+t_{s} & =  \frac{2n_i\cos(\alpha_i)}{n_i\cos(\alpha_i)+n_t\cos(\alpha_t)}
 \end{split}
 \end{equation}
 In case \vect{E} is parallel to the plane of incidence the amplitude coefficients are:
 \begin{equation}\label{Fresnel_parallel}
 \begin{split}
-r_{p} & = \frac{n_t\cos(t_i)-n_i \cos(t_t)}{n_i \cos(t_t)+n_t\cos(t_i)}\\
-t_{p} & =  \frac{2n_i\cos(t_i)}{n_i\cos(t_t)+n_t\cos(t_i)}.
+r_{p} & = \frac{n_t\cos(\alpha_i)-n_i \cos(\alpha_t)}{n_i \cos(\alpha_t)+n_t\cos(\alpha_i)}\\
+t_{p} & =  \frac{2n_i\cos(\alpha_i)}{n_i\cos(\alpha_t)+n_t\cos(\alpha_i)}.
 \end{split}
 \end{equation}
 Using Snell's Law,  Equations (\ref{Fresnel_perpendicular}) and (\ref{Fresnel_parallel}) are simplified as in the following:
 \begin{equation} \label{simple_Fresnel}
 \begin{split}
-r_{s} & = -\frac{\sin(t_i-t_t)}{\sin(t_i+t_t)}\\
-r_{p} & =  +\frac{\tan(t_i-t_t)}{t_i+t_t}\\
-t_{s} & = -\frac{2\sin t_t \cos t_i}{\sin(t_i+t_t)}\\
-t_{p} & = +\frac{2\sin t_t \cos t_i}{\sin(t_i+t_t)\cos(t_i- t_t)}.
+r_{s} & = -\frac{\sin(\alpha_i-\alpha_t)}{\sin(\alpha_i+\alpha_t)}\\
+r_{p} & =  +\frac{\tan(\alpha_i-\alpha_t)}{\alpha_i+\alpha_t}\\
+t_{s} & = -\frac{2\sin \alpha_t \cos \alpha_i}{\sin(\alpha_i+\alpha_t)}\\
+t_{p} & = +\frac{2\sin \alpha_t \cos \alpha_i}{\sin(\alpha_i+\alpha_t)\cos(\alpha_i- \alpha_t)}.
 \end{split}
 \end{equation}
 It can be show that
@@ -303,26 +310,26 @@ Fresnel's coefficients can also be derived using a different approach that does 
 Writing the parallel and perpendicular components of $R$ and $T$ as:
 \begin{equation}\label{Fresnel_pands}
 \begin{split}
-R_p &= r_p^2\\
-T_p &= \frac{n_t \cos(t_t)}{n_t \cos(t_i)}t_p^2\\
-R_s &= r_s^2\\
-T_s &= \frac{n_t \cos(t_t)}{n_t \cos(t_i)}t_s^2\\
+\mathcal{R}_p& =  {r_p^2}\\
+\mathcal{T}_p &=  \frac{n_t \cos(\alpha_t)}{n_t \cos(\alpha_i)}t_p^2\\
+\mathcal{R}_s &=  r_s^2\\
+\mathcal{T}_s &= \frac{n_t \cos(\alpha_t)}{n_t \cos(\alpha_i)}t_s^2\\
 \end{split}
 \end{equation}
 it can be show that
 \begin{equation}
 \begin{split}
-R_s+R_p &= 1\\
-T_s+t_p &=1\,.
+\mathcal{R}_s+\mathcal{R}_p &= 1\\
+\mathcal{T}_s+\mathcal{T}_p &=1\,.
 \end{split}
 \end{equation}
 For normal incidence, i.e. $t_i = 0$, there is no polarization and Eqs. (\ref{Fresnel_pands}) lead to:
 \begin{equation}
-R = R_p = R_s = \Bigg(\frac{n_i-n_t}{n_t+n_i}\Bigg)^2
+\mathcal{R} = \mathcal{R}_p = \mathcal{R}_s = \Bigg(\frac{n_i-n_t}{n_t+n_i}\Bigg)^2
 \end{equation}
 and 
 \begin{equation}
-T = T_p = T_s = \frac{4n_i n_t}{(n_t+n_i)^2}
+\mathcal{T} = \mathcal{T}_p = \mathcal{T}_s = \frac{4n_i n_t}{(n_t+n_i)^2}
 \end{equation}
 \begin{figure}[h]
  \label{fig:Reflectance_transmittance}
@@ -394,5 +401,3 @@ T = T_p = T_s = \frac{4n_i n_t}{(n_t+n_i)^2}
 
 
 
-
-%\section{Application to optical design systems}
