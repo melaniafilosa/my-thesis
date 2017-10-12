@@ -17,10 +17,10 @@ where $Q$ is the energy and $T$ the time.\\
   \begin{center}
   \includegraphics[width=7cm]{CIELuminosity}
   \end{center}
-  \caption{Luminosity function $\bar{y}(\lambda)$: relation between the eye's sensitivity and the wavelength of the light. The luminous function is dimensionless.}
+  \caption{Luminosity function $\bar{y}(\lambda)$: relation between the eye's sensitivity and the wavelength of the light. The luminous function is dimensionless, \cite{wiki}.}
   \label{fig:luminosityfunction}
   \end{figure}
-\\ The luminous flux corresponding to one Watt of radiation power at any wavelength is given by the product of $683$ $\textrm{lm/W}$ and the luminosity function at the same wavelength,
+\\ \indent The luminous flux corresponding to one Watt of radiation power at any wavelength is given by the product of $683$ $\textrm{lm/W}$ and the luminosity function at the same wavelength,
 i.e. $683 \, \bar{y}(\lambda)$. Hence, $\Phi$ has unit lumen [\textrm{lm}] and it is defined as:
 \begin{equation}
 \Phi = 683 \int_0^\infty \Phi_\textrm{r}(\lambda) \bar{y}(\lambda)\textrm{d}\lambda \;.
@@ -43,70 +43,69 @@ I = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}\;.
  \begin{figure}[h]
 %\label{fig:cup}
   \begin{center}
-  \includegraphics[width=6 cm]{solid_Angle}
+  \includegraphics[width=6 cm]{SolidAngle}
   \end{center}
-  \caption{Solid angle $\textrm{d}\Omega$ in a direction making an angle \myangle with the normal to the area $\textrm{d}A$.}
+  \caption{Solid angle $\textrm{d}\Omega$ in a direction making an angle \myangle $\;$ with the normal to the area $\textrm{d}A$.}
   \label{fig:rad}
-  \end{figure}
-The luminance $L$ \big(unit $\big[\textrm{cd} / \textrm{m}^2\big]$\big) is the luminous flux per unit solid angle $\textrm{d}\Omega$ and  per unit projected area $\cos(t)\,\textrm{d}A$ where $t$ is the angle that the normal $\boldsymbol{\nu}$ to area $\textrm{d}A$ makes with the direction of the solid angle $\textrm{d}\Omega$, as shown in Figure $\ref{fig:rad}$.  $L$  is given by:
+  \end{figure}The luminance $L$ \big(unit $\big[\textrm{cd} / \textrm{m}^2\big]$\big) is the luminous flux per unit solid angle $\textrm{d}\Omega$ and  per unit projected area $\cos\mbox{\myangle},\textrm{d}A$ where \myangle is the angle that the normal $\boldsymbol{\nu}$ to area $\textrm{d}A$ makes with the direction of the solid angle $\textrm{d}\Omega$, as shown in Figure $\ref{fig:rad}$.  $L$  is given by:
 \begin{equation}\label{luminance1}
-  L=\frac{\textrm{d}\Phi}{\cos \mbox{\myangle}\textrm{d}A\textrm{d}\Omega}.
+  L=\frac{\textrm{d}\Phi}{\cos\mbox{\myangle}\textrm{d}A\textrm{d}\Omega}\,.
 \end{equation}
-\noindent Note that from ($\ref{intensity}$) and ($\ref{luminance1}$) we can derive a relation between the intensity and the luminance.\\
-The infinitesimal intensity $\textrm{d}I $ emitted by the area element $\textrm{d}A$ is given by:
+\noindent Note that from ($\ref{intensity}$) and ($\ref{luminance1}$) we can derive a relation between the intensity and the luminance. The infinitesimal intensity $\textrm{d}I $ emitted by the area element $\textrm{d}A$ is given by:
 \begin{equation}
-\textrm{d}I = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}= L(\textrm{x},\mbox{\myangle})\cos(\mbox{\myangle})\textrm{d}A \,.
+\textrm{d}I = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}= L(\variabile{x},\mbox{\myangle})\cos\mbox{\myangle}\textrm{d}A \,.
 \end{equation}
-When the luminance is uniform over a finite area $A$, the luminous intensity emitted in the direction \myangle is equal to:
+When the luminance is uniform over a finite area $A$, the luminous intensity emitted in the direction \myangle  is equal to:
 \begin{equation}
-I(t) = L(\mbox{\myangle}) A \cos(\mbox{\myangle})\,.
+I(t) = L(\mbox{\myangle}) A \cos\mbox{\myangle}\,.
 \end{equation}
-Thus, when $L(\textrm{x},\mbox{\myangle})$ does not depend on the position and the direction (i.e. $L(\textrm{x},\mbox{\myangle})=L$), we deduce Lambert's cosine law:
+Thus, when $L(\variabile{x},\mbox{\myangle})$ does not depend on the position and the direction (i.e. $L(\variabile{x},\mbox{\myangle})=L$), we deduce Lambert's cosine law:
 \begin{equation}
-I(t) = I_0\cos(\mbox{\myangle})\,.
+I(t) = I_0\cos\mbox{\myangle}\,.
 \end{equation}
 where $I_0 = I(0) = LA$. \\
-Finally the \'{e}tendue $U$ (unit $[m \cdot srad]$) describes the ability of a source to emitt light or the capability of an optical system to receive light, \cite{zhu2011etendue}.
+Finally the \'{e}tendue $U$ (unit $[m \cdot sr]$) describes the ability of a source to emitt light or the capability of an optical system to receive light, \cite{zhu2011etendue}.
 The quantity $ \textrm{d}U $ is defined as:
 \begin{equation}\label{etendue}
-\textrm{d}U = n^2 \cos(\mbox{\myangle}) \textrm{d}A\textrm{d}\Omega.
+\textrm{d}U = n^2 \cos\mbox{\myangle}\textrm{d}A\textrm{d}\Omega.
 \end{equation}
 where $n$ is the index of refraction of the medium in which the surface $A$ is immersed. In optics the \'{e}tendue is considered to be a volume in phase space  (or an area for two-dimensional systems). This concept will be clarified in Chapter \ref{chap:PS} where we treat the phase space in more details.
-An important property of the \'{e}tendue is that it is conserved within an optical system where the flux is constant. We now show, following the same approach used by J. Chaves in \cite{chaves2015introduction}, how the conservation of this quantity can be derived .
-Consider a light ray emitted from an infinitesimal area $\textrm{d}A_1$ to the area $\textrm{d}A_2$ located at a distance $d$ from $\textrm{d}A_1$,  see Figure \ref{fig:etendue_conservation}.
+An important property of the \'{e}tendue is that it is conserved within an optical system where the flux is constant. We now show, using the same approach of by J. Chaves in \cite{chaves2015introduction}, how the conservation of this quantity can be derived .
+Consider a light ray emitted from an infinitesimal area $\textrm{d}A_1$ to the area $\textrm{d}A_2$ located at a distance \variabile{d} from $\textrm{d}A_1$,  see Figure \ref{fig:etendue_conservation}.
 \begin{figure}[h]
  \label{fig:etendue_conservation}
      \begin{center}
-     \includegraphics[width=10cm]{areas.png}
+     \includegraphics[width=10cm]{areas.pdf}
      \end{center}
-     \caption{\footnotesize{$\textrm{d}A_1$ and $\textrm{d}A_2$ are two line surfaces with normal $\nu_1$ and $\nu_2$, respectively. \myangle$_1$ and \myangle$_2$ are the angles made by the central ray with the normals $\nu_1$ and $\nu_2$, respectively.}}
+     \caption{\footnotesize{$\textrm{d}A_1$ and $\textrm{d}A_2$ are two line surfaces with normals $\nu_1$ and $\nu_2$, respectively. They are located at a distance \variabile{d}.
+\myangle$_1$ and \myangle$_2$ are the angles made by the central ray with the normals $\nu_1$ and $\nu_2$, respectively.}}
 \label{fig:etendue_conservation}
  \end{figure}
-\\ Indicating with $\boldsymbol{\nu}_1$ and $\boldsymbol{\nu}_2$ the normals to the surfaces $\textrm{d}A_1$ and $\textrm{d}A_2$, respectively and with \myangle$_1$ and \myangle$_2$ the angles that the central ray forms with $\boldsymbol{\nu}_1$ and $\boldsymbol{\nu}_2$, respectively,
+Indicating with $\boldsymbol{\nu}_1$ and $\boldsymbol{\nu}_2$ the normals to the surfaces $\textrm{d}A_1$ and $\textrm{d}A_2$, respectively and with \myangle$_1$ and \myangle$_2$ the angles that the central ray forms with $\boldsymbol{\nu}_1$ and $\boldsymbol{\nu}_2$, respectively,
 the flux passing though $\textrm{d}A_2$ coming from $\textrm{d}A_1$ is defined as:
 \begin{equation}
-\textrm{d}\Phi_1 = L \cos(\mbox{\myangle}_1) \textrm{d}A_1 \textrm{d}\Omega_1
+\textrm{d}\Phi_1 = L \cos\mbox{\myangle}_1 \textrm{d}A_1 \textrm{d}\Omega_1
 \end{equation}
 where $\textrm{d}\Omega_1$ is defined at the area $\textrm{d}A_1$ by the area $\textrm{d}A_2$ and it is given by 
 \begin{equation}
-\textrm{d}\Omega_1 = \frac{\textrm{d}A_2\cos(\mbox{\myangle}_2)}{d^2}\,.
+\textrm{d}\Omega_1 = \frac{\textrm{d}A_2\cos(\mbox{\myangle}_2)}{\variabile{d}^2}\,.
 \end{equation}
 Similarly, the flux passing though $\textrm{d}A_1$ coming from $\textrm{d}A_2$ is equal to:
 \begin{equation}
-\textrm{d}\Phi_2 = L \cos(\mbox{\myangle}_2) \textrm{d}A_2 \textrm{d}\Omega_2
+\textrm{d}\Phi_2 = L \cos\mbox{\myangle}_2 \textrm{d}A_2 \textrm{d}\Omega_2
 \end{equation}
 and
 \begin{equation}
-\textrm{d}\Omega_2 = \frac{\textrm{d}A_1\cos(\mbox{\myangle}_1)}{d^2}\,.
+\textrm{d}\Omega_2 = \frac{\textrm{d}A_1\cos\mbox{\myangle}_1}{\variabile{d}^2}\,.
 \end{equation}
 Then \begin{equation}
 \label{etendue1}
-\textrm{d}U_1 = n^2 \textrm{d}A_1\cos(\mbox{\myangle}_1)\textrm{d}\Omega_1= \frac{n^2 \textrm{d}A_1\cos(\mbox{\myangle}_1)\textrm{d}A_2\cos(\mbox{\myangle}_2)}{d^2},
+\textrm{d}U_1 = n^2 \textrm{d}A_1\cos\mbox{\myangle}_1\textrm{d}\Omega_1= \frac{n^2 \textrm{d}A_1\cos\mbox{\myangle}_1\textrm{d}A_2\cos\mbox{\myangle}_2}{\variabile{d}^2},
 \end{equation}
 and
 \begin{equation}
 \label{etendue2}
-\textrm{d}U_2 = n^2 \textrm{d}A_2\cos(\mbox{\myangle}_2)\textrm{d}\mbox{\myangle}_2= \frac{ n^2 \textrm{d}A_2\cos(\mbox{\myangle}_2)\textrm{d}A_1\cos(\mbox{\myangle}_2)}{d^2}\,.
+\textrm{d}U_2 = n^2 \textrm{d}A_2\cos\mbox{\myangle}_2\textrm{d}\mbox{\myangle}_2= \frac{ n^2 \textrm{d}A_2\cos\mbox{\myangle}_2\textrm{d}A_1\cos\mbox{\myangle}_2}{\variabile{d}^2}\,.
 \end{equation}
 From equation ($\ref{etendue1}$) and ($\ref{etendue2}$) we see that $\textrm{d}U_1=\textrm{d}U_2$.
 For a light beam, all the light passing through $\textrm{d}A_1$ coincides with the light passing through $\textrm{d}A_2$, hence $\textrm{d}U = \textrm{d}U_1$. Moreover, for the same light beam, all the light passing from $\textrm{d}A_2$ corresponds to the light emitted from $\textrm{d}A_1$, then $\textrm{d}U=\textrm{d}U_2$. Finally we can conclude that the \'{e}tendue $\textrm{d}U$ is conserved along a beam of light. Since also the flux through the areas $\textrm{d}A_1$ and $\textrm{d}A_2$ is conserved, the following relation holds:
@@ -116,28 +115,27 @@ L := n \frac{\textrm{d}\Phi}{\textrm{d}U} = constant\,.
  In the optical systems we will consider in this work, the source and the target are located in the same medium (air) with $n=1$, so the luminance $L$ equals the basic luminance $L^* = L/n$ at the source and the target of the system.\\
 \indent In this thesis we consider two-dimensional optical systems. 
  Hence, we need to find two-dimensional analogies for the definitions given above.
-In two dimensions the illuminance \big(unit $\big[\textrm{lm}/\textrm{m}\big]$\big) denotes the luminous flux falling on an infinitesimal line segment of length $\textrm{d}x$ and it is given by:
+In two dimensions the illuminance \big(unit $\big[\textrm{lm}/\textrm{m}\big]$\big) denotes the luminous flux falling on an infinitesimal line segment of length $\textrm{d}\variabile{x}$ 
+and it is given by:
  \begin{equation}
- E=\frac{\textrm{d}\Phi}{\textrm{d}x}\;.
+ E=\frac{\textrm{d}\Phi}{\textrm{d}\variabile{x}}\;.
  \end{equation}
- The luminous intensity \big(unit $\big[\textrm{lm}/\textrm{rad}\big]$\big) is the luminous flux per angle $\textrm{d}t$:
+ The luminous intensity \big(unit $\big[\textrm{lm}/\textrm{rad}\big]$\big) is the luminous flux per angle $\textrm{d}\mbox{\myangle}$:
  \begin{equation}
  I=\frac{\textrm{d}\Phi}{\textrm{d}\mbox{\myangle}}\;.
  \end{equation}
  Thus the following relation holds:
  \begin{equation}
- \textrm{d}I = L\cos(t)\textrm{d}x\,.
+ \textrm{d}I = L\cos\mbox{\myangle}\textrm{d}\variabile{x}\,.
  \end{equation}
  The $2D$ luminance \big(unit $\big[\textrm{lm}/(\textrm{rad}\; \textrm{m})\big]$\big) is given by:
  \begin{equation}
- L = \frac{\textrm {d}\Phi}{\cos t\,\textrm{d}x \,\textrm{d}\mbox{\myangle}}.
+ %L = \frac{\textrm {d}\Phi}{\cos\myangle\,\textrm{d}\variabile{x} \,\textrm{d}\mbox{\myangle}}.
  \end{equation}
   The \'{e}tendue $\textrm{d}U $ (unit $[m\cdot rad]$) in $2$D is given by:
 \begin{equation}\label{etendue2d}
-\textrm{d}U = n\cos(\mbox{\myangle}) \textrm{d}a\textrm{d}\mbox{\myangle}.
+\textrm{d}U = n\cos\mbox{\myangle}\textrm{d}\variabile{x}\,\textrm{d}\mbox{\myangle}.
 \end{equation}
-
-
 
 \section{Reflection and refraction law}
 The propagation of a light ray traveling through  different media is described by the reflection and refraction law.
@@ -162,27 +160,28 @@ the reflection law states that \myangle$_i$ equals \myangle$_r$ which are measur
 \begin{figure}[h]
  \label{fig:Snell}
      \begin{center}
-     \includegraphics[width=8cm]{Snell.png}
+     \includegraphics[width=8cm]{reflection}
      \end{center}
-     \caption{\footnotesize{$\textrm{d}A_1$ and $\textrm{d}A_2$ are two line surfaces with normal $\nu_1$ and $\nu_2$, respectively. $t_i$ and $t_2$ are the angles made by the central ray with the normals $\nu_1$ and $\nu_2$, respectively.}}
+     \caption{\footnotesize{Propagation of a ray through two different media with index of refraction $n_i$ and $n_t$.}}% \bolsymbol{$\nu$} is the normal to the surface $A$ that the incident ray hits.
+%$\vect{t}_i$, $\vect{t}_r$ and $\vect{t}_t$ are the direction vectors of the incident, reflected and refracted (or transmitted) ray, respectively. }}
+%\myangle$_{i}$, \myangle$_{r}$ and \myangle$_{t}$ are the angles between \bolsymbol{$\nu$} and the incident, reflected and transmitted ray, respectively.}}
 \label{fig:Snell}
  \end{figure}
-\\ When a ray propagates through two media with two different media, it direction changes according to refraction law. 
+\\ When a ray propagates through two different media, its direction changes according to refraction law. 
 Indicating with $n_i$ the index of refraction of the medium in which the incident ray travels and with $n_t$ the index of refraction of the medium of the transmitted ray, the direction $\vect{t}_t$ of the transmitted ray is given by:
 \begin{equation}\label{Refraction}
 \vect{t}_t = n_{i,t}\,\vect{t}_i+
 \Big[\sqrt{1-n_{i,t}^2+n_{i,t}^2(\boldsymbol{\nu},\vect{t}_i)^2}-n_{i,t}(\boldsymbol{\nu},\vect{t}_i) \Big]\boldsymbol{\nu}\,,
 \end{equation}
-where $n_{i,t}=n_i/n_t$. \\
- \indent Note that in Eq. (\ref{Reflection}) the direction of the normal $\boldsymbol{\nu}$ to the surface is not relevant for the computation of the direction of the reflective ray, since:
+where $n_{i,t}=n_i/n_t$. Note that in Eq. (\ref{Reflection}) the direction of the normal $\boldsymbol{\nu}$ to the surface is not relevant for the computation of the direction of the reflective ray, since:
 \begin{equation}
 \vect{t}_r = \vect{t}_i-2(\vect{t}_i,\boldsymbol{\nu})\boldsymbol{\nu}= \vect{t}_i-2(\vect{t}_i,-\boldsymbol{\nu})(-\boldsymbol{\nu}) ,
 \end{equation}
-while this is not the case of Eq. (\ref{Refraction}), therefore in the latter case we need to specify the direction of $\boldsymbol{\nu}$ which is usually chosen in such a way that the angle that it forms with the incident ray $\vect{t}_i$ is smaller than or equal to $\pi/2$. Hence, if $(\vect{t}_i, \boldsymbol{\nu})\geq0$ the normal $\boldsymbol{\nu}$ directed inside the same medium in which travels the incident ray is taken, otherwise the normal $-\boldsymbol{\nu}$ directed inside the same medium in which the transmitted ray will travel has to be considered. \\ \indent
+while this is not the case of Eq. (\ref{Refraction}), therefore in the latter case we need to specify the direction of $\boldsymbol{\nu}$ which is usually chosen in such a way that the angle that it forms with the incident ray $\vect{t}_i$ is smaller than or equal to $\pi/2$. Hence, if $(\vect{t}_i, \boldsymbol{\nu})\geq0$ the normal $\boldsymbol{\nu}$ directed inside the same medium in which travels the incident ray is taken, otherwise the normal $-\boldsymbol{\nu}$ directed inside the same medium in which the transmitted ray will travel has to be considered. 
 Eq. (\ref{Refraction}) is only valid for 
 \begin{equation}\label{tir}\begin{split}
 1-n_{i,t}^2+n_{i,t}^2(\boldsymbol{\nu},\vect{t}_i)^2\geq 0 & \Rightarrow \frac{n_t}{n_i}\geq \sqrt{1-(\boldsymbol{\nu},\vect{t}_i)^2}\\
-\Rightarrow n_t\geq n_i\sqrt{1-\cos^2(\mbox{\myangle}_i)} & \Rightarrow  n_t\geq n_i \sin(\mbox{\myangle}_i)
+\Rightarrow n_t\geq n_i\sqrt{1-\cos^2\mbox{\myangle}_i} & \Rightarrow  n_t\geq n_i \sin\mbox{\myangle}_i
 \end{split}
 \end{equation}
  The angle for which the equality holds is
@@ -219,26 +218,26 @@ Therefore:
 \vect{E} = <\vect{P}>_{\mytime} = \frac{c}{2\mu_0}\boldsymbol{\mathcal{E}}_0^2\,,
 \end{equation}
 where $<\cdot>_\mytime$ indicates the average in time.
-Considering a beam of light that hit a surface such that an area $A$ is illuminated, the incident, reflected and transmitted beams are $\vect{E}_i A\cos(\mbox{\myangle}_i)$ $\vect{E}_r A\cos(\mbox{\myangle}_r)$ and $\vect{E}_t A\cos(\mbox{\myangle}_t)$ , respectively.
+Considering a beam of light that hit a surface such that an area $A$ is illuminated, the incident, reflected and transmitted beams are $\vect{E}_i A\cos\mbox{\myangle}_i$ $\vect{E}_r A\cos\mbox{\myangle}_r$ and $\vect{E}_t A\cos\mbox{\myangle}_t$ , respectively.
 The reflectance $\mathcal{R}$ is the ratio of the reflected power to the incident power:
 \begin{equation}\label{reflectance}
-\mathcal{R} = \frac{\vect{E}_r A\cos(\mbox{\myangle}_r)}{\vect{E}_i A\cos(\mbox{\myangle}_i)} 
+\mathcal{R} = \frac{\vect{E}_r A\cos\mbox{\myangle}_r}{\vect{E}_i A\cos\mbox{\myangle}_i}\,. 
 \end{equation}
 Similarly, the transmittance $T$ is the ratio between the transmitted to the incident power:
 \begin{equation}\label{transmittance}
-\mathcal{T} = \frac{\vect{E}_tA\cos(\mbox{\myangle}_t)}{\vect{E}_r A\cos(\mbox{\myangle}_r)}
+\mathcal{T} = \frac{\vect{E}_t A\cos\mbox{\myangle}_t}{\vect{E}_r A\cos\mbox{\myangle}_r}
 \end{equation}\\
 Note that, since  $\vect{E} _r/\vect{E}_t = (v_r\varepsilon_r \boldsymbol{\mathcal{E}}_{0r}^2/2)/(v_i\varepsilon_i \boldsymbol{\mathcal{E}}_{0i}^2/2)$, Eq. (\ref{reflectance}) becomes
 \begin{equation}\label{R}
-\mathcal{R} = \Bigg(\frac{\boldsymbol{\mathcal{E}}_{0 r}}{\boldsymbol{\mathcal{E}}_{0 i}}\Bigg)^2\,,
+\mathcal{R} = \Bigg(\frac{\boldsymbol{\mathcal{E}}_{0 r}}{\boldsymbol{\mathcal{E}}_{0 i}}\Bigg)^2,
 \end{equation} 
 while Eq. (\ref{transmittance}) gives: \begin{equation}\label{T}
-\mathcal{T} = \frac{n_t \cos(\mbox{\myangle}_t)}{n_t \cos(\mbox{\myangle}_i)}\Bigg(\frac{\boldsymbol{\mathcal{E}}_{0 t}}{\boldsymbol{\mathcal{E}}_{0 i}}\Bigg)^2
+\mathcal{T} = \frac{n_t \cos\mbox{\myangle}_t}{n_t \cos\mbox{\myangle}_i}\Bigg(\frac{\boldsymbol{\mathcal{E}}_{0 t}}{\boldsymbol{\mathcal{E}}_{0 i}}\Bigg)^2
 \end{equation}
 where we assumed that $\mu_i = \mu_t  = \mu_0$ and we used the fact that $\mu_0 v_t\varepsilon_t=n_t/c$.
 Employing the total energy conservation, that is:
 \begin{equation}
-\vect{E}_i A\cos(\mbox{\myangle}_i) = \vect{E}_r A\cos(\mbox{\myangle}_r)+\vect{E}_t A\cos(\mbox{\myangle}_t)\,,
+\vect{E}_i A\cos\mbox{\myangle}_i = \vect{E}_r A\cos\mbox{\myangle}_r+\vect{E}_t A\cos\mbox{\myangle}_t,
 \end{equation}
 it can be easily proved that:
 \begin{equation}
@@ -261,15 +260,15 @@ Fresnel's coefficients can also be derived using a different approach that does 
 In case \vect{E} is perpendicular to the plane of incidence the following results are obtained:
 \begin{equation} \label{Fresnel_perpendicular}
 \begin{split}
-r_{s} & = \frac{n_i\cos(\mbox{\myangle}_i)-n_t \cos(\mbox{\myangle}_t)}{n_i \cos(\mbox{\myangle}_i)+n_t\cos(\mbox{\myangle}_t)}\\
-t_{s} & =  \frac{2n_i\cos(\mbox{\myangle}_i)}{n_i\cos(\mbox{\myangle}_i)+n_t\cos(\mbox{\myangle}_t)}
+r_{s} & = \frac{n_i\cos(\mbox{\myangle}_i)-n_t \cos\mbox{\myangle}_t}{n_i \cos\mbox{\myangle}_i+n_t\cos\mbox{\myangle}_t}\\
+t_{s} & =  \frac{2n_i\cos\mbox{\myangle}_i}{n_i\cos\mbox{\myangle}_i+n_t\cos\mbox{\myangle}_t}
 \end{split}
 \end{equation}
 In case \vect{E} is parallel to the plane of incidence the amplitude coefficients are:
 \begin{equation}\label{Fresnel_parallel}
 \begin{split}
-r_{p} & = \frac{n_t\cos(\mbox{\myangle}_i)-n_i \cos(\mbox{\myangle}_t)}{n_i \cos(\mbox{\myangle}_t)+n_t\cos(\mbox{\myangle}_i)}\\
-t_{p} & =  \frac{2n_i\cos(\mbox{\myangle}_i)}{n_i\cos(\mbox{\myangle}_t)+n_t\cos(\mbox{\myangle}_i)}.
+r_{p} & = \frac{n_t\cos\mbox{\myangle}_i-n_i \cos\mbox{\myangle}_t}{n_i \cos\mbox{\myangle}_t+n_t\cos\mbox{\myangle}_i}\\
+t_{p} & =  \frac{2n_i\cos\mbox{\myangle}_i}{n_i\cos\mbox{\myangle}_t+n_t\cos\mbox{\myangle}_i}.
 \end{split}
 \end{equation}
 Using Snell's Law, Equations (\ref{Fresnel_perpendicular}) and (\ref{Fresnel_parallel}) are simplified as in the following:
@@ -288,19 +287,19 @@ t_s+(-r_s) &= 1 \\
 t_p+r_p &=  1
 \end{split}
 \end{equation}
-Fresnel coefficients are shown in Fig. \ref{fig:coefficients} for the case in which light travels from a less dense to a more dense medium ($n_i<n_t$), that is external reflection. 
-While in Fig. \ref{fig:coefficients2} the coefficients are shown for the case in which $n_i>n_t$, that is internal reflection. Note from Fig. \ref{fig:coefficients} that $r_p$ approaches to $0$ when \myangle$_i$ approaches to \myangle$_p$ and it gradually decreases reaching $-1$ for an incident angle \myangle$_i=90^\circ$. The angle \myangle$_p$ is called Brewster's angle or polarization angle as only the component perpendicular to the incident ray will be reflected and therefore light is perfectly polarized. Similarly, Fig. \ref{fig:coefficients2} shows that $r_p=0$ for \myangle$_i=$\myangle$_{p\prime}$. It can be show that \myangle$_p+$\myangle$_{p\prime}= 90^\circ$. Fig. \ref{fig:coefficients2} also shows that $r_p$ and $r_s$ reach $1$ when \myangle$_i=$\myangle$_c$. \myangle$_c$ is called the critical angle. Light that hits the incident plane with an incident angle equal to or greater than the critical angle is totally reflected back and no transmitted light is observed. This phenomenon is called total internal reflection. 
+The amplitude coefficients are shown in Fig. \ref{fig:coefficients} for the case in which light travels from a less dense to a more dense medium ($n_i<n_t$), that is external reflection. 
+In Fig. \ref{fig:coefficients2} the reflection coefficients are shown for the case in which $n_i>n_t$, that is internal reflection. Note from Fig. \ref{fig:coefficients} that $r_p$ approaches to $0$ when \myangle$_i$ approaches to \myangle$_p$ and it gradually decreases reaching $-1$ for an incident angle \myangle$_i=90^\circ$. The angle \myangle$_p$ is called Brewster's angle or polarization angle as only the component perpendicular to the incident ray is reflected at that angle and therefore light is perfectly polarized. Similarly, Fig. \ref{fig:coefficients2} shows that $r_p=0$ for \myangle$_i= $\myangle$_{p\prime}$. It can be show that \myangle$_p+ $\myangle$_{p\prime}= 90^\circ$. Both $r_p$ and $r_s$ reach $1$ when \myangle$_i= $\myangle$_c$. \myangle$_c$ is called the critical angle. Light that hits the incident plane with an incident angle equal to or greater than the critical angle is totally reflected back and no transmitted light is observed. This phenomenon is called total internal reflection. 
 \begin{figure}[h]
   \begin{minipage}[h]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{amplitude_coefficients2.png}
-    \caption{Amplitude coefficients of reflection and transmission as a function of the incident angle \myangle$_i$ in the case of external reflection, i.e. $n_t<n_i$. 
-($n_t = 1$ and $n_i=1.5$).}
+    \includegraphics[width=\textwidth]{amplitude_coefficients2.pdf}
+    \caption{Amplitude coefficients of reflection and transmission as a function of the incident angle \myangle$_i$ in the case of external reflection, i.e. $n_t<n_i$
+($n_t = 1$ and $n_i=1.5$). \myangle$_p$ is the polarization angle, \cite{hecht1998hecht}.}
     \label{fig:coefficients}
   \end{minipage} \hspace{2.5cm}
   \begin{minipage}[h]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{rprs.png}
-    \caption{Amplitude coefficients of reflection as a function of the incident angle \myangle$_i$ in the case of internal reflection, i.e. $n_t>n_i$. 
-($n_t = 1.5$ and $n_i=1$).}
+    \includegraphics[width=\textwidth]{rprs.pdf}
+    \caption{Reflection coefficients as a function of the incident angle \myangle$_i$ in the case of internal reflection, i.e. $n_t>n_i$
+($n_t = 1.5$ and $n_i=1$). \myangle$_{p\prime}$ is the polarization angle and \myangle$_c$ is the critical angle., \cite{hecht1998hecht}}
    \label{fig:coefficients2}
  \end{minipage}
 \end{figure}
@@ -308,9 +307,9 @@ While in Fig. \ref{fig:coefficients2} the coefficients are shown for the case in
 \begin{equation}\label{Fresnel_pands}
 \begin{split}
 \mathcal{R}_p& =  {r_p^2}\\
-\mathcal{T}_p &=  \frac{n_t \cos(\mbox{\myangle}_t)}{n_t \cos(\mbox{\myangle}_i)}t_p^2\\
+\mathcal{T}_p &=  \frac{n_t \cos\mbox{\myangle}_t}{n_t \cos\mbox{\myangle}_i}t_p^2\\
 \mathcal{R}_s &=  r_s^2\\
-\mathcal{T}_s &= \frac{n_t \cos(\mbox{\myangle}_t)}{n_t \cos(\mbox{\myangle}_i)}t_s^2\\
+\mathcal{T}_s &= \frac{n_t \cos\mbox{\myangle}_t}{n_t \cos\mbox{\myangle}_i}t_s^2\\
 \end{split}
 \end{equation}
 it can be show that
@@ -328,44 +327,16 @@ and
 \begin{equation}
 \mathcal{T} = \mathcal{T}_p = \mathcal{T}_s = \frac{4n_i n_t}{(n_t+n_i)^2}\,.
 \end{equation}
-The behavior of the reflectance and transmittance is shown in Fig. \ref{fig:reflectance_and_transmittance}
-\begin{figure}[t]
- \label{fig:Reflectance_transmittance}
-     \begin{center}
-     \includegraphics[width=10cm]{RandT.png}
-     \end{center}
-     \caption{\footnotesize{Top: Transmittance as a function of the incident angle both for the case of external reflection (top left) and internal reflection (top right).\\
-Bottom: Reflectance as a function of the incident angle both for the case of external reflection (bottom left) and internal reflection (bottom right).}}
-\label{fig:reflectance_and_transmittance}
- \end{figure}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+%The behavior of the reflectance and transmittance is shown in Fig. \ref{fig:reflectance_and_transmittance}
+%\begin{figure}[t]
+% \label{fig:Reflectance_transmittance}
+%     \begin{center}
+%     \includegraphics[width=10cm]{RandT.png}
+%     \end{center}
+%     \caption{\footnotesize{Top: Transmittance as a function of the incident angle both for the case of external reflection (top left) and internal reflection (top right).\\
+%Bottom: Reflectance as a function of the incident angle both for the case of external reflection (bottom left) and internal reflection (bottom right).}}
+%\label{fig:reflectance_and_transmittance}
+% \end{figure}
 
 
 
