@@ -1,143 +1,143 @@
 \chapter{Ray tracing}
-Ray tracing is a geometric problem that describes the transport of light within optical systems.
-It uses single rays to describe the propagation of light through an optical system.
-The influence of diffraction on the transport of a ray is neglected and geometrical modeling of an optical system is considered.
-Generally, the method can be implemented for two or more dimensions and for any optical system.
-In this thesis we restrict outself to two dimensional systems, therefore in the following a description of the ray tracing method  $2$D.
-\section{Ray tracing for two-dimensional optical systems}
-The ray tracing process consists of tracing each ray, which is considered to be a broken line, through a non-imaging system.
-Given a Cartesian coordinate system $(\variabile{x}, \variabile{z})$, a two-dimensional optical system symmetric with respect to the $\variabile{z}$-axis is defined.
-One of the simplest optical systems tha twe can image is the two-faceted cup, the profile of which is depicted in Fig. \ref{figure:cup}.
-\begin{figure}[h]
-\label{figure:cup}
-  \begin{center}
-  \includegraphics[width=6.7cm]{cup.pdf}
-  \end{center}
-  \caption{\footnotesize{Shape of the two-faceted cup.  Each line of the system is labeled with a number.
-   The source \point{S}$= [-2,2]$ (line number $1$) is located on the $x$-axis.
-   The target \point{T}$= [-17, 17]$ (line $4$) is parallel to the source and is located at a height $ z= 40$.
-   The left and right reflectors (line $2$ and $3$) connect the source with the target.}}
-  \label{figure:cup}
-\end{figure}
-\\ \indent The light source \point{S}$= [-\variabile{a}, \variabile{a}]$ (line $1$) and the target \point{T}$~=~ [-\variabile{b}, \variabile{b}]$ (line $4$) are two segments normal to the \variabile{z}-axis, where $\variabile{a}=2$ and $\variabile{b}=17$.
-The left and right reflectors (line $2$ and $3$) are oblique segments that connect the source and the target.
-All the optical lines \variabile{i} with $\variabile{i} \in \{1, \cdots, 4\}$ are located in air, therefore the refractive index $\variabile{n}_{\variabile{i}}=1$ for every \variabile{i}.
-From now on, the coordinates $(\variabile{x}_{\variabile{i}}, \variabile{z}_{\variabile{i}})_{\variabile{i} =1, \cdots, 4}$ denote the intersection of the rays with line $\variabile{i}$ and,
-$\vect{s}_\variabile{i}= (-\sin \variabile{t}_\variabile{i}, \cos \variabile{t}_\variabile{i})$ is the direction vector of the rays that leave $\variabile{i}$,
- with $\variabile{t}_\variabile{i}$ the angle that the ray forms with respect to the \variabile{z}-axis measured counterclockwise. As we consider only forward rays, the angles $\variabile{t}_\variabile{i}\in (-\pi/2, \pi/2)$.
- Therefore, a ray segment between $(\variabile{x}_\variabile{i}, \variabile{z}_\variabile{i})$ and $(\variabile{x}_\variabile{j}, \variabile{z}_\variabile{j})$ 
- with $\variabile{j}\neq\textit{i}$ is parameterized in real space by:
-\begin{equation}
-\label{parametrization}
-\vect{r}(\variabile{s})=
-\left( \begin{array}{cc}
-\variabile{x}_\variabile{i}-\variabile{s}\sin(\variabile{t}_\variabile{i}) \\
-\variabile{z}_\variabile{i}+\variabile{s}\cos(\variabile{t}_\variabile{i})\end{array} \right) \qquad \quad 0\leq \variabile{s}\leq \variabile{s}_{\textrm{max}}\,,
-\end{equation}
-where \variabile{s} denotes the arc-length and $\variabile{s}_{\textrm{max}}$ is the maximum value that it can assume.
-\section{Monte Carlo ray tracing}
-
-
-Assuming a Lambertian source, the input intensity at $\point{S}$ emitted in the direction $\variabile{t}_1$ is given by:
-\begin{equation}\label{lambertian_source}
-I(\variabile{t}_1) = 2\const{a}L\cos(\variabile{t}_1),
-\end{equation}
-where $L$ is the luminance and \variabile{a} is the half width of \point{S}.
-In order to compute the target intensity, we need to find a relation between the intensities at \point{S} and \point{T}.
- Hence, we need to know how the optical system influences the direction of the rays when they hit an optical line.
- To this purpose, the ray tracing procedure is often used in optics.
-Ray tracing relates the position coordinates
- $ (\variabile{x}_1, \variabile{z}_1)$ and the direction vector $\vect{s}_1$ of every ray at the source $\point{S}$ with the corresponding position $(\variabile{x}_4, \variabile{z}_4)$ and direction $\vect{s}_4$ at the target $\point{T}$. As in the following we will use often the target coordinates of the rays, from now on, to simplify the notation, we write $\variabile{t}$ instead of $\variabile{t}_4$ and $(\variabile{x}, \variabile{z})$ instead of $(\variabile{x}_4, \variabile{z}_4)$ for the target coordinates.\\ \indent The ray tracing algorithm can be schematized as follows.
- For every ray that leaves $\point{S}$ with initial position $(\variabile{x}_1, \variabile{z}_1)$ and initial angle $\variabile{t}_1$, its ray parametrization is implemented according to Eq. ($\ref{parametrization}$). Then, the coordinates $(\variabile{x}_\variabile{i}, \variabile{z}_\variabile{i})$ of the intersection point between the ray and the line $\variabile{i}$ that it hits are computed. The unit normal $\boldsymbol{\nu}_\variabile{i}$ to the line $\variabile{i}$ at the point $(\variabile{x}_{\variabile{i}}, \variabile{z}_{\variabile{i}})$ is calculated to compute the change of direction of the ray.
- Since all the lines of the system are located in air, only the reflection law plays a role, \cite{Hecht}.
- Therefore, denoting with $\vect{t}_1$ the direction of the incident ray, the direction $\vect{t}_2$ of the reflected ray is given by:
- \begin{equation}\label{reflection}
-  \vect{t}_{2} = \vect{t}_1-2(\vect{t}_1,\boldsymbol{\nu}_{\variabile{i}})\boldsymbol{\nu}_{\variabile{i}}\,,
-\end{equation}
-where the vectors $\vect{t}_{1}$ and $\vect{t}_{2}$ are unit vectors, \cite{Chaves}.
-The procedure explained above is repeated for every line that the ray encounters until it reaches the target and for every ray traced through the system. \\ \indent
-There are different ways to implement the ray tracing procedure.
-An often used method is MC ray tracing which calculates the target photometric variables considering a sample of many rays that are traced randomly from $\point{S}$ to $\point{T}$. The output intensity is computed as a function of the angular coordinate $\variabile{t}$ and is calculated dividing the target into intervals of the same length, the so-called bins. A partitioning $P_1: -\pi/2 = \variabile{t}_{0}<\variabile{t}_{1}<\cdots <\variabile{t}_{\const{Nb}}=\pi/2$ of the interval $[-\pi/2, \pi/2]$ is defined where $\const{Nb}$ is the number of bins in $P_1$.
-We remark that, with a slight abuse of notation, we indicated the angular coordinates of the rays at the target with $\variabile{t}_{\variabile{j}}$ instead of $\variabile{t}_{4,\variabile{j}}$ for every $\variabile{j}\in\{0, \cdots, \const{Nb}\}$.
-The normalized approximated intensity $g_{\const{MC}}(\variabile{t})$ is a piecewise constant function and its value over the $\variabile{j}$-th bin is the ratio between the number of rays that fall into that bin
-$\const{Nr}[\variabile{t}_{\variabile{j}-1},\variabile{t}_{\variabile{j}})$ and the total number of rays traced $\const{Nr}[-\pi/2, \pi/2]$.
-Hence, $g_{\const{MC}}$ is defined by:
-\begin{equation} \label{g_mc}
-g_{\const{MC}}(\variabile{t}) = \frac{\const{Nr}[\variabile{t}_{\variabile{j}-1},\variabile{t}_{\variabile{j}})}{\const{Nr}[-\pi/2, \pi/2]} \qquad \mbox{ for } \variabile{t}\in[\variabile{t}_{\variabile{j}-1}, \variabile{t}_{\variabile{j}}).
-\end{equation}
-Furthermore, the output intensity is computed from the value of the intensity $g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})$ along the direction $\variabile{t}_{\variabile{j}-1/2}=(\variabile{t}_{\variabile{j}-1}+\variabile{t}_{\variabile{j}})/2$ for every bin $[\variabile{t}_{\variabile{j}-1},\variabile{t}_{\variabile{j}})_{\variabile{j} = 1, \cdots, \const{Nb}}$.
- The intensity $g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})$ gives an estimate of the probability that a ray reaches the target with an angle in the $\variabile{j}$-th interval $[\variabile{t}_{\variabile{j}-1}, \variabile{t}_{\variabile{j}})$ of the partitioning $P_1$. This probability $\const{P}_{\variabile{j}, \Delta\variabile{t}}$ is given by:
-\begin{equation}\label{eq:probability}
-\const{P}_{\variabile{j}, \Delta\variabile{t}} = \Pr(\variabile{t}_{\variabile{j}-1}\leq\variabile{t}<\variabile{t}_{\variabile{j}})= \frac{\int_{\variabile{t}_{\variabile{j}-1}}^{\variabile{t}_{\variabile{j}}} G(\variabile{t}) \textrm{d}\variabile{t}}{\int_{-\pi/2}^{\pi/2}G(\variabile{t}) \textrm{d}\variabile{t}}\,,
-\end{equation}
-where $G(\variabile{t})$ is the output intensity (not normalized) and it is measured in lumen per radian $[lm/rad]$.
-Note that $\sum_{\variabile{j}=1}^{\const{Nb}}\const{P}_{\variabile{j}, \Delta\variabile{t}}=1$. Using the mean value theorem for the function $G(\variabile{t})$ continuous in $[\variabile{t}_{\variabile{j}-1}, \variabile{t}_{\variabile{j}}]$, the integral at the numerator of the previous equation can be written as: \begin{equation}
-\int_{\variabile{t}_{\variabile{j}-1}}^{\variabile{t}_{\variabile{j}}} G(\variabile{t}) \textrm{d}\variabile{t} = \Delta \variabile{t}\;G(\variabile{t}_{j-1/2}).
-\end{equation}
-Hence, $\const{P}_{\variabile{j}, \Delta\variabile{t}}$ is proportional to the size $\Delta\variabile{t}= (\variabile{t}_{\const{Nb}}-\variabile{t}_{0})/{\const{Nb}}$ of the intervals, i.e., inversely proportional to the number of bins $\const{Nb}$ of the partitioning $P_1$.
-Indicating with $\Phi = \int_{-\pi/2}^{\pi/2}G(\variabile{t}) \textrm{d}\variabile{t}$ the total flux (measured in lumen $[lm]$),
-the error between the intensity $G(\variabile{t}_{\variabile{j}-1/2})$
- and the averaged \const{MC} intensity $\Phi g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})/\Delta\variabile{t}$ is given by:
-\begin{equation}\label{eq:error_int}
-\begin{aligned}
-\Big|G(\variabile{t}_{\variabile{j}-1/2})&-\frac{\Phi}
-{\Delta\variabile{t}}g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})\Big| \leq\\
- &\Big|G(\variabile{t}_{\variabile{j}-1/2})-\frac{1}{\Delta \variabile{t}}\int_{\variabile{t}_{\variabile{j}-1}}^{\variabile{t}_{\variabile{j}}} G(\variabile{t})\textrm{d}\variabile{t}\Big|+\\
-&\frac{1}{\Delta \variabile{t}}\Big|\int_{\variabile{t}_{\variabile{j}-1}}^{\variabile{t}_{\variabile{j}}} G(\variabile{t})\textrm{d}\variabile{t}-
-\Phi\, g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})\Big| \,.
-\end{aligned}
-\end{equation}
-\indent The first term of the right hand side of inequality (\ref{eq:error_int}) gives an estimate of how much the averaged intensity $\frac{1}{\Delta \variabile{t}}\int_{\variabile{t}_{\variabile{j}-1}}^{\variabile{t}_{\variabile{j}}} G(\variabile{t})\textrm{d}\variabile{t}$ differs from the exact intensity $G(\variabile{t}_{\variabile{j}-1/2})$.
-This term is due to the discretization of the target and therefore it depends on the number of bins $\const{Nb}$ considered.
-  Substituting $G(\variabile{t})$ with its Taylor expansion around the point $\variabile{t}_{\variabile{j}-1/2}$ we obtain that this term is proportional to the square of the size of the bins, therefore the following equality holds:
-\begin{equation}\Big|G(\variabile{t}_{\variabile{j}-1/2})-\frac{1}{\Delta \variabile{t}}\int_{\variabile{t}_{\variabile{j}-1}}^{\variabile{t}_{\variabile{j}}} G(\variabile{t})\textrm{d}\variabile{t}\Big| = \const{C}_1/\const{Nb}^2\end{equation}
-with $C_1>0$ a certain constant. \\
-\indent
-The second part of the right hand side of inequality (\ref{eq:error_int}) gives an estimate of the MC error and therefore it depends also on the
-number of rays traced.
-In order to show how this term decreases as a function of the number of rays traced,
-we define the random variable $\variabile{X}_\variabile{j}(\variabile{t})$ as the variable that is equal to $1$ if the ray with angular coordinate $\variabile{t}$
-is inside the interval $[\variabile{t}_{\variabile{j}-1}, \variabile{t}_{\variabile{j}})$ and equal to $0$ otherwise,
-\begin{equation}
-\label{radom_variable}
-\variabile{X}_{\variabile{j}}(\variabile{t}) = \begin{cases} \begin{aligned}
-1& \qquad \mbox{if} \quad \variabile{t}\in [\variabile{t}_{\variabile{j}-1}, \variabile{t}_{\variabile{j}}),\\
-0 & \qquad \mbox{otherwise}.
-\end{aligned}\end{cases}
-\end{equation}
-The Bernoulli trial $ \variabile{X}_{\variabile{j}}$ follows a binomial distribution $B(1,\const{P}_{\variabile{j}, \Delta\variabile{t}})$.
-Considering a sample of $\const{Nr}$ rays, the variable $\variabile{Y}_{\variabile{j}} = \sum_{\variabile{k}=1}^{\const{Nr}} \variabile{X}_{\variabile{j}}(\variabile{t}_{\variabile{k}})$
-follows a binomial distribution $B(\const{Nr}, \const{P}_{\variabile{j},\Delta \variabile{t}})$, where $\variabile{t}_{\variabile{k}}$ is the angle that the $\variabile{k}$-th ray forms with the optical axis. Then, using the de Moivre-Laplace theorem, we conclude that the variable $\variabile{Y}_{\variabile{j}}$ is approximated by a normal distribution with mean value $\variabile{E}[\variabile{Y}_{\variabile{j}}] = \const{Nr}\const{P}_{\variabile{j}, \Delta\variabile{t}}$ and variance $\sigma^2[\variabile{Y}_{\variabile{j}}] = \const{Nr}\const{P}_{\variabile{j}, \Delta\variabile{t}}(1~-~\const{P}_{\variabile{j}, \Delta\variabile{t}})$ when a large number of rays is considered, see \cite{Rubinstein, deMoivre}.
-Thus, the normalized intensity along the direction $\variabile{t}_{\variabile{j}-1/2}$ is given by:
-\begin{equation}\variabile{g}_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2}) = \sum_{\variabile{k}=1}^{\const{Nr}}\variabile{X}_{\variabile{j}}(\variabile{t}_{\variabile{k}})/\const{Nr}.\end{equation}
-The mean value $E[\variabile{g}_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})]=\const{P}_{\variabile{j}, \Delta\variabile{t}}$
-and the variance $\sigma^2[\variabile{g}_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})] ~=~ \const{P}_{\variabile{j}, \Delta\variabile{t}}(1-\const{P}_{\variabile{j}, \Delta\variabile{t}})/\const{Nr}$.
-Note that the standard deviation $\sigma_\variabile{j}:=\sigma[\variabile{g}_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})]$ equals:
-\begin{equation}\label{sigma}
-\sigma_\variabile{j}= \sqrt{\const{P}_{\variabile{j}, \Delta\variabile{t}}(1-\const{P}_{\variabile{j}, \Delta\variabile{t}})/\const{Nr}}= \frac{\const{C}_2}{\sqrt{\const{Nb}\const{Nr}}}\,, \end{equation}
- for some $\const{C}_{2}>0$. $\sigma_\variabile{j}$ can be used to give an estimate of the difference between the intensity $\variabile{g}_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})$ and its mean value $\const{P}_{\variabile{j}, \Delta\variabile{t}}$.
-Therefore, the second term of the right hand side of relation ($\ref{eq:error_int}$) becomes:
-\begin{equation}\begin{aligned}
-\frac{1}{\Delta \variabile{t}}\Big|\int_{\variabile{t}_{\variabile{j}-1}}^{\variabile{t}_{\variabile{j}}} G(\variabile{t})\textrm{d}\variabile{t} -
-\Phi\, g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})\Big| &=  \\
-\frac{\Phi}{\Delta \variabile{t}}\Big|\const{P}_{\variabile{j}, \Delta\variabile{t}} -g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})\Big| &\propto  \\
-  \frac{\Phi}{\Delta \variabile{t}}
-\sigma_{\variabile{j}}[\variabile{g}_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})]=\const{C}_3\frac{\const{Nb}}{\sqrt{\const{Nb}\const{Nr}}} & = \const{C}_3\sqrt{\frac{\const{Nb}}{\const{Nr}}}\,,
-\end{aligned}
-\end{equation}
-for some $\const{C}_3>0$, where the approximation holds because $\sigma_{\variabile{j}}$ gives a measure for the error between $g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})$ and the probability $\const{P}_{\variabile{j}, \Delta\variabile{t}}$, \cite{Diez}. The second equality follows from Eq. (\ref{sigma}). To conclude, the MC error over the $\variabile{j}$-th bin is estimated by:
-\begin{equation} \begin{aligned}
-\Big|G(\variabile{t}_{\variabile{j}-1/2})&-\frac{\Phi}
-{\Delta\variabile{t}}g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})\Big| =
-\frac{\const{C}_1}{\const{Nb}^2} + \const{C}_4\sqrt{\frac{\const{Nb}}{\const{Nr}}},
-\end{aligned}
-\end{equation}
-for $\const{C}_4>0$.
-Considering a fixed number of rays, we obtain that the minimal error is reached when $\const{Nb}\approx \const{Nr}^{1/5}$.
-Hence, if $10^{10}$ rays are considered the target has to be divided into $10^2$ bins to minimize the MC error.
-This leads to computational efforts resulting in a very slow procedure.
-
-
+%Ray tracing is a geometric problem that describes the transport of light within optical systems.
+%It uses single rays to describe the propagation of light through an optical system.
+%The influence of diffraction on the transport of a ray is neglected and geometrical modeling of an optical system is considered.
+%Generally, the method can be implemented for two or more dimensions and for any optical system.
+%In this thesis we restrict outself to two dimensional systems, therefore in the following a description of the ray tracing method  $2$D.
+%\section{Ray tracing for two-dimensional optical systems}
+%The ray tracing process consists of tracing each ray, which is considered to be a broken line, through a non-imaging system.
+%Given a Cartesian coordinate system $(\variabile{x}, \variabile{z})$, a two-dimensional optical system symmetric with respect to the $\variabile{z}$-axis is defined.
+%One of the simplest optical systems tha twe can image is the two-faceted cup, the profile of which is depicted in Fig. \ref{figure:cup}.
+%\begin{figure}[h]
+%\label{figure:cup}
+%  \begin{center}
+%  \includegraphics[width=6.7cm]{cup.pdf}
+%  \end{center}
+%  \caption{\footnotesize{Shape of the two-faceted cup.  Each line of the system is labeled with a number.
+%   The source \point{S}$= [-2,2]$ (line number $1$) is located on the $x$-axis.
+%   The target \point{T}$= [-17, 17]$ (line $4$) is parallel to the source and is located at a height $ z= 40$.
+%   The left and right reflectors (line $2$ and $3$) connect the source with the target.}}
+%  \label{figure:cup}
+%\end{figure}
+%\\ \indent The light source \point{S}$= [-\variabile{a}, \variabile{a}]$ (line $1$) and the target \point{T}$~=~ [-\variabile{b}, \variabile{b}]$ (line $4$) are two segments normal to the \variabile{z}-axis, where $\variabile{a}=2$ and $\variabile{b}=17$.
+%The left and right reflectors (line $2$ and $3$) are oblique segments that connect the source and the target.
+%All the optical lines \variabile{i} with $\variabile{i} \in \{1, \cdots, 4\}$ are located in air, therefore the refractive index $\variabile{n}_{\variabile{i}}=1$ for every \variabile{i}.
+%From now on, the coordinates $(\variabile{x}_{\variabile{i}}, \variabile{z}_{\variabile{i}})_{\variabile{i} =1, \cdots, 4}$ denote the intersection of the rays with line $\variabile{i}$ and,
+%$\vect{s}_\variabile{i}= (-\sin \variabile{t}_\variabile{i}, \cos \variabile{t}_\variabile{i})$ is the direction vector of the rays that leave $\variabile{i}$,
+% with $\variabile{t}_\variabile{i}$ the angle that the ray forms with respect to the \variabile{z}-axis measured counterclockwise. As we consider only forward rays, the angles $\variabile{t}_\variabile{i}\in (-\pi/2, \pi/2)$.
+% Therefore, a ray segment between $(\variabile{x}_\variabile{i}, \variabile{z}_\variabile{i})$ and $(\variabile{x}_\variabile{j}, \variabile{z}_\variabile{j})$ 
+% with $\variabile{j}\neq\textit{i}$ is parameterized in real space by:
+%\begin{equation}
+%\label{parametrization}
+%\vect{r}(\variabile{s})=
+%\left( \begin{array}{cc}
+%\variabile{x}_\variabile{i}-\variabile{s}\sin(\variabile{t}_\variabile{i}) \\
+%\variabile{z}_\variabile{i}+\variabile{s}\cos(\variabile{t}_\variabile{i})\end{array} \right) \qquad \quad 0\leq \variabile{s}\leq \variabile{s}_{\textrm{max}}\,,
+%\end{equation}
+%where \variabile{s} denotes the arc-length and $\variabile{s}_{\textrm{max}}$ is the maximum value that it can assume.
+%\section{Monte Carlo ray tracing}
+%
+%
+%Assuming a Lambertian source, the input intensity at $\point{S}$ emitted in the direction $\variabile{t}_1$ is given by:
+%\begin{equation}\label{lambertian_source}
+%I(\variabile{t}_1) = 2\const{a}L\cos(\variabile{t}_1),
+%\end{equation}
+%where $L$ is the luminance and \variabile{a} is the half width of \point{S}.
+%In order to compute the target intensity, we need to find a relation between the intensities at \point{S} and \point{T}.
+% Hence, we need to know how the optical system influences the direction of the rays when they hit an optical line.
+% To this purpose, the ray tracing procedure is often used in optics.
+%Ray tracing relates the position coordinates
+% $ (\variabile{x}_1, \variabile{z}_1)$ and the direction vector $\vect{s}_1$ of every ray at the source $\point{S}$ with the corresponding position $(\variabile{x}_4, \variabile{z}_4)$ and direction $\vect{s}_4$ at the target $\point{T}$. As in the following we will use often the target coordinates of the rays, from now on, to simplify the notation, we write $\variabile{t}$ instead of $\variabile{t}_4$ and $(\variabile{x}, \variabile{z})$ instead of $(\variabile{x}_4, \variabile{z}_4)$ for the target coordinates.\\ \indent The ray tracing algorithm can be schematized as follows.
+% For every ray that leaves $\point{S}$ with initial position $(\variabile{x}_1, \variabile{z}_1)$ and initial angle $\variabile{t}_1$, its ray parametrization is implemented according to Eq. ($\ref{parametrization}$). Then, the coordinates $(\variabile{x}_\variabile{i}, \variabile{z}_\variabile{i})$ of the intersection point between the ray and the line $\variabile{i}$ that it hits are computed. The unit normal $\boldsymbol{\nu}_\variabile{i}$ to the line $\variabile{i}$ at the point $(\variabile{x}_{\variabile{i}}, \variabile{z}_{\variabile{i}})$ is calculated to compute the change of direction of the ray.
+% Since all the lines of the system are located in air, only the reflection law plays a role, \cite{Hecht}.
+% Therefore, denoting with $\vect{t}_1$ the direction of the incident ray, the direction $\vect{t}_2$ of the reflected ray is given by:
+% \begin{equation}\label{reflection}
+%  \vect{t}_{2} = \vect{t}_1-2(\vect{t}_1,\boldsymbol{\nu}_{\variabile{i}})\boldsymbol{\nu}_{\variabile{i}}\,,
+%\end{equation}
+%where the vectors $\vect{t}_{1}$ and $\vect{t}_{2}$ are unit vectors, \cite{Chaves}.
+%The procedure explained above is repeated for every line that the ray encounters until it reaches the target and for every ray traced through the system. \\ \indent
+%There are different ways to implement the ray tracing procedure.
+%An often used method is MC ray tracing which calculates the target photometric variables considering a sample of many rays that are traced randomly from $\point{S}$ to $\point{T}$. The output intensity is computed as a function of the angular coordinate $\variabile{t}$ and is calculated dividing the target into intervals of the same length, the so-called bins. A partitioning $P_1: -\pi/2 = \variabile{t}_{0}<\variabile{t}_{1}<\cdots <\variabile{t}_{\const{Nb}}=\pi/2$ of the interval $[-\pi/2, \pi/2]$ is defined where $\const{Nb}$ is the number of bins in $P_1$.
+%We remark that, with a slight abuse of notation, we indicated the angular coordinates of the rays at the target with $\variabile{t}_{\variabile{j}}$ instead of $\variabile{t}_{4,\variabile{j}}$ for every $\variabile{j}\in\{0, \cdots, \const{Nb}\}$.
+%The normalized approximated intensity $g_{\const{MC}}(\variabile{t})$ is a piecewise constant function and its value over the $\variabile{j}$-th bin is the ratio between the number of rays that fall into that bin
+%$\const{Nr}[\variabile{t}_{\variabile{j}-1},\variabile{t}_{\variabile{j}})$ and the total number of rays traced $\const{Nr}[-\pi/2, \pi/2]$.
+%Hence, $g_{\const{MC}}$ is defined by:
+%\begin{equation} \label{g_mc}
+%g_{\const{MC}}(\variabile{t}) = \frac{\const{Nr}[\variabile{t}_{\variabile{j}-1},\variabile{t}_{\variabile{j}})}{\const{Nr}[-\pi/2, \pi/2]} \qquad \mbox{ for } \variabile{t}\in[\variabile{t}_{\variabile{j}-1}, \variabile{t}_{\variabile{j}}).
+%\end{equation}
+%Furthermore, the output intensity is computed from the value of the intensity $g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})$ along the direction $\variabile{t}_{\variabile{j}-1/2}=(\variabile{t}_{\variabile{j}-1}+\variabile{t}_{\variabile{j}})/2$ for every bin $[\variabile{t}_{\variabile{j}-1},\variabile{t}_{\variabile{j}})_{\variabile{j} = 1, \cdots, \const{Nb}}$.
+% The intensity $g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})$ gives an estimate of the probability that a ray reaches the target with an angle in the $\variabile{j}$-th interval $[\variabile{t}_{\variabile{j}-1}, \variabile{t}_{\variabile{j}})$ of the partitioning $P_1$. This probability $\const{P}_{\variabile{j}, \Delta\variabile{t}}$ is given by:
+%\begin{equation}\label{eq:probability}
+%\const{P}_{\variabile{j}, \Delta\variabile{t}} = \Pr(\variabile{t}_{\variabile{j}-1}\leq\variabile{t}<\variabile{t}_{\variabile{j}})= \frac{\int_{\variabile{t}_{\variabile{j}-1}}^{\variabile{t}_{\variabile{j}}} G(\variabile{t}) \textrm{d}\variabile{t}}{\int_{-\pi/2}^{\pi/2}G(\variabile{t}) \textrm{d}\variabile{t}}\,,
+%\end{equation}
+%where $G(\variabile{t})$ is the output intensity (not normalized) and it is measured in lumen per radian $[lm/rad]$.
+%Note that $\sum_{\variabile{j}=1}^{\const{Nb}}\const{P}_{\variabile{j}, \Delta\variabile{t}}=1$. Using the mean value theorem for the function $G(\variabile{t})$ continuous in $[\variabile{t}_{\variabile{j}-1}, \variabile{t}_{\variabile{j}}]$, the integral at the numerator of the previous equation can be written as: \begin{equation}
+%\int_{\variabile{t}_{\variabile{j}-1}}^{\variabile{t}_{\variabile{j}}} G(\variabile{t}) \textrm{d}\variabile{t} = \Delta \variabile{t}\;G(\variabile{t}_{j-1/2}).
+%\end{equation}
+%Hence, $\const{P}_{\variabile{j}, \Delta\variabile{t}}$ is proportional to the size $\Delta\variabile{t}= (\variabile{t}_{\const{Nb}}-\variabile{t}_{0})/{\const{Nb}}$ of the intervals, i.e., inversely proportional to the number of bins $\const{Nb}$ of the partitioning $P_1$.
+%Indicating with $\Phi = \int_{-\pi/2}^{\pi/2}G(\variabile{t}) \textrm{d}\variabile{t}$ the total flux (measured in lumen $[lm]$),
+%the error between the intensity $G(\variabile{t}_{\variabile{j}-1/2})$
+% and the averaged \const{MC} intensity $\Phi g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})/\Delta\variabile{t}$ is given by:
+%\begin{equation}\label{eq:error_int}
+%\begin{aligned}
+%\Big|G(\variabile{t}_{\variabile{j}-1/2})&-\frac{\Phi}
+%{\Delta\variabile{t}}g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})\Big| \leq\\
+% &\Big|G(\variabile{t}_{\variabile{j}-1/2})-\frac{1}{\Delta \variabile{t}}\int_{\variabile{t}_{\variabile{j}-1}}^{\variabile{t}_{\variabile{j}}} G(\variabile{t})\textrm{d}\variabile{t}\Big|+\\
+%&\frac{1}{\Delta \variabile{t}}\Big|\int_{\variabile{t}_{\variabile{j}-1}}^{\variabile{t}_{\variabile{j}}} G(\variabile{t})\textrm{d}\variabile{t}-
+%\Phi\, g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})\Big| \,.
+%\end{aligned}
+%\end{equation}
+%\indent The first term of the right hand side of inequality (\ref{eq:error_int}) gives an estimate of how much the averaged intensity $\frac{1}{\Delta \variabile{t}}\int_{\variabile{t}_{\variabile{j}-1}}^{\variabile{t}_{\variabile{j}}} G(\variabile{t})\textrm{d}\variabile{t}$ differs from the exact intensity $G(\variabile{t}_{\variabile{j}-1/2})$.
+%This term is due to the discretization of the target and therefore it depends on the number of bins $\const{Nb}$ considered.
+%  Substituting $G(\variabile{t})$ with its Taylor expansion around the point $\variabile{t}_{\variabile{j}-1/2}$ we obtain that this term is proportional to the square of the size of the bins, therefore the following equality holds:
+%\begin{equation}\Big|G(\variabile{t}_{\variabile{j}-1/2})-\frac{1}{\Delta \variabile{t}}\int_{\variabile{t}_{\variabile{j}-1}}^{\variabile{t}_{\variabile{j}}} G(\variabile{t})\textrm{d}\variabile{t}\Big| = \const{C}_1/\const{Nb}^2\end{equation}
+%with $C_1>0$ a certain constant. \\
+%\indent
+%The second part of the right hand side of inequality (\ref{eq:error_int}) gives an estimate of the MC error and therefore it depends also on the
+%number of rays traced.
+%In order to show how this term decreases as a function of the number of rays traced,
+%we define the random variable $\variabile{X}_\variabile{j}(\variabile{t})$ as the variable that is equal to $1$ if the ray with angular coordinate $\variabile{t}$
+%is inside the interval $[\variabile{t}_{\variabile{j}-1}, \variabile{t}_{\variabile{j}})$ and equal to $0$ otherwise,
+%\begin{equation}
+%\label{radom_variable}
+%\variabile{X}_{\variabile{j}}(\variabile{t}) = \begin{cases} \begin{aligned}
+%1& \qquad \mbox{if} \quad \variabile{t}\in [\variabile{t}_{\variabile{j}-1}, \variabile{t}_{\variabile{j}}),\\
+%0 & \qquad \mbox{otherwise}.
+%\end{aligned}\end{cases}
+%\end{equation}
+%The Bernoulli trial $ \variabile{X}_{\variabile{j}}$ follows a binomial distribution $B(1,\const{P}_{\variabile{j}, \Delta\variabile{t}})$.
+%Considering a sample of $\const{Nr}$ rays, the variable $\variabile{Y}_{\variabile{j}} = \sum_{\variabile{k}=1}^{\const{Nr}} \variabile{X}_{\variabile{j}}(\variabile{t}_{\variabile{k}})$
+%follows a binomial distribution $B(\const{Nr}, \const{P}_{\variabile{j},\Delta \variabile{t}})$, where $\variabile{t}_{\variabile{k}}$ is the angle that the $\variabile{k}$-th ray forms with the optical axis. Then, using the de Moivre-Laplace theorem, we conclude that the variable $\variabile{Y}_{\variabile{j}}$ is approximated by a normal distribution with mean value $\variabile{E}[\variabile{Y}_{\variabile{j}}] = \const{Nr}\const{P}_{\variabile{j}, \Delta\variabile{t}}$ and variance $\sigma^2[\variabile{Y}_{\variabile{j}}] = \const{Nr}\const{P}_{\variabile{j}, \Delta\variabile{t}}(1~-~\const{P}_{\variabile{j}, \Delta\variabile{t}})$ when a large number of rays is considered, see \cite{Rubinstein, deMoivre}.
+%Thus, the normalized intensity along the direction $\variabile{t}_{\variabile{j}-1/2}$ is given by:
+%\begin{equation}\variabile{g}_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2}) = \sum_{\variabile{k}=1}^{\const{Nr}}\variabile{X}_{\variabile{j}}(\variabile{t}_{\variabile{k}})/\const{Nr}.\end{equation}
+%The mean value $E[\variabile{g}_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})]=\const{P}_{\variabile{j}, \Delta\variabile{t}}$
+%and the variance $\sigma^2[\variabile{g}_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})] ~=~ \const{P}_{\variabile{j}, \Delta\variabile{t}}(1-\const{P}_{\variabile{j}, \Delta\variabile{t}})/\const{Nr}$.
+%Note that the standard deviation $\sigma_\variabile{j}:=\sigma[\variabile{g}_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})]$ equals:
+%\begin{equation}\label{sigma}
+%\sigma_\variabile{j}= \sqrt{\const{P}_{\variabile{j}, \Delta\variabile{t}}(1-\const{P}_{\variabile{j}, \Delta\variabile{t}})/\const{Nr}}= \frac{\const{C}_2}{\sqrt{\const{Nb}\const{Nr}}}\,, \end{equation}
+% for some $\const{C}_{2}>0$. $\sigma_\variabile{j}$ can be used to give an estimate of the difference between the intensity $\variabile{g}_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})$ and its mean value $\const{P}_{\variabile{j}, \Delta\variabile{t}}$.
+%Therefore, the second term of the right hand side of relation ($\ref{eq:error_int}$) becomes:
+%\begin{equation}\begin{aligned}
+%\frac{1}{\Delta \variabile{t}}\Big|\int_{\variabile{t}_{\variabile{j}-1}}^{\variabile{t}_{\variabile{j}}} G(\variabile{t})\textrm{d}\variabile{t} -
+%\Phi\, g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})\Big| &=  \\
+%\frac{\Phi}{\Delta \variabile{t}}\Big|\const{P}_{\variabile{j}, \Delta\variabile{t}} -g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})\Big| &\propto  \\
+%  \frac{\Phi}{\Delta \variabile{t}}
+%\sigma_{\variabile{j}}[\variabile{g}_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})]=\const{C}_3\frac{\const{Nb}}{\sqrt{\const{Nb}\const{Nr}}} & = \const{C}_3\sqrt{\frac{\const{Nb}}{\const{Nr}}}\,,
+%\end{aligned}
+%\end{equation}
+%for some $\const{C}_3>0$, where the approximation holds because $\sigma_{\variabile{j}}$ gives a measure for the error between $g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})$ and the probability $\const{P}_{\variabile{j}, \Delta\variabile{t}}$, \cite{Diez}. The second equality follows from Eq. (\ref{sigma}). To conclude, the MC error over the $\variabile{j}$-th bin is estimated by:
+%\begin{equation} \begin{aligned}
+%\Big|G(\variabile{t}_{\variabile{j}-1/2})&-\frac{\Phi}
+%{\Delta\variabile{t}}g_{\const{MC}}(\variabile{t}_{\variabile{j}-1/2})\Big| =
+%\frac{\const{C}_1}{\const{Nb}^2} + \const{C}_4\sqrt{\frac{\const{Nb}}{\const{Nr}}},
+%\end{aligned}
+%\end{equation}
+%for $\const{C}_4>0$.
+%Considering a fixed number of rays, we obtain that the minimal error is reached when $\const{Nb}\approx \const{Nr}^{1/5}$.
+%Hence, if $10^{10}$ rays are considered the target has to be divided into $10^2$ bins to minimize the MC error.
+%This leads to computational efforts resulting in a very slow procedure.
+%
+%
 
 %
 %

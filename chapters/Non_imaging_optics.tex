@@ -1,6 +1,6 @@
 \chapter{Non imaging optics}
 This chapter provides the notions of illumination optics needed in this thesis. We start explaining the difference between radiometry and photometry.
-In particular, we focus on the photometric variables defining them both in three and two dimensions. The reflection and refraction laws and the phenomenon of total internal reflection are explained. The last paragraph of the chapter gives a brief introduction of the Fresnel's equations. 
+In particular, we focus on the photometric variables defining them both in three and two dimensions. The reflection and refraction laws and the phenomenon of total internal reflection are explained. The last paragraph of the chapter gives a brief introduction of Fresnel equations. 
 \section{Radiometric and photometric variables}
 Radiometry is the measurement of the electromagnetic radiation across the entire electromagnetic spectrum. Photometry is the subfield of radiometry that takes into account only the portion of the electromagnetic spectrum corresponding to the visible light, \cite{zalewski1995radiometry}. Radiometry deals with radiometric quantities. An important radiometric quantity  is the radiant flux $\Phi_{\textrm{r}}$ (unit watt, [\textrm{W}]) which is the total energy emitted from a source or received by a target per unit time:
 \begin{equation}
@@ -45,9 +45,9 @@ I = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}\;.
   \begin{center}
   \includegraphics[width=6 cm]{SolidAngle}
   \end{center}
-  \caption{Solid angle $\textrm{d}\Omega$ in a direction making an angle \myangle $\;$ with the normal to the area $\textrm{d}A$.}
+  \caption{Solid angle $\textrm{d}\Omega$ in a direction making an angle \myangle $\;$with the normal to the area $\textrm{d}A$.}
   \label{fig:rad}
-  \end{figure}The luminance $L$ \big(unit $\big[\textrm{cd} / \textrm{m}^2\big]$\big) is the luminous flux per unit solid angle $\textrm{d}\Omega$ and  per unit projected area $\cos\mbox{\myangle},\textrm{d}A$ where \myangle is the angle that the normal $\boldsymbol{\nu}$ to area $\textrm{d}A$ makes with the direction of the solid angle $\textrm{d}\Omega$, as shown in Figure $\ref{fig:rad}$.  $L$  is given by:
+  \end{figure}The luminance $L$ \big(unit $\big[\textrm{cd} / \textrm{m}^2\big]$\big) is the luminous flux per unit solid angle $\textrm{d}\Omega$ and  per unit projected area $\cos\mbox{\myangle},\textrm{d}A$ where \myangle $\,$ is the angle that the normal $\boldsymbol{\nu}$ to area $\textrm{d}A$ makes with the direction of the solid angle $\textrm{d}\Omega$, as shown in Figure $\ref{fig:rad}$.  $L$  is given by:
 \begin{equation}\label{luminance1}
   L=\frac{\textrm{d}\Phi}{\cos\mbox{\myangle}\textrm{d}A\textrm{d}\Omega}\,.
 \end{equation}
@@ -55,7 +55,7 @@ I = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}\;.
 \begin{equation}
 \textrm{d}I = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}= L(\variabile{x},\mbox{\myangle})\cos\mbox{\myangle}\textrm{d}A \,.
 \end{equation}
-When the luminance is uniform over a finite area $A$, the luminous intensity emitted in the direction \myangle  is equal to:
+When the luminance is uniform over a finite area $A$, the luminous intensity emitted in the direction \myangle $\,$ is equal to:
 \begin{equation}
 I(t) = L(\mbox{\myangle}) A \cos\mbox{\myangle}\,.
 \end{equation}
@@ -70,14 +70,14 @@ The quantity $ \textrm{d}U $ is defined as:
 \textrm{d}U = n^2 \cos\mbox{\myangle}\textrm{d}A\textrm{d}\Omega.
 \end{equation}
 where $n$ is the index of refraction of the medium in which the surface $A$ is immersed. In optics the \'{e}tendue is considered to be a volume in phase space  (or an area for two-dimensional systems). This concept will be clarified in Chapter \ref{chap:PS} where we treat the phase space in more details.
-An important property of the \'{e}tendue is that it is conserved within an optical system where the flux is constant. We now show, using the same approach of by J. Chaves in \cite{chaves2015introduction}, how the conservation of this quantity can be derived .
+An important property of the \'{e}tendue is that it is conserved within an optical system where the flux is constant. We now show, using the same approach of J. Chaves in \cite{chaves2015introduction}, how the conservation of this quantity can be derived .
 Consider a light ray emitted from an infinitesimal area $\textrm{d}A_1$ to the area $\textrm{d}A_2$ located at a distance \variabile{d} from $\textrm{d}A_1$,  see Figure \ref{fig:etendue_conservation}.
 \begin{figure}[h]
  \label{fig:etendue_conservation}
      \begin{center}
      \includegraphics[width=10cm]{areas.pdf}
      \end{center}
-     \caption{\footnotesize{$\textrm{d}A_1$ and $\textrm{d}A_2$ are two line surfaces with normals $\nu_1$ and $\nu_2$, respectively. They are located at a distance \variabile{d}.
+     \caption{\footnotesize{$\textrm{d}A_1$ and $\textrm{d}A_2$ are two surfaces with normals $\nu_1$ and $\nu_2$, respectively. They are located at a distance \variabile{d}.
 \myangle$_1$ and \myangle$_2$ are the angles made by the central ray with the normals $\nu_1$ and $\nu_2$, respectively.}}
 \label{fig:etendue_conservation}
  \end{figure}
@@ -136,10 +136,10 @@ and it is given by:
 \begin{equation}\label{etendue2d}
 \textrm{d}U = n\cos\mbox{\myangle}\textrm{d}\variabile{x}\,\textrm{d}\mbox{\myangle}.
 \end{equation}
-
+In order to determine the light distribution on a certain surface and to compute the photometric variables on that surface, we need to understand how the light emitted from the source propagates. In the field of geometric optics the light propagation is decribed by light rays.
+The propagation of a light ray traveling through  different media is determined by the reflection and refraction law.
+In the following we introduce these two laws and we explain the total internal reflection phenomenon.
 \section{Reflection and refraction law}
-The propagation of a light ray traveling through  different media is described by the reflection and refraction law.
-In this section we introduce these two laws and we explain the total internal reflection phenomenon.
 A light ray is described by a position vector \vect{x} and a direction vector \vect{t} and can be parameterized by the arc length \variabile{s}.
 Light rays travel in an homogeneous medium along straight lines, once they hit a reflective surface their direction changes.
  Denoting with $\vect{t}_i$ the direction of the incident ray and with $\boldsymbol{\nu}$ the unit normal to the surface at the location of the incidence, the direction $\vect{t}_r$ of the reflected ray is given by:
@@ -190,24 +190,23 @@ Eq. (\ref{Refraction}) is only valid for
 \end{equation} and it is called the critical angle, \cite{chaves2015introduction}.
 Note that the condition $\frac{n_t}{n_i}<1$ is verified as in this case $\sin(\mbox{\myangle}_\textrm{i})<1$.
 When the incident angle \myangle$_{\textrm{i}}$ is exactly equal to the critical angle \myangle$_{\textrm{c}}$ the refractive ray propagates parallel to the refractive surface, 
-when \myangle$_{\textrm{i}}>\mbox{\myangle}_{\textrm{c}}$ the light ray is no longer refracted but it is reflected by the surface. This phenomenon is called total internal reflection (TIR). When TIR occurs, the $100\%$ of light is reflected and there is no loss of energy. Therefore, optical systems designed such that TIR is always verified are very efficient. In general, light that hits a normal refractive mirror can be both reflected and refracted. Therefore, some part of the energy is transmitted and some part is reflected. The amount of light that is reflected and refracted is determined by the Fresnel's coefficients.
+when \myangle$_{\textrm{i}}>\mbox{\myangle}_{\textrm{c}}$ the light ray is no longer refracted but it is only reflected by the surface. This phenomenon is called total internal reflection (TIR). When TIR occurs, the $100\%$ of light is reflected and there is no loss of energy. Therefore, optical systems designed such that TIR is always verified are very efficient. In general, light that hits a normal refractive mirror can be both reflected and refracted. Therefore, some part of the energy is transmitted and some part is reflected. The amount of light that is reflected and refracted is determined by the Fresnel's coefficients.
 In the next paragraph an overview of  Fresnel equations is given.
 
-\section{The Fresnel equations}
+\section{Fresnel equations}
 In order to derive Fresnel's equations we need to describe light as an electromagnetic wave. 
 It is therefore useful to study the light propagation from the perspective of Electromagnetic Theory which gives information about the incident, reflected and transmitted radiant flux density that are denoted with $E_i$, $E_r$ and $E_t$, respectively.  
-Any component of the electric field $\boldsymbol{\mathcal{E}}$ can be written in the form
+Any component of the electric field $\boldsymbol{\mathcal{E}}$ can be written as
 \begin{equation}
-\boldsymbol{\mathcal{E}}(\vect{x}, \mytime) = \boldsymbol{\mathcal{E}}_0(\vect{x} )e^{i(\omega \mytime - \vect{k}\cdot \vect{r})}
+\boldsymbol{\mathcal{E}}(\vect{x}, \mytime) = \boldsymbol{\mathcal{E}}_0(\vect{x} )e^{i(\omega \mytime - \vect{k}\cdot \vect{x})}
 \end{equation}
-where the amplitude $\boldsymbol{\mathcal{E}}_0(\vect{x})$ is constant in time. The vector \vect{k} has the same direction of the wave and its absolute value 
-$|\vect{k}| = k = \frac{2\pi}{\lambda}$ is the wave number in vacuum, with $\lambda$ the wavelength. The value of the angular frequency is $\omega = \frac{c k}{n}$ with $c$ the velocity of the light and $n$ the index of refraction in which the wave is traveling that is the ratio of the speed of light $v$ in the material and the speed of light $c$ in vacuum.
-Similarly, the magnetic field has the form:
+where \vect{x} is the position vector and $T$ is the time. The amplitude $\boldsymbol{\mathcal{E}}_0(\vect{x})$ is constant in time and $\omega = \frac{c k}{n}$ is the value of the angular frequency with $c$ the velocity of the light and $n$ the index of refraction in which the wave is traveling that is the ratio of the speed of light $v$ in the material and the speed of light $c$ in vacuum. The vector \vect{k} has the same direction of the wave and its absolute value 
+$|\vect{k}| = k = \frac{2\pi}{\lambda}$ is the wave number in vacuum, with $\lambda$ the wavelength. Similarly, the magnetic field has the form:
 \begin{equation}
-\boldsymbol{\mathcal{B}}(\vect{x}, \mytime) = \boldsymbol{\mathcal{B}}_0(\vect{x}) e^{i(\omega \mytime - \vect{k}\cdot \vect{r})}\,.
+\boldsymbol{\mathcal{B}}(\vect{x}, \mytime) = \boldsymbol{\mathcal{B}}_0(\vect{x}) e^{i(\omega \mytime - \vect{k}\cdot \vect{x})}\,.
 \end{equation}
 In the field of electromagnetism a very important concept is the Poynting vector \vect{P}. 
-It defines the energy flux of an electromagnetic field,  it is measured in $[W/m^2]$ and it is defined as:
+It defines the energy flux of an electromagnetic field,  it is measured in $[W/m^2]$ and it is given by:
 \begin{equation}
 \vect{P} = \frac{1}{\mu}\Big(\mathcal{E}\times \mathcal{B}\Big)
 \end{equation}
@@ -247,24 +246,24 @@ The values $r = \Big(\frac{\boldsymbol{\mathcal{E}}_{0 i}}{\boldsymbol{\mathcal{
 $t = \Big(\frac{\boldsymbol{\mathcal{E}}_{0 t}}{\boldsymbol{\mathcal{E}}_{0 i}}\Big)$ are called the amplitude coefficients.  
 The intensity of the reflected and transmitted light depends not only on the angle of incidence but also on the polarization of the electromagnetic field.
 By convention, we refer to the polarization of electromagnetic waves as the direction of the electric field $\boldsymbol{\mathcal{E}}$, 
-\cite{feynman1964feynman}. When $\boldsymbol{\mathcal{E}}$ is perpendicular to the plane of incidence, light is called $s$-polarized, while when
+\cite{feynman1964feynman}. When $\boldsymbol{\mathcal{E}}$ is perpendicular to the plane of incidence, light is called $s$-polarized, when
 $\boldsymbol{\mathcal{E}}$ is parallel to the plane of incidence, it is said that light is $p$-polarized.
 For $s$-polarized light the perpendicular components $r_s$ and $t_s$ of $r$ and $t$ are defined. 
 For $p$-polarized light the parallel components $r_p$ and $t_p$ of $r$ and $t$ are given. 
 Those coefficients are obtained considering the Maxwell's equations and the boundaries conditions due to the conservation of energy.
 For the first case ($s$-polarization), the boundaries conditions are given by the conservation of the tangent component of $\boldsymbol{\mathcal{E}}$ and of the normal component of $\boldsymbol{\mathcal{B}}$. For the second case ($p$-polarization), the boundaries conditions are given by the conservation of the tangential component $\boldsymbol{\mathcal{E}}$ and of the tangent component of $\boldsymbol{\mathcal{B}}$. These conditions together with Maxwell's equations lead to four equations with four unknowns.
 Solving those equations the Fresnel coefficients are derived. 
-It is out of this work to show the details of Fresnel equations as they are widely explained in the leterature. 
+It is out of this work to show the details of Fresnel equations as they are widely explained in the literature. 
 In the following we provide Fresnel coefficients and we briefly explain their physical interpretation. We refer the reader to \cite{born2013principles, hecht1998hecht} for more details. 
-Fresnel's coefficients can also be derived using a different approach that does not involves Marxwell's equations, this method is widely explained in \cite{feynman2011feynman}. 
-In case \vect{E} is perpendicular to the plane of incidence the following results are obtained:
+Fresnel's coefficients can also be derived using a different approach that does not involves Marxwell's equations, this method is explained in \cite{feynman2011feynman}. 
+In case $\boldsymbol{\mathcal{E}}$ is perpendicular to the plane of incidence the following results are obtained:
 \begin{equation} \label{Fresnel_perpendicular}
 \begin{split}
-r_{s} & = \frac{n_i\cos(\mbox{\myangle}_i)-n_t \cos\mbox{\myangle}_t}{n_i \cos\mbox{\myangle}_i+n_t\cos\mbox{\myangle}_t}\\
+r_{s} & = \frac{n_i\cos\mbox{\myangle}_i-n_t \cos\mbox{\myangle}_t}{n_i \cos\mbox{\myangle}_i+n_t\cos\mbox{\myangle}_t}\\
 t_{s} & =  \frac{2n_i\cos\mbox{\myangle}_i}{n_i\cos\mbox{\myangle}_i+n_t\cos\mbox{\myangle}_t}
 \end{split}
 \end{equation}
-In case \vect{E} is parallel to the plane of incidence the amplitude coefficients are:
+In case $\boldsymbol{\mathcal{E}}$ is parallel to the plane of incidence the amplitude coefficients are:
 \begin{equation}\label{Fresnel_parallel}
 \begin{split}
 r_{p} & = \frac{n_t\cos\mbox{\myangle}_i-n_i \cos\mbox{\myangle}_t}{n_i \cos\mbox{\myangle}_t+n_t\cos\mbox{\myangle}_i}\\
@@ -288,18 +287,18 @@ t_p+r_p &=  1
 \end{split}
 \end{equation}
 The amplitude coefficients are shown in Fig. \ref{fig:coefficients} for the case in which light travels from a less dense to a more dense medium ($n_i<n_t$), that is external reflection. 
-In Fig. \ref{fig:coefficients2} the reflection coefficients are shown for the case in which $n_i>n_t$, that is internal reflection. Note from Fig. \ref{fig:coefficients} that $r_p$ approaches to $0$ when \myangle$_i$ approaches to \myangle$_p$ and it gradually decreases reaching $-1$ for an incident angle \myangle$_i=90^\circ$. The angle \myangle$_p$ is called Brewster's angle or polarization angle as only the component perpendicular to the incident ray is reflected at that angle and therefore light is perfectly polarized. Similarly, Fig. \ref{fig:coefficients2} shows that $r_p=0$ for \myangle$_i= $\myangle$_{p\prime}$. It can be show that \myangle$_p+ $\myangle$_{p\prime}= 90^\circ$. Both $r_p$ and $r_s$ reach $1$ when \myangle$_i= $\myangle$_c$. \myangle$_c$ is called the critical angle. Light that hits the incident plane with an incident angle equal to or greater than the critical angle is totally reflected back and no transmitted light is observed. This phenomenon is called total internal reflection. 
+In Fig. \ref{fig:coefficients2} the reflection coefficients are shown for the case in which $n_i>n_t$, that is internal reflection. Note from Fig. \ref{fig:coefficients} that $r_p$ approaches to $0$ when \myangle$_i$ approaches to \myangle$_p$ and it gradually decreases reaching $-1$ for an incident angle \myangle$_i=90^\circ$. The angle \myangle$_p$ is called Brewster's angle or polarization angle as only the component perpendicular to the incident ray is reflected at that angle and therefore light is perfectly polarized. Similarly, Fig. \ref{fig:coefficients2} shows that $r_p=0$ for \myangle$_i= $ \myangle$_{p\prime}$. It can be show that \myangle$_p+ $\myangle$_{p\prime}= 90^\circ$. Both $r_p$ and $r_s$ reach $1$ when \myangle$_i= $ \myangle$_c$. \myangle$_c$ is called the critical angle. Light that hits the incident plane with an incident angle equal to or greater than the critical angle is totally reflected back and no transmitted light is observed. This phenomenon is called total internal reflection. 
 \begin{figure}[h]
   \begin{minipage}[h]{0.4\textwidth}
     \includegraphics[width=\textwidth]{amplitude_coefficients2.pdf}
-    \caption{Amplitude coefficients of reflection and transmission as a function of the incident angle \myangle$_i$ in the case of external reflection, i.e. $n_t<n_i$
+    \caption{Amplitude coefficients of reflection and transmission as a function of the incident angle \myangle$_i$  in the case of external reflection, i.e. $n_t<n_i$
 ($n_t = 1$ and $n_i=1.5$). \myangle$_p$ is the polarization angle, \cite{hecht1998hecht}.}
     \label{fig:coefficients}
   \end{minipage} \hspace{2.5cm}
   \begin{minipage}[h]{0.4\textwidth}
     \includegraphics[width=\textwidth]{rprs.pdf}
     \caption{Reflection coefficients as a function of the incident angle \myangle$_i$ in the case of internal reflection, i.e. $n_t>n_i$
-($n_t = 1.5$ and $n_i=1$). \myangle$_{p\prime}$ is the polarization angle and \myangle$_c$ is the critical angle., \cite{hecht1998hecht}}
+($n_t = 1.5$ and $n_i=1$). \myangle$_{p\prime}$ is the polarization angle and \myangle$_c$ is the critical angle, \cite{hecht1998hecht}.}
    \label{fig:coefficients2}
  \end{minipage}
 \end{figure}
