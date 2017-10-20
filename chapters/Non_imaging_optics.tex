@@ -1,14 +1,14 @@
 \chapter{Illumination optics}
-This chapter provides the notions of illumination optics needed in this thesis. We start explaining the difference between radiometry and photometry.
-In particular, we focus on the photometric variables, defining them both in three and two dimensions. The reflection and refraction laws and the phenomenon of total internal reflection are explained. The last paragraph of the chapter gives a brief introduction to Fresnel equations. 
+This chapter provides some concepts of illumination optics used in this thesis. We start explaining the difference between radiometry and photometry.
+In particular, we focus on the photometric variables, defining them both in three and two dimensions. The reflection and refraction laws and the phenomenon of total internal reflection are explained. The last paragraph of the chapter gives a brief introduction to Fresnel reflection. 
 \section{Radiometric and photometric variables}
 Radiometry is concerned with the measurement of electromagnetic radiation across the entire electromagnetic spectrum. Photometry is the subfield of radiometry that takes into account only the portion of the electromagnetic spectrum corresponding to the visible light, \cite{zalewski1995radiometry}. Radiometry deals with radiometric quantities. An important radiometric quantity  is the radiant flux $\Phi_{\textrm{r}}$ (unit watt, [\textrm{W}]) which is the total energy emitted from a source or received by a target per unit time:
 \begin{equation}
 \Phi_{\textrm{r}} = \frac{\textrm{d}Q}{\textrm{d}T}\,,
 \end{equation}
 where $Q$ is the energy and $T$ the time.\\
-\indent In illumination optics the measurement of light is given in terms of the impression that it gives on the human eye. Therefore, illumination optics deals with photometric variables. The most important photometric variables are defined in the following using the same notation adopted by Chaves in \cite{chaves2015introduction}. The luminous flux $\Phi$ (unit lumen, [\textrm{lm}]) is defined as the perceived power of light by the human eye.
- The radiant and the luminous flux are related by the luminous efficacy function, unit [lm/W], which tells us how many lumen there are for each Watt of power at a given wavelength.
+\indent In illumination optics the measurement of light is given in terms of the impression that it gives on the human eye. Therefore, illumination optics deals with photometric variables. The most important photometric variables are defined as follows using the same notation adopted by Chaves in \cite{chaves2015introduction}. The luminous flux $\Phi$ (unit lumen, [\textrm{lm}]) is defined as the perceived power of light by the human eye.
+ The radiant and the luminous flux are related by the luminous efficacy function, unit [\textrm{lm}/\textrm{W}], which tells us how many lumen there are for each Watt of power at a given wavelength.
  The luminous efficacy reaches its maximum  at a wavelength of $555$ $\textrm{nm}$ where it is equal to $683$ $\textrm{lm}/\textrm{W}$.
   We may normalize the luminous efficacy function with its maximum value of $683$.
   This normalized function is the dimensionless luminosity function $\bar{y}(\lambda)$ shown in Figure $\ref{fig:luminosityfunction}$ where $\lambda$ is the wavelength.
@@ -25,20 +25,21 @@ i.e. $683 \, \bar{y}(\lambda)$. Hence, the total luminous flux $\Phi$ has unit l
 \begin{equation}
 \Phi = 683 \int_0^\infty \Psi_\textrm{r}(\lambda) \bar{y}(\lambda)\textrm{d}\lambda
 \end{equation}
-where $\Psi_\textrm{r}(\lambda)$ is the power in watt per unit wavelength (unit [W/m]). 
+where $\Psi_\textrm{r}(\lambda)$ is the power in watt per unit wavelength (unit [\textrm{W}/\textrm{m}]). 
 \\ \indent A beam of light can be described as a collection of parallel light rays, where a light ray can be interpreted as a path along which the energy travels. 
 The luminous flux $\textrm{d}\Phi$ incident on a surface is called illuminance $E$ \big(unit \big[$\textrm{lm}/\textrm{m}^2\big]$\big)
 and is defined as:
 \begin{equation}
  E=\frac{\textrm{d}\Phi}{\textrm{d}A}\;,
  \end{equation}
- where $\textrm{d}A$ is an infinitesimal area receiving energy. The density of light emitted by a point source in a given direction is determined by the solid angle. The solid angle subtended by the emitted light on a given direction is defined by the infinitesimal surface area $\textrm{d}S$  of a sphere subtended by the radius of that sphere and by the rays emitted by the center on that direction, \cite{arecchi2007field}.  
+ where $\textrm{d}A$ is an infinitesimal area receiving radiation. The density of light emitted by a point source in a given direction is determined by the solid angle. 
+The solid angle on a given direction is defined by the infinitesimal surface area $\textrm{d}S$  of a sphere subtended by the radius of that sphere and by the rays emitted by the center on that direction, \cite{arecchi2007field}.  
 %The solid angle is indicated with $\Omega$ and the dimensionless unit of solid angles is the steradian $[sr]$, \cite{arecchi2007field}.
  Indicating with $r$ the radius of the sphere, the infinitesimal solid angle $\textrm{d}\Omega$ defined by $\textrm{d}S$  is given by:
 \begin{equation}\label{solid_angle}
 \textrm{d}\Omega = \frac{\textrm{d}S}{r^2}\,. %= \sin(\theta)\textrm{d}\theta \phi\.
 \end{equation}
-The solid angle on the entire sphere is $\Omega = 4\pi$, its unit is the steradian $[sr]$  and it is usually defined on a unit sphere .
+The solid angle on the entire sphere is $\Omega = 4\pi$, its unit is the steradian $[\textrm{sr}]$  and it is usually defined on a unit sphere .
 The luminous intensity $I$ (unit candela (\textrm{cd}), $[\textrm{cd}=\textrm{lm}/\textrm{sr}]$) is defined as the luminous flux $\textrm{d}\Phi$ per solid angle
 $\textrm{d}\Omega$ and is given by:
 \begin{equation}\label{intensity}
@@ -55,15 +56,16 @@ I = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}\;.
 \begin{equation}\label{luminance1}
   L=\frac{\textrm{d}\Phi}{\cos\mbox{\myangle}\,\textrm{d}A\textrm{d}\Omega}\,.
 \end{equation}
-\noindent Note that from ($\ref{intensity}$) and ($\ref{luminance1}$) we can derive a relation between the intensity and the luminance. The infinitesimal intensity $\textrm{d}I $ emitted by the area element $\textrm{d}A$ is given by:
+\noindent Note that from ($\ref{intensity}$) and ($\ref{luminance1}$) we can derive a relation between the intensity and the luminance. 
+The intensity $I$ emitted by the infinitesimal area $\textrm{d}A$ is given by:
 \begin{equation}
-\textrm{d}I = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}= L(\vect{x},\mbox{\myangle})\cos\mbox{\myangle}\textrm{d}A \,.
+I = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}= L(\vect{x},\mbox{\myangle})\cos\mbox{\myangle}\textrm{d}A \,.
 \end{equation}
 When the luminance is uniform over a finite area $A$, the luminous intensity emitted in the direction \myangle $\,$ is equal to:
 \begin{equation}
 I(\mbox{\myangle}) = L(\mbox{\myangle}) A \cos\mbox{\myangle}\,.
 \end{equation}
-Thus, when $L(\vect{x},\mbox{\myangle})$ does not depend on the position and the direction (i.e. $L(\vect{x},\mbox{\myangle})=L$), we deduce Lambert's cosine law:
+Thus, when $L(\vect{x},\mbox{\myangle})$ does not depend on the position and the direction (i.e. $L(\vect{x},\mbox{\myangle})=L$), we obtain Lambert's cosine law:
 \begin{equation}
 I(\mbox{\myangle}) = I_0\cos\mbox{\myangle}\,.
 \end{equation}
@@ -73,8 +75,9 @@ The quantity $ \textrm{d}U $ is defined as:
 \begin{equation}\label{etendue}
 \textrm{d}U = n^2 \cos\mbox{\myangle}\textrm{d}A\textrm{d}\Omega.
 \end{equation}
-where $n$ is the index of refraction of the medium in which the surface $A$ is immersed. In optics the \'{e}tendue is considered to be a volume in phase space  (or an area for two-dimensional systems). This concept will be clarified in Chapter \ref{chap:PS} where we treat the phase space in more detail.
-An important property of the \'{e}tendue is that it is conserved within an optical system where the flux is constant. We now show how conservation of this quantity can be derived.
+where $n$ is the index of refraction of the medium in which the surface $A$ is immersed. In optics the \'{e}tendue is considered to be a volume in phase space  (or an area for two-dimensional systems). This concept will be clarified in Chapter \ref{chap:PS} in which we treat the phase space in more detail.
+An important property of the \'{e}tendue is that it is conserved within an optical system in absence of absorption. We now show, using the approach of Chaves in \cite{chaves2015introduction}, 
+how conservation of this quantity can be derived.
 Consider a light ray emitted from an infinitesimal area $\textrm{d}A_1$ to the area $\textrm{d}A_2$. Suppose that the centers of $\textrm{d}A_1$ and $\textrm{d}A_2$ 
 are located at a distance \variabile{d} to each other,  see Figure \ref{fig:etendue_conservation}.
 \begin{figure}[h]
@@ -119,7 +122,7 @@ L := n \frac{\textrm{d}\Phi}{\textrm{d}U} = constant\,.
  The two-dimensional illuminance \big(unit $\big[\textrm{lm}/\textrm{m}\big]$\big) denotes the luminous flux falling on an infinitesimal line segment of length $\textrm{d}\variabile{a}$ 
 and it is given by:
  \begin{equation}
- E=\frac{\textrm{d}\Phi}{\textrm{d}\variabile{x}}\;.
+ E=\frac{\textrm{d}\Phi}{\textrm{d}\variabile{a}}\;.
  \end{equation}
  The luminous intensity \big(unit $\big[\textrm{lm}/\textrm{rad}\big]$\big) is the luminous flux per angle $\textrm{d}\mbox{\myangle}$:
  \begin{equation}
@@ -131,9 +134,9 @@ and it is given by:
  \end{equation}
  Thus the following relation holds:
  \begin{equation}
- \textrm{d}I = L(\vect{x}, \mbox{\myangle})\cos\mbox{\myangle}\textrm{d}\variabile{a}\,.
+ I = L(\vect{x}, \mbox{\myangle})\cos\mbox{\myangle}\,\textrm{d}\variabile{a}\,.
  \end{equation}
- Finally, the \'{e}tendue $\textrm{d}U $ (unit $[m\cdot rad]$) in two dimensions is given by:
+ Finally, the \'{e}tendue $\textrm{d}U $ (unit $[\textrm{m}\textrm{rad}]$) in two dimensions is given by:
 \begin{equation}\label{etendue2d}
 \textrm{d}U = n\cos\mbox{\myangle}\textrm{d}\variabile{a}\,\textrm{d}\mbox{\myangle}.
 \end{equation}
@@ -145,14 +148,17 @@ A light ray is described by a position vector \vect{x} on a surface and a direct
 Light rays travel in a homogeneous medium along straight lines, once they hit a reflective surface their direction changes.
  Denoting with $\vect{t}_\textrm{i}$ the direction of the incident ray and with $\boldsymbol{\nu}$ the unit normal to the surface at the location of incidence, the direction $\vect{t}_\textrm{r}$ of the reflected ray is given by:
  \begin{equation}\label{Reflection}
-  \vect{t}_\textrm{r} = \vect{t}_\textrm{i}-2(\vect{t}_\textrm{i},\boldsymbol{\nu})\boldsymbol{\nu}\,,
+  \vect{t}_\textrm{r} = \vect{t}_\textrm{i}-2 (\vect{t}_\textrm{i}\boldsymbol{\cdot}\boldsymbol{\nu})\boldsymbol{\nu}\,,
 \end{equation}
-where the vectors $\vect{t}_\textrm{i}$ and $\boldsymbol{\nu}$ are unit vectors and they all leave in the same plane. 
+where the vectors $\vect{t}_\textrm{i}$ and $\boldsymbol{\nu}$ are unit vectors and $\vect{t}_\textrm{i}\boldsymbol{\cdot}\boldsymbol{\nu}$ indicates the scalar product between 
+$\vect{t}_\textrm{i}$ and $\boldsymbol{\nu}$. 
 From Eq. (\ref{Reflection}) it follows that the vector  $\vect{t}_\textrm{r}$ is a unit vector too, indeed considering the scalar product $(\vect{t}_\textrm{r},\vect{t}_\textrm{r})$ we conclude:
 \begin{equation}\label{unit_vector}
-(\vect{t}_\textrm{r},\vect{t}_\textrm{r}) = (\vect{t}_\textrm{i},\vect{t}_\textrm{i}) - 4(\vect{t}_\textrm{i},\boldsymbol{\nu})(\vect{t}_\textrm{i},\boldsymbol{\nu})+
-4(\vect{t}_\textrm{i},\boldsymbol{\nu})^2(\boldsymbol{\nu},\boldsymbol{\nu})=1 .
+\vect{t}_\textrm{r}\boldsymbol{\cdot}\vect{t}_\textrm{r} = \vect{t}_\textrm{i}\boldsymbol{\cdot}\vect{t}_\textrm{i} 
+- 4(\vect{t}_\textrm{i}\boldsymbol{\cdot}\boldsymbol{\nu})(\vect{t}_\textrm{i}\boldsymbol{\cdot}\boldsymbol{\nu})+
+4(\vect{t}_\textrm{i}\boldsymbol{\cdot}\boldsymbol{\nu})^2(\boldsymbol{\nu}\boldsymbol{\cdot}\boldsymbol{\nu})=1 .
 \end{equation} 
+The vectors $\vect{t}_\textrm{i}$, $\vect{t}_\textrm{r}$ and $\boldsymbol{\nu}$ live all in the same plane.
 Defining the incident angle \myangle$_\textrm{i}$ and the reflective angle \myangle$_\textrm{r}$ such that \myangle$_\textrm{i}$, \myangle$_\textrm{r} \in[0, \pi/2)$.
 %\begin{equation}
 %\cos{\mbox{\myangle}_\textrm{i}} = -\vect{t}_\textrm{i}\cdot \boldsymbol{\nu} \qquad \mbox{and} \qquad \cos{\mbox{\myangle}_\textrm{r}} = \vect{t}_\textrm{r} \cdot\boldsymbol{\nu}\,,
@@ -169,23 +175,28 @@ the reflection law states that \myangle$_\textrm{i}=$ \myangle$_\textrm{r}$, see
 \label{fig:Snell}
  \end{figure}
 \\ When a ray propagates through two different media, its direction changes according to the law of refraction. 
-Indicating with $n_\textrm{i}$ the index of refraction of the medium in which the incident ray travels and with $n_\textrm{t}$ the index of refraction of the medium of the transmitted ray, the direction $\vect{t}_\textrm{t}$ of the transmitted ray is given by:
+Indicating with $n_\textrm{i}$ the index of refraction of the medium in which the incident ray travels and with 
+$n_\textrm{t}$ the index of refraction of the medium of the transmitted ray, the direction $\vect{t}_\textrm{t}$ of the transmitted ray is given by:
 \begin{equation}\label{Refraction}
 \vect{t}_\textrm{t} = n_{\textrm{i},\textrm{t}}\,\vect{t}_\textrm{i}+
-\Big[\sqrt{1-n_{\textrm{i},\textrm{t}}^2+n_{\textrm{i},\textrm{t}}^2(\boldsymbol{\nu},\vect{t}_\textrm{i})^2}-n_{\textrm{i},\textrm{t}}(\boldsymbol{\nu},\vect{t}_\textrm{i}) \Big]\boldsymbol{\nu}\,,
+\Big[\sqrt{1-n_{\textrm{i}\boldsymbol{\cdot}\textrm{t}}^2+
+n_{\textrm{i},\textrm{t}}^2(\boldsymbol{\nu}\boldsymbol{\cdot}\vect{t}_\textrm{i})^2}
+-n_{\textrm{i},\textrm{t}}(\boldsymbol{\nu}\boldsymbol{\cdot}\vect{t}_\textrm{i}) \Big]\boldsymbol{\nu}\,,
 \end{equation}
-where $n_{\textrm{i},\textrm{t}}=n_\textrm{i}/n_\textrm{t}$. Note that in Eq. (\ref{Reflection}) the direction of the normal $\boldsymbol{\nu}$ to the surface is not relevant for the computation of the direction of the reflective ray, since:
+where $n_{\textrm{i},\textrm{t}}=n_\textrm{i}/n_\textrm{t}$, \cite{chaves2015introduction}.
+ Note that in Eq. (\ref{Reflection}) the direction of the normal $\boldsymbol{\nu}$ to the surface is not relevant for the computation of the direction of the reflective ray, since:
 \begin{equation}
-\vect{t}_\textrm{r} = \vect{t}_\textrm{i}-2(\vect{t}_\textrm{i},\boldsymbol{\nu})\boldsymbol{\nu}= \vect{t}_\textrm{i}-2(\vect{t}_\textrm{i},-\boldsymbol{\nu})(-\boldsymbol{\nu}) ,
+\vect{t}_\textrm{r} = \vect{t}_\textrm{i}-2(\vect{t}_\textrm{i}\boldsymbol{\cdot}\boldsymbol{\nu})\boldsymbol{\nu}= \vect{t}_\textrm{i}-2(\vect{t}_\textrm{i}\boldsymbol{\cdot}-\boldsymbol{\nu})(-\boldsymbol{\nu}) ,
 \end{equation}
-however, this is not the case for Eq. (\ref{Refraction}), therefore in the latter case we need to specify the direction of $\boldsymbol{\nu}$ which is usually chosen in such a way that the angle that it forms with the incident ray $\vect{t}_\textrm{i}$ is smaller than or equal to $\pi/2$. Hence, if $(\vect{t}_\textrm{i}, \boldsymbol{\nu})\leq0$ the normal $\boldsymbol{\nu}$ directed inside the same medium in which travels the incident ray is taken, otherwise the normal $-\boldsymbol{\nu}$ directed inside the same medium in which the transmitted ray will travel has to be considered.
+however, this is not the case for Eq. (\ref{Refraction}), therefore in the latter case we need to specify the direction of $\boldsymbol{\nu}$ which is usually chosen in such a way that the angle that it forms with the incident ray $\vect{t}_\textrm{i}$ is smaller than or equal to $\pi/2$. Hence, if $(\vect{t}_\textrm{i}, \boldsymbol{\nu})\leq0$ the normal $\boldsymbol{\nu}$ directed inside the same medium in which travels the incident ray is taken as in Fig. \ref{fig:Snell}, 
+otherwise the normal $-\boldsymbol{\nu}$ directed inside the same medium in which the transmitted ray will travel has to be considered.
 \\\indent
 Eq. (\ref{Refraction}) is only valid for 
 \begin{equation}\label{tir}
-1-n_{\textrm{i},\textrm{t}}^2+n_{\textrm{i},\textrm{t}}^2(\boldsymbol{\nu},\vect{t}_\textrm{i})^2\geq 0 
+1-n_{\textrm{i},\textrm{t}}^2+n_{\textrm{i},\textrm{t}}^2(\boldsymbol{\nu}\boldsymbol{\cdot}\vect{t}_\textrm{i})^2\geq 0 
 \end{equation} which implies that
 \begin{equation}
-\frac{n_\textrm{t}}{n_\textrm{i}}\geq \sqrt{1-(\boldsymbol{\nu},\vect{t}_\textrm{i})^2}
+\frac{n_\textrm{t}}{n_\textrm{i}}\geq \sqrt{1-(\boldsymbol{\nu}\boldsymbol{\cdot}\vect{t}_\textrm{i})^2}
 \end{equation}
 from which we obtain:
 \begin{equation}
@@ -198,8 +209,8 @@ from which we obtain:
 \end{equation} and it is called the critical angle, \cite{chaves2015introduction}.
 %Note that the condition $\frac{n_t}{n_i}<1$ is verified as in this case $\sin(\mbox{\myangle}_\textrm{i})<1$.
 When the incident angle \myangle$_{\textrm{i}}$ is exactly equal to the critical angle \myangle$_{\textrm{c}}$, the square root in Eq. (\ref{Refraction}) is zero and the inner product $(\vect{t}_\textrm{t},\boldsymbol{\nu})=0$, hence the transmitted ray propagates parallel to the refractive surface. 
-When \myangle$_{\textrm{i}}>\mbox{\myangle}_{\textrm{c}}$ the light ray is no longer refracted but is only reflected by the surface. This phenomenon is called total internal reflection (TIR). When TIR occurs, the $100\%$ of light is reflected and there is no loss of energy. Therefore, optical systems designed such that TIR is always verified are very efficient. In general, light that hits an ordinary refractive mirror can be both reflected and refracted. Therefore, some part of the energy is transmitted and some part is reflected. The amount of light that is reflected and refracted is determined by the Fresnel's coefficients.
-In the next paragraph an overview of the Fresnel equations is given.
+When \myangle$_{\textrm{i}}>\mbox{\myangle}_{\textrm{c}}$ the light ray is no longer refracted but is only reflected by the surface. This phenomenon is called total internal reflection (TIR). When TIR occurs, $100\%$ of light is reflected and there is no loss of energy. Therefore, optical systems designed such that rays are reflected by TIR are very efficient. Lght that hits an ordinary refractive surface can be reflected and refracted. The energy that is reflected and refracted is determined by the Fresnel's coefficients.
+In the next paragraph an overview of the Fresnel coefficients is given.
 
 \section{Fresnel's equations}
 In order to derive Fresnel's equations we need to describe light as an electromagnetic wave. 
