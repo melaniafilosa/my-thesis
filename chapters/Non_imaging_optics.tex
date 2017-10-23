@@ -217,59 +217,32 @@ In order to derive Fresnel's equations we need to describe light as an electroma
 It is therefore useful to study the light propagation from the perspective of electromagnetic theory which gives information about the incident, reflected and transmitted radiant flux density that are denoted with $E_i$, $E_r$ and $E_t$, respectively.  
 Any component of the electric field $\boldsymbol{\mathcal{E}}$ can be written as
 \begin{equation}
-\boldsymbol{\mathcal{E}}(\vect{x}, \mytime) = \boldsymbol{\mathcal{E}}_0(\vect{x} )e^{i(\omega \mytime - \vect{k}\boldsymbol{\cdot}\vect{x})}
+\boldsymbol{\mathcal{E}}(\vect{x}, \mytime) = \boldsymbol{\mathcal{E}}_0(\vect{x} )e^{i( \vect{k}\boldsymbol{\cdot}\vect{x}-\omega \mytime )}
 \end{equation}
 where \vect{x} is the position vector and $T$ is the time. The amplitude $\boldsymbol{\mathcal{E}}_0(\vect{x})$ is constant in time and $\omega = \frac{c k}{n}$ is the value of the angular frequency with $c$ the velocity of light and $n$ the index of refraction in which the wave is traveling, which is the ratio of the speed of light $c$ in vacuum and the speed of light $v$ in the material. Note that the angular frequency can be also written as $\omega = vk$, in particular when a wave travels in vacuum $n=1$ and $\omega=ck$. The vector \vect{k} has the same direction of the wave and its absolute value 
 $|\vect{k}| = k = \frac{2\pi}{\lambda}$ is the wave number in vacuum, with $\lambda$ the wavelength. Similarly, the magnetic field has the form:
 \begin{equation}
-\boldsymbol{\mathcal{B}}(\vect{x}, \mytime) = \boldsymbol{\mathcal{B}}_0(\vect{x}) e^{i(\omega \mytime - \vect{k}\boldsymbol{\cdot} \vect{x})}\,.
+\boldsymbol{\mathcal{B}}(\vect{x}, \mytime) = \boldsymbol{\mathcal{B}}_0(\vect{x}) e^{i( \vect{k}\boldsymbol{\cdot} \vect{x}-\omega \mytime )}\,.
 \end{equation}
-In the theory of electromagnetism a very important concept is the Poynting vector \vect{P}. 
-It defines the energy flux of an electromagnetic field,  it is measured in $[W/m^2]$, and it is given by:
-\begin{equation}
-\vect{P} = \frac{1}{\mu}\Big(\mathcal{E}\boldsymbol{\times} \mathcal{B}\Big),
-\end{equation}
-where $\mu = \frac{1}{\varepsilon v^2}$ is the permeability and $\varepsilon$ the permittivity of the medium.
- In the following, the parameters for vacuum are indicated with the subscript $0$. All quantities defined in the media of the incident, reflective and transmitted light are indicated with the subscripts \textrm{i}, \textrm{r} and \textrm{t}, respectively. Optical rays are perpendicular to the wave front of an electromagnetic wave and parallel to the Poynting vector, \cite{jones2015optical}.
-The irradiance $E$ is defined as the average energy that crosses in unit time a unit area $A$ perpedicular to the direction of the energy flow.
-Therefore, defining the average of the vector \vect{P} over the time as:
-\begin{equation}
-\langle \vect{P} \rangle_T = \frac{1}{T}\int_0^T \vect{P}\textrm{d}T
-\end{equation}
-we can write the irradiance $E$ as:
-\begin{equation}
-\vect{E} = \langle\vect{P}\rangle_{\mytime} = \frac{c}{2\mu}|\boldsymbol{\mathcal{E}}_0|^2\,.
-\end{equation}
-Considering a beam of light that hits a surface such that an area $A$ is illuminated, the incident, reflected and transmitted beams are 
-$\vect{E}_\textrm{
-i} A\cos\mbox{\myangle}_\textrm{i}$ $\vect{E}_\textrm{r} A\cos\mbox{\myangle}_\textrm{r}$ and 
-$\vect{E}_\textrm{t} A\cos\mbox{\myangle}_\textrm{t}$, respectively. 
-The reflectance $\mathcal{R}$ is the ratio of the reflected power to the incident power:
-\begin{equation}\label{reflectance}
-\mathcal{R} = \frac{|\vect{E}_\textrm{r}|\cos\mbox{\myangle}_r}{|\vect{E}_\textrm{i}|\cos\mbox{\myangle}_\textrm{i}} = \frac{|\boldsymbol{\mathcal{E}}_{0 \textrm{r}}|^2}{|\boldsymbol{\mathcal{E}}_{0 \textrm{i}}|^2}
-\end{equation}
-where the second equality holds as we assumed that $\mu_\textrm{i} = \mu_\textrm{t}  = \mu_0$ and we used the fact that $\mu_0 v_\textrm{t}\varepsilon_\textrm{t}=n_\textrm{t}/c$.
-$\vect{E} _\textrm{r}/\vect{E}_\textrm{t} = (v_\textrm{r}\varepsilon_\textrm{r} \boldsymbol{\mathcal{E}}_{0\textrm{r}}^2/2)/(v_\textrm{i}\varepsilon_\textrm{i} \boldsymbol{\mathcal{E}}_{0\textrm{i}}^2/2)$.
-Similarly, the transmittance $\mathcal{T}$ is the ratio between the transmitted to the incident power:
-\begin{equation}\label{transmittance}
-\mathcal{T} = \frac{|\vect{E}_\textrm{
-t}| \cos\mbox{\myangle}_\textrm{
-t}}{|\vect{E}_\textrm{
-r|}\cos\mbox{\myangle}_\textrm{r}} = \frac{n_\textrm{t} \cos\mbox{\myangle}_\textrm{t}}{n_\textrm{t} \cos\mbox{\myangle}_\textrm{i}}\frac{|\boldsymbol{\mathcal{E}}_{0 \textrm{t}}|}{\boldsymbol{|\mathcal{E}}_{0 \textrm{i}}|^2}\,.
-\end{equation}
-Employing total energy conservation, that is:
-\begin{equation}
-\vect{E}_\textrm{i} A\cos\mbox{\myangle}_\textrm{i} = \vect{E}_\textrm{r} A\cos\mbox{\myangle}_\textrm{r}+\vect{E}_\textrm{t} A\cos\mbox{\myangle}_\textrm{t},
-\end{equation}
-we can easily prove that:
-\begin{equation}
-\mathcal{R}+\mathcal{T}=1\,.
-\end{equation}
-The amplitudes $r^2 = \frac{|\boldsymbol{\mathcal{E}}_{0 \textrm{i}}|^2}{|\boldsymbol{\mathcal{E}}_{0 \textrm{i}}|^2}$ and $t^2 = \Big(\frac{|\boldsymbol{\mathcal{E}}_{0 \textrm{t}}|}{|\boldsymbol{\mathcal{E}}_{0 \textrm{i}}|}\Big)$ are the square of the Fresnel coefficients values $r$ and $t$ respectively. In the following we briefly explain how these can be derived. \\ \indent 
-The intensity of the reflected and transmitted light depends not only on the angle of incidence but also on the polarization of the electromagnetic field.
-By convention, we refer to the polarization of electromagnetic waves as the direction of the electric field $\boldsymbol{\mathcal{E}}$, 
-\cite{feynman1964feynman}. When $\boldsymbol{\mathcal{E}}$ is perpendicular to the plane of incidence, light is called $s$-polarized, when
-$\boldsymbol{\mathcal{E}}$ is parallel to the plane of incidence, it is said that light is $p$-polarized.
+Light can be seen as an electromagnetic wave, that is an oscillating electric field $\boldsymbol{\mathcal{E}}$ and an oscillating magnetic filed $\boldsymbol{\mathcal{B}}$ which propagates  always perpendicular to $\boldsymbol{\mathcal{E}}$. 
+In order to derive the Fresnel's coefficients the polarization of light must to be taken into account. 
+ By convention, we refer to the light's polarization as the direction of the electric field $\boldsymbol{\mathcal{E}}$, \cite{feynman1964feynman} with respect to the incident plane that is defined by the incident and reflected rays as is shown in Fig. \ref{}. The electric field can propagate in any direction, Fresnel's equations are derived considering two particular cases of light's polarization. 
+\begin{enumerate}
+\item $\boldsymbol{\mathcal{E}}$ is perpendicular to the plane of incidence (see Fig. \ref{}). In this case  light is said to be $s$-polarized.
+\item $\boldsymbol{\mathcal{E}}$ is parallel to the plane of incidence (see Fig. \ref{}). In this case light is said to be $p$-polarized.
+\end{enumerate}
+Energy conservation gives some boundary conditions of the electromagnetic filed at the plane of the interface (which is perpendicular to the incident plane).
+For the first case these conditions are given by 
+the continuity of the the parallel component of $\boldsymbol{\mathcal{E}}$ across the boundary between the two different media that is
+\begin{equation}\label{Econservation}
+\mathcal{E}_{\textrm{i}}+\mathcal{E}_{\textrm{r}}= \mathcal{E}_{\textrm{t}}
+\end{equation} 
+and by the continuity of the perpendicular component of $\boldsymbol{\mathcal{B}}$ across the boundary between the two different media that is
+\begin{equation}\label{Bconservation}
+\mathcal{B}_{\textrm{i}}\cos{\textrm{i}}-\mathcal{B}_{\textrm{r}} = \mathcal{B}_{\textrm{t}}
+\end{equation}.
+
+
 For $s$-polarized light the perpendicular components $r_s$ and $t_s$ of $r$ and $t$ are defined. 
 For $p$-polarized light the parallel components $r_p$ and $t_p$ of $r$ and $t$ are given. 
 Those coefficients are obtained considering the Maxwell's equations and the boundary conditions due to the conservation of energy.
@@ -324,7 +297,54 @@ In Fig. \ref{fig:coefficients2} the reflection coefficients are shown for the ca
    \label{fig:coefficients2}
  \end{minipage}
 \end{figure}
-\\ The parallel and perpendicular components of $\mathcal{R}$ and $\mathcal{T}$ are:
+
+
+
+
+In the theory of electromagnetism a very important concept is the Poynting vector \vect{P}. 
+It defines the energy flux of an electromagnetic field,  it is measured in $[W/m^2]$, and it is given by:
+\begin{equation}
+\vect{P} = \frac{1}{\mu}\Big(\mathcal{E}\boldsymbol{\times} \mathcal{B}\Big),
+\end{equation}
+where $\mu = \frac{1}{\varepsilon v^2}$ is the permeability and $\varepsilon$ the permittivity of the medium.
+ In the following, the parameters for vacuum are indicated with the subscript $0$. All quantities defined in the media of the incident, reflective and transmitted light are indicated with the subscripts \textrm{i}, \textrm{r} and \textrm{t}, respectively. Optical rays are perpendicular to the wave front of an electromagnetic wave and parallel to the Poynting vector, \cite{jones2015optical}.
+The irradiance $E$ is defined as the average energy that crosses in unit time a unit area $A$ perpedicular to the direction of the energy flow.
+Therefore, defining the average of the vector \vect{P} over the time as:
+\begin{equation}
+\langle \vect{P} \rangle_T = \frac{1}{T}\int_0^T \vect{P}\textrm{d}T
+\end{equation}
+we can write the irradiance $E$ as:
+\begin{equation}
+\vect{E} = \langle\vect{P}\rangle_{\mytime} = \frac{c}{2\mu}|\boldsymbol{\mathcal{E}}_0|^2\,.
+\end{equation}
+Considering a beam of light that hits a surface such that an area $A$ is illuminated, the incident, reflected and transmitted beams are 
+$\vect{E}_\textrm{
+i} A\cos\mbox{\myangle}_\textrm{i}$ $\vect{E}_\textrm{r} A\cos\mbox{\myangle}_\textrm{r}$ and 
+$\vect{E}_\textrm{t} A\cos\mbox{\myangle}_\textrm{t}$, respectively. 
+The reflectance $\mathcal{R}$ is the ratio of the reflected power to the incident power:
+\begin{equation}\label{reflectance}
+\mathcal{R} = \frac{|\vect{E}_\textrm{r}|\cos\mbox{\myangle}_r}{|\vect{E}_\textrm{i}|\cos\mbox{\myangle}_\textrm{i}} = \frac{|\boldsymbol{\mathcal{E}}_{0 \textrm{r}}|^2}{|\boldsymbol{\mathcal{E}}_{0 \textrm{i}}|^2}
+\end{equation}
+where the second equality holds as we assumed that $\mu_\textrm{i} = \mu_\textrm{t}  = \mu_0$ and we used the fact that $\mu_0 v_\textrm{t}\varepsilon_\textrm{t}=n_\textrm{t}/c$.
+$\vect{E} _\textrm{r}/\vect{E}_\textrm{t} = (v_\textrm{r}\varepsilon_\textrm{r} \boldsymbol{\mathcal{E}}_{0\textrm{r}}^2/2)/(v_\textrm{i}\varepsilon_\textrm{i} \boldsymbol{\mathcal{E}}_{0\textrm{i}}^2/2)$.
+Similarly, the transmittance $\mathcal{T}$ is the ratio between the transmitted to the incident power:
+\begin{equation}\label{transmittance}
+\mathcal{T} = \frac{|\vect{E}_\textrm{
+t}| \cos\mbox{\myangle}_\textrm{
+t}}{|\vect{E}_\textrm{
+r|}\cos\mbox{\myangle}_\textrm{r}} = \frac{n_\textrm{t} \cos\mbox{\myangle}_\textrm{t}}{n_\textrm{t} \cos\mbox{\myangle}_\textrm{i}}\frac{|\boldsymbol{\mathcal{E}}_{0 \textrm{t}}|}{\boldsymbol{|\mathcal{E}}_{0 \textrm{i}}|^2}\,.
+\end{equation}
+Employing total energy conservation, that is:
+\begin{equation}
+\vect{E}_\textrm{i} A\cos\mbox{\myangle}_\textrm{i} = \vect{E}_\textrm{r} A\cos\mbox{\myangle}_\textrm{r}+\vect{E}_\textrm{t} A\cos\mbox{\myangle}_\textrm{t},
+\end{equation}
+we can easily prove that:
+\begin{equation}
+\mathcal{R}+\mathcal{T}=1\,.
+\end{equation}
+The amplitudes $r^2 = \frac{|\boldsymbol{\mathcal{E}}_{0 \textrm{i}}|^2}{|\boldsymbol{\mathcal{E}}_{0 \textrm{i}}|^2}$ and $t^2 = \Big(\frac{|\boldsymbol{\mathcal{E}}_{0 \textrm{t}}|}{|\boldsymbol{\mathcal{E}}_{0 \textrm{i}}|}\Big)$ are the square of the Fresnel coefficients values $r$ and $t$ respectively. In the following we briefly explain how these can be derived. 
+
+ The parallel and perpendicular components of $\mathcal{R}$ and $\mathcal{T}$ are:
 \begin{equation}\label{Fresnel_pands}
 \begin{split}
 \mathcal{R}_p& =  {r_p^2}\\
