@@ -39,7 +39,7 @@ The solid angle on a given direction is defined by the infinitesimal surface are
 \begin{equation}\label{solid_angle}
 \textrm{d}\Omega = \frac{\textrm{d}S}{r^2}\,. %= \sin(\theta)\textrm{d}\theta \phi\.
 \end{equation}
-The solid angle on the entire sphere is $\Omega = 4\pi$, its unit is the steradian $[\textrm{sr}]$  and it is usually defined on a unit sphere .
+The solid angle on the entire sphere is $\Omega = 4\pi$, its unit is the steradian $[\textrm{sr}]$  and it is usually defined on a unit sphere.
 The luminous intensity $I$ (unit candela (\textrm{cd}), $[\textrm{cd}=\textrm{lm}/\textrm{sr}]$) is defined as the luminous flux $\textrm{d}\Phi$ per solid angle
 $\textrm{d}\Omega$ and is given by:
 \begin{equation}\label{intensity}
@@ -85,8 +85,8 @@ are located at a distance \variabile{d} to each other,  see Figure \ref{fig:eten
      \begin{center}
      \includegraphics[width=10cm]{areas.pdf}
      \end{center}
-     \caption{\footnotesize{$\textrm{d}A_1$ and $\textrm{d}A_2$ are two surfaces with normals $\nu_1$ and $\nu_2$, respectively. Their centers are located at a distance \variabile{d}.
-\myangle$_1$ and \myangle$_2$ are the angles made by the central ray with the normals $\nu_1$ and $\nu_2$, respectively.}}
+     \caption{$\textrm{d}A_1$ and $\textrm{d}A_2$ are two surfaces with normals $\nu_1$ and $\nu_2$, respectively. Their centers are located at a distance \variabile{d}.
+\myangle$_1$ and \myangle$_2$ are the angles made by the central ray with the normals $\nu_1$ and $\nu_2$, respectively.}
 \label{fig:etendue_conservation}
  \end{figure}
 Indicating with $\boldsymbol{\nu}_1$ and $\boldsymbol{\nu}_2$ the normals to the surfaces $\textrm{d}A_1$ and $\textrm{d}A_2$, respectively and with \myangle$_1$ and \myangle$_2$ the angles that the central ray forms with $\boldsymbol{\nu}_1$ and $\boldsymbol{\nu}_2$, respectively,
@@ -114,11 +114,23 @@ for $\textrm{d}A_1$ and $\textrm{d}A_2$, respectively.
 From the previous equations we can conclude that $\textrm{d}U_1=\textrm{d}U_2$ and therefore the \'{e}tendue $\textrm{d}U$ is conserved along a beam of light. 
 Since also the flux through the areas $\textrm{d}A_1$ and $\textrm{d}A_2$ is conserved, the following relation holds:
 \begin{equation}\label{basicluminance}
-L := n \frac{\textrm{d}\Phi}{\textrm{d}U} = constant\,.
+L := n^2 \frac{\textrm{d}\Phi}{\textrm{d}U} = constant\,.
 \end{equation}
  In the optical systems we will consider in this work, the source and the target are located in the same medium (air) with $n=1$, so the luminance $L$ equals the basic luminance $L^* = L/n$ at the source and the target of the system.\\
 \indent In this thesis we consider two-dimensional optical systems. 
- Hence, the definitions of the photometric parameters have to be given in two dimensions. An infinitesimal line segment of length $\textrm{d}\variabile{a}$ that emits a light beam is considered. The central ray of the beam makes an angle \myangle with its normal $\boldsymbol{\nu}$ is considered, see Fig. \ref{}. 
+ Hence, the definitions of the photometric parameters have to be given in two dimensions. An infinitesimal line segment of length $\textrm{d}\variabile{a}$ that emits a light beam and the ray that makes an angle $\mbox{\myangle}$ with the normal $\boldsymbol{\nu}$ are considered, see Fig. \ref{fig:2Dsolidangle}. 
+\begin{figure}[h]
+ \label{fig:2Dsolidangle}
+     \begin{center}
+     \includegraphics[width=7cm]{solidangle2D.pdf}
+     \end{center}
+     \caption{Ray emitted by an infinitesimal line segment $\textrm{d}a$ that makes an angle $\mbox{\myangle}$ with respect to the line normal $\boldsymbol{\nu}$.}
+\label{fig:2Dsolidangle}
+ \end{figure}
+
+
+
+
  The two-dimensional illuminance \big(unit $\big[\textrm{lm}/\textrm{m}\big]$\big) denotes the luminous flux falling on an infinitesimal line segment of length $\textrm{d}\variabile{a}$ 
 and it is given by:
  \begin{equation}
@@ -134,13 +146,14 @@ and it is given by:
  \end{equation}
  Thus the following relation holds:
  \begin{equation}
- I = L(\vect{x}, \mbox{\myangle})\cos\mbox{\myangle}\,\textrm{d}\variabile{a}\,.
+ I = L(x, \mbox{\myangle})\cos\mbox{\myangle}\,\textrm{d}\variabile{a}
  \end{equation}
+where $x$ is a certain position at the light source $\textrm{d}a$.
  Finally, the \'{e}tendue $\textrm{d}U $ (unit $[\textrm{m}\textrm{rad}]$) in two dimensions is given by:
 \begin{equation}\label{etendue2d}
 \textrm{d}U = n\cos\mbox{\myangle}\textrm{d}\variabile{a}\,\textrm{d}\mbox{\myangle}.
 \end{equation}
-In order to determine the light distribution on a certain surface and to compute the photometric variables on that surface, we need to understand how the light emitted from the source propagates. In the field of geometric optics the light propagation is described by light rays.
+In order to determine the light distribution on a surface and to compute the photometric variables on that surface, we need to understand how the light emitted from the source propagates. In the field of geometric optics the light propagation is described by light rays.
 The propagation of a light ray traveling through  different media is determined by the reflection and refraction law.
 In the following we introduce these two laws and we explain the total internal reflection phenomenon.
 \section{Reflection and refraction law}\label{sec:reflection}
@@ -230,7 +243,17 @@ Those coefficients are obtained considering the Maxwell's equations and the boun
 The details of Fresnel's equations are widely explained in the literature. 
 In the following we provide Fresnel coefficients and we briefly explain their physical interpretation. We refer the reader to \cite{born2013principles, hecht1998hecht} for more details. 
 Fresnel's coefficients can also be derived using a different approach that does not involve Maxwell's equations, this method is explained in \cite{feynman2011feynman}. 
-By convention, we refer to the light's polarization as the direction of the electric field $\boldsymbol{\mathcal{E}}$, \cite{feynman1964feynman} with respect to the incident plane that is defined by the incident and reflected rays as is shown in Fig. \ref{}. The electric field can propagate in any direction, Fresnel's equations are derived considering two particular cases of light's polarization. 
+By convention, we refer to the light's polarization as the direction of the electric field $\boldsymbol{\mathcal{E}}$, \cite{feynman1964feynman} with respect to the incident plane that is defined by the incident and reflected rays as is shown in Fig. \ref{fig:planeofincidence}. 
+\begin{figure}[h]
+ \label{fig:planeofincidence}
+     \begin{center}
+     \includegraphics[width=8cm]{planeofincidence}
+     \end{center}
+     \caption{Light ray that hits a mirror located on the Reflecting plane. The incident and the reflected ray leave in the same plane of the normal to the mirror that is called plane of incident.}
+\label{fig:planeofincidence}
+ \end{figure}
+
+The electric field can propagate in any direction, Fresnel's equations are derived considering two particular cases of light's polarization. 
 \begin{enumerate}
 \item $\boldsymbol{\mathcal{E}}$ is perpendicular to the plane of incidence (see Fig. \ref{}). In this case  light is said to be $s$-polarized.
 \item $\boldsymbol{\mathcal{E}}$ is parallel to the plane of incidence (see Fig. \ref{}). In this case light is said to be $p$-polarized.
@@ -380,34 +403,9 @@ For normal incidence, i.e. \myangle$_i = 0$, there is no polarization and Eqs. (
 \mathcal{R} &= \frac{\mathcal{R}_p+ \mathcal{R}_s}{2},\\
 \mathcal{T} &= \frac{\mathcal{T}_p+ \mathcal{T}_s}{2}, 
 \end{split}
+\label{eq:RandTin2D}
 \end{equation}
  where $\mathcal{R}_p$, $\mathcal{R}_s$, $\mathcal{T}_p$ and $\mathcal{T}_s$ are given in Eqs. (\ref{Fresnel_pands}). \\
-\indent With this overview we conclude this chapter. The notions given in Section \ref{sec:photometry} will be used in the entire thesis as our goal is to study the distribution of light at the target of some optical systems. In particular we will focus on the computation of the output intensity distribution. The reflection and refraction laws explained in Section \ref{sec:reflection}are needed to determine how the optical system changes the ray's direction every time that it hits a surfaces (or a line in the two-dimensional case). In Chapters \ref{chap:raytracing},\ref{chap:PS}, \ref{chap:triangulation}, \ref{chap:raymapping1} and \ref{chap:raymapping2} only systems where the reflection and refraction laws play a role are considered. Finally, in the last chapter of this work systems where also Fresnel reflection are taken into account.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\indent With this overview we conclude this chapter. The notions given in Section \ref{sec:photometry} will be used in the entire thesis as our goal is to study the distribution of light at the target of some optical systems. In particular we will focus on the computation of the output intensity distribution. The reflection and refraction laws explained in Section \ref{sec:reflection}are needed to determine how the optical system changes the ray's direction every time that it hits a surfaces (or a line in the two-dimensional case). In Chapters \ref{chap:raytracing}, \ref{chap:PS}, \ref{chap:triangulation}, \ref{chap:raymapping1} and \ref{chap:raymapping2} only systems where the reflection and refraction laws play a role are considered. Systems with Fresnel reflection are treated in the last chapter. Since, we restrict ourselves to two-dimensional systems, the value of reflectance and transmittance will be computed using Eqs. (\ref{eq:RandPin2D}).
 
 
