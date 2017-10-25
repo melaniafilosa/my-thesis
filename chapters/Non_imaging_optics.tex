@@ -237,44 +237,67 @@ $|\vect{k}| = k = \frac{2\pi}{\lambda}$ is the wave number in vacuum, with $\lam
 \begin{equation}
 \boldsymbol{\mathcal{B}}(\vect{x}, \mytime) = \boldsymbol{\mathcal{B}}_0(\vect{x}) e^{i( \vect{k}\boldsymbol{\cdot} \vect{x}-\omega \mytime )}\,.
 \end{equation}
-Light can be seen as an electromagnetic wave, that is an oscillating electric field $\boldsymbol{\mathcal{E}}$ and an oscillating magnetic filed $\boldsymbol{\mathcal{B}}$ which propagates  always perpendicular to $\boldsymbol{\mathcal{E}}$. 
-In order to derive the Fresnel's coefficients the polarization of light must to be taken into account. 
-Those coefficients are obtained considering the Maxwell's equations and the boundary conditions due to the conservation of energy.
-The details of Fresnel's equations are widely explained in the literature. 
-In the following we provide Fresnel coefficients and we briefly explain their physical interpretation. We refer the reader to \cite{born2013principles, hecht1998hecht} for more details. 
-Fresnel's coefficients can also be derived using a different approach that does not involve Maxwell's equations, this method is explained in \cite{feynman2011feynman}. 
+Light can be seen as an electromagnetic wave, that is an oscillating electric field $\boldsymbol{\mathcal{E}}$ and an oscillating magnetic filed $\boldsymbol{\mathcal{B}}$ which propagates  always perpendicular to $\boldsymbol{\mathcal{E}}$. Th eelectric field oscillates perpendicular to the wave propagation.
+Light is said to be polarized if the direction of the electic field is well defined. When the electric field propagates in different directions we talk about unpolarized light. 
 By convention, we refer to the light's polarization as the direction of the electric field $\boldsymbol{\mathcal{E}}$, \cite{feynman1964feynman} with respect to the incident plane that is defined by the incident and reflected rays as is shown in Fig. \ref{fig:planeofincidence}. 
 \begin{figure}[h]
  \label{fig:planeofincidence}
      \begin{center}
      \includegraphics[width=8cm]{planeofincidence}
      \end{center}
-     \caption{Light ray that hits a mirror located on the Reflecting plane. The incident and the reflected ray leave in the same plane of the normal to the mirror that is called plane of incident.}
+     \caption{Light ray that hits a mirror located on the reflecting plane. The incident and the reflected ray leave in the same plane of the normal to the mirror that is called plane of incident.}
 \label{fig:planeofincidence}
  \end{figure}
-
-The electric field can propagate in any direction, Fresnel's equations are derived considering two particular cases of light's polarization. 
+\\ \indent In order to derive the Fresnel's coefficients the polarization of light must to be taken into account.
+Those coefficients are obtained considering Maxwell's equations and the boundary conditions due to the conservation of energy.
+The details of Fresnel's equations are widely explained in the literature. 
+In the following we provide Fresnel coefficients and we briefly explain their physical interpretation. We refer the reader to \cite{born2013principles, hecht1998hecht} for more details. 
+Fresnel's coefficients can also be derived using a different approach that does not involve Maxwell's equations, this method is explained in \cite{feynman2011feynman}.  
+The following particular cases of light's polarization need are considered. 
 \begin{enumerate}
-\item $\boldsymbol{\mathcal{E}}$ is perpendicular to the plane of incidence (see Fig. \ref{}). In this case  light is said to be $s$-polarized.
-\item $\boldsymbol{\mathcal{E}}$ is parallel to the plane of incidence (see Fig. \ref{}). In this case light is said to be $p$-polarized.
+\item $\boldsymbol{\mathcal{E}}$ is perpendicular to the plane of incidence (see Fig. \ref{fig:electric_field}). In this case light is said to be $s$-polarized.
+\item $\boldsymbol{\mathcal{E}}$ is parallel to the plane of incidence (see Fig. \ref{fig:electric_field_p}). In this case light is said to be $p$-polarized.
 \end{enumerate}
-Energy conservation gives the boundary conditions of the electromagnetic field at the plane of the interface (which is perpendicular to the incident plane). \\ 
-\indent In case of $s$-polarized light the tangential components of $\boldsymbol{\mathcal{E}}$ and $\boldsymbol{\mathcal{B}}/\mu$ across the boundary between the two different media must be continuous. The continuity of the tangential component of $\boldsymbol{\mathcal{E}}$ leads to:
+\begin{figure}[h]
+ \label{fig:electric_field}
+     \begin{center}
+     \includegraphics[width=8cm]{electric_field}
+     \end{center}
+     \caption{Propagation of an electromagnetic wave where $\boldsymbol{\mathcal{E}}$ is perpendicular to the incident plane. The components of $\boldsymbol{\mathcal{E}}$ are is indicated with the green circles.
+%, they live in the $(\variabile{x},\variabile{z})$ plane and they are oriented in the positive direction of $\variabile{z}$. 
+The components of $\boldsymbol{\mathcal{B}}$ are indicated with red arrows.}
+% and they are located in the $(\variabile{x}, \variabile{z})$ plane.}
+\label{fig:electric_field}
+ \end{figure}
+\begin{figure}[h]
+ \label{fig:electric_field_p}
+     \begin{center}
+     \includegraphics[width=8cm]{electric_field_p}
+     \end{center}
+ \caption{Propagation of an electromagnetic wave where $\boldsymbol{\mathcal{E}}$ is parallel to the incident plane. The components of $\boldsymbol{\mathcal{B}}$ are indicated with the red circle.
+%, they are in the $(\variabile{x},\variabile{z})$ plane and they are oriented in the positive direction of $\variabile{z}$. 
+The components of $\boldsymbol{\mathcal{E}}$ are indicated with greed arrows.}
+%and they are located in the $(\variabile{x}, \variabile{z})$ plane.}
+\label{fig:electric_field_p}
+ \end{figure}
+Energy conservation gives the boundary conditions of the electromagnetic field at the plane of the interface (which is perpendicular to the incident plane). In the following we derive Fresnel's coefficients for case $1$. Similarly, the Fresnel's coefficients can be derived for the second case.\\ 
+\indent For $s$-polarized light the tangential components of $\boldsymbol{\mathcal{E}}$ and $\boldsymbol{\mathcal{B}}/\mu$ across the boundary between the two different media must be continuous. The continuity of the tangential component of $\boldsymbol{\mathcal{E}}$ leads to:
 \begin{equation}\label{Econservation}
-|\boldsymbol{\mathcal{E}}_{0\textrm{i}}|+|\boldsymbol{\mathcal{E}}_{0\textrm{r}}|= |\boldsymbol{\mathcal{E}}_{0\textrm{t}}|
+|\boldsymbol{\mathcal{E}}_{0\textrm{i}}|+|\boldsymbol{\mathcal{E}}_{0\textrm{r}}|= |\boldsymbol{\mathcal{E}}_{0\textrm{t}}|,
 \end{equation} 
 %where we have indicated with $\mathcal{E}_{0\textrm{i}}$, $\mathcal{E}_{0\textrm{r}}$ and $\mathcal{E}_{0\textrm{t}}$
 %the magnitudes of $\boldsymbol{\mathcal{E}}_{0\textrm{i}}$, $\boldsymbol{\mathcal{E}}_{0\textrm{r}}$ and $\boldsymbol{\mathcal{E}}_{0\textrm{t}}$, respectively.
 while the continuity of the tangential component of $\boldsymbol{\mathcal{B}}/\mu$ gives:
 \begin{equation}\label{Bconservation}
 -\frac{|\boldsymbol{\mathcal{B}}_{\textrm{i}}|}{\mu_\textrm{i}}\cos\mbox{\myangle}_{\textrm{i}}+\frac{|\boldsymbol{\mathcal{B}}_{\textrm{r}}|}{\mu_\textrm{r}}\cos\mbox{\myangle}_{\textrm{r}} = 
--\frac{|\boldsymbol{\mathcal{B}}_{\textrm{t}}|}{\mu_\textrm{t}}\cos\mbox{\myangle}_{\textrm{t}}
+-\frac{|\boldsymbol{\mathcal{B}}_{\textrm{t}}|}{\mu_\textrm{t}}\cos\mbox{\myangle}_{\textrm{t}},
 \end{equation}
+where the negative sign in front of $|\boldsymbol{\mathcal{B}}_{\textrm{i}}|$ and $\boldsymbol{\mathcal{B}}_{\textrm{t}}$ is due to the convention that a positive direction is considered with increasing $\variabile{x}$.
 %where we have indicated with $\mathcal{B}_{\textrm{i}}$, $\mathcal{B}_{\textrm{r}}$ and $\mathcal{B}_{\textrm{t}}$
 %the absolute values of $\boldsymbol{\mathcal{B}}_{\textrm{i}}$,$\boldsymbol{\mathcal{B}}_{\textrm{r}}$ and $\boldsymbol{\mathcal{B}}_{\textrm{t}}$, respectively.
 Since $\boldsymbol{\mathcal{B}} = \boldsymbol{\mathcal{E}}/v$, Eq. (\ref{Bconservation}) can be written as 
 \begin{equation}
-\frac{1}{\mu_{\textrm{i}}v_{\textrm{i}}}(|\boldsymbol{\mathcal{E}}_{\textrm{i}}|-|\boldsymbol{\mathcal{E}}_{\textrm{r}}|)\cos\mbox{\myangle}_{\textrm{i}} = \frac{1}{\mu_{\textrm{t}}v_{\textrm{t}}}|\boldsymbol{\mathcal{E}}_{\textrm{t}}|\cos\mbox{\myangle}_{\textrm{t}}
+\frac{1}{\mu_{\textrm{i}}v_{\textrm{i}}}(|\boldsymbol{\mathcal{E}}_{\textrm{i}}|-|\boldsymbol{\mathcal{E}}_{\textrm{r}}|)\cos\mbox{\myangle}_{\textrm{i}} = \frac{1}{\mu_{\textrm{t}}v_{\textrm{t}}}|\boldsymbol{\mathcal{E}}_{\textrm{t}}|\cos\mbox{\myangle}_{\textrm{t}},
 \end{equation}
 where we employed the fact that $v_{\textrm{i}}= v_{\textrm{r}}$, and $\mbox{\myangle}_{\textrm{i}}= \mbox{\myangle}_{\textrm{r}}$. 
 Using Eq. (\ref{electric_field}) and $n = c/v$, the previous equation becomes:
@@ -357,7 +380,7 @@ we can write the irradiance $E$ as:
 Considering a beam of light that hits a surface such that an area $A$ is illuminated, the incident, reflected and transmitted beams are 
 $\vect{E}_\textrm{
 i} A\cos\mbox{\myangle}_\textrm{i}$ $\vect{E}_\textrm{r} A\cos\mbox{\myangle}_\textrm{r}$ and 
-$\vect{E}_\textrm{t} A\cos\mbox{\myangle}_\textrm{t}$, respectively as is shown in Fig. \ref{}
+$\vect{E}_\textrm{t} A\cos\mbox{\myangle}_\textrm{t}$, respectively. % as is shown in Fig. \ref{}
 The reflectance $\mathcal{R}$ is the ratio of the reflected power to the incident power:
 \begin{equation}\label{reflectance}
 \mathcal{R} = \frac{|\vect{E}_\textrm{r}|\cos\mbox{\myangle}_r}{|\vect{E}_\textrm{i}|\cos\mbox{\myangle}_\textrm{i}} = \frac{|\boldsymbol{\mathcal{E}}_{0 \textrm{r}}|^2}{|\boldsymbol{\mathcal{E}}_{0 \textrm{i}}|^2} = r^2
@@ -398,7 +421,9 @@ For normal incidence, i.e. \myangle$_i = 0$, there is no polarization and Eqs. (
 \mathcal{T} &= \mathcal{T}_p = \mathcal{T}_s = \frac{4n_i n_t}{(n_t+n_i)^2}\,.
 \end{split}
 \end{equation}
-\indent In two dimensions light hits lines instead of surfaces. Therefore only the plane of incidence is defined and it has no sense to consider separately the parallel and the perpendicular polarization. The amount of reflected and transmitted light is given by the reflectance $\mathcal{R}$ and transmittance $\mathcal{T}$ which are defined as:
+\indent %In two dimensions light hits lines instead of surfaces. Therefore only the plane of incidence is defined and it has no sense to consider separately the parallel and the perpendicular polarization. 
+Many common light sources such as sunlight, halogen lighting, LED spotlights, and incandescent bulbs produce unpolarized light, \cite{}. 
+In case of unpolarized light the amount of reflected and transmitted light is given by the average of reflectance $\mathcal{R}$ and transmittance $\mathcal{T}$ calculated considering first $p$-polarized light and then $s$-polarization, that is:
 \begin{equation}\begin{split}
 \mathcal{R} &= \frac{\mathcal{R}_p+ \mathcal{R}_s}{2},\\
 \mathcal{T} &= \frac{\mathcal{T}_p+ \mathcal{T}_s}{2}, 
@@ -406,6 +431,4 @@ For normal incidence, i.e. \myangle$_i = 0$, there is no polarization and Eqs. (
 \label{eq:RandTin2D}
 \end{equation}
  where $\mathcal{R}_p$, $\mathcal{R}_s$, $\mathcal{T}_p$ and $\mathcal{T}_s$ are given in Eqs. (\ref{Fresnel_pands}). \\
-\indent With this overview we conclude this chapter. The notions given in Section \ref{sec:photometry} will be used in the entire thesis as our goal is to study the distribution of light at the target of some optical systems. In particular we will focus on the computation of the output intensity distribution. The reflection and refraction laws explained in Section \ref{sec:reflection}are needed to determine how the optical system changes the ray's direction every time that it hits a surfaces (or a line in the two-dimensional case). In Chapters \ref{chap:raytracing}, \ref{chap:PS}, \ref{chap:triangulation}, \ref{chap:raymapping1} and \ref{chap:raymapping2} only systems where the reflection and refraction laws play a role are considered. Systems with Fresnel reflection are treated in the last chapter. Since, we restrict ourselves to two-dimensional systems, the value of reflectance and transmittance will be computed using Eqs. (\ref{eq:RandPin2D}).
-
-
+\indent With this overview we conclude this chapter. The notions given in Section \ref{sec:photometry} will be used in the entire thesis as our goal is to study the distribution of light at the target of some optical systems. In particular we will focus on the computation of the output intensity distribution. The reflection and refraction laws explained in Section \ref{sec:reflection} are needed to determine how the optical system changes the ray's direction every time that it hits a surfaces (or a line in the two-dimensional case). In Chapters \ref{chap:raytracing}, \ref{chap:PS}, \ref{chap:triangulation}, \ref{chap:raymapping1} and \ref{chap:raymapping2} only systems where the reflection and refraction laws play a role are considered. Systems with Fresnel reflection are treated in the last chapter. The amount of reflected and transmitted light is calculated using the Fresnel's equation (introduced in the last paragraph of this chapter). Since, we restrict ourselves to two-dimensional systems, the value of reflectance and transmittance will be computed using Eqs. (\ref{eq:RandTin2D}).
