@@ -116,7 +116,7 @@ Since also the flux through the areas $\textrm{d}A_1$ and $\textrm{d}A_2$ is con
 \begin{equation}\label{basicluminance}
 L := n^2 \frac{\textrm{d}\Phi}{\textrm{d}U} = constant\,.
 \end{equation}
- In the optical systems we will consider in this work, the source and the target are located in the same medium (air) with $n=1$, so the luminance $L$ equals the basic luminance $L^* = L/n$ at the source and the target of the system.\\
+ In the optical systems we will consider in this work, the source and the target are located in the same medium (air) with $n=1$, so the luminance $L$ equals the basic luminance $L^* = L/n^2$ at the source and the target of the system.\\
 \indent In this thesis we consider two-dimensional optical systems. 
  Hence, the definitions of the photometric parameters have to be given in two dimensions. An infinitesimal line segment of length $\textrm{d}\variabile{a}$ that emits a light beam and the ray that makes an angle $\myangle$ with the normal $\boldsymbol{\nu}$ are considered, see Fig. \ref{fig:2Dsolidangle}. 
 \begin{figure}[h]
@@ -128,9 +128,6 @@ L := n^2 \frac{\textrm{d}\Phi}{\textrm{d}U} = constant\,.
 \label{fig:2Dsolidangle}
  \end{figure}
 
-
-
-
  The two-dimensional illuminance \big(unit $\big[\textrm{lm}/\textrm{m}\big]$\big) denotes the luminous flux falling on an infinitesimal line segment of length $\textrm{d}\variabile{a}$ 
 and it is given by:
  \begin{equation}
@@ -140,7 +137,7 @@ and it is given by:
  \begin{equation}
  I=\frac{\textrm{d}\Phi}{\textrm{d}\myangle}\;.
  \end{equation}
- The two-dimensional luminance \big(unit $\big[\textrm{lm}/(\textrm{rad}\; \textrm{m})\big]$\big) is given by:
+ The two-dimensional luminance \big(unit $\big[\textrm{lm}/(\textrm{rad}\cdot \textrm{m})\big]$\big) is given by:
  \begin{equation}
  L= \frac{\textrm {d}\Phi}{\cos\myangle\,\textrm{d}\variabile{a} \,\textrm{d}\myangle}.
  \end{equation}
@@ -149,7 +146,7 @@ and it is given by:
  I = L(x, \myangle)\cos\myangle\,\textrm{d}\variabile{a}
  \end{equation}
 where $x$ is a certain position at the light source $\textrm{d}a$.
- Finally, the \'{e}tendue $\textrm{d}U $ (unit $[\textrm{m}\textrm{rad}]$) in two dimensions is given by:
+ Finally, the \'{e}tendue $\textrm{d}U $ (unit $[\textrm{m}\cdot \textrm{rad}]$) in two dimensions is given by:
 \begin{equation}\label{etendue2d}
 \textrm{d}U = n\cos\myangle\textrm{d}\variabile{a}\,\textrm{d}\myangle.
 \end{equation}
@@ -289,15 +286,15 @@ Energy conservation gives the boundary conditions of the electromagnetic field a
 %the magnitudes of $\boldsymbol{\mathcal{E}}_{0\textrm{i}}$, $\boldsymbol{\mathcal{E}}_{0\textrm{r}}$ and $\boldsymbol{\mathcal{E}}_{0\textrm{t}}$, respectively.
 while the continuity of the tangential component of $\boldsymbol{\mathcal{B}}/\mu$ gives:
 \begin{equation}\label{Bconservation}
--\frac{|\boldsymbol{\mathcal{B}}_{\textrm{i}}|}{\mu_\textrm{i}}\cos\myangle_{\textrm{i}}+\frac{|\boldsymbol{\mathcal{B}}_{\textrm{r}}|}{\mu_\textrm{r}}\cos\myangle_{\textrm{r}} = 
--\frac{|\boldsymbol{\mathcal{B}}_{\textrm{t}}|}{\mu_\textrm{t}}\cos\myangle_{\textrm{t}},
+-\frac{|\boldsymbol{\mathcal{B}}_{0,\textrm{i}}|}{\mu_\textrm{i}}\cos\myangle_{\textrm{i}}+\frac{|\boldsymbol{\mathcal{B}}_{0,\textrm{r}}|}{\mu_\textrm{r}}\cos\myangle_{\textrm{r}} = 
+-\frac{|\boldsymbol{\mathcal{B}}_{0,\textrm{t}}|}{\mu_\textrm{t}}\cos\myangle_{\textrm{t}},
 \end{equation}
-where the negative sign in front of $|\boldsymbol{\mathcal{B}}_{\textrm{i}}|$ and $\boldsymbol{\mathcal{B}}_{\textrm{t}}$ is due to the convention that a positive direction is considered with increasing $\variabile{x}$.
+where the negative sign in front of $|\boldsymbol{\mathcal{B}}_{0,\textrm{i}}|$ and $|\boldsymbol{\mathcal{B}}_{0,\textrm{t}}|$ is due to the convention that a positive direction is considered with increasing $\variabile{x}$.
 %where we have indicated with $\mathcal{B}_{\textrm{i}}$, $\mathcal{B}_{\textrm{r}}$ and $\mathcal{B}_{\textrm{t}}$
 %the absolute values of $\boldsymbol{\mathcal{B}}_{\textrm{i}}$,$\boldsymbol{\mathcal{B}}_{\textrm{r}}$ and $\boldsymbol{\mathcal{B}}_{\textrm{t}}$, respectively.
 Since $\boldsymbol{\mathcal{B}} = \boldsymbol{\mathcal{E}}/v$, Eq. (\ref{Bconservation}) can be written as 
 \begin{equation}
-\frac{1}{\mu_{\textrm{i}}v_{\textrm{i}}}(|\boldsymbol{\mathcal{E}}_{\textrm{i}}|-|\boldsymbol{\mathcal{E}}_{\textrm{r}}|)\cos\myangle_{\textrm{i}} = \frac{1}{\mu_{\textrm{t}}v_{\textrm{t}}}|\boldsymbol{\mathcal{E}}_{\textrm{t}}|\cos\myangle_{\textrm{t}},
+\frac{1}{\mu_{\textrm{i}}v_{\textrm{i}}}(|\boldsymbol{\mathcal{E}}_{0,\textrm{i}}|-|\boldsymbol{\mathcal{E}}_{0,\textrm{r}}|)\cos\myangle_{\textrm{i}} = \frac{1}{\mu_{\textrm{t}}v_{\textrm{t}}}|\boldsymbol{\mathcal{E}}_{0,\textrm{t}}|\cos\myangle_{\textrm{t}},
 \end{equation}
 where we employed the fact that $v_{\textrm{i}}= v_{\textrm{r}}$, and $\myangle_{\textrm{i}}= \myangle_{\textrm{r}}$. 
 Using Eq. (\ref{electric_field}) and $n = c/v$, the previous equation becomes:
