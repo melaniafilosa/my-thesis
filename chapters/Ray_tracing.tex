@@ -4,7 +4,7 @@ It uses single rays to describe the propagation of light through an optical syst
 The influence of diffraction on the transport of a ray is neglected and geometrical modeling of an optical system is considered.
 Generally, the method can be implemented for two or more dimensions and for any optical system.
 In the following a description of the ray tracing method is given. We restrict ourselves to two-dimensional systems and to the case where only reflection and refraction are taken into account.
-\section{Ray tracing for two-dimensional optical systems}
+\section{Ray tracing for two-dimensional optical systems}\label{sec:raytracing}
 Ray tracing is a procedure that can be applied to non-imaging systems. It consists of tracing each ray, which is considered to be a broken line, through the optical system.
 Given a Cartesian coordinate system $(\variabile{x}, \variabile{z})$, a two-dimensional optical system symmetric with respect to the $\variabile{z}$-axis is defined. 
 Hence, usually the optical axis coincides with the $\variable{z}$-axis. 
@@ -65,11 +65,8 @@ The ray tracing algorithm can be schematized as follows.
 \end{itemize}
 \item Restart the procedure from $1.$ for the ray that leaves line $\lineai$ instead of \point{S}. Consider as initial ray position coordinates $(\variabile{x}_{\variabile{i}}, \variabile{z}_{\variabile{i}})$ instead of $(\variabile{x}_1, \variabile{z}_1)$ and as initial ray direction $\vect{s}_\lineai= (-\sin \optangle_\lineai, \cos \optangle_\lineai)$ instead of $\vect{s}_1$.
 \end{enumerate}
-The procedure explained above is repeated for every ray traced through the system, \cite{Gross2005Handbook}. \\ \indent
-There are different ways to implement the ray tracing procedure.
+The procedure explained above is repeated for every ray traced through the system, \cite{Gross2005Handbook}. There are different ways to implement the ray tracing procedure.
 An often used method is MC ray tracing which is explained in the next paragraph.
-
-
 \section{Monte Carlo ray tracing}
 %Say that MC methods are used to calculate an integral 
 %\begin{figure}[h]
@@ -102,7 +99,33 @@ An often used method is MC ray tracing which is explained in the next paragraph.
 % Intensity integral of the luminance
 % Luminance constant
 
-The output intensity $I$ is computed as a function of the angular coordinate $\optangle$ and is calculated dividing the target into intervals of the same length, the so-called bins. A partitioning 
+% Give an introduction
+Given a function $f:D\subseteq \mathbb{R}^d \mapsto \mathbb{R}$ and a random variable $\variabile{y}\in D$ with probability density function $\rho(\variabile{y})$, the expected value of $f$ is defines as:
+\begin{equation}
+\variabile{E}[f(\variabile{y})] =\int_{D}f(\variabile{y})\rho(\variabile{y}) \textrm{d}\variabile{y}.
+\end{equation}
+In Monte Carlo methods $\const{N}$ independent random variables  $\variabile{y}_0, \cdots, \variabile{y}_{\const{N}}$  from the density $\rho$ are considered and, the sum 
+\begin{equation}
+f_{\const{N}}(\variabile{y}) = \frac{1}{\const{N}} \sum_{\variabile{i}=1}^{\textrm{N}} f(\variabile{y}_\variabile{i})
+\end{equation}
+is calculated,  \cite{owen2003quasi}. 
+The strong law of large numbers tells us that:
+\begin{equation}
+\const{Pr}\Big(\lim_{\const{N}\rightarrow\infty}\sum_{\variabile{i}=1}^{\const{N}} f(\variabile{y}_\variabile{i}) = \variabile{E}[f(\variabile{y})] \Big) = 1.
+\end{equation}
+Therefore the following relation holds:
+\begin{equation}
+\variabile{E}[f(\variabile{y})] \approx \frac{1}{\const{N}} \sum_{\variabile{i}=1}^{\textrm{N}} f(\variabile{y}_\variabile{i}).
+\end{equation}
+%Suppose that $f$ has variance $\sigma^2 = $, then $\variabile{E}()=\sigma^2/\const{N}$
+%MC procedures are used to approximate the value of integrals. fg
+\\ \indent MC technique can be combined with the ray tracing procedure in order to compute the light distribution at the target of an optical system. 
+This is called Monte Carlo ray tracing and it is explained in the following. 
+MC ray tracing uses as sample of random variables a set of points the coordinates of which correspond to the position and direction coordinates of every ray at the source of the optical system.
+Therefore, rays with a random initial position and a random initial direction are traced from \point{S} to \point{T} within the optical system.
+In this way a probabilistic interpretation of the output photometric variables is provided. 
+In particular, we are interested in the total target intensity $I$ which is computed as a function of the angular coordinate $\optangle$.
+The MC intensity is calculated dividing the target into intervals of the same length, the so-called bins. A partitioning 
 $P_1: -\pi/2 = \optangle_{0}<\optangle_{1}<\cdots <\optangle_{\const{Nb}}=\pi/2$ of the interval $[-\pi/2, \pi/2]$ is defined where $\const{Nb}$ is the number of bins in $P_1$.
 We remark that, with a slight abuse of notation, we indicated the angular coordinates of the rays at the target (line $\nline$) with $\optangle_{\variabile{j}}$ instead of $\optangle_{\nline,\variabile{j}}$ for every $\variabile{j}\in\{0, \cdots, \const{Nb}\}$.
 The normalized approximated intensity $I_{\const{MC}}(\optangle)$ is a piecewise constant function and its value over the $\variabile{j}$-th bin is the ratio between the number of rays that fall into that bin
@@ -162,7 +185,7 @@ Considering a sample of $\const{Nr}$ rays, the variable $\variabile{Y}_{\variabi
 follows a binomial distribution $B(\const{Nr}, \const{P}_{\variabile{j},\Delta \optangle})$, where $\optangle_{\variabile{k}}$ is the angle that the $\variabile{k}$-th ray forms
  with the optical axis. Then, using the de Moivre-Laplace theorem, we conclude that the variable $\variabile{Y}_{\variabile{j}}$ is approximated by a normal distribution with mean value 
 $\variabile{E}[\variabile{Y}_{\variabile{j}}] = \const{Nr}\const{P}_{\variabile{j}, \Delta\optangle}$ and variance $\sigma^2[\variabile{Y}_{\variabile{j}}] = \const{Nr}\const{P}_{\variabile{j}, \Delta\optangle}(1~-~\const{P}_{\variabile{j}, \Delta\optangle})$ 
-when a large number of rays is considered, see \cite{Rubinstein, deMoivre}.
+when a large number of rays is considered, see \cite{zolotarev1997modern, rubinstein2016simulation}.
 Thus, the normalized intensity along the direction $\optangle_{\variabile{j}-1/2}$ is given by:
 \begin{equation}I_{\const{MC}}(\optangle_{\variabile{j}-1/2}) = \sum_{\variabile{k}=1}^{\const{Nr}}\variabile{X}_{\variabile{j}}(\optangle_{\variabile{k}})/\const{Nr}.\end{equation}
 The mean value $E[I_{\const{MC}}(\optangle_{\variabile{j}-1/2})]=\const{P}_{\variabile{j}, \Delta\optangle}$
@@ -181,7 +204,7 @@ Therefore, the second term of the right hand side of relation ($\ref{eq:error_in
 \end{aligned}
 \end{equation}
 for some $\const{C}_3>0$, where the approximation holds because $\sigma_{\variabile{j}}$ gives a measure for the error between 
-$I_{\const{MC}}(\optangle_{\variabile{j}-1/2})$ and the probability $\const{P}_{\variabile{j}, \Delta\optangle}$, \cite{Diez}. The second equality follows from Eq. (\ref{sigma}). To conclude, the MC error over the $\variabile{j}$-th bin is estimated by:
+$I_{\const{MC}}(\optangle_{\variabile{j}-1/2})$ and the probability $\const{P}_{\variabile{j}, \Delta\optangle}$, \cite{diez2012openintro}. The second equality follows from Eq. (\ref{sigma}). To conclude, the MC error over the $\variabile{j}$-th bin is estimated by:
 \begin{equation} \begin{aligned}
 \Big|I(\optangle_{\variabile{j}-1/2})&-\frac{\Phi}
 {\Delta\optangle}I_{\const{MC}}(\optangle_{\variabile{j}-1/2})\Big| =
@@ -192,6 +215,21 @@ for $\const{C}_4>0$.
 Considering a fixed number of rays, we obtain that the minimal error is reached when $\const{Nb}\approx \const{Nr}^{1/5}$.
 Hence, if $10^{10}$ rays are considered the target has to be divided into $10^2$ bins to minimize the MC error.
 This leads to computational efforts resulting in a very slow procedure.\\ \indent
-To conclude we provide, as an example, the averaged and normalized MC intensity $\hat{I}_{\const{MC}}$ of the two-faceted cup described in the previous section, the profile of which is depicted in Fig. \ref{fig:cup}.
+To give an example we implemented MC ray tracing for the two-faceted cup the profile of which is depicted in Fig. \ref{fig:cup}.
+A set of random rays with coordinates $(\variabile{x}_{\variabile{k}}, \optangle_{\variabile{k}})_{\variabile{k}= 1, \cdots, \const{Nr}}$ is generated at the source. We considered for instance $\const{Nr}=10^4$ rays. The rays distribution on the $(\variabile{x}_{\variabile{k}}, \optangle_{\variabile{k}})$-plane is shown in Fig. \ref{fig:mc_sample}.
+\begin{figure}[h]
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{mc_sample.jpg}
+    \caption{Rays at the source of the two-faceted cup with random position coordinate $\variabile{x}$ and random angular coordinates $\optangle$. $10^4$ rays are depicted in this figure.}
+    \label{fig:mc_sample}
+\end{center}
+  \end{figure}
+\begin{figure}[t]
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{MC_raytracing.jpg}
+    \caption{Comparison between the averaged normalized MC intensity and the normalized exact intensity.}
+   \label{fig:mc_raytrancing_intensity}
+\end{center}
+\end{figure}
 
 \section{Quasi-Monte Carlo method}
