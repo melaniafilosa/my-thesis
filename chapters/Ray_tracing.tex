@@ -3,7 +3,10 @@ Ray tracing is a geometric problem that describes the transport of light within 
 It uses single rays to describe the propagation of light through an optical system.
 The influence of diffraction on the transport of a ray is neglected and geometrical modeling of an optical system is considered.
 Generally, the method can be implemented for two or more dimensions and for any optical system.
-In the following a description of the ray tracing method is given. We restrict ourselves to two-dimensional systems and to the case where only reflection and refraction are taken into account.
+In the following a description of the ray tracing method is given. We restrict ourselves to two-dimensional case.
+The two-dimensional case is particularly relevant because it is a good test case to demonstrate the performance of the new ray tracing method.
+Optical designers often start with 2D systems where only the meridional plane is taken into account because it gives a good prediction of the target distribution of the rays
+(see \cite{winston2005nonimaging}, chapter $4$, p.$50-65$). However, the two-dimensional case also has some limitations, as it may not identify skew rays that are turned back by the system, and so a 2D analysis cannot guarantee a proper treatment of non meridional rays in 3D. Hence, the 2D target intensity distribution is not exactly equal to the corresponding 3D intensity. Furthermore in this chapter we consider systems where only reflection and refraction are taken into account.
 \section{Ray tracing for two-dimensional optical systems}\label{sec:raytracing}
 Ray tracing is a procedure that can be applied to non-imaging systems. It consists of tracing each ray, which is considered to be a broken line, through the optical system.
 Given a Cartesian coordinate system $(\variabile{x}, \variabile{z})$, a two-dimensional optical system symmetric with respect to the $\variabile{z}$-axis is defined. 
@@ -34,8 +37,8 @@ Fig. \ref{fig:cup} shows an example where a single ray is traced inside a very s
   \end{center}
 \vspace{-2cm}
   \caption{\footnotesize{Shape of the two-faceted cup.  Each line of the system is labeled with a number.
-   The source \point{S}$= [-2,2]$ (line number $1$) is located on the $x$-axis.
-   The target \point{T}$= [-17, 17]$ (line $4$) is parallel to the source and is located at a height $z= 40$.
+   The source \point{S}$= [-2,2]$ (line number $1$) is located on the $\variabile{x}$-axis.
+   The target \point{T}$= [-17, 17]$ (line $4$) is parallel to the source and is located at a height $\variabile{z}= 40$.
    The left and right reflectors (line $2$ and $3$) connect the source with the target.}}
   \label{fig:cup}
 \end{figure}
@@ -98,15 +101,17 @@ An often used method is MC ray tracing which is explained in the next paragraph.
 
 % Intensity integral of the luminance
 % Luminance constant
-
-% Give an introduction
-Given a function $f:D\subseteq \mathbb{R}^d \mapsto \mathbb{R}$ and a random variable $\variabile{y}\in D$ with probability density function $\rho(\variabile{y})$, the expected value of $f$ is defines as:
+Before explain MC ray tracing procedure we give a general introduction about MC methods. MC simulation are often used to approximate the integral of a given function $f$ considering random variables in the domain of $f$. More precisely, given a function $f:[a,b]^d\subseteq \mathbb{R}^d \mapsto \mathbb{R}$ and a random variable $\variabile{y}\in D = [a, b]^d$ with probability density function $\rho(\variabile{y})$, the expected value of $f$ is defines as:
 \begin{equation}
-\variabile{E}[f(\variabile{y})] =\int_{D}f(\variabile{y})\rho(\variabile{y}) \textrm{d}\variabile{y}.
+\variabile{E}[f] =\int_{D}f(\variabile{y})\rho(\variabile{y}) \textrm{d}\variabile{y}.
 \end{equation}
-In Monte Carlo methods $\const{N}$ independent random variables  $\variabile{y}_0, \cdots, \variabile{y}_{\const{N}}$  from the density $\rho$ are considered and, the sum 
+Note that if $\rho$ is a uniform probability density function, we have:
 \begin{equation}
-f_{\const{N}}(\variabile{y}) = \frac{1}{\const{N}} \sum_{\variabile{i}=1}^{\textrm{N}} f(\variabile{y}_\variabile{i})
+\variabile{E}[f] = \int_{D}f(\variabile{y})\rho(\variabile{y}) \textrm{d}\variabile{y} =\frac{1}{(b-a)^d} \int_{D}f(\variabile{y}) \textrm{d}\variabile{y}.
+\end{equation}
+In Monte Carlo methods $\const{N}$ independent random variables  $\variabile{y}_1, \cdots, \variabile{y}_{\const{N}}$  from the density $\rho$ are considered and, the sum 
+\begin{equation}
+S_{\const{N}}(f) = \frac{1}{\const{N}} \sum_{\variabile{i}=1}^{\textrm{N}} f(\variabile{y}_\variabile{i})
 \end{equation}
 is calculated,  \cite{owen2003quasi}. 
 The strong law of large numbers tells us that:
@@ -115,12 +120,27 @@ The strong law of large numbers tells us that:
 \end{equation}
 Therefore the following relation holds:
 \begin{equation}
-\variabile{E}[f(\variabile{y})] \approx \frac{1}{\const{N}} \sum_{\variabile{i}=1}^{\textrm{N}} f(\variabile{y}_\variabile{i}).
+\variabile{E}[f] \approx \frac{1}{\const{N}} \sum_{\variabile{i}=1}^{\const{N}} f(\variabile{y}_\variabile{i}).
 \end{equation}
-%Suppose that $f$ has variance $\sigma^2 = $, then $\variabile{E}()=\sigma^2/\const{N}$
-%MC procedures are used to approximate the value of integrals. fg
+Suppose that $f$ has variance $Var[f]=\sigma^2[f] $, then 
+\begin{equation}
+Var[S_\const{N}(f)] = \variabile{E}[(S_{\const{N}}(f)-\variabile{E}[S_{\const{N}}(f)])^2]= \variabile{E}[(S_{\const{N}}(f)-\variabile{E}[S_{\const{N}}(f)])^2] = \sigma^2/\const{N}
+\end{equation}
+where the second equality follows from the linearity of the expected value:
+\begin{equation}
+\variabile{E}[S_{\const{N}}(f)] = \frac{1}{\const{N}}\sum_{\variabile{i}=1}^{\textrm{N}}\variabile{E}[ f(\variabile{y}_\variabile{i})].
+\end{equation}
+Indicating the integration error with:
+\begin{equation}
+\const{err}(f, S_{\const{N}}) =\int_{D}f(\variabile{y})\rho(\variabile{y}) \textrm{d}\variabile{y}-\frac{1}{\const{N}}S_{\const{N}}(f)
+\end{equation}
+we obtain that
+\begin{equation}\label{eq:mean_error}
+\variabile{E}\big[|\const{err}(f, S_{\const{N}})|\big]\leq\sqrt{\variabile{E}\big[\const{err}(f, S_{\const{N}})^2\big]} = \frac{\sigma[f]}{\sqrt{\const{N}}}.
+\end{equation}
+Hence, the absolute value of the integration error is, on average, bounded by $\sigma[f]/\sqrt{\const{N}}$, where $\sigma[f]$ is the standard deviation of function $f$, \cite{leobacher2014introduction}. It is worthy to note that $\const{err}(f, S_{\const{N}})$ does not depend on the dimension $d$ of function $f$.
 \\ \indent MC technique can be combined with the ray tracing procedure in order to compute the light distribution at the target of an optical system. 
-This is called Monte Carlo ray tracing and it is explained in the following. 
+Monte Carlo ray tracing is based on this idea and, it is explained in the following. 
 MC ray tracing uses as sample of random variables a set of points the coordinates of which correspond to the position and direction coordinates of every ray at the source of the optical system.
 Therefore, rays with a random initial position and a random initial direction are traced from \point{S} to \point{T} within the optical system.
 In this way a probabilistic interpretation of the output photometric variables is provided. 
@@ -224,6 +244,8 @@ A set of random rays with coordinates $(\variabile{x}_{\variabile{k}}, \optangle
     \label{fig:mc_sample}
 \end{center}
   \end{figure}
+Every sample ray is traced inside the system using the ray tracing procedure. Then, the target $\point{T} = [-\variabile{b}, \variabile{b}]$ is divided into $\const{Nb}= 100$ bins. 
+Using Eq. (\ref{g_mc}), the normalized intensity $I_{\const{MC}}$ is computed. $I_{\const{MC}}$  is a piecewise constant function, therefore the averaged normalized intensity  $\hat{I}_{\const{MC}}(\optangle_{\variabile{j}-1/2})= \frac{1}{\Delta \optangle}I_{\const{MC}}(\optangle_{\variabile{j}-1/2})$ is given considering the values that the intensity  $I_{\const{MC}}$ assumes on the middle point $(\optangle_{\variabile{j}-1/2})_{\variabile{j} = 0, \cdots, \const{Nb}}$ of every bin. The profile of $\hat{I}_{\const{MC}}$ is depicted in Fig. \ref{fig:mc_raytrancing_intensity} with the red line. The exact intensity $I$ (analytic intensity) is shown with the green line in the same figure.
 \begin{figure}[t]
 \begin{center}
     \includegraphics[width=0.8\textwidth]{MC_raytracing.jpg}
@@ -231,5 +253,45 @@ A set of random rays with coordinates $(\variabile{x}_{\variabile{k}}, \optangle
    \label{fig:mc_raytrancing_intensity}
 \end{center}
 \end{figure}
+From Fig. \ref{fig:mc_raytrancing_intensity} it is obvious that $10^4$ ray are not enough to have a good intensity's approximation and a big effect of noise is still observed. 
+\\ \indent
+To conclude, MC ray tracing has the advantages of being very easy to implement and it does not require too much regularity of the function that has to be approximate. Furthermore, the error convergence does not depend on the dimension of the domain in which the function is defined. 
+On the other hand, MC method is time consuming as the error has a speed of convergence of the order $(1/\sqrt{\const{N}})$. Furthermore, MC ray tracing is a binning procedure, therefore the error depends also on the number of bins in which the target is divided. Finally, it is a statistical procedure and the error bound is only a "probabilistic" error as shown in Eq. (\ref{eq:mean_error}). This means that, to calculate the value of the error, several simulations have to be repeated and the average of the errors obtained in every simulation has to be calculated. \\ \indent MC ray method can be improved using a deterministic approach. 
+Instead of considering random variables $\variabile{y}_1, \cdots, \variabile{y}_{\const{N}}$, a sample of points can be defined in such a way that they have a regular distribution on the domain $D\subseteq[a,b]^d$ of the function $f$ of which we want to compute the integral. Methods based on this deterministic approach are called Quasi Monte Carlo (QMC) methods.
+\section{Quasi-Monte Carlo ray tracing} 
+Quasi-Monte Carlo (QMC) methods were proposed for the first time in the 1950s in order to deal with the issues encountered in MC. 
+Likewise MC methods, QMC procedures can be used to approximate the integral of a function. 
+The idea is to generate a set of points $\variabile{y}_1, \cdots, \variabile{y}_\const{N}$ which are neither random distributed nor exactly uniformly distributed. 
+To measure the distribution of these points the concept of discrepancy was introduced.  Intuitively, discrepancy measures how much the samples differ from a uniform distribution. 
+Therefore, random sequences have a very high discrepancy, while uniform distributed sequences have zero discrepancy.
+ \begin{definition} 
 
-\section{Quasi-Monte Carlo method}
+\end{definition}
+% Define discrepancy and low discrepances sequenses,
+% Van der Corput Sequence
+% say something about Sobol low discrepances sequences
+% Estimation for the error
+% Application of QMC in optics
+% Quasi Monte Carlo ray tracing
+% Disadvantages of QMC 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
