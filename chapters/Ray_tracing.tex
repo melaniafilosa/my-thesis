@@ -261,14 +261,36 @@ Instead of considering random variables $\variabile{y}_1, \cdots, \variabile{y}_
 \section{Quasi-Monte Carlo ray tracing} 
 Quasi-Monte Carlo (QMC) methods were proposed for the first time in the 1950s in order to deal with the issues encountered in MC. 
 Likewise MC methods, QMC procedures can be used to approximate the integral of a function. 
-The idea is to generate a set of points $\variabile{y}_1, \cdots, \variabile{y}_\const{N}$ which are neither random distributed nor exactly uniformly distributed. 
-To measure the distribution of these points the concept of discrepancy was introduced.  Intuitively, discrepancy measures how much the samples differ from a uniform distribution. 
-Therefore, random sequences have a very high discrepancy, while uniform distributed sequences have zero discrepancy.
+The idea is to generate a set of points $\point{y}_1, \cdots, \point{y}_\const{N}$ which are not random distributed but also not exactly uniformly distributed, \cite{}. 
+To measure how much the distribution of these points differs from a uniform distribution, the concept of discrepancy was introduced. 
+Usually, discrepancy is restricted to intervals $[\point{a}, \point{b})\subseteq [0.1)^d$. Intuitively, discrepancy measures how much the samples differ from a uniform distribution. 
+Therefore, random sequences have a very high discrepancy, while uniform distributed sequences have zero discrepancy. There are different notions of discrepancies, one of the simplest is the star discrepancy:
  \begin{definition} 
-
+Let $\mathcal{S} = \{\point{y}_1, \cdots, \point{y}_\const{N}\}$ be a set of $\const{N}$ points in $[0,1)^d$. The  star discrepancy $D^*_\const{N}({\mathcal{S}})$ of $\mathcal{S}$ is defined as:
+\begin{equation}
+D^*_\const{N}({\mathcal{S}}) = \sup_{\point{a}\in[0,1)^d}\Big|\frac{1}{\const{N}}\sum_{\variabile{i} = 1}^{\const{N}}\chi_{[0,\point{a})}(\variabile{y}_\variabile{i})-\lambda_d([0, \point{a}))\Big|
+\end{equation}
+where $\chi_{[0,\point{a})}(\variabile{y}_\variabile{i})$ is the indicator function of $[0,\point{a})\subseteq [0.1)^d$ and $\lambda_d([0, \point{a})) = \prod_{\variabile{j}=1}^d \point{a}_\variabile{j}$ denotes the the $d$-dimensional Lesbegue measure. For intervals of the form $[\point{a}, \point{b})\subseteq [0.1)^d$ we have $\lambda_d([\point{a}, \point{b}))=\prod_{\variabile{j}=1}^{d}(\point{b}_\variabile{j}-\point{a}_\variabile{j})$.
 \end{definition}
-% Define discrepancy and low discrepances sequenses,
-% Van der Corput Sequence
+% Maybe add a picture
+Sequences constructed such that the corresponding star discrepancy has an order of $O(\log(\const{N})^d/\const{N})$ are called \textit{low-discrepancy sequences}, \cite{owen2003quasi}.
+There are many way to generate low discrepancies sequences. 
+We first show a particular construction for $d=1$ that was introduced the first time by Van der Corput in 1935.  This kind of sequences, called \textit{van der Corput} sequences, are particular interesting first of all because they give an intuition of how to construct low discrepancy sequences and, then, because many other kind of sequences in higher dimensions use this approach. 
+Let $\const{b}\geq 2$ be an integer base. Any natural number $\variabile{n}\in \mathbb{N}_0$ can be decomposed in base $\const{b}$ as follows:
+\begin{equation}
+\variabile{n} = \sum_{\variabile{i}=0}^\infty \variabile{n}_{\variabile{i}}\const{b}^{\variabile{i}}
+\end{equation}
+where $\variabile{n}_{\variabile{i}} \in \{0, 1, \cdots, \const{b}-1\}$.
+The radical inverse function $\phi_{\const{b}}(\variabile{n})$ in base $\const{b}$ is defined as:
+\begin{equation}
+\phi_{\const{b}}(\variabile{n}) = \sum_{\variabile{i}=1}^{\infty}\frac{\variabile{n}_{\variabile{i}-1}}{\const{b}^{\variabile{i}}}.
+\end{equation}
+\begin{definition}
+The Van der Corput sequence in base $\const{b}$ is defined as $(\variabile{y}_{\variabile{n}})_{n\in\mathbb{N}_0}$ with $\variabile{y}_{\variabile{n}} =
+ \phi_{\const{b}}(\variabile{n})$ 
+\end{definition}
+
+% Uniform distribution modulo one
 % say something about Sobol low discrepances sequences
 % Estimation for the error
 % Application of QMC in optics
