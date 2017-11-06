@@ -1,19 +1,21 @@
 \chapter{Ray tracing}\label{chap:raytracing}
 Ray tracing is a geometric problem that describes the transport of light within optical systems.
-It uses single rays to describe the propagation of light through an optical system.
-The influence of diffraction on the transport of a ray is neglected and geometrical modeling of an optical system is considered.
+It is a forward method which uses single rays to describe the propagation of light through an optical system.
+Given an optical system and a set of rays at the source, ray tracing relates the input light distribution with the distribution of light at the target of the optical system. 
+The influence of diffraction on the transport of a ray is neglected and geometrical modeling of an optical system needs to be considered.
 Generally, the method can be implemented for two or more dimensions and for any optical system.
-In the following a description of the ray tracing method is given. We restrict ourselves to two-dimensional case.
+In this thesis, we restrict ourselves to two-dimensional case. Hence, from now on we will refer to optical lines instead of optical surface.
 The two-dimensional case is particularly relevant because it is a good test case to demonstrate the performance of the new ray tracing method.
 Optical designers often start with 2D systems where only the meridional plane is taken into account because it gives a good prediction of the target distribution of the rays
-(see \cite{winston2005nonimaging}, chapter $4$, p.$50-65$). However, the two-dimensional case also has some limitations, as it may not identify skew rays that are turned back by the system, and so a 2D analysis cannot guarantee a proper treatment of non meridional rays in 3D. Hence, the 2D target intensity distribution is not exactly equal to the corresponding 3D intensity. Furthermore in this chapter we consider systems where only reflection and refraction are taken into account.
+(see \cite{winston2005nonimaging}, chapter $4$, p.$50-65$). However, the two-dimensional case also has some limitations, as it may not identify skew rays that are turned back by the system, and so a 2D analysis cannot guarantee a proper treatment of non meridional rays in 3D. Hence, the 2D target intensity distribution is not exactly equal to the corresponding 3D intensity. Furthermore in this chapter we consider systems where only reflection and refraction laws are taken into account.
 \section{Ray tracing for two-dimensional optical systems}\label{sec:raytracing}
-Ray tracing is a procedure that can be applied to non-imaging systems. It consists of tracing each ray, which is considered to be a broken line, through the optical system.
+Ray tracing consists of tracing each ray, which is considered to be a broken line, through the optical system. 
+Every ray emitted from the source is followed until it reaches the target. During its propagation it can encounter optical components which change its direction. The ray tracing procedure is constructed such that the position and the direction of the rays are calculated on every optical lines that they hit until they reach the target.
 Given a Cartesian coordinate system $(\variabile{x}, \variabile{z})$, a two-dimensional optical system symmetric with respect to the $\variabile{z}$-axis is defined.
-Hence, usually the optical axis coincides with the $\variable{z}$-axis.
+Hence, usually the optical axis coincides with the $\variabile{z}$-axis.
 The optical system is formed by a source \point{S}, a target  \point{T} and some optical components $\lineai$ where $\lineai \in \{2, \cdots, \nline-1\}$ and $\nline$
  indicates the number of lines that form the system. \point{S} and \point{T} are indicated with the indexes $1$ and $\nline$, respectively.
-The index of refraction of the medium in which line $\lineai$ is located is indicated with $\n_\lineai$
+The index of refraction of the medium in which line $\lineai$ is located is indicated with $\n_\lineai$.
 Every ray emitted by \point{S} (line $1$) can hit some optical components $\lineai\in\{2, \cdots, \nline -1\}$ before reaching \point{T} (line $\nline$).
 The intersection point of the rays with line $\lineai$ are $(\variabile{x}_\lineai, \variabile{z}_\lineai)_{\lineai =1, \cdots, \nline}$ and, $\vect{s}_\lineai= (-\sin \optangle_\lineai, \cos \optangle_\lineai)$ indicates the direction vector of the rays that leave $\lineai$,
 with $\optangle_\lineai$ the angle that the ray forms with respect to the optical axis measured counterclockwise. As we consider only forward rays, the angles
@@ -42,11 +44,10 @@ Fig. \ref{fig:cup} shows an example where a single ray is traced inside a very s
    The left and right reflectors (line $2$ and $3$) connect the source with the target.}}
   \label{fig:cup}
 \end{figure}
-The light source \point{S}$= [-\variabile{a}, \variabile{a}]$ (line $1$) and the target \point{T}$~=~ [-\variabile{b}, \variabile{b}]$ (line $4$) are two segments normal to the \variabile{z}-axis, where $\variabile{a}=2$ and $\variabile{b}=17$.
-The left and right reflectors (line $2$ and $3$) are oblique segments that connect the source and the target.
-All the optical lines $\lineai \in \{1, \cdots, 4\}$  are located in air, therefore the refractive index $\n_{\lineai}=1$ for every $\lineai$. \\ \indent
+%The light source \point{S}$= [-\variabile{a}, \variabile{a}]$ (line $1$) and the target \point{T}$~=~ [-\variabile{b}, \variabile{b}]$ (line $4$) are two segments normal to the \variabile{z}-axis, where $\variabile{a}=2$ and $\variabile{b}=17$.
+%The left and right reflectors (line $2$ and $3$) are oblique segments that connect the source and the target.
+%All the optical lines $\lineai \in \{1, \cdots, 4\}$  are located in air, therefore the refractive index $\n_{\lineai}=1$ for every $\lineai$. \\ \indent
 In order to compute the target photometric variables, we need to know how the optical system influences the direction of the rays when they hit an optical line.
- To this purpose, the ray tracing procedure is often used in optics.
 Ray tracing relates the position coordinates
  $ (\variabile{x}_1, \variabile{z}_1)$ and the direction vector $\vect{s}_1$ of every ray at the source $\point{S}$ with the corresponding position $(\variabile{x}_\nline, \variabile{z}_\nline)$ and direction $\vect{s}_\nline$
  at the target $\point{T}$. As in the following we will use often the target coordinates of the rays, from now on, to simplify the notation, we write $(\variabile{x},\variabile{z})$ instead of $(\variabile{x}_\nline, \variabile{z}_\nline)$,  $\optangle$ instead of $\optangle_\nline$ and $\vect{s}$ instead of $\vect{s}_{\nline}$ for the target coordinates.
@@ -58,7 +59,7 @@ The ray tracing algorithm can be schematized as follows.
 \item[a)] If the shape of the lines is described by equations with a known analytical description, the intersection points are determined analytically;
 \item[b)] If there is no analytic description for the optical lines, the intersections need to be determined using iterative methods;
 \end{itemize}
-\item  Computing the minimum of the distances between the previous ray's position coordinates $(\variabile{x}_1, \variabile{z}_1)$ and the coordinates $(\variabile{x}_\variabile{k}, \variabile{z}_\variabile{k})$ for every ${\variabile{k} = 1\cdots, \nline}$ and determine the closest line $\lineai$ that the forward ray encounters;
+\item  Determine the closest line $\lineai$ that the forward ray encounters;
 \item If $\lineai = \nline$ stop the procedure, the target ray's coordinates $(\variabile{x}, \variabile{z})$ and $\vect{s}$ are found.
 \item Calculate the normal $\boldsymbol{\nu}_\variabile{i}$ to line $\variabile{i}$ at the point $(\variabile{x}_{\variabile{i}}, \variabile{z}_{\variabile{i}})$;
  \item Compute the new ray direction $\vect{s}_\lineai$ of the ray that leaves line $\lineai$ at the point $(\variabile{x}_{\variabile{i}}, \variabile{z}_{\variabile{i}})$;
@@ -68,39 +69,18 @@ The ray tracing algorithm can be schematized as follows.
 \end{itemize}
 \item Restart the procedure from $1.$ for the ray that leaves line $\lineai$ instead of \point{S}. Consider as initial ray position coordinates $(\variabile{x}_{\variabile{i}}, \variabile{z}_{\variabile{i}})$ instead of $(\variabile{x}_1, \variabile{z}_1)$ and as initial ray direction $\vect{s}_\lineai= (-\sin \optangle_\lineai, \cos \optangle_\lineai)$ instead of $\vect{s}_1$.
 \end{enumerate}
-The procedure explained above is repeated for every ray traced through the system, \cite{Gross2005Handbook}. There are different ways to implement the ray tracing procedure.
-An often used method is MC ray tracing which is explained in the next paragraph.
+% The goal intensity
+% Same approach of computing an integral
+% How to chose the initial rays at the source
+The procedure explained above is repeated for every ray traced through the system, \cite{Gross2005Handbook}. 
+Once the target position and the direction of every ray traced are computed, the target photometric variables can be calculated.\\ \indent
+There are different ways to implement the ray tracing procedure. The efficiency of the ray tracing can related with the distribution of the rays at the source. 
+Therefore, we would like to understand how the 
+If the initial position and direction of the rays are chosen randomly we have Monte Carlo (MC) ray tracing which is explained in detail in the next paragraph. 
+This is a very common method in non-imaging optics as it is very powerful and easy to implement.
+If the rays are chosen to be points of a low discrepancy sequence we have the Quasi-Monte Carlo (QMC) ray tracing.
+The concept of low discrepancy and the QMC method will be provided in last paragraph of this chapter. 
 \section{Monte Carlo ray tracing}
-%Say that MC methods are used to calculate an integral
-%\begin{figure}[h]
-%\label{fig:cup}
-%  \begin{center}
-%
-%  \includegraphics[width=10cm]{MC_raytracing.pdf}
-%  \end{center}
-%\vspace{-2cm}
-%  \caption{\footnotesize{Shape of the two-faceted cup.  Each line of the system is labeled with a number.
-%   The source \point{S}$= [-2,2]$ (line number $1$) is located on the $x$-axis.
-%   The target \point{T}$= [-17, 17]$ (line $4$) is parallel to the source and is located at a height $z= 40$.
-%   The left and right reflectors (line $2$ and $3$) connect the source with the target.}}
-%  \label{fig:cup}
-%\end{figure}
-%\begin{figure}[h]
-%\label{fig:cup}
-%  \begin{center}
-%
-%  \includegraphics[width=10cm]{qmc_raytracing.pdf}
-%  \end{center}
-%\vspace{-2cm}
-%  \caption{\footnotesize{Shape of the two-faceted cup.  Each line of the system is labeled with a number.
-%   The source \point{S}$= [-2,2]$ (line number $1$) is located on the $x$-axis.
-%   The target \point{T}$= [-17, 17]$ (line $4$) is parallel to the source and is located at a height $z= 40$.
-%   The left and right reflectors (line $2$ and $3$) connect the source with the target.}}
-%  \label{fig:cup}
-%\end{figure}
-
-% Intensity integral of the luminance
-% Luminance constant
 Before explain MC ray tracing procedure we give a general introduction about MC methods. MC simulation are often used to approximate the integral of a given function $f$ considering random variables in the domain of $f$. More precisely, given a function $f:[a,b]^d\subseteq \mathbb{R}^d \mapsto \mathbb{R}$ and a random variable $\variabile{y}\in D = [a, b]^d$ with probability density function $\rho(\variabile{y})$, the expected value of $f$ is defines as:
 \begin{equation}
 \variabile{E}[f] =\int_{D}f(\variabile{y})\rho(\variabile{y}) \textrm{d}\variabile{y}.
@@ -124,7 +104,7 @@ Therefore the following relation holds:
 \end{equation}
 Suppose that $f$ has variance $Var[f]=\sigma^2[f] $, then
 \begin{equation}
-Var[S_\const{N}(f)] = \variabile{E}[(S_{\const{N}}(f)-\variabile{E}[S_{\const{N}}(f)])^2]= \variabile{E}[(S_{\const{N}}(f)-\variabile{E}[S_{\const{N}}(f)])^2] = \sigma^2/\const{N}
+Var[S_\const{N}(f)] = \variabile{E}[(S_{\const{N}}(f)-\variabile{E}[S_{\const{N}}(f)])^2]= \variabile{E}[(S_{\const{N}}(f)-\variabile{E}[f])^2] = \sigma^2/\const{N}
 \end{equation}
 where the second equality follows from the linearity of the expected value:
 \begin{equation}
@@ -141,7 +121,7 @@ we obtain that
 Hence, the absolute value of the integration error is, on average, bounded by $\sigma[f]/\sqrt{\const{N}}$, where $\sigma[f]$ is the standard deviation of function $f$, \cite{leobacher2014introduction}. It is worthy to note that $\const{err}(f, S_{\const{N}})$ does not depend on the dimension $d$ of function $f$.
 \\ \indent MC technique can be combined with the ray tracing procedure in order to compute the light distribution at the target of an optical system.
 Monte Carlo ray tracing is based on this idea and, it is explained in the following.
-MC ray tracing uses as sample of random variables a set of points the coordinates of which correspond to the position and direction coordinates of every ray at the source of the optical system.
+In MC ray tracing the position and the direction of  every ray at the source are chosen randomly. 
 Therefore, rays with a random initial position and a random initial direction are traced from \point{S} to \point{T} within the optical system.
 In this way a probabilistic interpretation of the output photometric variables is provided.
 In particular, we are interested in the total target intensity $I$ which is computed as a function of the angular coordinate $\optangle$.
@@ -260,38 +240,109 @@ On the other hand, MC method is time consuming as the error has a speed of conve
 Instead of considering random variables $\variabile{y}_1, \cdots, \variabile{y}_{\const{N}}$, a sample of points can be defined in such a way that they have a regular distribution on the domain $D\subseteq[a,b]^d$ of the function $f$ of which we want to compute the integral. Methods based on this deterministic approach are called Quasi Monte Carlo (QMC) methods.
 \section{Quasi-Monte Carlo ray tracing}
 Quasi-Monte Carlo (QMC) methods were proposed for the first time in the 1950s in order to deal with the issues encountered in MC.
-Likewise MC methods, QMC procedures can be used to approximate the integral of a function.
-The idea is to generate a set of points $\point{y}_1, \cdots, \point{y}_\const{N}$ which are not random distributed but also not exactly uniformly distributed, \cite{}.
-To measure how much the distribution of these points differs from a uniform distribution, the concept of discrepancy was introduced.
-Usually, discrepancy is restricted to intervals $[\point{a}, \point{b})\subseteq [0.1)^d$. Intuitively, discrepancy measures how much the samples differ from a uniform distribution.
-Therefore, random sequences have a very high discrepancy, while uniform distributed sequences have zero discrepancy. There are different notions of discrepancies, one of the simplest is the star discrepancy:
- \begin{definition}
-Let $\mathcal{S} = \{\point{y}_1, \cdots, \point{y}_\const{N}\}$ be a set of $\const{N}$ points in $[0,1)^d$. The  star discrepancy $D^*_\const{N}({\mathcal{S}})$ of $\mathcal{S}$ is defined as:
+Likewise MC methods, QMC procedures can be used to approximate the integral of a function. 
+In particular, given a sequence of points $\{\variabile{y}_\variabile{n}\}_{\variabile{n} = 1, \cdots, \const{N}}$ in the interval $[a, b]^d\subseteq[0,1)^d$ and a function 
+$f:[a,b]^d\mapsto \mathbb{R}$, QMC method approximates the integral of function $f$ on $[a,b]$ as the average of the values of $f$ on those points, that is:
 \begin{equation}
-D^*_\const{N}({\mathcal{S}}) = \sup_{\point{a}\in[0,1)^d}\Big|\frac{1}{\const{N}}\sum_{\variabile{i} = 1}^{\const{N}}\chi_{[0,\point{a})}(\variabile{y}_\variabile{i})-\lambda_d([0, \point{a}))\Big|
+\int_{[a,b]^d}f(y)\textrm{d}y \approx \frac{1}{\const{N}}\sum_{\variabile{i}=1}^{\const{N}}f(\variabile{y}_{\variabile{i}}).
 \end{equation}
-where $\chi_{[0,\point{a})}(\variabile{y}_\variabile{i})$ is the indicator function of $[0,\point{a})\subseteq [0.1)^d$ and $\lambda_d([0, \point{a})) = \prod_{\variabile{j}=1}^d \point{a}_\variabile{j}$ denotes the the $d$-dimensional Lesbegue measure. For intervals of the form $[\point{a}, \point{b})\subseteq [0.1)^d$ we have $\lambda_d([\point{a}, \point{b}))=\prod_{\variabile{j}=1}^{d}(\point{b}_\variabile{j}-\point{a}_\variabile{j})$.
+The idea is to generate the set of points in $[a,b]$ such that they are not random distributed but also not exactly uniformly distributed. 
+%To this purpose, the concept of sequences uniformly distributed modulo one has been introduced, they are defined in the following.
+%\begin{definition}
+%An infinite sequence $\{\variabile{y}_\variabile{n}\}_{\variabile{n}\in\mathbb{N}_0}$ is said to be \textit{uniformly distributed modulo one} (or equidistributed), if for every interval $[a,b)\subseteq[0,1)^d$ it holds
+%\begin{equation}
+%\lim_{\const{N}\rightarrow \infty}\frac{\textrm{card}(A([a,b), \const{N}))}{\const{N}} = \lambda_d([a,b))
+%\end{equation}
+%where $\textrm{card}(A([a,b), \const{N}))$ is the cardinality of
+%\begin{equation}
+%A([a,b), N) = \{\variabile{n}\in \mathbb{N}_0: 0\leq\variabile{n}\leq \const{N}-1 \mbox{ and } \variabile{y}_{\variabile{n}}\in [a,b)\}\,,
+%\end{equation}
+%and $\lambda_d([a,b)) = \prod_{\variabile{j}=1}^{d}(b_\variabile{j}-a_\variabile{j})$ is the $d$-dimensional Lesbegue measure of the interval $[a,b)$
+%\end{definition}
+To measure how much the distribution of these points differs from a uniform distribution, the concept of discrepancy was introduced.
+Usually, discrepancy is restricted to intervals $[a, b)\subseteq [0.1)^d$. Intuitively, it measures how much the samples differ from a uniform distribution.
+Therefore, random sequences have a very high discrepancy, while uniform distributed sequences have zero discrepancy.
+The definition of discrepancy in more mathematical terms is provided below. 
+\begin{definition}
+Given a set $\mathcal{S} = \{y_1, \cdots, y_\const{N}\}$ of $\const{N}$ points in $[0,1)^d$. The discrepancy $D_\const{N}({\mathcal{S}})$ of $\mathcal{S}$ is defined as
+\begin{equation}
+D_\const{N}({\mathcal{S}}) = \sup_{a, b\in[0,1)^d}\Big|\frac{1}{\const{N}}\sum_{\variabile{i} = 1}^{\const{N}}\chi_{[a,b)}(\variabile{y}_\variabile{i})-\lambda_d([a, b))\Big|
+\end{equation}
+where $\chi_{[a,b)}(\variabile{y}_\variabile{i})$ is the indicator function of $[a, b)\subseteq [0.1)^d$ and $\lambda_d([a,b)) = \prod_{\variabile{j}=1}^{d}(b_\variabile{j}-a_\variabile{j})$ is the $d$-dimensional Lesbegue measure of the interval $[a,b)$.
+\end{definition}
+Often, it is enough to consider the discrepancy in the intervals $[0,a)\subseteq[0,1)^d$, in that case we talk about star discrepancy.
+ \begin{definition}
+Let $\mathcal{S} = \{y_1, \cdots, y_\const{N}\}$ be a set of $\const{N}$ points in $[0,1)^d$. The  star discrepancy $D^*_\const{N}({\mathcal{S}})$ of $\mathcal{S}$ is defined as:
+\begin{equation}
+D^*_\const{N}({\mathcal{S}}) = \sup_{a\in[0,1)^d}\Big|\frac{1}{\const{N}}\sum_{\variabile{i} = 1}^{\const{N}}\chi_{[0,a)}(\variabile{y}_\variabile{i})-\lambda_d([0, a))\Big|
+\end{equation}
+%where $\chi_{[0,\point{a})}(\variabile{y}_\variabile{i})$ is the indicator function of $[0,\point{a})\subseteq [0.1)^d$ and $\lambda_d([0, \point{a})) = \prod_{\variabile{j}=1}^d \point{a}_\variabile{j}$ denotes the the $d$-dimensional Lesbegue measure. For intervals of the form $[\point{a}, \point{b})\subseteq [0.1)^d$ we have $\lambda_d([\point{a}, \point{b}))=\prod_{\variabile{j}=1}^{d}(\point{b}_\variabile{j}-\point{a}_\variabile{j})$.
 \end{definition}
 % Maybe add a picture
 Sequences constructed such that the corresponding star discrepancy has an order of $O(\log(\const{N})^d/\const{N})$ are called \textit{low-discrepancy sequences}, \cite{owen2003quasi}.
 There are many way to generate low discrepancies sequences.
-We first show a particular construction for $d=1$ that was introduced the first time by Van der Corput in 1935.  This kind of sequences, called \textit{van der Corput} sequences, are particular interesting first of all because they give an intuition of how to construct low discrepancy sequences and, then, because many other kind of sequences in higher dimensions use this approach.
-Let $\const{b}\geq 2$ be an integer base. Any natural number $\variabile{n}\in \mathbb{N}_0$ can be decomposed in base $\const{b}$ as follows:
+Here we show a particular construction for $d=1$ that was introduced the first time by Van der Corput in 1935.  
+This kind of sequences, called \textit{van der Corput} sequences, are particular interesting not only because they give an intuition of how to construct low discrepancy sequences but also because many other kind of sequences in higher dimensions are based on this one-dimensional case. Before introducing these sequences we need to give the concept of radical inverse function. Let $\const{b}\geq 2$ be an integer base. Any natural number $\variabile{n}\in \mathbb{N}_0$ can be decomposed in base $\const{b}$ as follows:
 \begin{equation}
 \variabile{n} = \sum_{\variabile{i}=0}^\infty \variabile{d}_{\variabile{i}}\const{b}^{\variabile{i}}
 \end{equation}
 where $\variabile{d}_{\variabile{i}} \in \{0, 1, \cdots, \const{b}-1\}$ are the so-called the digit numbers.
-The radical inverse function $\phi_{\const{b}}(\variabile{n})$ in base $\const{b}$ is defined as:
+The radical inverse function $\phi_{\const{b}}\mathbb{N}_0\mapsto [0,1)$ in base $\const{b}$ is defined as:
 \begin{equation}
 \phi_{\const{b}}(\variabile{n}) = \sum_{\variabile{i}=1}^{\infty}\frac{\variabile{d}_{\variabile{i}-1}}{\const{b}^{\variabile{i}}}.
 \end{equation}
-As an example we provide in the following the radical inverse function $\phi_{\const{b}}(5)$ in base $\const{b} = 2$. The digit expansion in base $\const{b}$ of $\variabile{n}=5$ is:
+As an example we provide in the following the radical inverse function $\phi_{\const{b}}(5)$ in base $\const{b} = 2$. 
+The digit expansion in base $\const{b}$ of $\variabile{n}=5$ is:
 \begin{equation}
-5 = 1\cdot 2ˆ0+1\cdot 2ˆ2
+5 = 1\cdot 2^0+1\cdot 2^2.
+\end{equation}
+Therefore, $\variabile{d}_0 = 1, \variabile{d}_1 = 0$ and $\variabile{d}_2 = 1$. 
+The radical inverse function $\phi_2(5)$ is:
+\begin{equation}
+\phi_2 (5) = \frac{1}{2}+\frac{1}{8} = \frac{5}{8}.
 \end{equation}
 \begin{definition}
-The Van der Corput sequence in base $\const{b}$ is defined as $(\variabile{y}_{\variabile{n}})_{n\in\mathbb{N}_0}$ with $\variabile{y}_{\variabile{n}} = \phi_{\const{b}}(\variabile{n})$.
+The Van der Corput sequence in base $\const{b}$ is defined as $\{\variabile{y}_{\variabile{n}}\}_{n\in\mathbb{N}_0}$ with $\variabile{y}_{\variabile{n}} = \phi_{\const{b}}(\variabile{n})$.
 \end{definition}
+For example, suppose we have the finite sequence of numbers $\variabile{n}\in \{0, 1,\cdots, 8\}$  the corresponding Van der Corput sequence 
+$\{\variabile{y}_{\variabile{n}}\}_{\variabile{n}\in \{0, 1,\cdots, 8\}}$ in base $\variabile{b}=2$ is:
+\begin{equation}
+\big(\phi_2(n)(\variabile{n})\big)_{\variabile{n}\in \{0, 1,\cdots, 8\}} = \Bigg\{0, \frac{1}{2}, \frac{1}{4}, \frac{3}{4}, \frac{1}{8},\frac{5}{8}, \frac{3}{8}, \frac{7}{8}, \frac{1}{16}\Bigg\} \,.
+\end{equation}
+%It can be proved that the Van der Corput sequence in base $\variabile{b}$ is uniformly distributed modulo one, \cite{leobacher2014introduction}. 
+The van der Corput sequence has been extended to higher dimensions.
+\\ \indent The ray tracing procedure is computed considering the rays at the source with position and direction coordinates corresponding to the coordinates of the points of a low-discrepancy sequence. 
+Sobol' sequences are an example of the extended Van der Corput sequences in base $\variabile{b}=2$ to $\variabile{d}\geq2$. 
+
+
+\cite{bratley1988algorithm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 % Uniform distribution modulo one
