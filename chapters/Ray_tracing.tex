@@ -74,55 +74,58 @@ The ray tracing algorithm can be schematized as follows.
 % How to chose the initial rays at the source
 The procedure explained above is repeated for every ray traced through the system, \cite{Gross2005Handbook}. 
 Once the target position and the direction of every ray traced are computed, the target photometric variables can be calculated.\\ \indent
-There are different ways to implement the ray tracing procedure. The efficiency of the ray tracing can related with the distribution of the rays at the source. 
-Therefore, we would like to understand how the 
-If the initial position and direction of the rays are chosen randomly we have Monte Carlo (MC) ray tracing which is explained in detail in the next paragraph. 
+There are different ways to implement the ray tracing procedure. The efficiency of the ray tracing can be related with the distribution of the rays at the source. 
+If the initial position and direction of the rays are chosen randomly we have Monte Carlo (MC) ray tracing. 
 This is a very common method in non-imaging optics as it is very powerful and easy to implement.
 If the rays are chosen to be points of a low discrepancy sequence we have the Quasi-Monte Carlo (QMC) ray tracing.
-The concept of low discrepancy and the QMC method will be provided in last paragraph of this chapter. 
+This will be clarified in the following.
 \section{Monte Carlo ray tracing}
-Before explain MC ray tracing procedure we give a general introduction about MC methods. MC simulation are often used to approximate the integral of a given function $f$ considering random variables in the domain of $f$. More precisely, given a function $f:[a,b]^d\subseteq \mathbb{R}^d \mapsto \mathbb{R}$ and a random variable $\variabile{y}\in D = [a, b]^d$ with probability density function $\rho(\variabile{y})$, the expected value of $f$ is defines as:
+Before explain MC ray tracing we give a general introduction about MC methods. MC simulations are often used to approximate the integral of a given function $f$ considering random variables in the domain of $f$. Given an interval $D = [\vect{a}, \vect{b}]$ with $\vect{a} = (a_1, \cdots, a_d)$ and $\vect{b} = (b_1, \cdots, b_d)$ elements of $\mathbb{R}^d$ such that
+$[\vect{a}, \vect{b}]  = [a_1, b_1] \times \cdots \times [a_d, b_d]$, a function $f:[\vect{a},\vect{b}]\subset \mathbb{R}^d \mapsto \mathbb{R}$ and a random variable 
+$\vect{y}\in D$ with probability density function $\rho(\vect{y})$, the expected value of $f$ is defines as:
 \begin{equation}
-\variabile{E}[f] =\int_{D}f(\variabile{y})\rho(\variabile{y}) \textrm{d}\variabile{y}.
+\mathbb{E}[f] =\int_{D}f(\vect{y})\rho(\vect{y}) \textrm{d}\vect{y}.
 \end{equation}
 Note that if $\rho$ is a uniform probability density function, we have:
 \begin{equation}
-\variabile{E}[f] = \int_{D}f(\variabile{y})\rho(\variabile{y}) \textrm{d}\variabile{y} =\frac{1}{(b-a)^d} \int_{D}f(\variabile{y}) \textrm{d}\variabile{y}.
+\mathbb{E}[f] = \int_{D}f(\vect{y})\rho(\vect{y}) \textrm{d}\vect{y} =\frac{1}{(\vect{b}-\vect{a})} \int_{D}f(\vect{y}) \textrm{d}\vect{y}.
 \end{equation}
-In Monte Carlo methods $\const{N}$ independent random variables  $\variabile{y}_1, \cdots, \variabile{y}_{\const{N}}$  from the density $\rho$ are considered and, the sum
+In Monte Carlo methods $\const{N}$ independent random variables  $\{\vect{y}_\variabile{i}\}_{\variabile{i} = 1, \cdots, \const{N}}\in D$ 
+from the density $\rho$ are considered and, the sum
 \begin{equation}
-S_{\const{N}}(f) = \frac{1}{\const{N}} \sum_{\variabile{i}=1}^{\textrm{N}} f(\variabile{y}_\variabile{i})
+S_{\const{N}}(f) = \frac{1}{\const{N}} \sum_{\variabile{i}=1}^{\textrm{N}} f(\vect{y}_\variabile{i})
 \end{equation}
 is calculated,  \cite{owen2003quasi}.
 The strong law of large numbers tells us that:
 \begin{equation}
-\const{Pr}\Big(\lim_{\const{N}\rightarrow\infty}\sum_{\variabile{i}=1}^{\const{N}} f(\variabile{y}_\variabile{i}) = \variabile{E}[f(\variabile{y})] \Big) = 1.
+\const{Pr}\Big(\lim_{\const{N}\rightarrow\infty}\sum_{\variabile{i}=1}^{\const{N}} f(\vect{y}_\variabile{i}) = \mathbb{E}[f(\vect{y})] \Big) = 1.
 \end{equation}
 Therefore the following relation holds:
 \begin{equation}
-\variabile{E}[f] \approx \frac{1}{\const{N}} \sum_{\variabile{i}=1}^{\const{N}} f(\variabile{y}_\variabile{i}).
+\mathbb{E}[f] \approx \frac{1}{\const{N}} \sum_{\variabile{i}=1}^{\const{N}} f(\vect{y}_\variabile{i}).
 \end{equation}
-Suppose that $f$ has variance $Var[f]=\sigma^2[f] $, then
+Suppose that $f$ has variance $\textrm{Var}[f]=\sigma^2[f] $, then
 \begin{equation}
-Var[S_\const{N}(f)] = \variabile{E}[(S_{\const{N}}(f)-\variabile{E}[S_{\const{N}}(f)])^2]= \variabile{E}[(S_{\const{N}}(f)-\variabile{E}[f])^2] = \sigma^2/\const{N}
+\textrm{Var}[S_\const{N}(f)] = \mathbb{E}[(S_{\const{N}}(f)-\mathbb{E}[S_{\const{N}}(f)])^2]= \mathbb{E}[(S_{\const{N}}(f)-\mathbb{E}[f])^2] = \sigma[f]^2/\const{N}
 \end{equation}
-where the second equality follows from the linearity of the expected value:
+where the second equality follows from the linearity of the expected value, that is:
 \begin{equation}
-\variabile{E}[S_{\const{N}}(f)] = \frac{1}{\const{N}}\sum_{\variabile{i}=1}^{\textrm{N}}\variabile{E}[ f(\variabile{y}_\variabile{i})].
+\mathbb{E}[S_{\const{N}}(f)] = \frac{1}{\const{N}}\sum_{\variabile{i}=1}^{\textrm{N}}\mathbb{E}[ f(\vect{y}_\variabile{i})].
 \end{equation}
 Indicating the integration error with:
 \begin{equation}
-\const{err}(f, S_{\const{N}}) =\int_{D}f(\variabile{y})\rho(\variabile{y}) \textrm{d}\variabile{y}-\frac{1}{\const{N}}S_{\const{N}}(f)
+\const{err}(f, S_{\const{N}}) =\Bigg|\int_{D}f(\vect{y})\rho(\vect{y}) \textrm{d}\vect{y}-S_{\const{N}}(f)\Bigg|
 \end{equation}
 we obtain that
 \begin{equation}\label{eq:mean_error}
-\variabile{E}\big[|\const{err}(f, S_{\const{N}})|\big]\leq\sqrt{\variabile{E}\big[\const{err}(f, S_{\const{N}})^2\big]} = \frac{\sigma[f]}{\sqrt{\const{N}}}.
+\mathbb{E}\big[\const{err}(f, S_{\const{N}})\big]\leq\sqrt{\mathbb{E}\big[\const{err}(f, S_{\const{N}})^2\big]} = \frac{\sigma[f]}{\sqrt{\const{N}}}.
 \end{equation}
-Hence, the absolute value of the integration error is, on average, bounded by $\sigma[f]/\sqrt{\const{N}}$, where $\sigma[f]$ is the standard deviation of function $f$, \cite{leobacher2014introduction}. It is worthy to note that $\const{err}(f, S_{\const{N}})$ does not depend on the dimension $d$ of function $f$.
+Hence, the absolute value of the integration error is, on average, bounded by $\sigma[f]/\sqrt{\const{N}}$, where $\sigma[f]$ is the standard deviation of $f$, \cite{leobacher2014introduction}. It is worthy to note that $\const{err}(f, S_{\const{N}})$ does not depend on the dimension $d$ of $f$.
 \\ \indent MC technique can be combined with the ray tracing procedure in order to compute the light distribution at the target of an optical system.
-Monte Carlo ray tracing is based on this idea and, it is explained in the following.
 In MC ray tracing the position and the direction of  every ray at the source are chosen randomly. 
-Therefore, rays with a random initial position and a random initial direction are traced from \point{S} to \point{T} within the optical system.
+In the two-dimensional case (d=2), for every ray we need to choose one position coordinate $\variabile{x}_1$ at the source and one angular coordinate $\optangle_1$ at the target as the $\variabile{z}_1$ coordinate of every ray at the source is given (for instance, for the two-faceted cup in Fig. \ref{fig:cup}, $\variabile{z}_1=0$ for every ray). 
+Therefore, given a set of random variables $\{\vect{y}_1, \cdots, \vect{y}_N\}\in [\vect{a}, \vect{b}]\subset\mathbb{R}^2$, the initial position coordinate $\variabile{x}_1$ of the $\variabile{k}$-th ray corresponds to the first component of the $\variabile{k}$-th random variable $\vect{y}_\variabile{k}$ and, the starting angular coordinate of the $\variabile{k}$-th ray corresponds to the second component of the $\variabile{k}$-th random variable $\vect{y}_\variabile{k}$.
+Next, rays with those random initial coordinates are traced from \point{S} to \point{T} within the optical system.
 In this way a probabilistic interpretation of the output photometric variables is provided.
 In particular, we are interested in the total target intensity $I$ which is computed as a function of the angular coordinate $\optangle$.
 The MC intensity is calculated dividing the target into intervals of the same length, the so-called bins. A partitioning
@@ -145,7 +148,7 @@ $[\optangle_{\variabile{j}-1}, \optangle_{\variabile{j}})$ of the partitioning $
 where $I(\optangle)$ is the output intensity (not normalized) and it is measured in lumen per radian $[\textrm{lm}/\textrm{rad}]$.
 Note that $\sum_{\variabile{j}=1}^{\const{Nb}}\const{P}_{\variabile{j}, \Delta\optangle}=1$. Using the mean value theorem for the function
 $I(\optangle)$ continuous in $[\optangle_{\variabile{j}-1}, \optangle_{\variabile{j}}]$, the integral at the numerator of the previous equation can be written as: \begin{equation}
-\int_{\optangle_{\variabile{j}-1}}^{\optangle_{\variabile{j}}} I(\optangle) \textrm{d}\optangle = \Delta \optangle\;I(\optangle_{j-1/2}).
+\int_{\optangle_{\variabile{j}-1}}^{\optangle_{\variabile{j}}} I(\optangle) \textrm{d}\optangle = \Delta \optangle\;I(\optangle_{j-1/2}) + O(\Delta \optangle^2).
 \end{equation}
 Hence, $\const{P}_{\variabile{j}, \Delta\optangle}$ is proportional to the size $\Delta\optangle= (\optangle_{\const{Nb}}-\optangle_{0})/{\const{Nb}}$
 of the intervals, i.e., inversely proportional to the number of bins $\const{Nb}$ of the partitioning $P_1$.
@@ -215,8 +218,13 @@ for $\const{C}_4>0$.
 Considering a fixed number of rays, we obtain that the minimal error is reached when $\const{Nb}\approx \const{Nr}^{1/5}$.
 Hence, if $10^{10}$ rays are considered the target has to be divided into $10^2$ bins to minimize the MC error.
 This leads to computational efforts resulting in a very slow procedure.\\ \indent
-To give an example we implemented MC ray tracing for the two-faceted cup the profile of which is depicted in Fig. \ref{fig:cup}.
-A set of random rays with coordinates $(\variabile{x}_{\variabile{k}}, \optangle_{\variabile{k}})_{\variabile{k}= 1, \cdots, \const{Nr}}$ is generated at the source. We considered for instance $\const{Nr}=10^4$ rays. The rays distribution on the $(\variabile{x}_{\variabile{k}}, \optangle_{\variabile{k}})$-plane is shown in Fig. \ref{fig:mc_sample}.
+To give an example we implemented MC ray tracing for the two-faceted cup the profile of which is depicted in Fig. \ref{fig:cup}. 
+The light source \point{S}$= [-\variabile{a}, \variabile{a}]$ (line $1$) and the target \point{T}$~=~ [-\variabile{b}, \variabile{b}]$ (line $4$) are two segments normal to the \variabile{z}-axis, where $\variabile{a}=2$ and $\variabile{b}=17$.
+The left and right reflectors (line $2$ and $3$) are oblique segments that connect the source and the target.
+All the optical lines $\lineai \in \{1, \cdots, 4\}$  are located in air, therefore the refractive index $\n_{\lineai}=1$ for every $\lineai$.
+Considering a set of $\const{Nr} = 10^4$ random rays 
+%with coordinates $(\variabile{x}_{\variabile{k}}, \optangle_{\variabile{k}})_{\variabile{k}= 1, \cdots, \const{Nr}}$ is generated at the source.
+at the source, we obtain the distribution on the $(\variabile{x}, \optangle)$-plane shown in Fig. \ref{fig:mc_sample}.
 \begin{figure}[h]
 \begin{center}
     \includegraphics[width=0.8\textwidth]{mc_sample.jpg}
@@ -230,51 +238,50 @@ Using Eq. (\ref{g_mc}), the normalized intensity $I_{\const{MC}}$ is computed. $
 \begin{center}
     \includegraphics[width=0.8\textwidth]{MC_raytracing.jpg}
     \caption{Comparison between the averaged normalized MC intensity and the normalized exact intensity.}
-   \label{fig:mc_raytrancing_intensity}
+   \label{fig:mc_intensity}
 \end{center}
 \end{figure}
-From Fig. \ref{fig:mc_raytrancing_intensity} it is obvious that $10^4$ ray are not enough to have a good intensity's approximation and a big effect of noise is still observed.
-\\ \indent
+% In appendix A analytic intensity
 To conclude, MC ray tracing has the advantages of being very easy to implement and it does not require too much regularity of the function that has to be approximate. Furthermore, the error convergence does not depend on the dimension of the domain in which the function is defined.
-On the other hand, MC method is time consuming as the error has a speed of convergence of the order $(1/\sqrt{\const{N}})$. Furthermore, MC ray tracing is a binning procedure, therefore the error depends also on the number of bins in which the target is divided. Finally, it is a statistical procedure and the error bound is only a "probabilistic" error as shown in Eq. (\ref{eq:mean_error}). This means that, to calculate the value of the error, several simulations have to be repeated and the average of the errors obtained in every simulation has to be calculated. \\ \indent MC ray method can be improved using a deterministic approach.
-Instead of considering random variables $\variabile{y}_1, \cdots, \variabile{y}_{\const{N}}$, a sample of points can be defined in such a way that they have a regular distribution on the domain $D\subseteq[a,b]^d$ of the function $f$ of which we want to compute the integral. Methods based on this deterministic approach are called Quasi Monte Carlo (QMC) methods.
+On the other hand, MC method is time consuming as the error has a speed of convergence of the order $O(1/\sqrt{\const{Nr}})$. Furthermore, MC ray tracing is a binning procedure, therefore the error depends also on the number of bins in which the target is divided. Finally, it is a statistical procedure and the error bound is only a "probabilistic" error as shown in Eq. (\ref{eq:mean_error}). This means that, to calculate the value of the error, several simulations have to be repeated and the average of the errors obtained in every simulation has to be calculated. \\ \indent MC ray method can be improved using a deterministic approach.
+Instead of considering random variables, the sample of rays can be defined in such a way that they have a regular distribution on the domain $D\subseteq\mathbb{R}^d$ of the function $f$ of which we want to compute the integral. Methods based on this deterministic approach are called Quasi Monte Carlo (QMC) methods.
 \section{Quasi-Monte Carlo ray tracing}
 Quasi-Monte Carlo (QMC) methods were proposed for the first time in the 1950s in order to deal with the issues encountered in MC.
 Likewise MC methods, QMC procedures can be used to approximate the integral of a function. 
-In particular, given a sequence of points $\{\variabile{y}_\variabile{n}\}_{\variabile{n} = 1, \cdots, \const{N}}$ in the interval $[a, b]^d\subseteq[0,1)^d$ and a function 
-$f:[a,b]^d\mapsto \mathbb{R}$, QMC method approximates the integral of function $f$ on $[a,b]$ as the average of the values of $f$ on those points, that is:
+It now useful to consider intervals of the form $[\vect{a}, \vect{b})\subseteq[0,1)^d$ and introduce the concept of sequences uniformly distributed modulo one.
+\begin{definition}
+An infinite sequence $\{\variabile{y}_\variabile{n}\}_{\variabile{n}\in\mathbb{N}_0} \in [0,1)^d$ is said to be \textit{uniformly distributed modulo one} (or equidistributed), if for every interval $[\vect{a},\vect{b})\subseteq[0,1)^d$ it holds
 \begin{equation}
-\int_{[a,b]^d}f(y)\textrm{d}y \approx \frac{1}{\const{N}}\sum_{\variabile{i}=1}^{\const{N}}f(\variabile{y}_{\variabile{i}}).
+\lim_{\const{N}\rightarrow \infty}\frac{\textrm{card}(A([\vect{a},\vect{b}), \const{N}))}{\const{N}} = \lambda_d([\vect{a},\vect{b}))
 \end{equation}
-The idea is to generate the set of points in $[a,b]$ such that they are not random distributed but also not exactly uniformly distributed. 
-%To this purpose, the concept of sequences uniformly distributed modulo one has been introduced, they are defined in the following.
-%\begin{definition}
-%An infinite sequence $\{\variabile{y}_\variabile{n}\}_{\variabile{n}\in\mathbb{N}_0}$ is said to be \textit{uniformly distributed modulo one} (or equidistributed), if for every interval $[a,b)\subseteq[0,1)^d$ it holds
-%\begin{equation}
-%\lim_{\const{N}\rightarrow \infty}\frac{\textrm{card}(A([a,b), \const{N}))}{\const{N}} = \lambda_d([a,b))
-%\end{equation}
-%where $\textrm{card}(A([a,b), \const{N}))$ is the cardinality of
-%\begin{equation}
-%A([a,b), N) = \{\variabile{n}\in \mathbb{N}_0: 0\leq\variabile{n}\leq \const{N}-1 \mbox{ and } \variabile{y}_{\variabile{n}}\in [a,b)\}\,,
-%\end{equation}
-%and $\lambda_d([a,b)) = \prod_{\variabile{j}=1}^{d}(b_\variabile{j}-a_\variabile{j})$ is the $d$-dimensional Lesbegue measure of the interval $[a,b)$
-%\end{definition}
-To measure how much the distribution of these points differs from a uniform distribution, the concept of discrepancy was introduced.
-Usually, discrepancy is restricted to intervals $[a, b)\subseteq [0.1)^d$. Intuitively, it measures how much the samples differ from a uniform distribution.
+where $\textrm{card}(A([\vect{a},\vect{b}), \const{N}))$ is the cardinality of
+\begin{equation}
+A([\vect{a},\vect{b}), N) = \{\variabile{n}\in \mathbb{N}_0: 0\leq\variabile{n}\leq \const{N}-1 \mbox{ and } \variabile{y}_{\variabile{n}}\in [\vect{a},\vect{b})\}\,,
+\end{equation}
+and $\lambda_d([\vect{a},\vect{b})) = \prod_{\variabile{j}=1}^{d}(b_\variabile{j}-a_\variabile{j})$ is the $d$-dimensional Lesbegue measure of the interval $[\vect{a},\vect{b}).$
+\end{definition}
+Given a sequence $\{\vect{y}_\variabile{i}\}_{\variabile{i} = 1, \cdots, \const{N}}\in[0,1)^d$ uniformly distributed modulo one and a 
+Riemann integrable function $f:[0,1]^d\mapsto \mathbb{R}$, the integral of $f$ can be approximate as the average of the values that $f$ assumes on $\{\vect{y}_\variabile{i}\}$, that is:
+\begin{equation}
+ \lim_{\const{N}\rightarrow \infty}\frac{1}{\const{N}}\sum_{\variabile{i}=1}^{\const{N}}f(\variabile{y}_{\variabile{i}}) = \int_{[0,1]^d}f(\vect{y})\textrm{d}\vect{y}.
+\end{equation}
+The idea of QMC methods is to generate the set of points in $[\vect{a},\vect{b}]$ such that they are not random distributed but also not exactly uniformly distributed. 
+To measure how much the distribution of these points differs from a uniform distribution, the concept of discrepancy was introduced. 
+Intuitively, discrepancy measures how much the samples differ from a uniform distribution.
 Therefore, random sequences have a very high discrepancy, while uniform distributed sequences have zero discrepancy.
 The definition of discrepancy in more mathematical terms is provided below. 
 \begin{definition}
-Given a set $\mathcal{S} = \{y_1, \cdots, y_\const{N}\}$ of $\const{N}$ points in $[0,1)^d$. The discrepancy $D_\const{N}({\mathcal{S}})$ of $\mathcal{S}$ is defined as
+Given a set $\mathcal{S} = \{\vect{y}_1, \cdots, \vect{y}_\const{N}\}$ of $\const{N}$ points in $[0,1)^d$. The discrepancy $D_\const{N}({\mathcal{S}})$ of $\mathcal{S}$ is defined as
 \begin{equation}
-D_\const{N}({\mathcal{S}}) = \sup_{a, b\in[0,1)^d}\Big|\frac{1}{\const{N}}\sum_{\variabile{i} = 1}^{\const{N}}\chi_{[a,b)}(\variabile{y}_\variabile{i})-\lambda_d([a, b))\Big|
+D_\const{N}({\mathcal{S}}) = \sup_{\vect{a}, \vect{b}\in[0,1)^d}\Big|\frac{1}{\const{N}}\sum_{\variabile{i} = 1}^{\const{N}}\chi_{[\vect{a},\vect{b})}(\vect{y}_\variabile{i})-\lambda_d([\vect{a}, \vect{b}))\Big|
 \end{equation}
-where $\chi_{[a,b)}(\variabile{y}_\variabile{i})$ is the indicator function of $[a, b)\subseteq [0.1)^d$ and $\lambda_d([a,b)) = \prod_{\variabile{j}=1}^{d}(b_\variabile{j}-a_\variabile{j})$ is the $d$-dimensional Lesbegue measure of the interval $[a,b)$.
+where $\chi_{[\vect{a},\vect{b})}(\vect{y}_\variabile{i})$ is the indicator function of $[a, b)\subseteq [0.1)^d$ and $\lambda_d([a,b)) = \prod_{\variabile{j}=1}^{d}(b_\variabile{j}-a_\variabile{j})$ is the $d$-dimensional Lesbegue measure of the interval $[\vect{a},\vect{b})$.
 \end{definition}
 Often, it is enough to consider the discrepancy in the intervals $[0,a)\subseteq[0,1)^d$, in that case we talk about star discrepancy.
  \begin{definition}
-Let $\mathcal{S} = \{y_1, \cdots, y_\const{N}\}$ be a set of $\const{N}$ points in $[0,1)^d$. The  star discrepancy $D^*_\const{N}({\mathcal{S}})$ of $\mathcal{S}$ is defined as:
+Let $\mathcal{S} = \{\vect{y}_1, \cdots, \vect{y}_\const{N}\}$ be a set of $\const{N}$ points in $[0,1)^d$. The  star discrepancy $D^*_\const{N}({\mathcal{S}})$ of $\mathcal{S}$ is defined as:
 \begin{equation}
-D^*_\const{N}({\mathcal{S}}) = \sup_{a\in[0,1)^d}\Big|\frac{1}{\const{N}}\sum_{\variabile{i} = 1}^{\const{N}}\chi_{[0,a)}(\variabile{y}_\variabile{i})-\lambda_d([0, a))\Big|
+D^*_\const{N}({\mathcal{S}}) = \sup_{\vect{a}\in[0,1)^d}\Big|\frac{1}{\const{N}}\sum_{\variabile{i} = 1}^{\const{N}}\chi_{[0,\vect{a})}(\vect{y}_\variabile{i})-\lambda_d([0, \vect{a}))\Big|
 \end{equation}
 %where $\chi_{[0,\point{a})}(\variabile{y}_\variabile{i})$ is the indicator function of $[0,\point{a})\subseteq [0.1)^d$ and $\lambda_d([0, \point{a})) = \prod_{\variabile{j}=1}^d \point{a}_\variabile{j}$ denotes the the $d$-dimensional Lesbegue measure. For intervals of the form $[\point{a}, \point{b})\subseteq [0.1)^d$ we have $\lambda_d([\point{a}, \point{b}))=\prod_{\variabile{j}=1}^{d}(\point{b}_\variabile{j}-\point{a}_\variabile{j})$.
 \end{definition}
@@ -286,8 +293,8 @@ This kind of sequences, called \textit{van der Corput} sequences, are particular
 \begin{equation}
 \variabile{n} = \sum_{\variabile{i}=0}^\infty \variabile{d}_{\variabile{i}}\const{b}^{\variabile{i}}
 \end{equation}
-where $\variabile{d}_{\variabile{i}} \in \{0, 1, \cdots, \const{b}-1\}$ are the so-called the digit numbers.
-The radical inverse function $\phi_{\const{b}}\mathbb{N}_0\mapsto [0,1)$ in base $\const{b}$ is defined as:
+where $\variabile{d}_{\variabile{i}} \in \{0, 1, \cdots, \const{b}-1\}$ are the digit numbers.
+The radical inverse function $\phi_{\const{b}}:\mathbb{N}_0\mapsto [0,1)$ in base $\const{b}$ is defined as:
 \begin{equation}
 \phi_{\const{b}}(\variabile{n}) = \sum_{\variabile{i}=1}^{\infty}\frac{\variabile{d}_{\variabile{i}-1}}{\const{b}^{\variabile{i}}}.
 \end{equation}
@@ -302,52 +309,75 @@ The radical inverse function $\phi_2(5)$ is:
 \phi_2 (5) = \frac{1}{2}+\frac{1}{8} = \frac{5}{8}.
 \end{equation}
 \begin{definition}
-The Van der Corput sequence in base $\const{b}$ is defined as $\{\variabile{y}_{\variabile{n}}\}_{n\in\mathbb{N}_0}$ with $\variabile{y}_{\variabile{n}} = \phi_{\const{b}}(\variabile{n})$.
+The Van der Corput sequence in base $\const{b}$ is defined as $\{ \phi_{\const{b}}(\variabile{n})\}_{n\in\mathbb{N}_0}$.
 \end{definition}
 For example, suppose we have the finite sequence of numbers $\variabile{n}\in \{0, 1,\cdots, 8\}$  the corresponding Van der Corput sequence 
-$\{\variabile{y}_{\variabile{n}}\}_{\variabile{n}\in \{0, 1,\cdots, 8\}}$ in base $\variabile{b}=2$ is:
+$\{ \phi_{\const{b}}(\variabile{n})_{\variabile{n}\in \{0, 1,\cdots, 8\}}$ in base $\variabile{b}=2$ is:
 \begin{equation}
-\big(\phi_2(n)(\variabile{n})\big)_{\variabile{n}\in \{0, 1,\cdots, 8\}} = \Bigg\{0, \frac{1}{2}, \frac{1}{4}, \frac{3}{4}, \frac{1}{8},\frac{5}{8}, \frac{3}{8}, \frac{7}{8}, \frac{1}{16}\Bigg\} \,.
+\big\{\phi_2(\variabile{n})\big\}_{\variabile{n}\in \{0, 1,\cdots, 8\}} = \Bigg\{0, \frac{1}{2}, \frac{1}{4}, \frac{3}{4}, \frac{1}{8},\frac{5}{8}, \frac{3}{8}, \frac{7}{8}, \frac{1}{16}\Bigg\} \,.
 \end{equation}
-%It can be proved that the Van der Corput sequence in base $\variabile{b}$ is uniformly distributed modulo one, \cite{leobacher2014introduction}. 
-The van der Corput sequence has been extended to higher dimensions.
-\\ \indent The ray tracing procedure is computed considering the rays at the source with position and direction coordinates corresponding to the coordinates of the points of a low-discrepancy sequence. 
-Sobol' sequences are an example of the extended Van der Corput sequences in base $\variabile{b}=2$ to $\variabile{d}\geq2$. 
-
-
-\cite{bratley1988algorithm}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% Uniform distribution modulo one
-% say something about Sobol low discrepances sequences
-% Estimation for the error
-% Application of QMC in optics
-% Quasi Monte Carlo ray tracing
+It can be proved that the Van der Corput sequence in base $\variabile{b}$ is uniformly distributed modulo one, \cite{leobacher2014introduction}. 
+The van der Corput sequence has been extended to higher dimensions. An important results shows that, using a low-discrepancy sequence $\{\vect{y}_{\variabile{i}}\}_{\variabile{i}=1, \cdots, \const{N}}$, the integration error:
+\begin{equation}
+\const{err}(f, S_{\const{N}}) =\Bigg|\int_{[0,1]^d}f(\vect{y}) \textrm{d}\vect{y}-\frac{1}{\const{N}}\sum_{\variabile{i}=1}^{\const{N}}f(\vect{y}_\variabile{i})\Bigg|
+\end{equation}
+ can be bounded by the product of a term that depends on $f$ and another term that depends on the discrepancy of the set $\{\vect{y}_{\variabile{i}}\}_{\variabile{i}=1, \cdots, \const{N}}$.
+% Disequality
+\\ \indent QMC ray tracing considers as position and angular coordinates of the rays at the source, the coordinates of the corresponding points of a low-discrepancy sequence. 
+Therefore, to implement QMC ray tracing in two-dimensions we need to construct a low-discrepancy sequence in two-dimensions. We choose for instance a Sobol' sequence which is one an extended Van der Corput sequence in base $\variabile{b}=2$ to $\variabile{d}=2$. The algorithm for generating Sobol' sequences is explained widely in the literature, (see for instance , \cite{bratley1988algorithm}). In appendix \ref{app:Sobol} we give an overview of how these kind of sequences can be constructed. 
+Given a Sobol' sequence $\{\vect{y}_{\variabile{i}}\}_{\variabile{i}=1, \cdots, \const{N}}$ with $\vect{y}_\variabile{i}\in[0,1)^2$ for every $\variabile{i}=1, \cdots, \const{N}$, the two dimensional QMC ray tracing consider the position coordinate of the $\variabile{i}$-th ray at the source equal to the first component of the $\variabile{i}$-th point 
+$\vect{y}_{\variabile{i}}$ of the Sobol' sequence  $\{\vect{y}_{\variabile{i}}\}_{\variabile{i}=1, \cdots, \const{N}}$ and, the direction coordinate of the $\variabile{i}$-th ray at the source equal to the second component of the $\variabile{i}$-th point 
+$\vect{y}_{\variabile{i}}$ of the same sequence. A set of $\const{Nr} = \const{N}$ rays with these initial coordinates is traced within the system and, once the target coordinates of all the rays traced are computed, the output intensity is calculated using the same approach used for MC ray tracing.\\ \indent
+As an example, in Fig. \ref{fig:qmc_sample} we show the distribution of the position and direction coordinates of the rays at the source of the two-faceted cup in Fig. \ref{fig:cup}. 
+A set of $10^3$ rays is considered and the coordinates $(\variabile{x}_1, \optangle_1)$ of every ray are depicted with blue dots.
+We note that the rays have a regular distribution on the $(\variabile{x}, \optangle_1)$-plane.
+We need to remark that, for the system in Fig. \ref{fig:cup}, $\variabile{x}_1 \in[-2,2]$ and the angular coordinates $\optangle_1 \in[-\pi/2, \pi/2]$. 
+Since Sobol' sequences are defined inside sub-intervals of the square $[0,1)^2$, we scaled the points of the sequence $\vect{y}_{\variabile{i}}$ in order to take all the possible positions and directions that the rays can assume at the source. 
+\begin{figure}[h]
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{qmc_sample.jpg}
+    \caption{$10^3$ rays at the source of the two-faceted cup with position $\variabile{x}_1$ and angular $\optangle_1$ coordinates with a regular distributions.
+They are distributed as the points of a Sobol' sequence in two-dimensions.}
+    \label{fig:qmc_sample}
+\end{center}
+  \end{figure}
+\\ \indent Dividing the target into $\const{Nb}=100$ bins, we computed the target intensity using the same procedure explained for MC ray tracing. 
+The difference between MC and QMC ray tracing consists only on the choice of the initial ray set.
+In Fig. \ref{fig:qmc_intensity} we show the profile of the output intensity at the target of the two-faceted cup computed using QMC ray tracing with $10^4$ rays. 
+The QMC intensity is depicted with the red line. It is compared with an analytic intensity shown in the same figure with a green line.
+\begin{figure}[t]
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{qmc_raytracing.jpg}
+    \caption{QMC intensity for the two-faceted cup obtained tracing $\const{Nr}=10^4$ rays and dividing the target into $\const{Nb}=100$ bins.}
+    \label{fig:qmc_intensity}
+\end{center}
+  \end{figure}
+A comparison between Fig. \ref{fig:mc_intensity} and \ref{fig:qmc_intensity} shows that for the two-faceted cup and for a set of $\const{Nr}=10^4$ rays, QMC ray tracing performs much better than MC ray tracing. The results shown for a simple optical system are indeed consistent with what we expected from the theory explained above.
+Therefore the choice of the initial ray set can make a big impact on the performance of the ray tracing procedure. 
 % Disadvantages of QMC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
