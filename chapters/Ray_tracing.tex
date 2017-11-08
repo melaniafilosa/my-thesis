@@ -146,9 +146,9 @@ $[\optangle_{\variabile{j}-1}, \optangle_{\variabile{j}})$ of the partitioning $
 \frac{\int_{\optangle_{\variabile{j}-1}}^{\optangle_{\variabile{j}}} I(\optangle) \textrm{d}\optangle}{\int_{-\pi/2}^{\pi/2}I(\optangle) \textrm{d}\optangle}\,,
 \end{equation}
 where $I(\optangle)$ is the output intensity (not normalized) and it is measured in lumen per radian $[\textrm{lm}/\textrm{rad}]$.
-Note that $\sum_{\variabile{j}=1}^{\const{Nb}}\const{P}_{\variabile{j}, \Delta\optangle}=1$. Using the mean value theorem for the function
-$I(\optangle)$ continuous in $[\optangle_{\variabile{j}-1}, \optangle_{\variabile{j}}]$, the integral at the numerator of the previous equation can be written as: \begin{equation}
-\int_{\optangle_{\variabile{j}-1}}^{\optangle_{\variabile{j}}} I(\optangle) \textrm{d}\optangle = \Delta \optangle\;I(\optangle_{j-1/2}) + O(\Delta \optangle^2).
+Note that $\sum_{\variabile{j}=1}^{\const{Nb}}\const{P}_{\variabile{j}, \Delta\optangle}=1$. From the mean value theorem for the function
+$I(\optangle)$ continuous in $[\optangle_{\variabile{j}-1}, \optangle_{\variabile{j}}]$, we know that there exists a value $\optangle_{k}\in[\optangle_{\variabile{j}-1}, \optangle_{\variabile{j}}]$ for which the integral at the numerator of the previous equation can be written as: \begin{equation}
+\int_{\optangle_{\variabile{j}-1}}^{\optangle_{\variabile{j}}} I(\optangle) \textrm{d}\optangle = \Delta \optangle\;I(\optangle_{k}).
 \end{equation}
 Hence, $\const{P}_{\variabile{j}, \Delta\optangle}$ is proportional to the size $\Delta\optangle= (\optangle_{\const{Nb}}-\optangle_{0})/{\const{Nb}}$
 of the intervals, i.e., inversely proportional to the number of bins $\const{Nb}$ of the partitioning $P_1$.
@@ -222,7 +222,7 @@ To give an example we implemented MC ray tracing for the two-faceted cup the pro
 The light source \point{S}$= [-\variabile{a}, \variabile{a}]$ (line $1$) and the target \point{T}$~=~ [-\variabile{b}, \variabile{b}]$ (line $4$) are two segments normal to the \variabile{z}-axis, where $\variabile{a}=2$ and $\variabile{b}=17$.
 The left and right reflectors (line $2$ and $3$) are oblique segments that connect the source and the target.
 All the optical lines $\lineai \in \{1, \cdots, 4\}$  are located in air, therefore the refractive index $\n_{\lineai}=1$ for every $\lineai$.
-Considering a set of $\const{Nr} = 10^4$ random rays 
+Considering a set of $\const{Nr} = 10^3$ random rays 
 %with coordinates $(\variabile{x}_{\variabile{k}}, \optangle_{\variabile{k}})_{\variabile{k}= 1, \cdots, \const{Nr}}$ is generated at the source.
 at the source, we obtain the distribution on the $(\variabile{x}, \optangle)$-plane shown in Fig. \ref{fig:mc_sample}.
 \begin{figure}[h]
@@ -233,7 +233,7 @@ at the source, we obtain the distribution on the $(\variabile{x}, \optangle)$-pl
 \end{center}
   \end{figure}
 Every sample ray is traced inside the system using the ray tracing procedure. Then, the target $\point{T} = [-\variabile{b}, \variabile{b}]$ is divided into $\const{Nb}= 100$ bins.
-Using Eq. (\ref{g_mc}), the normalized intensity $I_{\const{MC}}$ is computed. $I_{\const{MC}}$  is a piecewise constant function, therefore the averaged normalized intensity  $\hat{I}_{\const{MC}}(\optangle_{\variabile{j}-1/2})= \frac{1}{\Delta \optangle}I_{\const{MC}}(\optangle_{\variabile{j}-1/2})$ is given considering the values that the intensity  $I_{\const{MC}}$ assumes on the middle point $(\optangle_{\variabile{j}-1/2})_{\variabile{j} = 0, \cdots, \const{Nb}}$ of every bin. The profile of $\hat{I}_{\const{MC}}$ is depicted in Fig. \ref{fig:mc_raytrancing_intensity} with the red line. The exact intensity $I$ (analytic intensity) is shown with the green line in the same figure.
+Using Eq. (\ref{g_mc}), the normalized intensity $I_{\const{MC}}$ is computed. $I_{\const{MC}}$  is a piecewise constant function, therefore the averaged normalized intensity  $\hat{I}_{\const{MC}}(\optangle_{\variabile{j}-1/2})= \frac{1}{\Delta \optangle}I_{\const{MC}}(\optangle_{\variabile{j}-1/2})$ is given considering the values that the intensity  $I_{\const{MC}}$ assumes on the middle point $(\optangle_{\variabile{j}-1/2})_{\variabile{j} = 0, \cdots, \const{Nb}}$ of every bin. The profile of $\hat{I}_{\const{MC}}$ is depicted in Fig. \ref{fig:mc_intensity} with the red line. The exact intensity (analytic intensity) is shown with the green line in the same figure.
 \begin{figure}[t]
 \begin{center}
     \includegraphics[width=0.8\textwidth]{MC_raytracing.jpg}
@@ -241,7 +241,7 @@ Using Eq. (\ref{g_mc}), the normalized intensity $I_{\const{MC}}$ is computed. $
    \label{fig:mc_intensity}
 \end{center}
 \end{figure}
-% In appendix A analytic intensity
+
 To conclude, MC ray tracing has the advantages of being very easy to implement and it does not require too much regularity of the function that has to be approximate. Furthermore, the error convergence does not depend on the dimension of the domain in which the function is defined.
 On the other hand, MC method is time consuming as the error has a speed of convergence of the order $O(1/\sqrt{\const{Nr}})$. Furthermore, MC ray tracing is a binning procedure, therefore the error depends also on the number of bins in which the target is divided. Finally, it is a statistical procedure and the error bound is only a "probabilistic" error as shown in Eq. (\ref{eq:mean_error}). This means that, to calculate the value of the error, several simulations have to be repeated and the average of the errors obtained in every simulation has to be calculated. \\ \indent MC ray method can be improved using a deterministic approach.
 Instead of considering random variables, the sample of rays can be defined in such a way that they have a regular distribution on the domain $D\subseteq\mathbb{R}^d$ of the function $f$ of which we want to compute the integral. Methods based on this deterministic approach are called Quasi Monte Carlo (QMC) methods.
@@ -273,59 +273,75 @@ The definition of discrepancy in more mathematical terms is provided below.
 \begin{definition}
 Given a set $\mathcal{S} = \{\vect{y}_1, \cdots, \vect{y}_\const{N}\}$ of $\const{N}$ points in $[0,1)^d$. The discrepancy $D_\const{N}({\mathcal{S}})$ of $\mathcal{S}$ is defined as
 \begin{equation}
-D_\const{N}({\mathcal{S}}) = \sup_{\vect{a}, \vect{b}\in[0,1)^d}\Big|\frac{1}{\const{N}}\sum_{\variabile{i} = 1}^{\const{N}}\chi_{[\vect{a},\vect{b})}(\vect{y}_\variabile{i})-\lambda_d([\vect{a}, \vect{b}))\Big|
+D_\const{N}({\mathcal{S}}) = \sup_{\vect{a}, \vect{b}\in[0,1)^d}\Big|\frac{\textrm{card}(A([\vect{a},\vect{b}), \const{N}))}{\const{N}}-\lambda_d([\vect{a}, \vect{b}))\Big|
 \end{equation}
-where $\chi_{[\vect{a},\vect{b})}(\vect{y}_\variabile{i})$ is the indicator function of $[a, b)\subseteq [0.1)^d$ and $\lambda_d([a,b)) = \prod_{\variabile{j}=1}^{d}(b_\variabile{j}-a_\variabile{j})$ is the $d$-dimensional Lesbegue measure of the interval $[\vect{a},\vect{b})$.
+where $\lambda_d([\vect{a},\vect{b})) = \prod_{\variabile{j}=1}^{d}(b_\variabile{j}-a_\variabile{j})$ is the $d$-dimensional Lesbegue measure of the interval $[\vect{a},\vect{b})$.
 \end{definition}
-Often, it is enough to consider the discrepancy in the intervals $[0,a)\subseteq[0,1)^d$, in that case we talk about star discrepancy.
+Often, it is enough to consider the discrepancy in the intervals $[0,\vect{a})\subseteq[0,1)^d$, in that case we talk about star discrepancy.
  \begin{definition}
 Let $\mathcal{S} = \{\vect{y}_1, \cdots, \vect{y}_\const{N}\}$ be a set of $\const{N}$ points in $[0,1)^d$. The  star discrepancy $D^*_\const{N}({\mathcal{S}})$ of $\mathcal{S}$ is defined as:
 \begin{equation}
-D^*_\const{N}({\mathcal{S}}) = \sup_{\vect{a}\in[0,1)^d}\Big|\frac{1}{\const{N}}\sum_{\variabile{i} = 1}^{\const{N}}\chi_{[0,\vect{a})}(\vect{y}_\variabile{i})-\lambda_d([0, \vect{a}))\Big|
+D^*_\const{N}({\mathcal{S}}) = \sup_{\vect{a}\in[0,1)^d}\Big|\frac{\textrm{card}(A([0,\vect{b}), \const{N}))}{\const{N}}-\lambda_d([0, \vect{a}))\Big|
 \end{equation}
 %where $\chi_{[0,\point{a})}(\variabile{y}_\variabile{i})$ is the indicator function of $[0,\point{a})\subseteq [0.1)^d$ and $\lambda_d([0, \point{a})) = \prod_{\variabile{j}=1}^d \point{a}_\variabile{j}$ denotes the the $d$-dimensional Lesbegue measure. For intervals of the form $[\point{a}, \point{b})\subseteq [0.1)^d$ we have $\lambda_d([\point{a}, \point{b}))=\prod_{\variabile{j}=1}^{d}(\point{b}_\variabile{j}-\point{a}_\variabile{j})$.
 \end{definition}
 % Maybe add a picture
 Sequences constructed such that the corresponding star discrepancy has an order of $O(\log(\const{N})^d/\const{N})$ are called \textit{low-discrepancy sequences}, \cite{owen2003quasi}.
-There are many way to generate low discrepancies sequences.
-Here we show a particular construction for $d=1$ that was introduced the first time by Van der Corput in 1935.  
-This kind of sequences, called \textit{van der Corput} sequences, are particular interesting not only because they give an intuition of how to construct low discrepancy sequences but also because many other kind of sequences in higher dimensions are based on this one-dimensional case. Before introducing these sequences we need to give the concept of radical inverse function. Let $\const{b}\geq 2$ be an integer base. Any natural number $\variabile{n}\in \mathbb{N}_0$ can be decomposed in base $\const{b}$ as follows:
+An important results shows that, using a low-discrepancy sequence $\{\vect{y}_{\variabile{i}}\}_{\variabile{i}=1, \cdots, \const{N}}$, the absolute error of a QMC algorithm:
 \begin{equation}
-\variabile{n} = \sum_{\variabile{i}=0}^\infty \variabile{d}_{\variabile{i}}\const{b}^{\variabile{i}}
+\const{err}(f, S_{\const{N}}) =\Bigg|\int_{[0,1)^d}f(\vect{y}) \textrm{d}\vect{y}-\frac{1}{\const{N}}\sum_{\variabile{i}=1}^{\const{N}}f(\vect{y}_\variabile{i})\Bigg|
 \end{equation}
-where $\variabile{d}_{\variabile{i}} \in \{0, 1, \cdots, \const{b}-1\}$ are the digit numbers.
-The radical inverse function $\phi_{\const{b}}:\mathbb{N}_0\mapsto [0,1)$ in base $\const{b}$ is defined as:
+ can be bounded by the product of a term that depends on $f$ and another term that depends on the discrepancy of the set $\{\vect{y}_{\variabile{i}}\}_{\variabile{i}=1, \cdots, \const{N}}.$ This estimation of the error is given by the Koksma-Hlawka inequality that is:
 \begin{equation}
-\phi_{\const{b}}(\variabile{n}) = \sum_{\variabile{i}=1}^{\infty}\frac{\variabile{d}_{\variabile{i}-1}}{\const{b}^{\variabile{i}}}.
+\Bigg|\int_{[0,1)^d}f(\vect{y}) \textrm{d}\vect{y}-\frac{1}{\const{N}}\sum_{\variabile{i}=1}^{\const{N}}f(\vect{y}_\variabile{i})\Bigg|\leq V(f)D^*_\const{N}({\mathcal{S}})
 \end{equation}
-As an example we provide in the following the radical inverse function $\phi_{\const{b}}(5)$ in base $\const{b} = 2$. 
-The digit expansion in base $\const{b}$ of $\variabile{n}=5$ is:
+where $V(f)$ is the so-called variation function of $f$ in the sense of Hardy-Krause (see \cite{brandolini2013koksma,owen2005multidimensional} for details).
+%and, when $f\in C^d([0,1])^d$ is continuous will all the derivatives continuous, it assumes the form:
+%\begin{equation}
+
+%\end{equation}
+% QMC error
+From definition of low-discrepancy sequences and from the Koksma-Hlawka inequality we can state that:
 \begin{equation}
-5 = 1\cdot 2^0+1\cdot 2^2.
+\const{err}(f, S_{\const{N}})<C \frac{\log(\const{N})^d}{\const{N}}.
 \end{equation}
-Therefore, $\variabile{d}_0 = 1, \variabile{d}_1 = 0$ and $\variabile{d}_2 = 1$. 
-The radical inverse function $\phi_2(5)$ is:
-\begin{equation}
-\phi_2 (5) = \frac{1}{2}+\frac{1}{8} = \frac{5}{8}.
-\end{equation}
-\begin{definition}
-The Van der Corput sequence in base $\const{b}$ is defined as $\{ \phi_{\const{b}}(\variabile{n})\}_{n\in\mathbb{N}_0}$.
-\end{definition}
-For example, suppose we have the finite sequence of numbers $\variabile{n}\in \{0, 1,\cdots, 8\}$  the corresponding Van der Corput sequence 
-$\{ \phi_{\const{b}}(\variabile{n})_{\variabile{n}\in \{0, 1,\cdots, 8\}}$ in base $\variabile{b}=2$ is:
-\begin{equation}
-\big\{\phi_2(\variabile{n})\big\}_{\variabile{n}\in \{0, 1,\cdots, 8\}} = \Bigg\{0, \frac{1}{2}, \frac{1}{4}, \frac{3}{4}, \frac{1}{8},\frac{5}{8}, \frac{3}{8}, \frac{7}{8}, \frac{1}{16}\Bigg\} \,.
-\end{equation}
-It can be proved that the Van der Corput sequence in base $\variabile{b}$ is uniformly distributed modulo one, \cite{leobacher2014introduction}. 
-The van der Corput sequence has been extended to higher dimensions. An important results shows that, using a low-discrepancy sequence $\{\vect{y}_{\variabile{i}}\}_{\variabile{i}=1, \cdots, \const{N}}$, the integration error:
-\begin{equation}
-\const{err}(f, S_{\const{N}}) =\Bigg|\int_{[0,1]^d}f(\vect{y}) \textrm{d}\vect{y}-\frac{1}{\const{N}}\sum_{\variabile{i}=1}^{\const{N}}f(\vect{y}_\variabile{i})\Bigg|
-\end{equation}
- can be bounded by the product of a term that depends on $f$ and another term that depends on the discrepancy of the set $\{\vect{y}_{\variabile{i}}\}_{\variabile{i}=1, \cdots, \const{N}}$.
-% Disequality
-\\ \indent QMC ray tracing considers as position and angular coordinates of the rays at the source, the coordinates of the corresponding points of a low-discrepancy sequence. 
-Therefore, to implement QMC ray tracing in two-dimensions we need to construct a low-discrepancy sequence in two-dimensions. We choose for instance a Sobol' sequence which is one an extended Van der Corput sequence in base $\variabile{b}=2$ to $\variabile{d}=2$. The algorithm for generating Sobol' sequences is explained widely in the literature, (see for instance , \cite{bratley1988algorithm}). In appendix \ref{app:Sobol} we give an overview of how these kind of sequences can be constructed. 
-Given a Sobol' sequence $\{\vect{y}_{\variabile{i}}\}_{\variabile{i}=1, \cdots, \const{N}}$ with $\vect{y}_\variabile{i}\in[0,1)^2$ for every $\variabile{i}=1, \cdots, \const{N}$, the two dimensional QMC ray tracing consider the position coordinate of the $\variabile{i}$-th ray at the source equal to the first component of the $\variabile{i}$-th point 
+For small dimensions $d$ QMC performs much better than MC methods, while for large dimension $d$ the factor $\log(\const{N})$ could be very big.
+\\ \indent There are many ways to generate such sequences.
+% In the following we show a particular construction of a low-discrepancy sequence for $d=1$ that was introduced the first time by Van der Corput in 1935.  
+%This kind of sequences, called \textit{van der Corput} sequences, are particular interesting not only because they give an intuition of how to construct low discrepancy sequences but also because many other kind of sequences in higher dimensions are based on this one-dimensional case. Before introducing these sequences we need to give the concept of radical inverse function. Let $\const{b}\geq 2$ be an integer base. Any natural number $\variabile{n}\in \mathbb{N}_0$ can be decomposed in base $\const{b}$ as follows:
+%\begin{equation}
+%\variabile{n} = \sum_{\variabile{i}=0}^\infty \variabile{d}_{\variabile{i}}\const{b}^{\variabile{i}}
+%\end{equation}
+%where $\variabile{d}_{\variabile{i}} \in \{0, 1, \cdots, \const{b}-1\}$ are the digit numbers.
+%The radical inverse function $\phi_{\const{b}}:\mathbb{N}_0\mapsto [0,1)$ in base $\const{b}$ is defined as:
+%\begin{equation}
+%\phi_{\const{b}}(\variabile{n}) = \sum_{\variabile{i}=1}^{\infty}\frac{\variabile{d}_{\variabile{i}-1}}{\const{b}^{\variabile{i}}}.
+%\end{equation}
+%As an example we provide in the following the radical inverse function $\phi_{\const{b}}(5)$ in base $\const{b} = 2$. 
+%The digit expansion in base $\const{b}$ of $\variabile{n}=5$ is:
+%\begin{equation}
+%5 = 1\cdot 2^0+1\cdot 2^2.
+%\end{equation}
+%Therefore, $\variabile{d}_0 = 1, \variabile{d}_1 = 0$ and $\variabile{d}_2 = 1$. 
+%The radical inverse function $\phi_2(5)$ is:
+%\begin{equation}
+%\phi_2 (5) = \frac{1}{2}+\frac{1}{8} = \frac{5}{8}.
+%\end{equation}
+%\begin{definition}
+%The Van der Corput sequence in base $\const{b}$ is defined as $\{ \phi_{\const{b}}(\variabile{n})\}_{n\in\mathbb{N}_0}$.
+%\end{definition}
+%For example, suppose we have the finite sequence of numbers $\variabile{n}\in \{0, 1,\cdots, 8\}$  the corresponding Van der Corput sequence 
+%$\{ \phi_{\const{b}}(\variabile{n})_{\variabile{n}\in \{0, 1,\cdots, 8\}}$ in base $\variabile{b}=2$ is:
+%\begin{equation}
+%\big\{\phi_2(\variabile{n})\big\}_{\variabile{n}\in \{0, 1,\cdots, 8\}} = \Bigg\{0, \frac{1}{2}, \frac{1}{4}, \frac{3}{4}, \frac{1}{8},\frac{5}{8}, \frac{3}{8}, \frac{7}{8}, \frac{1}{16}\Bigg\} \,.
+%\end{equation}
+%It can be proved that the Van der Corput sequence in base $\variabile{b}$ is uniformly distributed modulo one, \cite{leobacher2014introduction}. 
+%The van der Corput sequence has been extended to higher dimensions. 
+%The most common QMC approach uses Sobol sequence which is one an extended Van der Corput sequence in base $\variabile{b}=2$ to $\variabile{d}\geq2$. 
+The most common QMC approach uses the so-called Sobol' sequence. The algorithm for generating Sobol' sequences is explained widely in the literature, (see for instance , \cite{bratley1988algorithm}). In appendix \ref{app:Sobol} we give an overview of how these kind of sequences can be constructed.
+\\ \indent Based on QMC methods, QMC ray tracing considers as position and angular coordinates of the rays at the source, the coordinates of the corresponding points of a low-discrepancy sequence. 
+Therefore, to implement QMC ray tracing in two-dimensions we need to construct a low-discrepancy sequence in two-dimensions.  
+Given, for instance, a Sobol' sequence $\{\vect{y}_{\variabile{i}}\}_{\variabile{i}=1, \cdots, \const{N}}$ with $\vect{y}_\variabile{i}\in[0,1)^2$ for every $\variabile{i}=1, \cdots, \const{N}$, the two dimensional QMC ray tracing consider the position coordinate of the $\variabile{i}$-th ray at the source equal to the first component of the $\variabile{i}$-th point 
 $\vect{y}_{\variabile{i}}$ of the Sobol' sequence  $\{\vect{y}_{\variabile{i}}\}_{\variabile{i}=1, \cdots, \const{N}}$ and, the direction coordinate of the $\variabile{i}$-th ray at the source equal to the second component of the $\variabile{i}$-th point 
 $\vect{y}_{\variabile{i}}$ of the same sequence. A set of $\const{Nr} = \const{N}$ rays with these initial coordinates is traced within the system and, once the target coordinates of all the rays traced are computed, the output intensity is calculated using the same approach used for MC ray tracing.\\ \indent
 As an example, in Fig. \ref{fig:qmc_sample} we show the distribution of the position and direction coordinates of the rays at the source of the two-faceted cup in Fig. \ref{fig:cup}. 
@@ -344,22 +360,23 @@ They are distributed as the points of a Sobol' sequence in two-dimensions.}
 \\ \indent Dividing the target into $\const{Nb}=100$ bins, we computed the target intensity using the same procedure explained for MC ray tracing. 
 The difference between MC and QMC ray tracing consists only on the choice of the initial ray set.
 In Fig. \ref{fig:qmc_intensity} we show the profile of the output intensity at the target of the two-faceted cup computed using QMC ray tracing with $10^4$ rays. 
-The QMC intensity is depicted with the red line. It is compared with an analytic intensity shown in the same figure with a green line.
-\begin{figure}[t]
+The QMC intensity is depicted with the red line. It is compared with an analytic intensity shown in the same figure with the green dotted line.
+A comparison between Fig. \ref{fig:mc_intensity} and \ref{fig:qmc_intensity} shows that for the two-faceted cup and for a set of $\const{Nr}=10^4$ rays, QMC ray tracing performs much better than MC ray tracing. The results shown for a simple optical system are indeed consistent with what we expected from the theory explained above.
+We want to remark that, although QMC ray tracing outperforms MC ray tracing for a simple optical system, it has two main disadvantages. 
+First, its convergence is strongly related with the dimension in which it is implemented.
+Second, likewise MC ray tracing, QMC ray tracing is a binning procedure, therefore the error depends on the number of bins in which the target is divided since the averaged value of the intensity over every bin is calculated.
+\begin{figure}[h]\vspace{-3cm}
 \begin{center}
     \includegraphics[width=0.8\textwidth]{qmc_raytracing.jpg}
     \caption{QMC intensity for the two-faceted cup obtained tracing $\const{Nr}=10^4$ rays and dividing the target into $\const{Nb}=100$ bins.}
     \label{fig:qmc_intensity}
 \end{center}
   \end{figure}
-A comparison between Fig. \ref{fig:mc_intensity} and \ref{fig:qmc_intensity} shows that for the two-faceted cup and for a set of $\const{Nr}=10^4$ rays, QMC ray tracing performs much better than MC ray tracing. The results shown for a simple optical system are indeed consistent with what we expected from the theory explained above.
-Therefore the choice of the initial ray set can make a big impact on the performance of the ray tracing procedure. 
-% Disadvantages of QMC
-
-
-
-
-
+ \\\ \indent
+From the results provided in this chapter we can conclude that the choice of the initial ray set can make a big impact on the performance of the ray tracing procedure. 
+Based on an idea of taking a smart choice of the initial ray set, we develop a new ray tracing method which is based on phase space. 
+The phase space concept will be introduced in the next chapter. The new ray tracing method employs the phase space of the source and the target of the optical systems.
+We will show in this thesis that phase space ray tracing allows to trace only few rays inside the system to obtain the desired accuracy of the target intensity. 
 
 
 
