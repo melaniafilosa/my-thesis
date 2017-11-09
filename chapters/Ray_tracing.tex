@@ -1,19 +1,19 @@
 \chapter{Ray tracing}\label{chap:raytracing}
-Ray tracing is a geometric problem that describes the transport of light within optical systems.
-It is a forward method which uses single rays to describe the propagation of light through an optical system.
-Given an optical system and a set of rays at the source, ray tracing relates the input light distribution with the distribution of light at the target of the optical system. 
+Ray tracing is a geometric problem that calculates the transport of light within optical systems.
+It is a forward method which uses single rays to describe  light.
+Given an optical system and a set of rays at the source, ray tracing relates the input light distribution with the output distribution. 
 The influence of diffraction on the transport of a ray is neglected and geometrical modeling of an optical system needs to be considered.
 Generally, the method can be implemented for two or more dimensions and for any optical system.
-In this thesis, we restrict ourselves to two-dimensional case. Hence, from now on we will refer to optical lines instead of optical surface.
-The two-dimensional case is particularly relevant because it is a good test case to demonstrate the performance of the new ray tracing method.
+In this thesis, we restrict ourselves to the two-dimensional case. Hence, from now on we will refer to optical lines instead of optical surface.
+The two-dimensional case is particularly relevant because it is a good test case to demonstrate the performance of the new methods.
 Optical designers often start with 2D systems where only the meridional plane is taken into account because it gives a good prediction of the target distribution of the rays
-(see \cite{winston2005nonimaging}, chapter $4$, p.$50-65$). However, the two-dimensional case also has some limitations, as it may not identify skew rays that are turned back by the system, and so a 2D analysis cannot guarantee a proper treatment of non meridional rays in 3D. Hence, the 2D target intensity distribution is not exactly equal to the corresponding 3D intensity. Furthermore in this chapter we consider systems where only reflection and refraction laws are taken into account.
+(see \cite{winston2005nonimaging}, chapter $4$, p.$50-65$). However, the two-dimensional case also has some limitations, as it may not identify skew rays that are turned back by the system, and so a 2D analysis cannot guarantee a proper treatment of non meridional rays in 3D. In this chapter we consider systems where only reflection and refraction laws are taken into account.
 \section{Ray tracing for two-dimensional optical systems}\label{sec:raytracing}
 Ray tracing consists of tracing each ray, which is considered to be a broken line, through the optical system. 
 Every ray emitted from the source is followed until it reaches the target. During its propagation it can encounter optical components which change its direction. The ray tracing procedure is constructed such that the position and the direction of the rays are calculated on every optical lines that they hit until they reach the target.
 Given a Cartesian coordinate system $(\variabile{x}, \variabile{z})$, a two-dimensional optical system symmetric with respect to the $\variabile{z}$-axis is defined.
 Hence, usually the optical axis coincides with the $\variabile{z}$-axis.
-The optical system is formed by a source \point{S}, a target  \point{T} and some optical components $\lineai$ where $\lineai \in \{2, \cdots, \nline-1\}$ and $\nline$
+The optical system is formed by a source \point{S}, a target  \point{T} and some optical components labeled with indexes $\lineai$ where $\lineai \in \{2, \cdots, \nline-1\}$ and $\nline$
  indicates the number of lines that form the system. \point{S} and \point{T} are indicated with the indexes $1$ and $\nline$, respectively.
 The index of refraction of the medium in which line $\lineai$ is located is indicated with $\n_\lineai$.
 Every ray emitted by \point{S} (line $1$) can hit some optical components $\lineai\in\{2, \cdots, \nline -1\}$ before reaching \point{T} (line $\nline$).
@@ -50,13 +50,13 @@ Fig. \ref{fig:cup} shows an example where a single ray is traced inside a very s
 In order to compute the target photometric variables, we need to know how the optical system influences the direction of the rays when they hit an optical line.
 Ray tracing relates the position coordinates
  $ (\variabile{x}_1, \variabile{z}_1)$ and the direction vector $\vect{s}_1$ of every ray at the source $\point{S}$ with the corresponding position $(\variabile{x}_\nline, \variabile{z}_\nline)$ and direction $\vect{s}_\nline$
- at the target $\point{T}$. As in the following we will use often the target coordinates of the rays, from now on, to simplify the notation, we write $(\variabile{x},\variabile{z})$ instead of $(\variabile{x}_\nline, \variabile{z}_\nline)$,  $\optangle$ instead of $\optangle_\nline$ and $\vect{s}$ instead of $\vect{s}_{\nline}$ for the target coordinates.
+ at the target $\point{T}$. As in the following we will use often the target coordinates of the rays, from now on, to simplify the notation, we do not write the subscript $\nline$ for the target coordinates. Hence, from now on, we write $(\variabile{x},\variabile{z})$ instead of $(\variabile{x}_\nline, \variabile{z}_\nline)$,  $\optangle$ instead of $\optangle_\nline$ and $\vect{s}$ instead of $\vect{s}_{\nline}$ for the target coordinates.
 The ray tracing algorithm can be schematized as follows.
 \begin{enumerate}
- \item[1. ] Given a ray that leaves $\point{S}$ with initial position $(\variabile{x}_1, \variabile{z}_1)$ and initial direction $\vect{s}_1~=~(-\sin \optangle_1, \cos \optangle_1)$, use Eq. ($\ref{parametrization}$) to implement the ray parametrization $\vect{r}(\variabile{s}_1)$;
-\item[2. ] Compute the coordinates $(\variabile{x}_\variabile{k}, \variabile{z}_\variabile{k})_{\variabile{k} = 1\cdots, \nline}$ of the intersection point of the ray with all the lines that it hits;
+ \itemGiven a ray that leaves $\point{S}$ with initial position $(\variabile{x}_1, \variabile{z}_1)$ and initial direction $\vect{s}_1~=~(-\sin \optangle_1, \cos \optangle_1)$, use Eq. ($\ref{parametrization}$) to implement the ray parametrization $\vect{r}(\variabile{s}_1)$;
+\item Compute the coordinates $(\variabile{x}_\variabile{k}, \variabile{z}_\variabile{k})_{\variabile{k} = 1\cdots, \nline}$ of the intersection point of the parameterized ray $\vect{r}(\variabile{s}_1)$ with all the lines that it hits;
 \begin{itemize}
-\item[a)] If the shape of the lines is described by equations with a known analytical description, the intersection points are determined analytically;
+\item[a)] If the shape of the lines is described by an analytical equation, the intersection points are determined analytically;
 \item[b)] If there is no analytic description for the optical lines, the intersections need to be determined using iterative methods;
 \end{itemize}
 \item  Determine the closest line $\lineai$ that the forward ray encounters;
@@ -76,9 +76,9 @@ The procedure explained above is repeated for every ray traced through the syste
 Once the target position and the direction of every ray traced are computed, the target photometric variables can be calculated.\\ \indent
 There are different ways to implement the ray tracing procedure. The efficiency of the ray tracing can be related with the distribution of the rays at the source. 
 If the initial position and direction of the rays are chosen randomly we have Monte Carlo (MC) ray tracing. 
-This is a very common method in non-imaging optics as it is very powerful and easy to implement.
-If the rays are chosen to be points of a low discrepancy sequence we have the Quasi-Monte Carlo (QMC) ray tracing.
-This will be clarified in the following.
+This is a very common method in non-imaging optics as it is very powerful and easy to implement. MC ray tracing will be explained in details in the next paragraph of this chapter.
+If the rays are chosen from a so-called low discrepancy sequence we have the Quasi-Monte Carlo (QMC) ray tracing.
+This will be clarified in Section \ref{sec:QMC}.
 \section{Monte Carlo ray tracing}
 Before explain MC ray tracing we give a general introduction about MC methods. MC simulations are often used to approximate the integral of a given function $f$ considering random variables in the domain of $f$. Given an interval $D = [\vect{a}, \vect{b}]$ with $\vect{a} = (a_1, \cdots, a_d)$ and $\vect{b} = (b_1, \cdots, b_d)$ elements of $\mathbb{R}^d$ such that
 $[\vect{a}, \vect{b}]  = [a_1, b_1] \times \cdots \times [a_d, b_d]$, a function $f:[\vect{a},\vect{b}]\subset \mathbb{R}^d \mapsto \mathbb{R}$ and a random variable 
@@ -90,8 +90,7 @@ Note that if $\rho$ is a uniform probability density function, we have:
 \begin{equation}
 \mathbb{E}[f] = \int_{D}f(\vect{y})\rho(\vect{y}) \textrm{d}\vect{y} =\frac{1}{(\vect{b}-\vect{a})} \int_{D}f(\vect{y}) \textrm{d}\vect{y}.
 \end{equation}
-In Monte Carlo methods $\const{N}$ independent random variables  $\{\vect{y}_\variabile{i}\}_{\variabile{i} = 1, \cdots, \const{N}}\in D$ 
-from the density $\rho$ are considered and, the sum
+In Monte Carlo methods $\const{N}$ independent random variables  $\{\vect{y}_\variabile{i}\}_{\variabile{i} = 1, \cdots, \const{N}}\in D$ are generated from the density function  $\rho$ and, the sum
 \begin{equation}
 S_{\const{N}}(f) = \frac{1}{\const{N}} \sum_{\variabile{i}=1}^{\textrm{N}} f(\vect{y}_\variabile{i})
 \end{equation}
@@ -106,7 +105,7 @@ Therefore the following relation holds:
 \end{equation}
 Suppose that $f$ has variance $\textrm{Var}[f]=\sigma^2[f] $, then
 \begin{equation}
-\textrm{Var}[S_\const{N}(f)] = \mathbb{E}[(S_{\const{N}}(f)-\mathbb{E}[S_{\const{N}}(f)])^2]= \mathbb{E}[(S_{\const{N}}(f)-\mathbb{E}[f])^2] = \sigma[f]^2/\const{N}
+\textrm{Var}[S_\const{N}(f)] = \mathbb{E}[(S_{\const{N}}(f)-\mathbb{E}[S_{\const{N}}(f)])^2]= \mathbb{E}[(S_{\const{N}}(f)-\mathbb{E}[f])^2] = \sigma[f]^2/\const{N},
 \end{equation}
 where the second equality follows from the linearity of the expected value, that is:
 \begin{equation}
@@ -114,7 +113,7 @@ where the second equality follows from the linearity of the expected value, that
 \end{equation}
 Indicating the integration error with:
 \begin{equation}
-\const{err}(f, S_{\const{N}}) =\Bigg|\int_{D}f(\vect{y})\rho(\vect{y}) \textrm{d}\vect{y}-S_{\const{N}}(f)\Bigg|
+\const{err}(f, S_{\const{N}}) =\Bigg|\int_{D}f(\vect{y})\rho(\vect{y}) \textrm{d}\vect{y}-S_{\const{N}}(f)\Bigg|,
 \end{equation}
 we obtain that
 \begin{equation}\label{eq:mean_error}
@@ -123,7 +122,7 @@ we obtain that
 Hence, the absolute value of the integration error is, on average, bounded by $\sigma[f]/\sqrt{\const{N}}$, where $\sigma[f]$ is the standard deviation of $f$, \cite{leobacher2014introduction}. It is worthy to note that $\const{err}(f, S_{\const{N}})$ does not depend on the dimension $d$ of $f$.
 \\ \indent MC technique can be combined with the ray tracing procedure in order to compute the light distribution at the target of an optical system.
 In MC ray tracing the position and the direction of  every ray at the source are chosen randomly. 
-In the two-dimensional case (d=2), for every ray we need to choose one position coordinate $\variabile{x}_1$ at the source and one angular coordinate $\optangle_1$ at the target as the $\variabile{z}_1$ coordinate of every ray at the source is given (for instance, for the two-faceted cup in Fig. \ref{fig:cup}, $\variabile{z}_1=0$ for every ray). 
+In the two-dimensional case ($d$=2), for every ray we need to choose one position coordinate $\variabile{x}_1$ at the source and one angular coordinate $\optangle_1$ at the target, indeed the $\variabile{z}_1$ coordinate of every ray at the source is always given (for instance, for the two-faceted cup in Fig. \ref{fig:cup}, $\variabile{z}_1=0$ for every ray). 
 Therefore, given a set of random variables $\{\vect{y}_1, \cdots, \vect{y}_N\}\in [\vect{a}, \vect{b}]\subset\mathbb{R}^2$, the initial position coordinate $\variabile{x}_1$ of the $\variabile{k}$-th ray corresponds to the first component of the $\variabile{k}$-th random variable $\vect{y}_\variabile{k}$ and, the starting angular coordinate of the $\variabile{k}$-th ray corresponds to the second component of the $\variabile{k}$-th random variable $\vect{y}_\variabile{k}$.
 Next, rays with those random initial coordinates are traced from \point{S} to \point{T} within the optical system.
 In this way a probabilistic interpretation of the output photometric variables is provided.
@@ -245,7 +244,7 @@ Using Eq. (\ref{g_mc}), the normalized intensity $I_{\const{MC}}$ is computed. $
 To conclude, MC ray tracing has the advantages of being very easy to implement and it does not require too much regularity of the function that has to be approximate. Furthermore, the error convergence does not depend on the dimension of the domain in which the function is defined.
 On the other hand, MC method is time consuming as the error has a speed of convergence of the order $O(1/\sqrt{\const{Nr}})$. Furthermore, MC ray tracing is a binning procedure, therefore the error depends also on the number of bins in which the target is divided. Finally, it is a statistical procedure and the error bound is only a "probabilistic" error as shown in Eq. (\ref{eq:mean_error}). This means that, to calculate the value of the error, several simulations have to be repeated and the average of the errors obtained in every simulation has to be calculated. \\ \indent MC ray method can be improved using a deterministic approach.
 Instead of considering random variables, the sample of rays can be defined in such a way that they have a regular distribution on the domain $D\subseteq\mathbb{R}^d$ of the function $f$ of which we want to compute the integral. Methods based on this deterministic approach are called Quasi Monte Carlo (QMC) methods.
-\section{Quasi-Monte Carlo ray tracing}
+\section{Quasi-Monte Carlo ray tracing}\label{sec:QMC}
 Quasi-Monte Carlo (QMC) methods were proposed for the first time in the 1950s in order to deal with the issues encountered in MC.
 Likewise MC methods, QMC procedures can be used to approximate the integral of a function. 
 It now useful to consider intervals of the form $[\vect{a}, \vect{b})\subseteq[0,1)^d$ and introduce the concept of sequences uniformly distributed modulo one.

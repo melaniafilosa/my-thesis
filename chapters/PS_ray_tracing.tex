@@ -1,5 +1,37 @@
 \chapter{Ray tracing on phase space} \label{chap:PS}
+In this chapter we explain a new ray tracing method which employes the phase space (PS) of the source and the target of the optical systems.
+The PS concept is introduced in the next section where we focus on the two-dimensional case.
 \section{Phase space concept}
+Given an optical surface in three dimensions, in PS every ray is described by two position coordinates
+and two direction coordinates. Therefore the PS of a three-dimensional systems is a four-dimensional space.
+The two position coordinates are given by two of the coordinates of the intersection point of the ray with the surface, while the two direction coordinates are
+the momentum coordinates of the vector tangent to the ray projected on the optical surface (see \cite{Wolf}).
+For two-dimensional systems every ray in the PS of a line is given by a point. Therefore, the PS of every line is a two-dimensional space.
+The position coordinate in the PS of line \lineai is the \variabile{x}-coordinate of the intersection point between the ray and line \lineai.
+The direction coordinate is the sine of the angle that the ray forms with respect to the normal of line \lineai multiplied by the index of refraction of the medium in which the ray is located.
+We indicate the PS with \set{S}{}{}$=$\set{Q}{}{}$\times$\set{P}{}{},
+where \set{Q}{}{} is the set of the position coordinates \var{q} and \set{P}{}{} is the set of the direction coordinates $\variabile{p}=\var{n}\sin{\tau}$ with $\tau$ the angle between the ray and the normal \vect{$\boldsymbol{\nu}$} of the line and \variabile{n} is the index of refraction of the medium in which the line is located.  
+The normal \vect{$\boldsymbol{\nu}$} is always directed into the cup and the angle $\tau$ between the ray and \vect{$\boldsymbol{\nu}$} is measured counterclockwise.
+In PS each ray is described by its intersection point with the line it hits and the sine of the angle it forms with respect to the optical axis multiplied by the refractive index (see \cite{wolf2004geometric} chapter 2.1-2.3, \cite{rausch2014phase}, and \cite{torre2005linear} chapter 1 for details).
+In the following, the phase space is considered only for the source $\mathcal{S}$ and the target $\mathcal{T}$ and for no other line of the optical system.
+The rays in a two-dimensional system correspond to points with coordinates $(x,\tau)$ and $(q,\eta)$ in $\mathcal{S}$ and $\mathcal{T}$ phase space, respectively.
+We have indicated the ray positions with $\variabile{x}$ and $\variabile{q}$, the angles formed with the normal with $t$ and $\theta$, the refractive indexes with $\n_{\textrm{s}}$ and $n_{\textrm{t}}$, for $\mathcal{S}$ and $\mathcal{T}$, respectively and, with $\tau = \n_{\textrm{s}}\sin(t)$ and $\eta = \n_{\textrm{t}}\sin(\theta)$ the directions of the rays.
+
+The rays are represented by a unique point in phase space, both for $\mathcal{S}$ and $\mathcal{T}$.
+More formally, the phase space for the light source is defined as: \begin{equation}
+\mbox{\set{S}{$1${}}=\mathcal{S}\times[-n_\textrm{s},n_\textrm{s}] .\end{equation}
+The target phase space is defined as \begin{equation}\mathcal{P}_\textrm{t}=\mathcal{T}\times[-n_\textrm{t},n_\textrm{t}] .\end{equation}
+The map $\mathcal{M}:\mathcal{P}_{\textrm{s}}\rightarrow\mathcal{P}_{\textrm{t}}$ which describes how the optical system changes the rays is defined as:
+\begin{equation}\label{M}
+\mathcal{M}(x,\tau)=(q,\eta).
+\end{equation}
+For most optical systems, there is no way to determine an explicit expression for the map $\mathcal{M}$ defined above.
+The idea is to apply the edge-ray principle \cite{Ries:2} to a given set of rays at the source.
+The principle states that to map one region from the source to the target phase space it is sufficient to map the boundaries of those regions.
+Therefore, the boundaries of the source are mapped to the boundaries of the target and the regions where the luminance is different from zero are calculated.
 \section{The edge-ray principle}
+
+
 \section{Phase space ray tracing}
 
+\section{Comparison between MC QMC and PS ray tracing}
