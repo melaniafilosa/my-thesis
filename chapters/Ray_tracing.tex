@@ -44,16 +44,16 @@ Fig. \ref{fig:cup} shows an example where a single ray is traced inside a very s
    The left and right reflectors (line $2$ and $3$) connect the source with the target.}}
   \label{fig:cup}
 \end{figure}
-%The light source \point{S}$= [-\variabile{a}, \variabile{a}]$ (line $1$) and the target \point{T}$~=~ [-\variabile{b}, \variabile{b}]$ (line $4$) are two segments normal to the \variabile{z}-axis, where $\variabile{a}=2$ and $\variabile{b}=17$.
-%The left and right reflectors (line $2$ and $3$) are oblique segments that connect the source and the target.
-%All the optical lines $\lineai \in \{1, \cdots, 4\}$  are located in air, therefore the refractive index $\n_{\lineai}=1$ for every $\lineai$. \\ \indent
+The light source \point{S}$= [-\variabile{a}, \variabile{a}]$ (line $1$) and the target \point{T}$~=~ [-\variabile{b}, \variabile{b}]$ (line $4$) are two segments normal to the \variabile{z}-axis, where $\variabile{a}=2$ and $\variabile{b}=17$.
+The left and right reflectors (line $2$ and $3$) are oblique segments that connect the source and the target.
+All the optical lines $\lineai \in \{1, \cdots, 4\}$  are located in air, therefore the refractive index $\n_{\lineai}=1$ for every $\lineai$. \\ \indent
 In order to compute the target photometric variables, we need to know how the optical system influences the direction of the rays when they hit an optical line.
 Ray tracing relates the position coordinates
  $ (\variabile{x}_1, \variabile{z}_1)$ and the direction vector $\vect{s}_1$ of every ray at the source $\point{S}$ with the corresponding position $(\variabile{x}_\nline, \variabile{z}_\nline)$ and direction $\vect{s}_\nline$
  at the target $\point{T}$. As in the following we will use often the target coordinates of the rays, from now on, to simplify the notation, we do not write the subscript $\nline$ for the target coordinates. Hence, from now on, we write $(\variabile{x},\variabile{z})$ instead of $(\variabile{x}_\nline, \variabile{z}_\nline)$,  $\optangle$ instead of $\optangle_\nline$ and $\vect{s}$ instead of $\vect{s}_{\nline}$ for the target coordinates.
 The ray tracing algorithm can be schematized as follows.
 \begin{enumerate}
- \itemGiven a ray that leaves $\point{S}$ with initial position $(\variabile{x}_1, \variabile{z}_1)$ and initial direction $\vect{s}_1~=~(-\sin \optangle_1, \cos \optangle_1)$, use Eq. ($\ref{parametrization}$) to implement the ray parametrization $\vect{r}(\variabile{s}_1)$;
+ \item Given a ray that leaves $\point{S}$ with initial position $(\variabile{x}_1, \variabile{z}_1)$ and initial direction $\vect{s}_1~=~(-\sin \optangle_1, \cos \optangle_1)$, use Eq. ($\ref{parametrization}$) to implement the ray parametrization $\vect{r}(\variabile{s}_1)$;
 \item Compute the coordinates $(\variabile{x}_\variabile{k}, \variabile{z}_\variabile{k})_{\variabile{k} = 1\cdots, \nline}$ of the intersection point of the parameterized ray $\vect{r}(\variabile{s}_1)$ with all the lines that it hits;
 \begin{itemize}
 \item[a)] If the shape of the lines is described by an analytical equation, the intersection points are determined analytically;
@@ -123,9 +123,8 @@ Hence, the absolute value of the integration error is, on average, bounded by $\
 \\ \indent MC technique can be combined with the ray tracing procedure in order to compute the light distribution at the target of an optical system.
 In MC ray tracing the position and the direction of  every ray at the source are chosen randomly. 
 In the two-dimensional case ($d$=2), for every ray we need to choose one position coordinate $\variabile{x}_1$ at the source and one angular coordinate $\optangle_1$ at the target, indeed the $\variabile{z}_1$ coordinate of every ray at the source is always given (for instance, for the two-faceted cup in Fig. \ref{fig:cup}, $\variabile{z}_1=0$ for every ray). 
-Therefore, given a set of random variables $\{\vect{y}_1, \cdots, \vect{y}_N\}\in [\vect{a}, \vect{b}]\subset\mathbb{R}^2$, the initial position coordinate $\variabile{x}_1$ of the $\variabile{k}$-th ray corresponds to the first component of the $\variabile{k}$-th random variable $\vect{y}_\variabile{k}$ and, the starting angular coordinate of the $\variabile{k}$-th ray corresponds to the second component of the $\variabile{k}$-th random variable $\vect{y}_\variabile{k}$.
-Next, rays with those random initial coordinates are traced from \point{S} to \point{T} within the optical system.
-In this way a probabilistic interpretation of the output photometric variables is provided.
+Therefore, given a set of random variables $\{\vect{y}_1, \cdots, \vect{y}_N\}\in [\vect{a}, \vect{b}]\subset\mathbb{R}^2$, the initial position coordinate $\variabile{x}_1$ of the $\variabile{k}$-th ray corresponds to the first component of the $\variabile{k}$-th random variable $\vect{y}_\variabile{k}$ and, the starting angular coordinate $\optangle{t}_1$ of the $\variabile{k}$-th ray corresponds to the second component of the $\variabile{k}$-th random variable $\vect{y}_\variabile{k}$.
+Next, rays with those random coordinates at \point{S} are traced from \point{S} to \point{T} and, a probabilistic interpretation of the output photometric variables is provided.
 In particular, we are interested in the total target intensity $I$ which is computed as a function of the angular coordinate $\optangle$.
 The MC intensity is calculated dividing the target into intervals of the same length, the so-called bins. A partitioning
 $P_1: -\pi/2 = \optangle_{0}<\optangle_{1}<\cdots <\optangle_{\const{Nb}}=\pi/2$ of the interval $[-\pi/2, \pi/2]$ is defined where $\const{Nb}$ is the number of bins in $P_1$.
@@ -144,7 +143,7 @@ $[\optangle_{\variabile{j}-1}, \optangle_{\variabile{j}})$ of the partitioning $
 \const{P}_{\variabile{j}, \Delta\optangle} = \Pr(\optangle_{\variabile{j}-1}\leq\optangle<\optangle_{\variabile{j}})=
 \frac{\int_{\optangle_{\variabile{j}-1}}^{\optangle_{\variabile{j}}} I(\optangle) \textrm{d}\optangle}{\int_{-\pi/2}^{\pi/2}I(\optangle) \textrm{d}\optangle}\,,
 \end{equation}
-where $I(\optangle)$ is the output intensity (not normalized) and it is measured in lumen per radian $[\textrm{lm}/\textrm{rad}]$.
+where $I(\optangle)$ is the output intensity (not normalized).
 Note that $\sum_{\variabile{j}=1}^{\const{Nb}}\const{P}_{\variabile{j}, \Delta\optangle}=1$. From the mean value theorem for the function
 $I(\optangle)$ continuous in $[\optangle_{\variabile{j}-1}, \optangle_{\variabile{j}}]$, we know that there exists a value $\optangle_{k}\in[\optangle_{\variabile{j}-1}, \optangle_{\variabile{j}}]$ for which the integral at the numerator of the previous equation can be written as: \begin{equation}
 \int_{\optangle_{\variabile{j}-1}}^{\optangle_{\variabile{j}}} I(\optangle) \textrm{d}\optangle = \Delta \optangle\;I(\optangle_{k}).
@@ -206,7 +205,7 @@ Therefore, the second term of the right hand side of relation ($\ref{eq:error_in
 \end{aligned}
 \end{equation}
 for some $\const{C}_3>0$, where the approximation holds because $\sigma_{\variabile{j}}$ gives a measure for the error between
-$I_{\const{MC}}(\optangle_{\variabile{j}-1/2})$ and the probability $\const{P}_{\variabile{j}, \Delta\optangle}$, \cite{diez2012openintro}. The second equality follows from Eq. (\ref{sigma}). To conclude, the MC error over the $\variabile{j}$-th bin is estimated by:
+$I_{\const{MC}}(\optangle_{\variabile{j}-1/2})$ and the probability $\const{P}_{\variabile{j}, \Delta\optangle}$, \cite{diez2012openintro}. The second equality follows from Eq. (\ref{sigma}). The MC error over the $\variabile{j}$-th bin is estimated by:
 \begin{equation} \begin{aligned}
 \Big|I(\optangle_{\variabile{j}-1/2})&-\frac{\Phi}
 {\Delta\optangle}I_{\const{MC}}(\optangle_{\variabile{j}-1/2})\Big| =
@@ -217,10 +216,7 @@ for $\const{C}_4>0$.
 Considering a fixed number of rays, we obtain that the minimal error is reached when $\const{Nb}\approx \const{Nr}^{1/5}$.
 Hence, if $10^{10}$ rays are considered the target has to be divided into $10^2$ bins to minimize the MC error.
 This leads to computational efforts resulting in a very slow procedure.\\ \indent
-To give an example we implemented MC ray tracing for the two-faceted cup the profile of which is depicted in Fig. \ref{fig:cup}. 
-The light source \point{S}$= [-\variabile{a}, \variabile{a}]$ (line $1$) and the target \point{T}$~=~ [-\variabile{b}, \variabile{b}]$ (line $4$) are two segments normal to the \variabile{z}-axis, where $\variabile{a}=2$ and $\variabile{b}=17$.
-The left and right reflectors (line $2$ and $3$) are oblique segments that connect the source and the target.
-All the optical lines $\lineai \in \{1, \cdots, 4\}$  are located in air, therefore the refractive index $\n_{\lineai}=1$ for every $\lineai$.
+We conclude this chapter implementing MC ray tracing for the two-faceted cup the profile of which is depicted in Fig. \ref{fig:cup}. 
 Considering a set of $\const{Nr} = 10^3$ random rays 
 %with coordinates $(\variabile{x}_{\variabile{k}}, \optangle_{\variabile{k}})_{\variabile{k}= 1, \cdots, \const{Nr}}$ is generated at the source.
 at the source, we obtain the distribution on the $(\variabile{x}, \optangle)$-plane shown in Fig. \ref{fig:mc_sample}.
@@ -231,8 +227,9 @@ at the source, we obtain the distribution on the $(\variabile{x}, \optangle)$-pl
     \label{fig:mc_sample}
 \end{center}
   \end{figure}
-Every sample ray is traced inside the system using the ray tracing procedure. Then, the target $\point{T} = [-\variabile{b}, \variabile{b}]$ is divided into $\const{Nb}= 100$ bins.
-Using Eq. (\ref{g_mc}), the normalized intensity $I_{\const{MC}}$ is computed. $I_{\const{MC}}$  is a piecewise constant function, therefore the averaged normalized intensity  $\hat{I}_{\const{MC}}(\optangle_{\variabile{j}-1/2})= \frac{1}{\Delta \optangle}I_{\const{MC}}(\optangle_{\variabile{j}-1/2})$ is given considering the values that the intensity  $I_{\const{MC}}$ assumes on the middle point $(\optangle_{\variabile{j}-1/2})_{\variabile{j} = 0, \cdots, \const{Nb}}$ of every bin. The profile of $\hat{I}_{\const{MC}}$ is depicted in Fig. \ref{fig:mc_intensity} with the red line. The exact intensity (analytic intensity) is shown with the green line in the same figure.
+\\\ Then, every sample ray is traced inside the system using the ray tracing procedure. 
+The target $\point{T} = [-\variabile{b}, \variabile{b}]$ is divided into $\const{Nb}= 100$ bins.
+Using Eq. (\ref{g_mc}), the normalized intensity $I_{\const{MC}}$ is computed. $I_{\const{MC}}$  is a piecewise constant function, therefore the averaged normalized intensity  $\hat{I}_{\const{MC}}(\optangle_{\variabile{j}-1/2})= \frac{1}{\Delta \optangle}I_{\const{MC}}(\optangle_{\variabile{j}-1/2})$ is given considering the values that the intensity $I_{\const{MC}}$ assumes on the middle point $(\optangle_{\variabile{j}-1/2})_{\variabile{j} = 0, \cdots, \const{Nb}}$ of every bin of the partitioning $P_!$. The profile of $\hat{I}_{\const{MC}}$ is depicted in Fig. \ref{fig:mc_intensity} with the red line. The exact intensity (analytic intensity) is shown with the green line in the same figure.
 \begin{figure}[t]
 \begin{center}
     \includegraphics[width=0.8\textwidth]{MC_raytracing.jpg}
@@ -240,27 +237,26 @@ Using Eq. (\ref{g_mc}), the normalized intensity $I_{\const{MC}}$ is computed. $
    \label{fig:mc_intensity}
 \end{center}
 \end{figure}
-
-To conclude, MC ray tracing has the advantages of being very easy to implement and it does not require too much regularity of the function that has to be approximate. Furthermore, the error convergence does not depend on the dimension of the domain in which the function is defined.
-On the other hand, MC method is time consuming as the error has a speed of convergence of the order $O(1/\sqrt{\const{Nr}})$. Furthermore, MC ray tracing is a binning procedure, therefore the error depends also on the number of bins in which the target is divided. Finally, it is a statistical procedure and the error bound is only a "probabilistic" error as shown in Eq. (\ref{eq:mean_error}). This means that, to calculate the value of the error, several simulations have to be repeated and the average of the errors obtained in every simulation has to be calculated. \\ \indent MC ray method can be improved using a deterministic approach.
+MC ray tracing has the advantages of being very easy to implement and it does not require too much regularity of the function that has to be approximate. Furthermore, the error convergence does not depend on the dimension of the domain in which the function is defined.
+On the other hand, MC method is time consuming as the error, for a fixed number of bins, has a speed of convergence of the order $O(1/\sqrt{\const{Nr}})$. Furthermore, MC ray tracing is a binning procedure, therefore the error depends also on the number of bins in which the target is divided. It is a statistical procedure and the error bound is only a "probabilistic" error as shown in Eq. (\ref{eq:mean_error}). This means that, to calculate the value of the error, several simulations have to be repeated and the average of the errors obtained in every simulation has to be calculated. \\ \indent MC method can be improved using a deterministic approach.
 Instead of considering random variables, the sample of rays can be defined in such a way that they have a regular distribution on the domain $D\subseteq\mathbb{R}^d$ of the function $f$ of which we want to compute the integral. Methods based on this deterministic approach are called Quasi Monte Carlo (QMC) methods.
 \section{Quasi-Monte Carlo ray tracing}\label{sec:QMC}
 Quasi-Monte Carlo (QMC) methods were proposed for the first time in the 1950s in order to deal with the issues encountered in MC.
 Likewise MC methods, QMC procedures can be used to approximate the integral of a function. 
-It now useful to consider intervals of the form $[\vect{a}, \vect{b})\subseteq[0,1)^d$ and introduce the concept of sequences uniformly distributed modulo one.
+It is useful to restrict ourselves to intervals of the form $[\vect{a}, \vect{b})\subseteq[0,1)^d$ and introduce the concept of sequences uniformly distributed modulo one.
 \begin{definition}
 An infinite sequence $\{\variabile{y}_\variabile{n}\}_{\variabile{n}\in\mathbb{N}_0} \in [0,1)^d$ is said to be \textit{uniformly distributed modulo one} (or equidistributed), if for every interval $[\vect{a},\vect{b})\subseteq[0,1)^d$ it holds
 \begin{equation}
 \lim_{\const{N}\rightarrow \infty}\frac{\textrm{card}(A([\vect{a},\vect{b}), \const{N}))}{\const{N}} = \lambda_d([\vect{a},\vect{b}))
 \end{equation}
-where $\textrm{card}(A([\vect{a},\vect{b}), \const{N}))$ is the cardinality of
+where $\textrm{card}(A([\vect{a},\vect{b}), \const{N}))$ is the cardinality of the following set
 \begin{equation}
 A([\vect{a},\vect{b}), N) = \{\variabile{n}\in \mathbb{N}_0: 0\leq\variabile{n}\leq \const{N}-1 \mbox{ and } \variabile{y}_{\variabile{n}}\in [\vect{a},\vect{b})\}\,,
 \end{equation}
 and $\lambda_d([\vect{a},\vect{b})) = \prod_{\variabile{j}=1}^{d}(b_\variabile{j}-a_\variabile{j})$ is the $d$-dimensional Lesbegue measure of the interval $[\vect{a},\vect{b}).$
 \end{definition}
 Given a sequence $\{\vect{y}_\variabile{i}\}_{\variabile{i} = 1, \cdots, \const{N}}\in[0,1)^d$ uniformly distributed modulo one and a 
-Riemann integrable function $f:[0,1]^d\mapsto \mathbb{R}$, the integral of $f$ can be approximate as the average of the values that $f$ assumes on $\{\vect{y}_\variabile{i}\}$, that is:
+Riemann integrable function $f:[0,1]^d\mapsto \mathbb{R}$, the integral of $f$ can be approximate as the average of the values that $f$ assumes on $\{\vect{y}_\variabile{i}\}$ for every $\lineai=\{1, \cdots, \const{N}\}$, that is:
 \begin{equation}
  \lim_{\const{N}\rightarrow \infty}\frac{1}{\const{N}}\sum_{\variabile{i}=1}^{\const{N}}f(\variabile{y}_{\variabile{i}}) = \int_{[0,1]^d}f(\vect{y})\textrm{d}\vect{y}.
 \end{equation}
@@ -290,22 +286,16 @@ An important results shows that, using a low-discrepancy sequence $\{\vect{y}_{\
 \begin{equation}
 \const{err}(f, S_{\const{N}}) =\Bigg|\int_{[0,1)^d}f(\vect{y}) \textrm{d}\vect{y}-\frac{1}{\const{N}}\sum_{\variabile{i}=1}^{\const{N}}f(\vect{y}_\variabile{i})\Bigg|
 \end{equation}
- can be bounded by the product of a term that depends on $f$ and another term that depends on the discrepancy of the set $\{\vect{y}_{\variabile{i}}\}_{\variabile{i}=1, \cdots, \const{N}}.$ This estimation of the error is given by the Koksma-Hlawka inequality that is:
+ can be bounded by the product of a term that depends on $f$ and another term that depends on the discrepancy of the set $\{\vect{y}_{\variabile{i}}\}_{\variabile{i}=1, \cdots, \const{N}}.$ This is the result provided by the Koksma-Hlawka inequality which gives the following estimation of the error:
 \begin{equation}
 \Bigg|\int_{[0,1)^d}f(\vect{y}) \textrm{d}\vect{y}-\frac{1}{\const{N}}\sum_{\variabile{i}=1}^{\const{N}}f(\vect{y}_\variabile{i})\Bigg|\leq V(f)D^*_\const{N}({\mathcal{S}})
 \end{equation}
-where $V(f)$ is the so-called variation function of $f$ in the sense of Hardy-Krause (see \cite{brandolini2013koksma,owen2005multidimensional} for details).
-%and, when $f\in C^d([0,1])^d$ is continuous will all the derivatives continuous, it assumes the form:
-%\begin{equation}
-
-%\end{equation}
-% QMC error
-From definition of low-discrepancy sequences and from the Koksma-Hlawka inequality we can state that:
+where $V(f)$ is the so-called variation function of $f$ in the sense of Hardy-Krause (see \cite{brandolini2013koksma,owen2005multidimensional} for details). From the definition of low-discrepancy sequences and from the Koksma-Hlawka inequality we can state that:
 \begin{equation}
 \const{err}(f, S_{\const{N}})<C \frac{\log(\const{N})^d}{\const{N}}.
 \end{equation}
-For small dimensions $d$ QMC performs much better than MC methods, while for large dimension $d$ the factor $\log(\const{N})$ could be very big.
-\\ \indent There are many ways to generate such sequences.
+For small dimensions $d$, QMC performs much better than MC methods, while for large dimension $d$ the factor $\log(\const{N})$ could be very big. 
+The convergence of QMC method can depend on which kind of low-discrepancy sequence is used. Indeed, there are many ways to generate such sequences.
 % In the following we show a particular construction of a low-discrepancy sequence for $d=1$ that was introduced the first time by Van der Corput in 1935.  
 %This kind of sequences, called \textit{van der Corput} sequences, are particular interesting not only because they give an intuition of how to construct low discrepancy sequences but also because many other kind of sequences in higher dimensions are based on this one-dimensional case. Before introducing these sequences we need to give the concept of radical inverse function. Let $\const{b}\geq 2$ be an integer base. Any natural number $\variabile{n}\in \mathbb{N}_0$ can be decomposed in base $\const{b}$ as follows:
 %\begin{equation}
@@ -337,17 +327,17 @@ For small dimensions $d$ QMC performs much better than MC methods, while for lar
 %It can be proved that the Van der Corput sequence in base $\variabile{b}$ is uniformly distributed modulo one, \cite{leobacher2014introduction}. 
 %The van der Corput sequence has been extended to higher dimensions. 
 %The most common QMC approach uses Sobol sequence which is one an extended Van der Corput sequence in base $\variabile{b}=2$ to $\variabile{d}\geq2$. 
-The most common QMC approach uses the so-called Sobol' sequence. The algorithm for generating Sobol' sequences is explained widely in the literature, (see for instance , \cite{bratley1988algorithm}). In appendix \ref{app:Sobol} we give an overview of how these kind of sequences can be constructed.
+The most common QMC approach uses the so-called Sobol' sequence. The algorithm for generating Sobol' sequences is widely explained in the literature, (see for instance , \cite{bratley1988algorithm}). In appendix \ref{app:Sobol} we give an overview of how these kind of sequences can be constructed.
 \\ \indent Based on QMC methods, QMC ray tracing considers as position and angular coordinates of the rays at the source, the coordinates of the corresponding points of a low-discrepancy sequence. 
 Therefore, to implement QMC ray tracing in two-dimensions we need to construct a low-discrepancy sequence in two-dimensions.  
 Given, for instance, a Sobol' sequence $\{\vect{y}_{\variabile{i}}\}_{\variabile{i}=1, \cdots, \const{N}}$ with $\vect{y}_\variabile{i}\in[0,1)^2$ for every $\variabile{i}=1, \cdots, \const{N}$, the two dimensional QMC ray tracing consider the position coordinate of the $\variabile{i}$-th ray at the source equal to the first component of the $\variabile{i}$-th point 
 $\vect{y}_{\variabile{i}}$ of the Sobol' sequence  $\{\vect{y}_{\variabile{i}}\}_{\variabile{i}=1, \cdots, \const{N}}$ and, the direction coordinate of the $\variabile{i}$-th ray at the source equal to the second component of the $\variabile{i}$-th point 
-$\vect{y}_{\variabile{i}}$ of the same sequence. A set of $\const{Nr} = \const{N}$ rays with these initial coordinates is traced within the system and, once the target coordinates of all the rays traced are computed, the output intensity is calculated using the same approach used for MC ray tracing.\\ \indent
-As an example, in Fig. \ref{fig:qmc_sample} we show the distribution of the position and direction coordinates of the rays at the source of the two-faceted cup in Fig. \ref{fig:cup}. 
-A set of $10^3$ rays is considered and the coordinates $(\variabile{x}_1, \optangle_1)$ of every ray are depicted with blue dots.
-We note that the rays have a regular distribution on the $(\variabile{x}, \optangle_1)$-plane.
+$\vect{y}_{\variabile{i}}$ of the same sequence. A set of $\const{Nr} = \const{N}$ rays with these initial coordinates is traced within the system and, once the target coordinates of all the rays traced are computed, the output intensity is calculated using the same approach used for MC ray tracing, see Eqs \ref{g_mc} and \ref{eq:error_int}. The difference between MC and QMC ray tracing consists only on the choice of the initial ray set.\\ \indent
+In Fig. \ref{fig:qmc_sample} we show the distribution of the position and direction coordinates of the rays at the source of the two-faceted cup in Fig. \ref{fig:cup}. 
+A set of $10^3$ rays generated from a $2D$ Sobol sequence is considered, the coordinates $(\variabile{x}_1, \optangle_1)$ of every ray at the source are depicted with blue dots.
+We note that the rays have a regular distribution on the $(\variabile{x}, \optangle)$-plane.
 We need to remark that, for the system in Fig. \ref{fig:cup}, $\variabile{x}_1 \in[-2,2]$ and the angular coordinates $\optangle_1 \in[-\pi/2, \pi/2]$. 
-Since Sobol' sequences are defined inside sub-intervals of the square $[0,1)^2$, we scaled the points of the sequence $\vect{y}_{\variabile{i}}$ in order to take all the possible positions and directions that the rays can assume at the source. 
+Since Sobol' sequences are defined inside intervals of the  $[\vect{a}, \vect{b})\subseteq[0,1)^2$, we scaled the points of the sequence $\vect{y}_{\variabile{i}}$ in order to take all the possible positions and directions that the rays tan assume at the source. 
 \begin{figure}[h]
 \begin{center}
     \includegraphics[width=0.8\textwidth]{qmc_sample.jpg}
@@ -356,14 +346,13 @@ They are distributed as the points of a Sobol' sequence in two-dimensions.}
     \label{fig:qmc_sample}
 \end{center}
   \end{figure}
-\\ \indent Dividing the target into $\const{Nb}=100$ bins, we computed the target intensity using the same procedure explained for MC ray tracing. 
-The difference between MC and QMC ray tracing consists only on the choice of the initial ray set.
+\\ \indent Dividing the target into $\const{Nb}=100$ bins, we computed the target intensity. 
 In Fig. \ref{fig:qmc_intensity} we show the profile of the output intensity at the target of the two-faceted cup computed using QMC ray tracing with $10^4$ rays. 
-The QMC intensity is depicted with the red line. It is compared with an analytic intensity shown in the same figure with the green dotted line.
-A comparison between Fig. \ref{fig:mc_intensity} and \ref{fig:qmc_intensity} shows that for the two-faceted cup and for a set of $\const{Nr}=10^4$ rays, QMC ray tracing performs much better than MC ray tracing. The results shown for a simple optical system are indeed consistent with what we expected from the theory explained above.
-We want to remark that, although QMC ray tracing outperforms MC ray tracing for a simple optical system, it has two main disadvantages. 
+The QMC intensity is depicted with the red line. It is compared to the analytic intensity shown in the same figure with the green dotted line.
+A comparison between Fig. \ref{fig:mc_intensity} and \ref{fig:qmc_intensity} shows that for the two-faceted cup and for a set of $\const{Nr}=10^4$ rays, QMC ray tracing performs much better than MC ray tracing. The results shown for a simple optical system are indeed consistent with what we expected from the theoretical analysis.
+Although QMC ray tracing is an improvement of MC ray tracing for small dimensions, it has two main disadvantages. 
 First, its convergence is strongly related with the dimension in which it is implemented.
-Second, likewise MC ray tracing, QMC ray tracing is a binning procedure, therefore the error depends on the number of bins in which the target is divided since the averaged value of the intensity over every bin is calculated.
+Second, likewise MC ray tracing, QMC ray tracing is a binning procedure, therefore the error still depends on the number of bins in which the target is divided and only the averaged value of the intensity over every bin is provided.
 \begin{figure}[h]\vspace{-3cm}
 \begin{center}
     \includegraphics[width=0.8\textwidth]{qmc_raytracing.jpg}
@@ -373,8 +362,8 @@ Second, likewise MC ray tracing, QMC ray tracing is a binning procedure, therefo
   \end{figure}
  \\\ \indent
 From the results provided in this chapter we can conclude that the choice of the initial ray set can make a big impact on the performance of the ray tracing procedure. 
-Based on an idea of taking a smart choice of the initial ray set, we develop a new ray tracing method which is based on phase space. 
-The phase space concept will be introduced in the next chapter. The new ray tracing method employs the phase space of the source and the target of the optical systems.
+Based on the idea of taking a smart choice of the initial ray set, we develop a new ray tracing method which is based on phase space. 
+The phase space (PS) concept will be introduced in the next chapter. The new ray tracing method employs the PS of the source and the target of the optical systems.
 We will show in this thesis that phase space ray tracing allows to trace only few rays inside the system to obtain the desired accuracy of the target intensity. 
 
 
