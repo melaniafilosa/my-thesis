@@ -48,21 +48,24 @@ where we have indicated with $\oplus$ the bit by bit exclusive or operator which
 \variabile{v}_{\variabile{k}, \variabile{j}}=\frac{m_{\variabile{k}, \variabile{j}}}{2^\variabile{k}}.
 \end{equation}
 Then, the sequence $\{\variabile{x}_{\variabile{i}, \variabile{j}}\}$ is given by
-\begin{equation}
+\begin{equation}\label{eq:x}
 \variabile{x}_{\variabile{i}, \variabile{j}} = \variabile{i}_1\variabile{v}_1\oplus \variabile{i}_2\variabile{v}_{2}\oplus \cdots
 \end{equation}
 for every $\variabile{i}$, where $\variabile{i}_{\variabile{k}}$ is the $\variabile{k}$-th digit from the right when $\variabile{i}$ is written in binary $\variabile{i} = (\cdots \variabile{i}_3\variabile{i}_2\variabile{i}_1)_2$, \cite{joe2008notes}. We provide in the following an example. \\ \indent
 Given the primitive polynomial $\variabile{x}^3+\variabile{x}^2+1$ of degree $\textrm{s}_{\variabile{j}}=3$, the first three coefficients $m_{1, \variabile{j}}=1$, 
 $m_{2, \variabile{j}}=3$, and $m_{3, \variabile{j}}=7$ lead to the following direction numbers 
 \begin{equation}
+\variabile{v}_{1,\variabile{j}} = \frac{1}{2}, \qquad \variabile{v}_{2,\variabile{j}} = \frac{3}{4}, \qquad \variabile{v}_{3,\variabile{j}}= \frac{7}{8},
 \end{equation}
 that in binary notation are:
 \begin{equation}
-\end{equation}.
-From Eq. \ref{eq:m} we can derive some others coefficients $m_{4,\variabile{j}}=5$, $m_{4,\variabile{j}}=5$, etc. with he corresponding direction vectors:
-\begin{equation}
+\variabile{v}_{1,\variabile{j}} = (0.1)_2 \qquad \variabile{v}_{1,\variabile{j}} = (0.11)_2, \qquad \variabile{v}_{1,\variabile{j}} = (0.111)_2.
 \end{equation}
-From Eq. \ref{} we finally find the numbers
+From Eq. (\ref{eq:m}) we can derive the others coefficients $m_{4,\variabile{j}}=5$, $m_{5,\variabile{j}}=7$, etc. with he corresponding direction vectors:
+\begin{equation}
+\variabile{v}_{4,\variabile{j}} = \frac{5}{16} = (0.0101)_2  \qquad \variabile{v}_{5,\variabile{j}} = \frac{7}{32}=(0.00111)_2
+\end{equation}
+From Eq. (\ref{eq:x}) we finally find the sequence
 \begin{equation}
 \end{equation}
 \\ \indent
