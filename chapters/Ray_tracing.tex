@@ -1,18 +1,18 @@
 \chapter{Ray tracing}\label{chap:raytracing}
-Ray tracing is a geometric problem that calculates the transport of light within optical systems.
-It is a forward method which uses single rays to describe light propagation.
+Optical ray tracing is a tool to calculate the transport of light within optical systems.
 Given an optical system and a set of rays at the source, ray tracing relates the emitted light with its output distribution. 
-The influence of diffraction on the transport of a ray is neglected and geometrical modeling of an optical system needs to be considered.
+The influence of diffraction on the transport of a ray is neglected and geometrical modeling of an optical system needs to be considered. \\ \indent
 Although the method can be implemented for two or more dimensions and for any optical system, here we consider the two-dimensional case only. 
 From now on, we will thus refer to optical lines instead of optical surfaces.
 The two-dimensional case is particularly relevant because it is a good test case to demonstrate the performance of new methods.
 Optical designers often start with 2D systems, where only the meridional plane is taken into account because it gives a good prediction of the target distribution of the rays
-(see \cite{winston2005nonimaging}, chapter $4$, p.$50-65$). However, the two-dimensional case has limitations. For example, it may not identify skew rays that are turned back by the system, with the consequence that a 2D analysis cannot guarantee a proper treatment of non meridional rays in 3D. In this chapter we consider systems where only reflection and refraction laws are taken into account.
+(see \cite{winston2005nonimaging}, chapter $4$, p.$50-65$). However, the two-dimensional case has limitations. For example, it may not identify skew rays that are turned back by the system, with the consequence that a 2D analysis cannot guarantee a proper treatment of non meridional rays in 3D.\\ \indent
+In this chapter we consider systems where only reflection and refraction laws are taken into account.
+% Why there are alternatives
 \section{Ray tracing for two-dimensional optical systems}\label{sec:raytracing}
-Ray tracing consists of tracing each ray through the optical system. 
-Every ray emitted from the source is followed until it reaches the target. During its propagation it can encounter optical components which change its direction. 
-It is thus considered to be a broken line which vertices are given by its location coordinates on every optical component encountered. 
-The ray tracing procedure is constructed such that the position and the direction of the rays are calculated on every optical lines that they hit until they reach the target.
+Light rays are straight lines and they are reflected or refracted by the optical components.
+Every ray emitted from the source is followed until it reaches the target.  
+The ray tracing procedure is constructed such that the position and the direction of the rays are calculated on every optical line that they hit. \\ \indent
 Given a Cartesian coordinate system $(\variabile{x}, \variabile{z})$, a two-dimensional optical system symmetric with respect to the $\variabile{z}$-axis is defined.
 Hence, usually the optical axis coincides with the $\variabile{z}$-axis.
 The optical system is formed by a source \point{S}, a target  \point{T} and some optical components labeled with indexes $\lineai$ where $\lineai \in \{2, \cdots, \nline-1\}$ and $\nline$
@@ -52,14 +52,14 @@ All the optical lines $\lineai \in \{1, \cdots, 4\}$  are located in air, thus t
 In order to compute the target photometric variables, we need to know how the optical system influences the direction of the rays when they hit an optical line.
 Ray tracing relates the position coordinates
  $ (\variabile{x}_1, \variabile{z}_1)$ and the direction vector $\vect{s}_1$ of every ray at the source $\point{S}$ with the corresponding position $(\variabile{x}_\nline, \variabile{z}_\nline)$ and direction $\vect{s}_\nline$
- at the target $\point{T}$. In the following we will use often the target coordinates of the rays thus, to simplify the notation, we do not write the subscript $\nline$ for the target coordinates. Hence, from now on, we write $(\variabile{x},\variabile{z})$ instead of $(\variabile{x}_\nline, \variabile{z}_\nline)$,  $\optangle$ instead of $\optangle_\nline$ and $\vect{s}$ instead of $\vect{s}_{\nline}$ for the target coordinates.
-The ray tracing algorithm can be outlined as follows.
+ at the target $\point{T}$. In the following we will often use the target coordinates of the rays thus, to simplify the notation, we do not write the subscript $\nline$ for the target coordinates. Hence, we write $(\variabile{x},\variabile{z})$ instead of $(\variabile{x}_\nline, \variabile{z}_\nline)$,  $\optangle$ instead of $\optangle_\nline$ and $\vect{s}$ instead of $\vect{s}_{\nline}$ for the target coordinates.
+The ray tracing algorithm can be outlined as follows:
 \begin{enumerate}
  \item Given a ray that leaves $\point{S}$ with initial position $(\variabile{x}_1, \variabile{z}_1)$ and initial direction $\vect{s}_1~=~(-\sin \optangle_1, \cos \optangle_1)$, use Eq. ($\ref{parametrization}$) to implement the ray parametrization $\vect{r}(\variabile{s}_1)$;
-\item Compute the coordinates $(\variabile{x}_\variabile{k}, \variabile{z}_\variabile{k})_{\variabile{k} = 1\cdots, \nline}$ of the intersection point of the parameterized ray $\vect{r}(\variabile{s}_1)$ with all the lines that it hits;
+\item Compute the coordinates $(\variabile{x}_\variabile{k}, \variabile{z}_\variabile{k})_{\variabile{k} = 1\cdots, \nline}$ of the intersection point of the parameterized ray $\vect{r}(\variabile{s}_1)$ with all the lines that it crosses
 \begin{itemize}
-\item[a)] If the shape of the lines is described by an analytical equation, the intersection points are determined analytically;
-\item[b)] If there is no analytic description for the optical lines, the intersections need to be determined using iterative methods;
+\item[a)] if the shape of the lines is described by an analytical equation, the intersection points are determined analytically;
+\item[b)] if there is no analytic description for the optical lines, the intersections need to be determined using iterative methods;
 \end{itemize}
 \item  Determine the closest line $\lineai$ that the forward ray encounters;
 \item If $\lineai = \nline$ stop the procedure, the target ray's coordinates $(\variabile{x}, \variabile{z})$ and $\vect{s}$ are found.
@@ -80,7 +80,7 @@ There are different ways to implement the ray tracing procedure. The efficiency 
 If the initial position and direction of the rays are chosen randomly we have Monte Carlo (MC) ray tracing. 
 This is a very common method in non-imaging optics as it is very powerful and easy to implement. MC ray tracing will be explained in details in the next paragraph.
 If the rays are chosen from a so-called low discrepancy sequence we have the Quasi-Monte Carlo (QMC) ray tracing.
-This will be discussed in Section \ref{sec:QMC}.
+This approach is discussed in Section \ref{sec:QMC}.
 \section{Monte Carlo ray tracing}
 Before explain MC ray tracing we give a general introduction to the MC methods approximate computation of integrals. Given an interval $D = [\vect{a}, \vect{b}]$ with $\vect{a} = (a_1, \cdots, a_d)$ and $\vect{b} = (b_1, \cdots, b_d)$ elements of $\mathbb{R}^d$ such that
 $[\vect{a}, \vect{b}]  = [a_1, b_1] \times \cdots \times [a_d, b_d]$, a function $f:[\vect{a},\vect{b}]\subset \mathbb{R}^d \mapsto \mathbb{R}$ and a random variable 
@@ -105,21 +105,34 @@ Therefore,
 \begin{equation}
 \mathbb{E}[f] = \int_{D}f(\vect{y})\rho(\vect{y}) \textrm{d}\vect{y}  \approx \frac{1}{\const{N}} \sum_{\variabile{i}=1}^{\const{N}} f(\vect{y}_\variabile{i}).
 \end{equation}
-Suppose that $f$ has variance $\textrm{Var}[f]=\sigma^2[f] $, then
+From the linearity of the expected values, it follows the obvious relation
+\begin{equation}\label{eq:linearity}
+\mathbb{E}[S_{\const{N}}(f)] = \frac{1}{\const{N}}\sum_{\variabile{i}=1}^{\textrm{N}}\mathbb{E}[f] = \mathbb{E}[f].
+\end{equation}
+Suppose that $f$ has variance $\textrm{Var}[f]=\mathbb{E}[(f-\mathbb{E}(f))]^2 = \sigma^2[f] $, the Bienaym\'e formula leads to
+\begin{equation}\label{eq:variance}
+\textrm{Var}(S_{\const{N}}) = \textrm{Var}\big(\frac{1}{\const{N}}\sum_{\variabile{i}=1}^{\const{N}}f(\vect{y}_\variabile{i})\big) =
+ \frac{1}{\const{N}^2}\sum_{\variabile{i}=1}^{\const{N}}\textrm{Var}\big(f(\vect{y}_\variabile{i})\big)
+\end{equation}
+which can be applied because the variables $\{\vect{y}_\variabile{i}\}_{i = 1, \cdots, \const{N}}$ are independent, \cite{}. \\ \indent
+From Eqs. (\ref{eq:linearity}) and (\ref{eq:variance}) we obtain that
 \begin{equation}
 \textrm{Var}[S_\const{N}(f)] = \mathbb{E}[(S_{\const{N}}(f)-\mathbb{E}[S_{\const{N}}(f)])^2]= \mathbb{E}[(S_{\const{N}}(f)-\mathbb{E}[f])^2] = \sigma[f]^2/\const{N},
-\end{equation}
-where the second equality follows from the obious relation
-\begin{equation}
-\mathbb{E}[S_{\const{N}}(f)] = \frac{1}{\const{N}}\sum_{\variabile{i}=1}^{\textrm{N}}\mathbb{E}[ f(\vect{y}_\variabile{i})].
 \end{equation}
 Let us denote the integration error with:
 \begin{equation}
 \const{err}(f, S_{\const{N}}) =\int_{D}f(\vect{y})\rho(\vect{y}) \textrm{d}\vect{y}-S_{\const{N}}(f),
 \end{equation}
-we obtain that
+then
 \begin{equation}\label{eq:mean_error}
-\mathbb{E}\big[|\const{err}(f, S_{\const{N}})|\big]\leq\sqrt{\mathbb{E}\big[\const{err}(f, S_{\const{N}})^2\big]} = \frac{\sigma[f]}{\sqrt{\const{N}}}.
+\mathbb{E}\big[|\const{err}(f, S_{\const{N}})|\big]\leq\sqrt{\mathbb{E}\big[\const{err}(f, S_{\const{N}})^2\big]} = \frac{\sigma[f]}{\sqrt{\const{N}}},
+\end{equation}
+where the first inequality follows from the obvious relations
+\begin{equation}
+\begin{aligned}
+\mathbb{E}[|\const{err}(f, S_{\const{N}})|] &= \frac{1}{\const{N}}\sqrt{\sum_{\variabile{1}=1}^\const{N}|\const{err}(f, S_{\const{N}})|^2}  = \frac{1}{\const{N}}\sqrt{\sum_{\variabile{1}=1}^\const{N}\const{err}(f, S_{\const{N}})^2}  \\ 
+& \leq \sqrt{\frac{1}{\const{N}}\sum_{\variabile{1}=1}^\const{N}\const{err}(f, S_{\const{N}})}= \sqrt{\mathbb{E}[\const{err}(f, S_{\const{N}})^2]}
+\end{aligned}
 \end{equation}
 Hence, the absolute value of the integration error is, on average, bounded by $\sigma[f]/\sqrt{\const{N}}$, where $\sigma[f]$ is the standard deviation of $f$, \cite{leobacher2014introduction}. It is very important to note that $\const{err}(f, S_{\const{N}})$ does not depend on the dimension $d$ of $f$.
 \\ \indent MC technique can be combined with the ray tracing procedure in order to compute the light distribution at the target of an optical system.
@@ -129,13 +142,13 @@ Therefore, given a set of random variables $\{\vect{y}_1, \cdots, \vect{y}_N\}\i
 Next, rays with those random coordinates at \point{S} are traced from \point{S} to \point{T} and, a probabilistic interpretation of the output photometric variables is provided.
 In particular, we are interested in the total target intensity $I$ which is computed as a function of the angular coordinate $\optangle$.
 The MC intensity is calculated dividing the target into intervals of equal length, the so-called bins. A partitioning
-$P_1: -\pi/2 = \optangle_{0}<\optangle_{1}<\cdots <\optangle_{\const{Nb}}=\pi/2$ of the interval $[-\pi/2, \pi/2]$ is defined where $\const{Nb}$ is the number of bins in $P_1$.
+$P_1: -\pi/2 = \optangle_{0}<\optangle_{1}<\cdots <\optangle_{\const{Nb}}=\pi/2$ of the interval $[-\pi/2, \pi/2)$ is defined where $\const{Nb}$ is the number of bins in $P_1$.
 We remark that, with a slight abuse of notation, we indicated the angular coordinates of the rays at the target (line $\nline$) with $\optangle_{\variabile{j}}$ instead of $\optangle_{\nline,\variabile{j}}$ for every $\variabile{j}\in\{0, \cdots, \const{Nb}\}$. \\ \indent
 The normalized approximated intensity $I_{\const{MC}}(\optangle)$ is a piecewise constant function, whose value over the $\variabile{j}$-th bin is the ratio between the number of rays that fall into that bin
-$\const{Nr}[\optangle_{\variabile{j}-1},\optangle_{\variabile{j}})$ and the total number of rays traced $\const{Nr}[-\pi/2, \pi/2]$.
+$\const{Nr}[\optangle_{\variabile{j}-1},\optangle_{\variabile{j}})$ and the total number of rays traced $\const{Nr}[-\pi/2, \pi/2)$.
 Hence, $I_{\const{MC}}$ is defined by
 \begin{equation} \label{g_mc}
-I_{\const{MC}}(\optangle) = \frac{\const{Nr}[\optangle_{\variabile{j}-1},\optangle_{\variabile{j}})}{\const{Nr}[-\pi/2, \pi/2]} \qquad \mbox{ for } \optangle\in[\optangle_{\variabile{j}-1}, \optangle_{\variabile{j}}).
+I_{\const{MC}}(\optangle) = \frac{\const{Nr}[\optangle_{\variabile{j}-1},\optangle_{\variabile{j}})}{\const{Nr}[-\pi/2, \pi/2)} \qquad \mbox{ for } \optangle\in[\optangle_{\variabile{j}-1}, \optangle_{\variabile{j}}).
 \end{equation}
 The output intensity is computed from the value of the intensity $I_{\const{MC}}(\optangle_{\variabile{j}-1/2})$ along the direction $\optangle_{\variabile{j}-1/2}=(\optangle_{\variabile{j}-1}+
 \optangle_{\variabile{j}})/2$ for every bin $[\optangle_{\variabile{j}-1},\optangle_{\variabile{j}})_{\variabile{j} = 1, \cdots, \const{Nb}}$.
