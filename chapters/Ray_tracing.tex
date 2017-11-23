@@ -56,7 +56,7 @@ Ray tracing relates the position coordinates
 The ray tracing algorithm can be outlined as follows:
 \begin{enumerate}
  \item Given a ray that leaves $\point{S}$ with initial position $(\variabile{x}_1, \variabile{z}_1)$ and initial direction $\vect{s}_1~=~(-\sin \optangle_1, \cos \optangle_1)$, use Eq. ($\ref{parametrization}$) to implement the ray parametrization $\vect{r}(\variabile{s}_1)$;
-\item Compute the coordinates $(\variabile{x}_\variabile{k}, \variabile{z}_\variabile{k})_{\variabile{k} = 1\cdots, \nline}$ of the intersection point of the parameterized ray $\vect{r}(\variabile{s}_1)$ with all the lines that it crosses
+\item Compute the coordinates $(\variabile{x}_\variabile{k}, \variabile{z}_\variabile{k})_{\variabile{k} = 1\cdots, \nline}$ of the intersection point of the parameterized ray $\vect{r}(\variabile{s})$ with all the lines that it crosses
 \begin{itemize}
 \item[a)] if the shape of the lines is described by an analytical equation, the intersection points are determined analytically;
 \item[b)] if there is no analytic description for the optical lines, the intersections need to be determined using iterative methods;
@@ -75,7 +75,9 @@ The ray tracing algorithm can be outlined as follows:
 % Same approach of computing an integral
 % How to chose the initial rays at the source
 The procedure explained above is repeated for every ray traced through the system, \cite{Gross2005Handbook}. 
-Once the target position and the direction of every ray traced are computed, the target photometric variables can be calculated using the definitions explained in the previous chapter, see section \ref{sec:photometry}.\\ \indent
+Once the target position and the direction of every ray traced are computed, the target photometric variables can be calculated using the definitions explained in the previous chapter, see section \ref{sec:photometry}.
+% Put the algorithm
+\\ \indent
 There are different ways to implement the ray tracing procedure. The efficiency of the ray tracing can be related with the distribution of the rays at the source. 
 If the initial position and direction of the rays are chosen randomly we have Monte Carlo (MC) ray tracing. 
 This is a very common method in non-imaging optics as it is very powerful and easy to implement. MC ray tracing will be explained in details in the next paragraph.
