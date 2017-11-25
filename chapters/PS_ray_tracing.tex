@@ -1,5 +1,5 @@
 \chapter{Ray tracing on phase space} \label{chap:PS}
-Ray tracing on phase space is a method which employs the phase space (PS) of the source and the target of the optical systems. 
+Ray tracing on phase space is a method which employs the phase space (PS) of the source and the target of the optical systems.
 Moreover, it takes into account of the trajectory that every ray follows during its propagation.
 %We show through this chapter that this allows to trace only the rays close to the discontinuity of the luminance.
 Before explaining the method, we need to introduce the PS concept.
@@ -12,37 +12,37 @@ the momentum coordinates of the vector tangent to the ray projected on the optic
 Given an optical line $\lineai$, the ray position coordinate on PS is the \variabile{x}-coordinate of the intersection point between the ray and line $\lineai$.
 The direction coordinate is the sine of the angle that the ray forms with respect to the normal of line $\lineai$ multiplied by the index of refraction of the medium in which the ray is located.
 We indicate the PS with \set{S}{}{}$=$\set{Q}{}{}$\times$\set{P}{}{},
-where \set{Q}{}{} is the set of the position coordinates \variabile{q} and \set{P}{}{} is the set of the direction coordinates $\variabile{p}=\variabile{n}\sin{\myangle}$, with $\myangle$ the angle between the ray and the normal \vect{$\boldsymbol{\nu}$} of the line and \variabile{n} the index of refraction of the medium in which the line is located.  
-The normal \vect{$\boldsymbol{\nu}$} is always directed inside the same medium in which the incident ray travels and, 
+where \set{Q}{}{} is the set of the position coordinates \variabile{q} and \set{P}{}{} is the set of the direction coordinates $\variabile{p}=\variabile{n}\sin{\myangle}$, with $\myangle$ the angle between the ray and the normal \vect{$\boldsymbol{\nu}$} of the line and \variabile{n} the index of refraction of the medium in which the line is located.
+The normal \vect{$\boldsymbol{\nu}$} is always directed inside the same medium in which the incident ray travels and,
 the angle $\myangle$ between the ray and \vect{$\boldsymbol{\nu}$} is measured counterclockwise.
 In the following, the phase space is considered only for the source $\point{S}$ and the target $\point{T}$ and for no other line of the optical system.
-The coordinates of every ray on \set{S}{}{} and \set{T}{}{} are indicated with $(\variabile{q}_1,\variabile{p}_1)$ and $(\variabile{q},\variabile{p})$, respectively.\\ \indent 
+The coordinates of every ray on \set{S}{}{} and \set{T}{}{} are indicated with $(\variabile{q}_1,\variabile{p}_1)$ and $(\variabile{q},\variabile{p})$, respectively.\\ \indent
 \begin{figure}[h]
   \begin{minipage}[]{0.49\textwidth}
 \centering
     \includegraphics[width  = \textwidth]{source_PS_cup.pdf}
     \caption{Source PS of the two-faceted cup. Five different paths can occur.}
     \label{fig:sourcePS}
-  \end{minipage} 
+  \end{minipage}
 \hspace{0.2cm}
   \begin{minipage}[]{0.49\textwidth}
 \centering
     \includegraphics[width=\textwidth]{target_PS_cup.pdf}
-  \caption{Target PS of the two-faceted cup. Five different paths can occur}  
+  \caption{Target PS of the two-faceted cup. Five different paths can occur}
    \label{fig:targetPS}
  \end{minipage}
 \end{figure}
-To provide an example, we show the source and target PS of the two-faceted cup depicted in Figure \ref{fig:cup}. 
-They are given in Figures \ref{fig:sourcePS} and \ref{fig:targetPS}, respectively. 
-A sample of $10^4$ random rays randomly are traced within the system. The initial position and initial direction coordinates of a given ray are the coordinates of a point in 
+To provide an example, we show the source and target PS of the two-faceted cup depicted in Figure \ref{fig:cup}.
+They are given in Figures \ref{fig:sourcePS} and \ref{fig:targetPS}, respectively.
+A sample of $10^4$ random rays randomly are traced within the system. The initial position and initial direction coordinates of a given ray are the coordinates of a point in
 Figure \ref{fig:sourcePS}.
-Using ray tracing, we calculate the coordinates of the rays that arrive at the target which correspond 
-to the coordinates of the points depicted in Figure \ref{fig:targetPS}. 
-Furthermore, we can store the path that every ray follows, where we refer to a path as the sequence of the lines encountered by the ray. 
-In Figures \ref{fig:sourcePS} and \ref{fig:targetPS} a color is associated to every path, hence all the rays that follow the same path are depicted with the same color. 
-We note that the source and target phase spaces are partitioned into different regions according to the path $\Pi$ followed by the rays. 
-Given a path $\Pi$, the corresponding regions are indicated with \set{R}{$1$}{}$(\Pi)$ and \set{R}{}{}$(\Pi)$ at the source and the target PS, respectively. 
-Rays that propagate through the two-faceted cup can follow $5$ different paths. They can be emitted from the source and arrive to the target without hitting any other line, that is they follow path $\Pi_1= (1,4)$. These rays are depicted in red in the PS pictures. Some rays can hit the left or the right reflector (line $2$ and $3$, respectively) once, their corresponding paths are $\Pi_2 = (1,2,4)$ and $\Pi_3 = (1,3,4)$, respectively. These rays are the blue and green dots in PS, respectively. Finally, there is the possibility that the rays have to reflections before hit the target. The paths are, therefore, $\Pi_4 = (1,2,3,4)$ and $\Pi_5 = (1,3,2,4)$ and the corresponding rays are the yellow and cyan rays, respectively.  
+Using ray tracing, we calculate the coordinates of the rays that arrive at the target which correspond
+to the coordinates of the points depicted in Figure \ref{fig:targetPS}.
+Furthermore, we can store the path that every ray follows, where we refer to a path as the sequence of the lines encountered by the ray.
+In Figures \ref{fig:sourcePS} and \ref{fig:targetPS} a color is associated to every path, hence all the rays that follow the same path are depicted with the same color.
+We note that the source and target phase spaces are partitioned into different regions according to the path $\Pi$ followed by the rays.
+Given a path $\Pi$, the corresponding regions are indicated with \set{R}{$1$}{}$(\Pi)$ and \set{R}{}{}$(\Pi)$ at the source and the target PS, respectively.
+Rays that propagate through the two-faceted cup can follow $5$ different paths. They can be emitted from the source and arrive to the target without hitting any other line, that is they follow path $\Pi_1= (1,4)$. These rays are depicted in red in the PS pictures. Some rays can hit the left or the right reflector (line $2$ and $3$, respectively) once, their corresponding paths are $\Pi_2 = (1,2,4)$ and $\Pi_3 = (1,3,4)$, respectively. These rays are the blue and green dots in PS, respectively. Finally, there is the possibility that the rays have to reflections before hit the target. The paths are, therefore, $\Pi_4 = (1,2,3,4)$ and $\Pi_5 = (1,3,2,4)$ and the corresponding rays are the yellow and cyan rays, respectively.
 \\ \indent For the two-faceted cup all the light emitted by the source arrives at the target. Nevertheless, while the source PS is completely covered by rays, some parts of the target PS are not reached by any ray, that is
 \begin{equation}
 \begin{aligned}
@@ -61,24 +61,24 @@ In order to derive the photometric variables at the target we need to understand
 It is therefore useful to employ a fundamental principle in non-imaging optics which is referred to as "the edge-ray principle". A literature overview of this principle is given in the next paragraph.
 \section{The edge-ray principle}
 \cite{welford1978problem}.
-Ries and Rabl (1994) showed that the boundaries 
-$\partial$\set{R}{$1$}{}$(\Pi)$ at the source are mapped into the boundaries $\partial$\set{R}{}{}$(\Pi)$ at the target: 
-all rays that are neighbors at the source PS remain close to each other at the target PS, \cite{Ries:2}. 
+Ries and Rabl (1994) showed that the boundaries
+$\partial$\set{R}{$1$}{}$(\Pi)$ at the source are mapped into the boundaries $\partial$\set{R}{}{}$(\Pi)$ at the target:
+all rays that are neighbors at the source PS remain close to each other at the target PS, \cite{Ries:2}.
 Then, to map one region from \set{S}{}{} to \set{T}{}{} it is sufficient to map the boundary of this region.
 %\\ \indent Using the PS concept and the edge-ray principle we develop a new ray-tracing procedure in PS.
 \section{Phase space ray tracing}
-PS ray tracing takes advantage of the fact that there exists an optical map 
+PS ray tracing takes advantage of the fact that there exists an optical map
 $
 \map{M}{}{}: \mbox{\set{S}{}{}} \mapsto \mbox{\set{T}{}{}}
 $
  such that
-\begin{equation} 
-\map{M}{}{}(\variabile{q}_1,\variabile{p}_1)=(\variabile{q},\variabile{p}), 
-\end{equation} for every $(\variabile{q}_1,\variabile{p}_1)\in$ \set{S}{}{}. 
+\begin{equation}
+\map{M}{}{}(\variabile{q}_1,\variabile{p}_1)=(\variabile{q},\variabile{p}),
+\end{equation} for every $(\variabile{q}_1,\variabile{p}_1)\in$ \set{S}{}{}.
 For very simple systems, like the two-faceted cup, it is possible to determine an analytic expression for $\map{M}{}{}$ (as explained in Appendix \ref{app:boundariescup}).
-This is not the case of most of the optical systems we deal with. In that case it is necessary to implement ray tracing to calculate how light is distributed at the target. 
-For some optical systems $\map{M}{}{}$ is not even continuous. 
-Given a path $\Pi$, the map $\map{M}{}{}(\Pi)$: \set{R}{$1$}{}$(\Pi)$ $\mapsto$ \set{R}{$4$}{}$(\Pi)$ 
+This is not the case of most of the optical systems we deal with. In that case it is necessary to implement ray tracing to calculate how light is distributed at the target.
+For some optical systems $\map{M}{}{}$ is not even continuous.
+Given a path $\Pi$, the map $\map{M}{}{}(\Pi)$: \set{R}{$1$}{}$(\Pi)$ $\mapsto$ \set{R}{}{}$(\Pi)$
 which maps the regions \set{R}{$1$}{}$(\Pi)$ in \set{S}{}{} into the regions \set{R}{}{}$(\Pi)$ in \set{T}{}{} is a continuous and bijective map.
   The edge ray principle guarantees that $\map{M}{}{}(\Pi)$ maps \set{R}{$1$}{}$(\Pi)$ into \set{R}{}{}$(\Pi)$ preserving topological features. In particular, the boundaries $\partial$\set{R}{$1$}{}$(\Pi)$ are mapped into the boundaries $\partial$\set{R}{}{}$(\Pi)$. %, see \cite{Ries, Davies, Minano}.
 Employing the maps $\map{M}{}{}(\Pi)$ for all the possible paths $\Pi$, the output photometric variables can be calculated.
@@ -86,7 +86,7 @@ Employing the maps $\map{M}{}{}(\Pi)$ for all the possible paths $\Pi$, the outp
 \begin{equation}
 \begin{aligned}
 \label{eq:PSluminance}
-L(\variabile{q}, \variabile{p}) &> 0  & \quad \mbox{for } (\variabile{q}, \variabile{p})\in \mbox{\set{R}{}{}}(\Pi),\\ \vspace{0.5 cm}
+L(\variabile{q}, \variabile{p}) &> 0 & \mbox{for } (\variabile{q}, \variabile{p})\in \mbox{\set{R}{}{}}(\Pi),\\ \vspace{0.5 cm}
 L(\variabile{q}, \variabile{p}) &= 0 & \mbox{otherwise},\qquad \quad \;\;
 \end{aligned}
 \end{equation}
@@ -96,28 +96,28 @@ The target intensity along a given direction $\variabile{p}=\const{const}$ is co
 \label{eq:PSintensity}
 I_{PS}(\variabile{p}) = \int_{\mbox{\set{Q}{}{}}}L(\variabile{q}, \variabile{p}) \textrm{d}\variabile{q}.
 \end{equation}
-The previous equation implies that, assuming a Lambertian source, the problem of computing the target intensity is reduced to the problem of calculating the boundaries 
+The previous equation implies that, assuming a Lambertian source, the problem of computing the target intensity is reduced to the problem of calculating the boundaries
 $\partial$\set{R}{}{}$(\Pi)$ for all the possible paths $\Pi$. Indicating with $\variabile{q}^\textrm{min}(\Pi,\variabile{p})$ and $\variabile{q}^\textrm{max}(\Pi,\variabile{p})$ the minimum and the maximum position coordinates of the rays located on the boundary \set{R}{}{}$(\Pi)$ and using Eq. (\ref{eq:PSluminance}), Eq. (\ref{eq:PSintensity}) reduces to:
 \begin{equation}\label{eta2}
 I_{PS}(\variabile{p}) = \sum_{\Pi}\int_{\variabile{q}^\textrm{\,min}(\Pi, \variabile{p})}^{\variabile{q}^\textrm{\,max}(\Pi,\variabile{p})}L(\variabile{q}, \variabile{p})\textrm{d}\variabile{q} = \sum_{\Pi}\big (\variabile{q}^\textrm{max}(\Pi,\variabile{p})-\variabile{q}^\textrm{\,min}(\Pi,\variabile{p})\big )\,,
 \end{equation}
-where the sum is over all the possible paths and the second equation holds as we assume $L=1$ in \set{R}{}{}($\Pi$). 
-Note that for a given ray with corresponding coordinates 
+where the sum is over all the possible paths and the second equation holds as we assume $L=1$ in \set{R}{}{}($\Pi$).
+Note that for a given ray with corresponding coordinates
 on \set{T}{$4$}{}, only one path is possible as we are assuming that all the lines are reflective lines.
-Because of this, all the regions \set{R}{}{}($\Pi$) do not overlap each other, i.e. 
+Because of this, all the regions \set{R}{}{}($\Pi$) do not overlap each other, i.e.
 \begin{equation}
 \bigcap_{\Pi}\mbox{\set{R}{}{}}(\Pi)= \emptyset,
 \end{equation}
 where the intersection is over all the possible paths. \\ \indent
-From Eq. (\ref{eq:PSintensity}) we note that, using the PS structure, we could trace less rays inside the system to obtain, the profile of the intensity at the target. 
-%Instead of tracing the rays randomly (as in MC ray tracing) or following a regular source distribution (as in QMC ray tracing) 
-The aim is to construct a ray tracing procedure that allow us tracing more rays close to the discontinuity of the luminance, i.e. close to the boundaries $\partial$\set{R}{}{}$(\Pi)$. 
-To this purpose, a triangulation in \set{S}{}{} is defined such that the rays closest to the boundaries $\partial$\set{R}{}{}$(\Pi)$ 
+From Eq. (\ref{eq:PSintensity}) we note that, using the PS structure, we could trace less rays inside the system to obtain, the profile of the intensity at the target.
+%Instead of tracing the rays randomly (as in MC ray tracing) or following a regular source distribution (as in QMC ray tracing)
+The aim is to construct a ray tracing procedure that allow us tracing more rays close to the discontinuity of the luminance, i.e. close to the boundaries $\partial$\set{R}{}{}$(\Pi)$.
+To this purpose, a triangulation in \set{S}{}{} is defined such that the rays closest to the boundaries $\partial$\set{R}{}{}$(\Pi)$
 are selected and more rays in their vicinity are created to get progressively better estimates of the boundaries.\\ \indent
 The regions \set{R}{}{}$(\Pi)$ can be defined only when some rays are traced.
 The procedure starts with coordinates $(\variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})_{\variabile{k}=1, \cdots, 4}$ of the four points located exactly at the corners of \set{S}{}{}.
-%Then for each ray traced the corresponding paths $(\Pi^\variabile{k})_{\variabile{k}=1, \cdots, 4}$ are stored. 
-Next the grid is divided into two equal triangles joining two opposite vertices. For each triangle the rays with corresponding coordinates located at its corners are traced and the corresponding paths $(\Pi^\variabile{k})_{\variabile{k}=1, \cdots, 4}$ are stored.\footnote{We use the apix \variabile{k} to indicate the path corresponding to the ray with initial position coordinates $(\variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})$. This notation will be used only in this chapter.}
+%Then for each ray traced the corresponding paths $(\Pi^\variabile{k})_{\variabile{k}=1, \cdots, 4}$ are stored.
+Next the grid is divided into two equal triangles joining two opposite vertices. For each triangle the rays with corresponding coordinates located at its corners are traced and the corresponding paths $(\Pi^\variabile{k})_{\variabile{k}=1, \cdots, 4}$ are stored.
 If not all the paths corresponding to
 those rays are equal, one or more boundaries
 $\partial$\set{R}{}{}$(\Pi)$ are expected to cross the triangle.
@@ -134,13 +134,12 @@ the three corresponding rays are traced. Each refinement step leads to four new 
   \label{fig:refinement}
 \end{figure}
   \\ \indent
-When all the rays corresponding to the corners of each triangle have the same path, it is not necessary to refine the triangles anymore. 
-The triangles very close to the boundaries have alway vertices which corresponding rays that follow different paths. 
-At least two different paths are found close to the boundaries and the procedure could continue infinitely.
-Therefore, two parameters $\epsilon_{\variabile{q}_{min}}$ and $\epsilon_{\variabile{p}_{min}}$ are introduced to defined a stopping criterion.
+When all the rays corresponding to the corners of each triangle have the same path, it is not necessary to refine the triangles anymore.
+The triangles very close to the boundaries have vertices whose corresponding rays follow different paths.
+Indeed at least two different paths are found close to the boundaries. Because of this, the procedure could continue infinitely, therefore, two parameters $\epsilon_{\variabile{q}_{min}}$ and $\epsilon_{\variabile{p}_{min}}$ are introduced to defined a stopping criterion.
 The algorithm stops when the length of the sides of the triangles is smaller than $\epsilon_{\variabile{q}_{min}}$ and $\epsilon_{\variabile{p}_{min}}$.
-\noindent Suppose we have $\npath$ number of possible paths. Let us indicate them with $(\Pi_{\variabile{j}})_{\variabile{j}=1, \cdots, \npath}$. 
-Note that it can happen that a region formed by rays that follow a path $\Pi_\variabile{j}$ is located completely inside a triangle whose vertices are related to the same path $\Pi_\variabile{i}$ with $\variabile{j} \neq  \variabile{i}$, see Figure \ref{fig:region inside}. 
+Indicating all the possible paths with $(\Pi_{\variabile{j}})_{\variabile{j}=1, \cdots, \npath}$ where $\npath$ is the maximum number of paths\footnote{We use the apix \variabile{k} of $\Piˆ{\variabile{k}}$ to indicate the path followed by rays corresponding to the coordinates $(\variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})$ while the subscript refers to the index of every path, i.e. $\Pi_{\variabile{i}}\neq\Pi_{\variabile{j}}$ if $\variabile{i}\neq\variabile{j}$}.
+If the size of the triangles is too big, it can happen that a region formed by rays that follow a path $\Pi_\variabile{j}$ is located completely inside a triangle whose vertices are related to the same path $\Pi_\variabile{i}$ with $\variabile{j} \neq  \variabile{i}$, see Figure \ref{fig:region inside}.
 \begin{figure}[h]
   \begin{center}
   \includegraphics[width=8cm]{region_inside}
@@ -150,13 +149,12 @@ Note that it can happen that a region formed by rays that follow a path $\Pi_\va
     %The parameters values are $\epsilon_{variabile_{max}}~=~ 2$, $\epsilon_{\tau_{max}}= 1$, $\epsilon_{x_{min}}= 4$ and $\epsilon_{\tau_{min}}=2$. }
    \label{fig:region inside}
   \end{figure}
-To avoid this, two parameters $\epsilon_{\variabile{q}_{\textrm{max}}}$ and $\epsilon_{\variabile{p}_{\textrm{max}}}$ are defined for the $\variabile{q}_1$-axis and the $\variabile{p}_1$-axis, respectively. 
-When the length of the sides of the triangle are greater than these parameters, a new triangle is defined even if its vertices correspond to the same path. 
+To avoid this, two parameters $\epsilon_{\variabile{q}_{\textrm{max}}}$ and $\epsilon_{\variabile{p}_{\textrm{max}}}$ are defined for the $\variabile{q}_1$-axis and the $\variabile{p}_1$-axis, respectively.
+When the length of the sides of the triangle are greater than these parameters, a new triangle is defined even if its vertices correspond to the same path.
 The values of the parameters $\epsilon_{\variabile{q}_{min}}$, $\epsilon_{\variabile{p}_{min}}$, $\epsilon_{\variabile{q}_{max}}$ and $\epsilon_{\variabile{p}_{max}}$ determine the number of rays traced.
-Indeed, on the one hand, $\epsilon_{\variabile{q}_{min}}$ and $\epsilon_{\variabile{p}_{min}}$ can be decreased to obtain more rays close to the boundaries;
-on the other hand, a large number of rays in the interior of the regions can be traced decreasing the values of $\epsilon_{\variabile{q}_{max}}$ and $\epsilon_{\variabile{p}_{max}}$. %
+Indeed, on the one hand, decreasing $\epsilon_{\variabile{q}_{min}}$ and $\epsilon_{\variabile{p}_{min}}$ more rays close to the boundaries are obtained;
+on the other hand, decreasing the values of $\epsilon_{\variabile{q}_{max}}$ and $\epsilon_{\variabile{p}_{max}}$ more rays in the interior of the regions are traced. %
 \\ \indent  Figure \ref{fig:triangulation_refinement} shows an example of a triangulation refinement at the source PS of the two-faceted cup in Figure \ref{fig:cup}.
-
 \begin{figure}[h]
   \begin{center}
   \includegraphics[width=9cm]{triangulation_source}
@@ -169,16 +167,18 @@ on the other hand, a large number of rays in the interior of the regions can be 
 For this optical system, the width of the $\variabile{q}_1$-axis in source phase space is two times the width of the $\variabile{p}_1$-axis.
 Thus, our choice is $\epsilon_{\variabile{p}_{min}}=\frac{1}{2}\epsilon_{\variabile{q}_{min}}$ and $\epsilon_{\variabile{p}_{max}} = \frac{1}{2}\epsilon_{\variabile{q}_{max}}$.
 with $\epsilon_{\variabile{q}_{min}}=0.1$ and $\epsilon_{\variabile{q}_{max}}=1$.
-The triangulation refinement provides more triangles close to the boundaries $\partial$\set{R}{$1$}{}$(\Pi)$ and only few triangles inside the regions \set{R}{$1$}{}$(\Pi)$. 
-All the possible paths $(\Pi)_{\variabile{j} = 1, \cdots, \npath}$ are found and their corresponding regions \set{R}{$1$}{}$(\Pi)_{\variabile{j} = 1, \cdots, \npath}$. Using the edge-ray principle, we conclude that also the regions \set{R}{}{}$(\Pi)_{\variabile{j} = 1, \cdots, \npath}$ at the target are determined and only the rays close to the boundaries 
-$\partial$\set{R}{$1$}{} need to be considered to obtain the target rays distribution. The distribution of the rays at the target iss shown in Figure 
-\\ \indent The triangulation refinement is provided by Algorithm ref{alg:triangulation}.
- \\ \indent 
+\\ \indent
+The triangulation refinement provides more triangles close to the boundaries $\partial$\set{R}{$1$}{}$(\Pi)$ and only few triangles inside the regions \set{R}{$1$}{}$(\Pi)$.
+All the possible paths $(\Pi)_{\variabile{j} = 1, \cdots, \npath}$ with are found and their corresponding regions \set{R}{$1$}{}$(\Pi)_{\variabile{j} = 1, \cdots, \npath}$ are determined. Using the edge-ray principle, we conclude that also the regions \set{R}{}{}$(\Pi)_{\variabile{j} = 1, \cdots, \npath}$ at the target are determined and only the rays close to the boundaries
+$\partial$\set{R}{$1$}{} need to be considered to obtain the target rays distribution.
+%The distribution of the rays at the target is shown in Figure
+\\ \indent The triangulation refinement is provided using Algorithm \ref{alg:triangulation}.
+ \\ \indent
 \begin{algorithm}
 \caption{Triangulation refinement algorithm}\label{alg:triangulation}
 \begin{algorithmic}[1]
 \Procedure{Triangulation refinement}{}
-\State $(x(1), \tau(1))\gets \mbox{left and  botton corner of source PS}$
+\State $(\variabile{}, \tau(1))\gets \mbox{left and  botton corner of source PS}$
 \State $(x(2), \tau(2))\gets \mbox{right and  botton corner of source PS}$
 \State $(x(3), \tau(3)) \gets \mbox{right and upper corner of source PS}$
 \State $(x(4), \tau(4)) \gets \mbox{left and upper corner of source PS} $
@@ -198,10 +198,30 @@ RTriangle(pts2, $\epsilon_{wmin}, \epsilon_{wmax},\epsilon_{hmin}, \epsilon_{hma
 \end{algorithmic}
 \end{algorithm}
 \section{Conclusions}
+\begin{figure}[h]
+    \centering
+ \begin{subfigure}[t]{0.48\textwidth}
+
+    \includegraphics[width=\textwidth]{mc_sample.jpg}
+    \caption{Rays at the source of the two-faceted cup with random position coordinate $\variabile{x}$ and random angular coordinates $\optangle$. $10^3$ rays are depicted in this figure.}
+    \label{fig:mc_sample}
+
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.48\textwidth}
+
+    \includegraphics[width = \textwidth]{qmc_sample.jpg}
+    \caption{$10^3$ rays at the source of the two-faceted cup with position $\variabile{x}_1$ and angular $\optangle_1$ coordinates with a regular distributions.
+They are distributed as the points of a Sobol' sequence in two-dimensions.}
+    \label{fig:qmc_sample}
+
+\end{subfigure}
+\end{figure}
+
 % Compare all the PS
 % Definition of luminance intensity and etendue
 %\indent A similar method as described in this chapter is presented by Moore, \cite{moore2013methods}. In Moore's method each ray leaves the source at the same position while the angle coordinate changes. The path followed by the rays is taken into account and an interpolation is required to finalize the illumination pattern.
-% This interpolation can affect the efficiency of the method. Our method employs the distribution of the rays at the target phase space and avoids using any interpolation. 
+% This interpolation can affect the efficiency of the method. Our method employs the distribution of the rays at the target phase space and avoids using any interpolation.
 %Moreover, a criterion to stop the algorithm is provided in such a way that no more rays than necessary are traced. This makes ray tracing in phase space more accurate compared with Moore's procedure.
 % Finally, we claim that PS ray tracing is also more accurate than the ray tracing procedure proposed by Moore (2013), \cite{moore2013methods}.
 %The novelty of our approach compared to the method used by Moore, is briefly explained below.
@@ -211,5 +231,3 @@ RTriangle(pts2, $\epsilon_{wmin}, \epsilon_{wmax},\epsilon_{hmin}, \epsilon_{hma
 
 
 % We need to compute the boundaries, explained in next chapter
-
-
