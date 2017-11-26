@@ -112,8 +112,7 @@ where the intersection is over all the possible paths. \\ \indent
 From Eq. (\ref{eq:PSintensity}) we note that, using the PS structure, we could trace less rays inside the system to obtain, the profile of the intensity at the target.
 %Instead of tracing the rays randomly (as in MC ray tracing) or following a regular source distribution (as in QMC ray tracing)
 The aim is to construct a ray tracing procedure that allow us tracing more rays close to the discontinuity of the luminance, i.e. close to the boundaries $\partial$\set{R}{}{}$(\Pi)$.
-To this purpose, a triangulation in \set{S}{}{} is defined such that the rays closest to the boundaries $\partial$\set{R}{}{}$(\Pi)$
-are selected and more rays in their vicinity are created to get progressively better estimates of the boundaries.\\ \indent
+To this purpose, a triangulation refinement at \set{S}{}{} is defined as explained in the following. \\ \indent
 The regions \set{R}{}{}$(\Pi)$ can be defined only when some rays are traced.
 The procedure starts with coordinates $(\variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})_{\variabile{k}=1, \cdots, 4}$ of the four points located exactly at the corners of \set{S}{}{}.
 %Then for each ray traced the corresponding paths $(\Pi^\variabile{k})_{\variabile{k}=1, \cdots, 4}$ are stored.
@@ -198,23 +197,35 @@ RTriangle(pts2, $\epsilon_{wmin}, \epsilon_{wmax},\epsilon_{hmin}, \epsilon_{hma
 \end{algorithmic}
 \end{algorithm}
 \section{Conclusions}
+In this chapter we introduced the phase space concept.
+We explained a new ray tracing method based on the source and the target PS representation.
+The edge-ray principle guarante
+The method takes into account of the paths followed by every ray traced.
+This allows to construct a triangulation in \set{S}{}{} such that the rays closest to the boundaries $\partial$\set{R}{}{}$(\Pi)$
+are selected and more rays in their vicinity are created to get progressively better estimates of the boundaries.\\ \indent
+
 \begin{figure}[h]
-    \centering
- \begin{subfigure}[t]{0.48\textwidth}
-
-    \includegraphics[width=\textwidth]{mc_sample.jpg}
-    \caption{Rays at the source of the two-faceted cup with random position coordinate $\variabile{x}$ and random angular coordinates $\optangle$. $10^3$ rays are depicted in this figure.}
+ \begin{subfigure}[t]{\textwidth}
+\centering
+    \includegraphics[width=0.6\textwidth]{mc_sample.jpg}
+    \caption{Random rays distribution at the source.}
     \label{fig:mc_sample}
-
 \end{subfigure}
 \hfill
-\begin{subfigure}[t]{0.48\textwidth}
-
-    \includegraphics[width = \textwidth]{qmc_sample.jpg}
-    \caption{$10^3$ rays at the source of the two-faceted cup with position $\variabile{x}_1$ and angular $\optangle_1$ coordinates with a regular distributions.
-They are distributed as the points of a Sobol' sequence in two-dimensions.}
+\\
+\begin{subfigure}[t]{\textwidth}
+\centering
+    \includegraphics[width = 0.6\textwidth]{qmc_sample.jpg}
+    \caption{Rays at the source distributed as the points of a Sobol' sequence in two-dimensions.}
     \label{fig:qmc_sample}
-
+\end{subfigure}
+\\
+\begin{subfigure}[t]{\textwidth}
+\centering
+\includegraphics[width=0.6\textwidth]{triangulation_source}
+\caption{Rays distributed according to a triangulation refinement
+on source phase space.}
+\label{fig:mc_sample}
 \end{subfigure}
 \end{figure}
 
