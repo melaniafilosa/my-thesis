@@ -197,36 +197,46 @@ RTriangle(pts2, $\epsilon_{wmin}, \epsilon_{wmax},\epsilon_{hmin}, \epsilon_{hma
 \end{algorithmic}
 \end{algorithm}
 \section{Conclusions}
-In this chapter we introduced the phase space concept.
+In this chapter we introduced the phase space concept. 
 We explained a new ray tracing method based on the source and the target PS representation.
-The edge-ray principle guarante
 The method takes into account of the paths followed by every ray traced.
-This allows to construct a triangulation in \set{S}{}{} such that the rays closest to the boundaries $\partial$\set{R}{}{}$(\Pi)$
-are selected and more rays in their vicinity are created to get progressively better estimates of the boundaries.\\ \indent
-
+As an example, we provide the source and the target PS representation of a very simple optical system which is the two-faceted cup.
+We observe that all the rays that follow the same path are located in the same regions in PS.
+The edge-ray principle guarantees that all the rays that follow the same path are located in the same regions in PS. Furthermore, 
+if we know these regions at the source we can determine the corresponding regions at the target. 
+It is sufficient to map the boundaries at the source $\partial$\set{R}{$1$}{}$(\Pi)$ to obtain their corresponding target boundaries $\partial$\set{R}{}{}$(\Pi)$. \\ \indent
+The boundaries $\partial$\set{R}{}{}$(\Pi)$ are particular relevant because there occur the discontinuities of the luminance. In particular, 
+assuming a lambertian source, the rays on the boundaries gives all the information required to compute the target intensity. Based on this idea, a triangulation in \set{S}{}{} is construct such that the rays closest to the boundaries $\partial$\set{R}{}{}$(\Pi)$
+are selected and more rays in their vicinity are created to get progressively better estimates of the boundaries.
+\\ \indent In Figures \ref{fig:three_distributions} we show three different rays distributions on the source PS of the two-faceted cup. There every point corresponds to a unique ray.
+Indeed, considering only reflection law, for a given ray only one path is allowed and, therefore, the PS regions do not overlap to each others. 
+The coordinates of every point correspond to the initial ray position $\variabile{q}_1$ coordinate at the source and the initial ray direction $\variabile{p}_1 = \sin(\myangle_1)$ 
+coordinate (expressed with respect to the normal of the source). \\ \indent In Figure \ref{fig:mc_sample}, $10^3$ random points are shown. MC ray tracing is based on this random distribution of the initial rays set. In Figure \ref{fig:qmc_sample}, $10^3$ points of a two-dimensional Sobol' sequence are shown. 
+Since Sobol's sequences are defined in a unit square, we scaled it such that all the source PS \set{S}{}{}$=[-2, 2]\times[-1, 1]$ is covered by rays. QMC ray tracing it considers as initial set, rays distributed as the points of a Sobol sequence. Such regular distribution can leads to several advantages for the computation of the target intensity, see Section \ref{sec:QMC} of this thesis. Finally, Figure \ref{fig:ps_sample} shows a non-uniform distribution of rays at the source PS. Such distribution is obtained from the triangulation refinement explained in the previous section. The procedure takes into account of the path followed by every rays traced. This allows to trace more rays close to the boundaries of the regions in PS, each of them is formed by all the rays that follow the same path when they propagate within the two-faceted cup. PS ray tracing is based on this initial rays distribution at the source. The target intensity in PS is calculated using only the rays that are located on the boundaries of those regions. Thus, in order to compute to obtain the profile of the intensity at the target, the boundaries need to be determined. In the next chapter we provide to different approach to find the boundaries $\partial$\set{R}{}{}$(\Pi)$ of the regions with positive luminance at the target PS \set{T}{}{}.
 \begin{figure}[h]
  \begin{subfigure}[t]{\textwidth}
 \centering
-    \includegraphics[width=0.6\textwidth]{mc_sample.jpg}
-    \caption{Random rays distribution at the source.}
+    \includegraphics[width=0.57\textwidth]{MC_source_cup}
+    \caption{$10^3$ random rays at the source PS (MC ray tracing).}
     \label{fig:mc_sample}
 \end{subfigure}
 \hfill
 \\
 \begin{subfigure}[t]{\textwidth}
 \centering
-    \includegraphics[width = 0.6\textwidth]{qmc_sample.jpg}
-    \caption{Rays at the source distributed as the points of a Sobol' sequence in two-dimensions.}
+    \includegraphics[width = 0.57\textwidth]{QMC_source_cup}
+    \caption{$10^3$ rays at the source PS distributed as the point of a Sobol' sequence (QMC ray tracing).}
     \label{fig:qmc_sample}
 \end{subfigure}
-\\
+\hfill
 \begin{subfigure}[t]{\textwidth}
 \centering
-\includegraphics[width=0.6\textwidth]{triangulation_source}
-\caption{Rays distributed according to a triangulation refinement
-on source phase space.}
-\label{fig:mc_sample}
+\includegraphics[width=0.57\textwidth]{PS_source_cup}
+\caption{$1,5*10^3$ rays distributed using the triangulation refinement (PS ray tracing).}
+\label{fig:ps_sample}
 \end{subfigure}
+\caption{Three different rays distribution at the source of the two-faceted cup.}
+\label{fig:three_distributions}
 \end{figure}
 
 % Compare all the PS
