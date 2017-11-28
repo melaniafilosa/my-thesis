@@ -114,14 +114,11 @@ From Eq. (\ref{eq:PSintensity}) we note that, using the PS structure, we could t
 The aim is to construct a ray tracing procedure that allow us tracing more rays close to the discontinuity of the luminance, i.e. close to the boundaries $\partial$\set{R}{}{}$(\Pi)$.
 To this purpose, a triangulation refinement at \set{S}{}{} is defined as explained in the following. \\ \indent
 The regions \set{R}{}{}$(\Pi)$ can be defined only when some rays are traced.
-The procedure starts with coordinates $(\variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})_{\variabile{k}=1, \cdots, 4}$ of the four points located exactly at the corners of \set{S}{}{}.
-%Then for each ray traced the corresponding paths $(\Pi^\variabile{k})_{\variabile{k}=1, \cdots, 4}$ are stored.
-Next the grid is divided into two equal triangles joining two opposite vertices. For each triangle the rays with corresponding coordinates located at its corners are traced and the corresponding paths $(\Pi^\variabile{k})_{\variabile{k}=1, \cdots, 4}$ are stored.
-If not all the paths corresponding to
+The procedure starts with coordinates $(\variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})_{\variabile{k}=1, \cdots, 4}$ of the four points located exactly at the corners of \set{S}{}{}. For each of them, the paths $(\Pi^\variabile{k})_{\variabile{k}=1, \cdots, 4}$. Next, for some $\variabile{k} \in\{1, \cdots, 4\}$, the grid is divided into two equal triangles joining two opposite vertices. For each triangle the rays located at its corners are traced. If not all the paths corresponding to
 those rays are equal, one or more boundaries
 $\partial$\set{R}{}{}$(\Pi)$ are expected to cross the triangle.
 In that case, the middle points $(\variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})_{\variabile{k}=5,6,7}$ of each side of the triangle are added and
-the three corresponding rays are traced. Each refinement step leads to four new triangles (see Figure \ref{fig:refinement}).
+the three corresponding rays are traced (unless they where already traced in the previous steps). Each refinement step leads to four new triangles (see Figure \ref{fig:refinement}).
  \begin{figure}[h]
   \begin{center}
   \includegraphics[width=8cm]{region}
@@ -129,15 +126,15 @@ the three corresponding rays are traced. Each refinement step leads to four new 
   \caption{Triangulation refinement:
   when the rays related to the vertices of the triangles follow a different path a new refinement step is required.
    Each refinement step leads to four new triangles.}
-   %The parameters values are $\epsilon_{\variabile{q}_{max}}~=~ 2$, $\epsilon_{\variabile{p}_{max}}= 1$, $\epsilon_{\variabile{q}_{min}}= 4$ and $\epsilon_{\variabile{p}_{min}}=2$.}
+   %The parameters values are $\varepsilon_{\variabile{q}_{max}}~=~ 2$, $\varepsilon_{\variabile{p}_{max}}= 1$, $\varepsilon_{\variabile{q}_{min}}= 4$ and $\varepsilon_{\variabile{p}_{min}}=2$.}
   \label{fig:refinement}
 \end{figure}
   \\ \indent
 When all the rays corresponding to the corners of each triangle have the same path, it is not necessary to refine the triangles anymore.
 The triangles very close to the boundaries have vertices whose corresponding rays follow different paths.
-Indeed at least two different paths are found close to the boundaries. Because of this, the procedure could continue infinitely, therefore, two parameters $\epsilon_{\variabile{q}_{min}}$ and $\epsilon_{\variabile{p}_{min}}$ are introduced to defined a stopping criterion.
-The algorithm stops when the length of the sides of the triangles is smaller than $\epsilon_{\variabile{q}_{min}}$ and $\epsilon_{\variabile{p}_{min}}$.
-Indicating all the possible paths with $(\Pi_{\variabile{j}})_{\variabile{j}=1, \cdots, \npath}$ where $\npath$ is the maximum number of paths\footnote{We use the apix \variabile{k} of $\Piˆ{\variabile{k}}$ to indicate the path followed by rays corresponding to the coordinates $(\variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})$ while the subscript refers to the index of every path, i.e. $\Pi_{\variabile{i}}\neq\Pi_{\variabile{j}}$ if $\variabile{i}\neq\variabile{j}$}.
+Indeed at least two different paths are found close to the boundaries. Because of this, the procedure could continue infinitely, therefore, two parameters $\varepsilon_{\variabile{q}_{min}}$ and $\varepsilon_{\variabile{p}_{min}}$ are introduced to defined a stopping criterion.
+The algorithm stops when the length of the sides of the triangles is smaller than $\varepsilon_{\variabile{q}_{min}}$ and $\varepsilon_{\variabile{p}_{min}}$.
+Indicating all the possible paths with $(\Pi_{\variabile{j}})_{\variabile{j}=1, \cdots, \npath}$ where $\npath$ is the maximum number of paths\footnote{We use the apix to indicate the path $\Pi^\variabile{k}$ followed by rays corresponding to the coordinates $(\variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})$ while the subscript refers to the index of every path, i.e. $\Pi_{\variabile{i}}\neq\Pi_{\variabile{j}}$ if $\variabile{i}\neq\variabile{j}$}.
 If the size of the triangles is too big, it can happen that a region formed by rays that follow a path $\Pi_\variabile{j}$ is located completely inside a triangle whose vertices are related to the same path $\Pi_\variabile{i}$ with $\variabile{j} \neq  \variabile{i}$, see Figure \ref{fig:region inside}.
 \begin{figure}[h]
   \begin{center}
@@ -145,57 +142,99 @@ If the size of the triangles is too big, it can happen that a region formed by r
   \end{center}
   \caption{The red line encloses a region of rays that follow the path $\Pi_2$ and is completely located inside a triangle.
   The algorithm is not able to detect that region and, a further refinement is required.}
-    %The parameters values are $\epsilon_{variabile_{max}}~=~ 2$, $\epsilon_{\tau_{max}}= 1$, $\epsilon_{x_{min}}= 4$ and $\epsilon_{\tau_{min}}=2$. }
+    %The parameters values are $\varepsilon_{variabile_{max}}~=~ 2$, $\varepsilon_{\tau_{max}}= 1$, $\varepsilon_{x_{min}}= 4$ and $\varepsilon_{\tau_{min}}=2$. }
    \label{fig:region inside}
   \end{figure}
-To avoid this, two parameters $\epsilon_{\variabile{q}_{\textrm{max}}}$ and $\epsilon_{\variabile{p}_{\textrm{max}}}$ are defined for the $\variabile{q}_1$-axis and the $\variabile{p}_1$-axis, respectively.
+To avoid this, two parameters $\varepsilon_{\variabile{q}_{\textrm{max}}}$ and $\varepsilon_{\variabile{p}_{\textrm{max}}}$ are defined for the $\variabile{q}_1$-axis and the $\variabile{p}_1$-axis, respectively.
 When the length of the sides of the triangle are greater than these parameters, a new triangle is defined even if its vertices correspond to the same path.
-The values of the parameters $\epsilon_{\variabile{q}_{min}}$, $\epsilon_{\variabile{p}_{min}}$, $\epsilon_{\variabile{q}_{max}}$ and $\epsilon_{\variabile{p}_{max}}$ determine the number of rays traced.
-Indeed, on the one hand, decreasing $\epsilon_{\variabile{q}_{min}}$ and $\epsilon_{\variabile{p}_{min}}$ more rays close to the boundaries are obtained;
-on the other hand, decreasing the values of $\epsilon_{\variabile{q}_{max}}$ and $\epsilon_{\variabile{p}_{max}}$ more rays in the interior of the regions are traced. %
-\\ \indent  Figure \ref{fig:triangulation_refinement} shows an example of a triangulation refinement at the source PS of the two-faceted cup in Figure \ref{fig:cup}.
+The values of the parameters $\varepsilon_{\variabile{q}_{min}}$, $\varepsilon_{\variabile{p}_{min}}$, $\varepsilon_{\variabile{q}_{max}}$ and $\varepsilon_{\variabile{p}_{max}}$ determine the number of rays traced.
+Indeed, on the one hand, decreasing $\varepsilon_{\variabile{q}_{min}}$ and $\varepsilon_{\variabile{p}_{min}}$ more rays close to the boundaries are obtained;
+on the other hand, decreasing the values of $\varepsilon_{\variabile{q}_{max}}$ and $\varepsilon_{\variabile{p}_{max}}$ more rays in the interior of the regions are traced. %
+%The distribution of the rays at the target is shown in Figure
+\\ \indent The triangulation refinement is provided using Algorithm \ref{alg:triangulation}.
+ \\ \indent
+\begin{algorithm}
+\caption{Triangulation refinement algorithm}\label{alg:triangulation}
+Initialize $\varepsilon_{\variabile{q}_1}^{\textrm{min}}, \varepsilon_{\variabile{q}_1}^{\textrm{max}}, \varepsilon_{\variabile{p}_1}^{\textrm{min}}$ and,
+ $\varepsilon_{\variabile{p}_1}^{\textrm{max}};$
+\begin{algorithmic}[1]
+%\Procedure{Triangulation refinement}{}
+\State $(\variabile{q}_1^1, \variabile{p}_1^1)\gets \mbox{left and bottom corner of source PS: (-\variabile{a}, -1)}$
+\State $(\variabile{q}_1^2, \variabile{p}_1^2) \gets \mbox{right and bottom corner of source PS:  (\variabile{a}, -1)}$
+\State $(\variabile{q}_1^3, \variabile{p}_1^3)  \gets \mbox{right and upper corner of source PS: (\variabile{a}, 1)}$
+\State $(\variabile{q}_1^4, \variabile{p}_1^4) \gets \mbox{left and upper corner of source PS: (-\variabile{a}, 1)} $
+\For{$ \variabile{k}= 1 \to 4 $}
+\State Trace the ray with initial coordinatees $(\variabile{q}_1^\variabile{k}, \variabile{p}_1^{\variabile{k}})$ in \set{S}{}{};
+%\State $pcoordinates\gets [p_coordinates \variabile{q}_1^\variabile{k}]$;
+\State Store the corresponding path $\Pi^{\variabile{k}}$.
+\EndFor
+\State VL $\gets [1, 2, 4]$ \Comment{VL = vertices of the left triangle}
+\State VR $\gets [2,3, 4]$   \Comment{VR = vertices of the right triangle}
+\State Left triangle(VL, $\varepsilon_{\variabile{q}_1}^{\textrm{min}}, \varepsilon_{\variabile{q}_1}^{\textrm{max}}, \varepsilon_{\variabile{p}_1}^{\textrm{min}}, \varepsilon_{\variabile{p}_1}^{\textrm{max}}$) \Comment{Refine the left triangle} \\
+\State Right triangle(VR, $\varepsilon_{\variabile{q}_1}^{\textrm{min}}, \varepsilon_{\variabile{q}_1}^{\textrm{max}}, \varepsilon_{\variabile{p}_1}^{\textrm{min}}, \varepsilon_{\variabile{p}_1}^{\textrm{max}}$) \Comment{Refine the right triangle} \\
+%\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+\begin{algorithm}
+\caption{Algorithm for the refinement of the left triangles}\label{alg:left_triangle}
+\begin{algorithmic}[1]
+\Procedure{ Left triangle}{VL, $\varepsilon_{\variabile{q}_1}^{\textrm{min}}, \varepsilon_{\variabile{q}_1}^{\textrm{max}}, \varepsilon_{\variabile{p}_1}^{\textrm{min}}, \varepsilon_{\variabile{p}_1}^{\textrm{max}}$}
+\State $\textrm{dist}_\variabile{q}\gets \mbox{$|\variabile{q}_1^2-\variabile{q}_1^1|$}$
+\State $\textrm{dist}_\variabile{p}\gets \mbox{$|\variabile{p}_1^{3}-\variabile{p}_1^1|$}$
+\State RefineTriangle $\gets$  false;
+\State DifferentPath $\gets$  false;
+\If{$\textrm{dist}_\variabile{q}>\varepsilon_{\variabile{q}_1}^{\textrm{max}} $ or $\textrm{dist}_\variabile{p} >\variabile{p}_1^{\textrm{max}}$}
+\State RefineTriangle $\gets$  true;
+\EndIf
+\For{$ \variabile{k} = 1 \to 2 $}
+\If{$\Pi^{\variabile{k}} \neq \Pi^{\variabile{k}+1}$}
+\State DifferentPath $\gets$  true;
+\EndIf
+\EndFor
+\If{$\textrm{dist}_\variabile{q}>\varepsilon_{\variabile{q}_1}^{\textrm{min}}$ or $\textrm{dist}_\variabile{p}>\varepsilon_{\variabile{p}_1}^{\textrm{min}}$}
+\State RefineTriangle $\gets$  DifferentPath;
+\Else
+\If{(DifferentPath is true)}
+\State Boundary(\textrm{VL}) $\gets$ true; \Comment{A boundary crosses the triangle}
+\EndIf
+\EndIf
+\If {(RefineTriangle is true)}
+\State Define the points at the middle of each side of the triangle
+\State $(\variabile{q}_1^5, \variabile{p}_1^5) = ((\variabile{q}_1^1+\variabile{q}_1^2)/2, \variabile{p}_1^1)$
+\State $(\variabile{q}_1^6, \variabile{p}_1^6) = (\variabile{q}_1^5, (\variabile{p}_1^1+\variabile{p}_1^2)/2)$
+\State $(\variabile{q}_1^7, \variabile{p}_1^7) = (\variabile{q}_1^1, \variabile{p}_1^6)$
+\For {$\variabile{k} = 5 \to 7 $}
+\If {The ray with coordinates $(\variabile{q}_1^\variabile{k}, \variabile{p}_1^\variabile{k})$ is not traced yet}
+\State Trace the ray with initial coordinatees: $(\variabile{q}_1^\variabile{k}, \variabile{p}_1^\variabile{k})$ in PS;
+\EndIf
+\EndFor
+\State\Return{\Call{Left Triangle}{$[\textrm{VL}(1),5, 7], \varepsilon_{\variabile{q}_1}^{\textrm{min}}, \varepsilon_{\variabile{q}_1}^{\textrm{max}}, \varepsilon_{\variabile{p}_1}^{\textrm{min}}, \varepsilon_{\variabile{p}_1}^{\textrm{max}}$}}
+\State\Return{\Call{Left Triangle}{$[5,\textrm{VL}(2), 6], \varepsilon_{\variabile{q}_1}^{\textrm{min}}, \varepsilon_{\variabile{q}_1}^{\textrm{max}}, \varepsilon_{\variabile{p}_1}^{\textrm{min}}, \varepsilon_{\variabile{p}_1}^{\textrm{max}}$}}
+\State\Return{\Call{Left Triangle}{$[7,6,\textrm{VL}(3)], \varepsilon_{\variabile{q}_1}^{\textrm{min}}, \varepsilon_{\variabile{q}_1}^{\textrm{max}}, \varepsilon_{\variabile{p}_1}^{\textrm{min}}, \varepsilon_{\variabile{p}_1}^{\textrm{max}}$}}
+\State\Return{\Call{Right Triangle}{$[5,6, 7], \varepsilon_{\variabile{q}_1}^{\textrm{min}}, \varepsilon_{\variabile{q}_1}^{\textrm{max}}, \varepsilon_{\variabile{p}_1}^{\textrm{min}}, \varepsilon_{\variabile{p}_1}^{\textrm{max}}$}}
+\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+\\ \indent Figure \ref{fig:triangulation_refinement} shows an example of a triangulation refinement at the source PS of the two-faceted cup in Figure \ref{fig:cup}.
 \begin{figure}[h]
   \begin{center}
   \includegraphics[width=9cm]{triangulation_source}
   \end{center}
   \caption{Triangulation refinement of source phase space:
   near the boundaries more rays are traced.
-    The values of the parameters are $\epsilon_{\variabile{q}_{min}}~=~ 0.1$ and $\epsilon_{\variabile{q}_{max}}~=~1$.}
+    The values of the parameters are $\varepsilon_{\variabile{q}_{min}}~=~ 0.1$ and $\varepsilon_{\variabile{q}_{max}}~=~1$.}
    \label{fig:triangulation_refinement}
   \end{figure}
 For this optical system, the width of the $\variabile{q}_1$-axis in source phase space is two times the width of the $\variabile{p}_1$-axis.
-Thus, our choice is $\epsilon_{\variabile{p}_{min}}=\frac{1}{2}\epsilon_{\variabile{q}_{min}}$ and $\epsilon_{\variabile{p}_{max}} = \frac{1}{2}\epsilon_{\variabile{q}_{max}}$.
-with $\epsilon_{\variabile{q}_{min}}=0.1$ and $\epsilon_{\variabile{q}_{max}}=1$.
+Thus, our choice is $\varepsilon_{\variabile{p}_{min}}=\frac{1}{2}\varepsilon_{\variabile{q}_{min}}$ and $\varepsilon_{\variabile{p}_{max}} = \frac{1}{2}\varepsilon_{\variabile{q}_{max}}$.
+with $\varepsilon_{\variabile{q}_{min}}=0.1$ and $\varepsilon_{\variabile{q}_{max}}=1$.
 \\ \indent
 The triangulation refinement provides more triangles close to the boundaries $\partial$\set{R}{$1$}{}$(\Pi)$ and only few triangles inside the regions \set{R}{$1$}{}$(\Pi)$.
 All the possible paths $(\Pi)_{\variabile{j} = 1, \cdots, \npath}$ with are found and their corresponding regions \set{R}{$1$}{}$(\Pi)_{\variabile{j} = 1, \cdots, \npath}$ are determined. Using the edge-ray principle, we conclude that also the regions \set{R}{}{}$(\Pi)_{\variabile{j} = 1, \cdots, \npath}$ at the target are determined and only the rays close to the boundaries
 $\partial$\set{R}{$1$}{} need to be considered to obtain the target rays distribution.
-%The distribution of the rays at the target is shown in Figure
-\\ \indent The triangulation refinement is provided using Algorithm \ref{alg:triangulation}.
- \\ \indent
-\begin{algorithm}
-\caption{Triangulation refinement algorithm}\label{alg:triangulation}
-\begin{algorithmic}[1]
-\Procedure{Triangulation refinement}{}
-\State $(\variabile{}, \tau(1))\gets \mbox{left and  botton corner of source PS}$
-\State $(x(2), \tau(2))\gets \mbox{right and  botton corner of source PS}$
-\State $(x(3), \tau(3)) \gets \mbox{right and upper corner of source PS}$
-\State $(x(4), \tau(4)) \gets \mbox{left and upper corner of source PS} $
-\For{$ i = 1 \to 4 $}
-\State Trace the ray with PS coordinatees: $(x(i), \tau(i))$;
-\State Store the paths;
-\EndFor
-\State $pts1 \gets [1, 2, 3]$ \Comment{vertexes of the left triangle}
-\State $pts2 \gets [2,3, 4]$   \Comment{vertexes of the right triangle}
-\State $\epsilon_{wmin} \gets \mbox{minimum parameter for the x-axis of } \mathcal{P}_\textrm{s}$
-\State $\epsilon_{wmax} \gets \mbox{maximum parameter for the x-axis of } \mathcal{P}_\textrm{s}$
-\State $\epsilon_{hmin}\gets  \mbox{minimum parameter for the $\tau$-axis of } \mathcal{P}_\textrm{s}$
-\State $\epsilon_{hmax}\gets  \mbox{maximum parameter for the $\tau$-axis of } \mathcal{P}_\textrm{s}$ \\
-LTriangle(pts1, $\epsilon_{wmin}, \epsilon_{wmax},\epsilon_{hmin}, \epsilon_{hmax}$ ) \\ \Comment{Refine the left triangle} \\
-RTriangle(pts2, $\epsilon_{wmin}, \epsilon_{wmax},\epsilon_{hmin}, \epsilon_{hmax}$) \\ \Comment{Refine the right triangle}
-\EndProcedure
-\end{algorithmic}
-\end{algorithm}
 \section{Conclusions}
 In this chapter we introduced the phase space concept. 
 We explained a new ray tracing method based on the source and the target PS representation.
@@ -232,7 +271,7 @@ Since Sobol's sequences are defined in a unit square, we scaled it such that all
 \begin{subfigure}[t]{\textwidth}
 \centering
 \includegraphics[width=0.57\textwidth]{PS_source_cup}
-\caption{$1,5*10^3$ rays distributed using the triangulation refinement (PS ray tracing).}
+\caption{$1,5\cdot10^3$ rays distributed using the triangulation refinement (PS ray tracing).}
 \label{fig:ps_sample}
 \end{subfigure}
 \caption{Three different rays distribution at the source of the two-faceted cup.}
