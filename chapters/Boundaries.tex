@@ -68,15 +68,50 @@ with $C$ a constant and $\delta$ is:
 \begin{equation}
 \delta=\frac{N}{\mbox{surface area}}\; ,
 \end{equation}
-where $N$ is the number of points in $V$ and the surface area is the area inside the boundaries of the region formed by the points cloud. Hence $\delta$ is given for a fixed point set and the value of $C$ needs to be determined by numerical simulations.
-% Insert algorithm
-\\
+where $N$ is the number of points in $V$ and the surface area is the area inside the boundaries of the region formed by the points cloud. Hence $\delta$ is given for a fixed point set and the value of $C$ needs to be determined by numerical simulations.\\ \indent 
+The $\alpha$-shape procedure can be outlined as follows.
+\begin{enumerate}
+\item Construct a Delaunay triangulation $T^\prime$ of the point cloud $V$;
+\item For every triangles $T^\prime(i)$ calculates the radius $r(i)$ of the circle circumscribed by its vertices;
+\item If $r(i)\leq\alpha$ keep the triangle $T^\prime(i)$ in the triangulation;
+\item If $r(i)>\alpha$ remove the triangle from the triangulation;
+\item For every triangle return the edges (facets in $3$D) referred to only one triangle (tetrahedron in $3$D), the so-called \textit{free boundary} edges.
+\end{enumerate}
+%% Insert algorithm
+%\begin{algorithm}[h]
+%\caption{$\alpha$-shape reconstruction}\label{alg:alphashapes}
+%\begin{algorithmic}[1]
+%\Procedure{$\alpha$-shape}{$V$, $\alpha$}
+%\State Construct a Delaunay triangulation of the point cloud $V$
+%\State$T^\prime\gets$ all triangles of the Delaunay triangulation
+%\State For every 
+%\State Calculates the radius of the circle circumscribed by the vertices of every triangle
+%\State $r(i) \gets$
+%\State For {every triangle in $T^\prime$}
+%\State $(\variabile{q}_1^4, \variabile{p}_1^4) \gets \mbox{left and upper corner of source PS: (-\variabile{a}, 1)} $
+%\For{$ \variabile{k}= 1 \to 4 $}
+%\State Trace the ray with initial coordinates $(\variabile{q}_1^\variabile{k}, \variabile{p}_1^{\variabile{k}})$ in \set{S}{}{};
+%\State Calculate the corresponding path $\Pi^{\variabile{k}}$;
+%\State $\mbox{Ray}.\variabile{q}\gets [\mbox{Ray}.\variabile{q}, \variabile{q}_1^\variabile{k}]$;
+%\State $\mbox{Ray}.\variabile{p}\gets [\mbox{Ray}.\variabile{p}, \variabile{p}_1^\variabile{k}]$;
+%\State Store the corresponding path $\Pi^{\variabile{k}}$.
+%\State $\mbox{Ray}.\Pi\gets [\mbox{Ray}.\Pi, \Pi^{\variabile{k}}]$;
+%\EndFor
+%\State VL $\gets [1, 2, 4]$ \Comment{VL = vertices of the left triangle}
+%\State VR $\gets [2,3, 4]$   \Comment{VR = vertices of the right triangle}
+%\State \Call{Left Triangle}{VL, Ray, $\varepsilon_{\variabile{q}_1}^{\textrm{min}}, \varepsilon_{\variabile{q}_1}^{\textrm{max}}, \varepsilon_{\variabile{p}_1}^{\textrm{min}}, \varepsilon_{\variabile{p}_1}^{\textrm{max}}$}\Comment{Refine the left triangle} 
+%\State \Call{Right Triangle}{VR, Ray, $\varepsilon_{\variabile{q}_1}^{\textrm{min}}, \varepsilon_{\variabile{q}_1}^{\textrm{max}}, \varepsilon_{\variabile{p}_1}^{\textrm{min}}, \varepsilon_{\variabile{p}_1}^{\textrm{max}}$} \Comment{Refine the right triangle} \\
+%\Return ;
+%\EndProcedure
+%\end{algorithmic}
+%\end{algorithm}
+%\\
 %Let us define a Voronoi diagram in a metric space.
 %The simplest case that we can have is the two-dimensional case that is the case where $X=\mathbb{R}^2$.
 %The tuple $\mathcal{S}=\{1,\cdots,n\}\subset \mathbb{R}^2$ is now a set of points. The Voronoi diagram of $\mathcal{S}$ is a subsection of $\mathbb{R}^2$ such that every other region around a point $p\in \mathcal{S}$ contains all points that are closer to $p$ than to every point in $\mathcal{S}$. A triangulation of the point set $\mathcal{S}$ is a set of edges $\mathcal{E}$ whose extremes are points of $\mathcal{S}$ such that the faces of each triangle are bounded by three edges and any edge that is not in $\mathcal{E}$ intersects one of the existing edges. The Delaunay triangulation is the dual graph of the Voronoi diagram: it consists of vertices (the points in $\mathcal{S}$) and it has an edge between two vertices if the two corresponding faces share an edge. \\
 \indent $\alpha$-shapes are a powerful tool to reconstruct surfaces. However, there exist surfaces that are not described well by $ \alpha $-shapes. Indeed for some surfaces there exist no value of $\alpha$ that includes all desired triangles and deletes all undesired triangles. For example, it can be difficult to obtain a good approximation of a shape formed by a non-uniform points set if the parameter $\alpha$ is determined according to the density of the point cloud. Furthermore, the $\alpha$-shape method does not work well when the shape has a sharp turn or a joint. In this case $\alpha$-shapes often give a "webbed-foot" appearance at such joints since they improperly connect the adjacent surfaces. To overcome this issue, Teichmann and Capps presented an alternative approach to establish the value of $\alpha$, \cite{teichmann1998surface}. Their density-scaled $\alpha$-shapes method constitutes an improvement of "classical" $\alpha$-shapes.
 % BRIDGE
-There are several ways to determine the value of $\alpha$ \cite{mandal1997selection}; we provide a technique that exploits the conservation of the \'{e}tendue in phase space. The essence of our approach is explained in the following.
+%There are several ways to determine the value of $\alpha$ \cite{mandal1997selection}; we provide a technique that exploits the conservation of the \'{e}tendue in phase space. The essence of our approach is explained in the following.
 
 %The first step of this method is to make a triangulation of the point cloud.
 %Then the key idea is to compute somehow the point-density of each point and use this to get an approximation of the point density of a triangle. In this way one can reduce the $\alpha$-value in areas where the triangle's point density (see equation \ref{delta_t} for the definition) is higher than average in such a way that is possible to obtain a finer level of detail for areas that have an higher density.
