@@ -194,49 +194,71 @@ where the summation over $\Pi$ is for all the paths $\Pi$ for which the intersec
 In order to clarify our idea we apply the method to a simple optical system.
 \\ \indent Let us consider the two-faceted cup introduced in Chapter \ref{chap:raytracing} and depicted in Figure \ref{fig:cup}. The half length of the source is $\variabile{a}=2$, the maximum angle is $\myangle_1^{\textrm{max}} = \pi/2$ and \point{S} is located in air, i.e. $\n_1=1$. Therefore, the total \'{e}tendue is $U=8$. For the two-faceted cup all the rays emitted by \point{S} arrive to \point{T}, hence from \'{e}tendue conservation we obtain that $U_{\textrm{t}} =U_1 = 8$.
 For some optical systems, not all the rays emitted by the source arrive to the target.  
-
-
-
 % Explain the idea: use etendue conservation
 % Do the example for the two faceted cup
 % Explain the TIR collimator
 \section{Results for a TIR collimator}
-
-\indent
- For the TIR-collimator we considered (Figure \ref{fig:tir}), the area of $\mathcal{P}_\textrm{s}$ is equal to $7.92$, since $a = 4$ and $\sin(t_{max}) ~=~ 0.99$.
- The rays traced are uniformly distributed over $\mathcal{P}_\textrm{s}$, and they cover it almost entirely.
- More precisely, given two adjacent paths $\Pi_i$ and $\Pi_j$, the regions $R_{\textrm{s}, \Pi_i}$ and $R_{\textrm{s}, \Pi_j}$ have usually a common boundary and only small parts of the source do not illuminate the target of the TIR-collimator (see Figure \ref{fig:sourcePS}).
- Indeed a small number of rays reach the left and the right reflectors of our optical system (surfaces $13$ and $15$ in Figure $\ref{fig:tir}$), which are note considered to determine the target intensity.
- As a result, the \'{e}tendue at the source $E_{\textrm{s}}$ can be calculated removing from the area of the entire $\mathcal{P}_\textrm{s}$ those areas occupied by the regions formed by the rays that hit the left and the right detector (white regions in Figure $\ref{fig:tir}$).  Therefore, $E_{\textrm{s}}$ can be approximate by the following relation:
+We apply ray tracing in PS for two different kinds of total internal reflection (TIR)-collimators to compute the target intensity. 
+In this paragraph we use the $\alpha$-shapes approach to calculate the boundaries of the regions with positive luminance. Let us describe the TIR-collimator depicted in Figure \ref{fig:tir}. It is an optical system symmetric with respect to the $z$-axis, it consists of a lens (central curve), two broken lines adjacent to the lens,
+two curved lines on each side and a top formed by a horizontal segment. The lens (line $2$) and the broken lines, formed by a collection of three segments (lines $3, 4, \mbox{ and } 5$ and $9, 10 \mbox{ and } 11$), are refractive line segments while the curved lines (labeled with $6$ and $8$) are designed in such a way that light is internally reflected (which explains the name TIR).
+The light source $\mathcal{S}$ (line $1$) and the target $\mathcal{T}$ (line $12$) are two straight line segments normal to the optical axis.
+The source $\point{S}= [-2,2]$ is located at a height $\variabile{z}_{1} = 0.3$ from the $\variabile{x}$-axis.
+ The target $\point{T}= [-9.7, 9.7]$ is parallel to the source and is located at a height $ \variabile{z}= 8.2$ and both are located inside air ($\n_1=1$).
+The volume inside the collimator is filled with a material with index of refraction $\n_2=1.5$ (e.g. glass).
+The collimator is surrounded by two vertical lines (lines $13$ and $15$) and two horizontal lines ($12$ and $14$) that receive the light exiting from the optical system; among these the horizontal one at the top is assumed to be the light target, and it is located at a small distance from the top (line $7$). 
+\begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=7.7cm]{TIR.jpg}
+  \end{center}
+  \caption{Shape of the TIR-collimator. Each surface of the system is labeled with a number.
+   The shape of the collimator is shown with a blue line.
+   Three detectors depicted with green lines (surfaces $13$, $14$, and $15$) are located at the left, the right and the bottom of the optical system.
+The sagitta of the lens is approximately $1.17$}
+  \label{fig:tir}
+\end{figure}
+Using PS ray tracing explained in Section \ref{sec:PS_raytracing} with around $1.9 \cdot 10^4$ rays traced, seven different paths are found. In Figure \ref{fig:sourcePS} the distribution of the rays traced at the source PS \set{S}{}{} is shown, where we depicted with the same color the rays that follow the same path. Seven different paths are found. The yellow rays follow the path $\Pi_1 = (1, 2, 7, 12)$;
+   the red rays follow the path $\Pi_2 ~= ~(1, 10, 8, 7, 12)$; the green rays follow the path $\Pi_3 = (1, 4, 6, 7, 12)$;
+   the blue rays follow the path $\Pi_4= (1, 11, 7, 12)$ and the magenta rays follow the path $\Pi_5= (1, 3, 7, 12)$. The rays located inside the white areas correspond to rays that do not reach the target, they follow either path $\Pi_6 = (1, 10, 7, 8, 13)$ or path $\Pi_7 = (1,4,7,6,15)$ and they do not give any contribution to the target intensity.
+\begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=7.7cm]{source1.jpg}
+  \end{center}
+  \caption{Distribution of the rays on source phase space. Around $1.9 \cdot 10^4$ rays are traced using the triangulation refinement with parameters:
+  $\varepsilon_\variabile{q}^\textrm{min} = 0.1 ,$ $ \varepsilon_{\variabile{p}}^\textrm{min} = 5\cdot 10^{-2}, $ $\varepsilon_{\variabile{q}}^\textrm{max} = 9\cdot 10^{-3}, \varepsilon_\variabile{p}^\textrm{max} = 4.5 \cdot 10^{-3}$. Rays that belong to the same region are depicted with the same color. The rays located inside the white areas do not reach the target. The boundaries of the two white regions are approximated by triangles depicted with black lines.}
+  \label{fig:sourcePS}
+\end{figure}
+Note that, given two adjacent paths the regions $\mbox{\set{R}{$1$}{}}(\Pi)$ in \set{S}{}{} have usually a common boundary. 
+Since for this system not all the rays emitted by the source arrive to the target, the target \'{e}tendue $U_{\textrm{t}}$ needs to be compared with the \'{e}tendue $U_1$ at the source given by only those rays that reach the target (the rays that follow paths $\Pi_6=(1,10,8,7,12)$ and 
+$\Pi_7 = (1,4,7,6,15)$ are discarded). To this purpose $U_1$ is calculated by removing from the total area $U$ of \set{S}{}{} those areas occupied by the regions formed by the rays that hit the left and the right detector (white regions in Figure $\ref{fig:tir}$).  For the TIR colllimator in Figure \ref{fig:tir} $U = 8$. Hence, $U_1$ can be approximate by:
  \begin{equation}
- E_{\textrm{s}}\approx 7.92-2A_{T}
+ U_{1}\approx 8-2A_{T}
  \end{equation}
- where $A_{T}$ is the approximated area of one of the white regions in Figure $\ref{fig:tir}$ and, it is computed approximating those regions with the area of the triangles shown in Fig. \ref{fig:sourcePS} with black lines.
- %by $E_{\textrm{s}} = 7.68$.
- On the contrary, large parts of the target phase space $\mathcal{P}_{\textrm{t}}$ are not illuminated by any ray and the regions $R_{\textrm{t}, \Pi_j}$ are always disconnected. Hence, the total \'{e}tendue at the target, $E_{\textrm{t}}$, is given by the sum of the \'{e}tendues related to each region $R_{\textrm{t}, \Pi_{j}}$:
- \begin{equation}
- E_{\textrm{t}} = \sum_{j = 1}^p E(R_{\textrm{t}, \Pi_j})\,,
- \end{equation}
- where $E(R_{\textrm{t}, \Pi_j})$ is the contribution to the \'{e}tendue at the target given by the rays inside the region $R_{\textrm{t}, \Pi_j}$. $E(R_{\textrm{t}, \Pi_j})$ is defined by:
-  \begin{equation}\label{etenduepartial}
- E(R_{\textrm{t}, \Pi_j}) = {\int\!\!\int}_{R_{\textrm{t}, \Pi_j}} \textrm{d}q\textrm{d}\eta \,.
- \end{equation}
- To calculate the previous integral the $\alpha$-shapes method is applied to the regions
-  $R_{\textrm{t},\Pi_j}$ for a range of values for $\alpha$;
-   for each value an approximation of the boundaries $\partial R_{\textrm{t},\Pi_j}$ is obtained and
-   the intersection points $(q_{\Pi_j,i}( \eta))_{i = 1, \cdots, r}$ between $\partial R_{t,\Pi_j}$
-and the horizontal lines $\eta ~=~ const$, with $\eta~\in~[-1,1]$, are computed for each $j \in \{1, \cdots, p\}$.
-%When $r=2$, that is only two intersection points occur,
-Ordering the points $(q_{\Pi_j,i}( \eta))_{i = 1, \cdots, r}$ in ascending order,
- Equation ($\ref{etenduepartial}$) becomes:
-\begin{equation}\label{eq:etenduetarg}
- E(R_{\textrm{t}, \Pi_j}) =\sum_{i = 1}^{m} \int_{-1}^{1}{(q_{\Pi_j, 2i}( \eta)}-{q_{\Pi_j,2i-1} ( \eta) )} \textrm{d}q\textrm{d}\eta \,,
-\end{equation}
-where $m$ is the integer part of $r/2$ and $r$ is the number of the intersection point between $\partial R_{t,\Pi_j}$
-and the horizontal lines $\eta ~=~ const$. The integral in Equation (\ref{eq:etenduetarg}) is calculated discretizing the interval $[-1, 1]$
-   into $Nb=100$ sub-intervals of equal width and using the trapezoidal rule to approximate the integral.
-   Note that by increasing the value of $\alpha$, the area inside the $\alpha$-shape increases and, consequently, the \'{e}tendue raises.
-\noindent Eventually, matching the value of the \'{e}tendue at the source $E_{\textrm{s}}$ with the value of the \'{e}tendue at the target $E_{\textrm{t}}$, a unique value of $\alpha$, $\alpha_{c}$, is determined.
+ where $A_{T}$ is the approximated area of each of the white regions in Figure $\ref{fig:tir}$ that is the area of the triangles shown in Fig. \ref{fig:sourcePS} with black lines. Then, several approximation of $U_{\textrm{t}}$ is calculated by using Equation (\ref{eq:etenduetarg}) where the boundaries are calculated using $\alpha$-shapes for a range of values of $\alpha$.
+% The best approximation of the boundaries $\partial$\set{R}{}{}$(\Pi)$ gives the best obtained by considering the $\alpha$ value, $\alpha_c$, for which $U_1=U_{\textrm{t}}$.
+% On the contrary, large parts of the target phase space $\mathcal{P}_{\textrm{t}}$ are not illuminated by any ray and the regions $R_{\textrm{t}, \Pi_j}$ are always disconnected. Hence, the total \'{e}tendue at the target, $E_{\textrm{t}}$, is given by the sum of the \'{e}tendues related to each region $R_{\textrm{t}, \Pi_{j}}$:
+% \begin{equation}
+% E_{\textrm{t}} = \sum_{j = 1}^p E(R_{\textrm{t}, \Pi_j})\,,
+% \end{equation}
+% where $E(R_{\textrm{t}, \Pi_j})$ is the contribution to the \'{e}tendue at the target given by the rays inside the region $R_{\textrm{t}, \Pi_j}$. $E(R_{\textrm{t}, \Pi_j})$ is defined by:
+%  \begin{equation}\label{etenduepartial}
+% E(R_{\textrm{t}, \Pi_j}) = {\int\!\!\int}_{R_{\textrm{t}, \Pi_j}} \textrm{d}q\textrm{d}\eta \,.
+% \end{equation}
+% To calculate the previous integral the $\alpha$-shapes method is applied to the regions
+%  $R_{\textrm{t},\Pi_j}$ for a range of values for $\alpha$;
+%   for each value an approximation of the boundaries $\partial R_{\textrm{t},\Pi_j}$ is obtained and
+%   the intersection points $(q_{\Pi_j,i}( \eta))_{i = 1, \cdots, r}$ between $\partial R_{t,\Pi_j}$
+%and the horizontal lines $\eta ~=~ const$, with $\eta~\in~[-1,1]$, are computed for each $j \in \{1, \cdots, p\}$.
+%%When $r=2$, that is only two intersection points occur,
+%Ordering the points $(q_{\Pi_j,i}( \eta))_{i = 1, \cdots, r}$ in ascending order,
+% Equation ($\ref{etenduepartial}$) becomes:
+%\begin{equation}\label{eq:etenduetarg}
+% E(R_{\textrm{t}, \Pi_j}) =\sum_{i = 1}^{m} \int_{-1}^{1}{(q_{\Pi_j, 2i}( \eta)}-{q_{\Pi_j,2i-1} ( \eta) )} \textrm{d}q\textrm{d}\eta \,,
+%\end{equation}
+%where $m$ is the integer part of $r/2$ and $r$ is the number of the intersection point between $\partial R_{t,\Pi_j}$
+%and the horizontal lines $\eta ~=~ const$. The integral in Equation (\ref{eq:etenduetarg}) is calculated discretizing the interval $[-1, 1]$
+%   into $Nb=100$ sub-intervals of equal width and using the trapezoidal rule to approximate the integral.
+%   Note that by increasing the value of $\alpha$, the area inside the $\alpha$-shape increases and, consequently, the \'{e}tendue raises.
+%\noindent 
  Figure \ref{fig:etendueTS} shows that a value of $\alpha_c = 0.041$ is obtained for a set of $1.9\cdot 10^4$ rays.
  \begin{figure}[h]
   \begin{center}
@@ -269,10 +291,6 @@ I_{PS}(\eta) = \sum_{ i, j }\int_{q_{\Pi_j,2i-1}( \eta)}^{q_{\Pi_j, 2i}( \eta)}L
 \label{eq:Ips}
 \end{equation}
 where the summation for the indexes $i$ is over all $i = 1,2, \cdots, m$, and the summation for the $j$ indexes is over all $j$ for which the intersection between $\eta = const$ and $R_{t, \Pi_j}$ is not empty.
-
-
-
-
 
 
 % 
