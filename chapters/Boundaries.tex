@@ -142,7 +142,7 @@ The $\alpha$-shape procedure can be outlined as follows.
 % We want to determine the boundaries in phase space
 % Jorg
 % It is useful to understand whether the approximation is correct
-\section{Determination of $\alpha$ using \'{e}tendue conservation}
+\section{Determination of $\alpha$ using \'{e}tendue conservation} \label{sec:Tir_alpha}
 As mentioned in Section \ref{sec:PSconcept} \'{e}tendue can be seen as an area in a two-dimensional phase space. 
 Therefore, given an optical system with a line segment source $\point{S} = [-\variabile{a}, \variabile{a}]$, the \'{e}tendue at the source coincides with the area of the entire PS \set{S}{}{}, given by:
 \begin{equation}\label{eq:etenduesource}
@@ -229,70 +229,168 @@ Using PS ray tracing explained in Section \ref{sec:PS_raytracing} with around $1
 \end{figure}
 Note that, given two adjacent paths the regions $\mbox{\set{R}{$1$}{}}(\Pi)$ in \set{S}{}{} have usually a common boundary. 
 Since for this system not all the rays emitted by the source arrive to the target, the target \'{e}tendue $U_{\textrm{t}}$ needs to be compared with the \'{e}tendue $U_1$ at the source given by only those rays that reach the target (the rays that follow paths $\Pi_6=(1,10,8,7,12)$ and 
-$\Pi_7 = (1,4,7,6,15)$ are discarded). To this purpose $U_1$ is calculated by removing from the total area $U$ of \set{S}{}{} those areas occupied by the regions formed by the rays that hit the left and the right detector (white regions in Figure $\ref{fig:tir}$).  For the TIR colllimator in Figure \ref{fig:tir} $U = 8$. Hence, $U_1$ can be approximate by:
+$\Pi_7 = (1,4,7,6,15)$ are discarded). To this purpose $U_1$ is calculated by removing from the total area $U$ of \set{S}{}{} those areas occupied by the regions formed by the rays that hit the left and the right detector (white regions in Figure $\ref{fig:tir}$).  For the TIR colllimator in Figure \ref{fig:tir} $U = 8$. Hence, $U_1$ can be approximated by:
  \begin{equation}
  U_{1}\approx 8-2A_{T}
  \end{equation}
- where $A_{T}$ is the approximated area of each of the white regions in Figure $\ref{fig:tir}$ that is the area of the triangles shown in Fig. \ref{fig:sourcePS} with black lines. Then, several approximation of $U_{\textrm{t}}$ is calculated by using Equation (\ref{eq:etenduetarg}) where the boundaries are calculated using $\alpha$-shapes for a range of values of $\alpha$.
-% The best approximation of the boundaries $\partial$\set{R}{}{}$(\Pi)$ gives the best obtained by considering the $\alpha$ value, $\alpha_c$, for which $U_1=U_{\textrm{t}}$.
-% On the contrary, large parts of the target phase space $\mathcal{P}_{\textrm{t}}$ are not illuminated by any ray and the regions $R_{\textrm{t}, \Pi_j}$ are always disconnected. Hence, the total \'{e}tendue at the target, $E_{\textrm{t}}$, is given by the sum of the \'{e}tendues related to each region $R_{\textrm{t}, \Pi_{j}}$:
-% \begin{equation}
-% E_{\textrm{t}} = \sum_{j = 1}^p E(R_{\textrm{t}, \Pi_j})\,,
-% \end{equation}
-% where $E(R_{\textrm{t}, \Pi_j})$ is the contribution to the \'{e}tendue at the target given by the rays inside the region $R_{\textrm{t}, \Pi_j}$. $E(R_{\textrm{t}, \Pi_j})$ is defined by:
-%  \begin{equation}\label{etenduepartial}
-% E(R_{\textrm{t}, \Pi_j}) = {\int\!\!\int}_{R_{\textrm{t}, \Pi_j}} \textrm{d}q\textrm{d}\eta \,.
-% \end{equation}
-% To calculate the previous integral the $\alpha$-shapes method is applied to the regions
-%  $R_{\textrm{t},\Pi_j}$ for a range of values for $\alpha$;
-%   for each value an approximation of the boundaries $\partial R_{\textrm{t},\Pi_j}$ is obtained and
-%   the intersection points $(q_{\Pi_j,i}( \eta))_{i = 1, \cdots, r}$ between $\partial R_{t,\Pi_j}$
-%and the horizontal lines $\eta ~=~ const$, with $\eta~\in~[-1,1]$, are computed for each $j \in \{1, \cdots, p\}$.
-%%When $r=2$, that is only two intersection points occur,
-%Ordering the points $(q_{\Pi_j,i}( \eta))_{i = 1, \cdots, r}$ in ascending order,
-% Equation ($\ref{etenduepartial}$) becomes:
-%\begin{equation}\label{eq:etenduetarg}
-% E(R_{\textrm{t}, \Pi_j}) =\sum_{i = 1}^{m} \int_{-1}^{1}{(q_{\Pi_j, 2i}( \eta)}-{q_{\Pi_j,2i-1} ( \eta) )} \textrm{d}q\textrm{d}\eta \,,
-%\end{equation}
-%where $m$ is the integer part of $r/2$ and $r$ is the number of the intersection point between $\partial R_{t,\Pi_j}$
-%and the horizontal lines $\eta ~=~ const$. The integral in Equation (\ref{eq:etenduetarg}) is calculated discretizing the interval $[-1, 1]$
-%   into $Nb=100$ sub-intervals of equal width and using the trapezoidal rule to approximate the integral.
-%   Note that by increasing the value of $\alpha$, the area inside the $\alpha$-shape increases and, consequently, the \'{e}tendue raises.
-%\noindent 
- Figure \ref{fig:etendueTS} shows that a value of $\alpha_c = 0.041$ is obtained for a set of $1.9\cdot 10^4$ rays.
+ where $A_{T}$ is the approximated area of each of the white regions in Figure $\ref{fig:tir}$ that is the area of the triangles shown in Fig. \ref{fig:sourcePS} with black lines. Then, $U_{\textrm{t}}$ is calculated several times from Equation (\ref{eq:etenduetarg}) where every time the boundaries $\partial$\set{R}{}{}$(\Pi)$ are obtained by using $\alpha$-shapes for a different value of $\alpha$. The better approximation of $\partial$\set{R}{}{}$(\Pi)$ gives the closer value of $U_{\textrm{t}}$ to the exact \'{e}tendue. 
+Matching $U_1$ with all the approximation of $U_{\textrm{t}}$ we find the best value $\alpha_c$ of $\alpha$ that approximates $\partial$\set{R}{}{}$(\Pi)$ and, therefore $U_{\textrm{t}}$. Figure \ref{fig:etendueTS} shows that a value of $\alpha_c = 0.041$ is obtained for a set of $1.9\cdot 10^4$ rays.
  \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=7.7cm]{Delaunay_Voronoi.jpg}
+  \includegraphics[width=7.7cm]{etendue.jpg}
   \end{center}
   \caption{\footnotesize{The source and the target \'{e}tendue are depicted with the dotted red line and the blue line, respectively.
-  $E_\textrm{t}$ is computed for a range of values for $\alpha$. $E_{\textrm{s}} \approx 7.68$
-   The green dot indicates the value of $\alpha_c = 0.041$ which gives the best approximation of the boundaries $\partial R_{\textrm{t}, \Pi_j}$ at the target.
+  $U_\textrm{t}$ is computed for a range of values for $\alpha$. $U_1 \approx 7.68$
+   The green dot indicates the value of $\alpha_c = 0.041$ which gives the best approximation of the boundaries $\partial$\set{R}{}{}$(\Pi)$ at the target.
    Around $1.9 \cdot 10^4$ rays have been traced in PS.
   }}
   \label{fig:etendueTS}
 \end{figure}
+Applying $\alpha$-shapes with $\alpha=\alpha_c$, a good approximation of $\partial$\set{R}{}{}$(\Pi)$ is found. In Fugure \ref{fig:targetPS} we show the boundaries 
+$\partial$\set{R}{}{}$(\Pi)$ in target PS \set{T}{}{} with $\alpha_c=0.041$ and tracing $1.9*10^4$ rays.
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=7.7cm]{Delaunay_Voronoi.jpg}
+  \includegraphics[width=7.7cm]{target.jpg}
   \end{center}
   \caption{\footnotesize{Target phase space representation of a set of $1.9 \cdot 10^4$ rays.
-  The choice of the colors for each path is the same as in Figure $\ref{fig:sourcePS}$.
-  Rays that follow the same path are depicted with the same color. The boundaries $(\partial R_{\textrm{t}, \Pi_j})_{j = 1, \cdots, p}$ are computed through the $\alpha$-shapes method with $\alpha = 0.041$.}}
+  Rays that follow the same path are depicted with the same color. The choice of the colors for each path is the same as in Figure $\ref{fig:sourcePS}$. The boundaries $\partial$\set{R}{}{}$\Pi$ are computed through the $\alpha$-shapes method with $\alpha = \alpha_c = 0.041$.}}
   \label{fig:targetPS}
 \end{figure}
-
- \noindent The $\alpha$-shapes method with $\alpha = \alpha_{c}$ is applied to the target regions $R_{\textrm{t}, \Pi_j}$, and the
- best approximations of the boundaries
- $(\partial R_{\textrm{t}, \Pi_j})_{j = 1, \cdots, p}$ are obtained (see Figure \ref{fig:targetPS}).
-\newline \indent To conclude, we compute the target intensity, which is defined in $\mathcal{P}_{\textrm{t}}$ by Equation (\ref{I(eta)}).
-From Equation (\ref{luminance}), we obtain:
-\begin{equation}
-I_{PS}(\eta) = \sum_{ i, j }\int_{q_{\Pi_j,2i-1}( \eta)}^{q_{\Pi_j, 2i}( \eta)}L_\textrm{t}(q, \eta)\textrm{d}q\,,
-\label{eq:Ips}
+Once the boundaries are computed, the target intensity $I_{PS}(\variabile{p})$ for every $\variabile{p}\in[-1,1]$ is given by Equation (\ref{eta2}). 
+To validate our method we compare the $PS$ intensity with the $MC$ intensity. 
+To this purpose a partitioning $P_2:-1=\variabile{p}_{0}<\variabile{p}_1<\cdots<\variabile{p}_{\nbin}=1$ of the interval $[-1,1]$ into $\nbin=100$ bins is considered. 
+The averaged and normalized PS intensity $\hat{I}_{PS}$ is calculated for every 
+$\big(\variabile{p}^{\variabile{h}+1/2} = \frac{1}{2}(\variabile{p}^{\variabile{h}+1}, \variabile{p}^{\variabile{h}})\big)_{\variabile{h}=0, \cdots, \nbin-1}$ dividing the PS averaged intensity by the total \'{e}tendue:
+\begin{equation}\label{eq:normalized_PS_intensity}
+\hat{I}_{PS}(\variabile{p}^{\variabile{h}+1/2}) = \frac{1}{U_{\textrm{t}}}\int_{\variabile{p}_{\variabile{h}}}^{\variabile{p}_{\variabile{h}+1}} I_{PS}(\variabile{p})\textrm{d}\variabile{p}
 \end{equation}
-where the summation for the indexes $i$ is over all $i = 1,2, \cdots, m$, and the summation for the $j$ indexes is over all $j$ for which the intersection between $\eta = const$ and $R_{t, \Pi_j}$ is not empty.
+The averaged and normalized MC intensity $\big(\hat{I}_{MC}(\variabile{p}^{\variabile{h}+1/2})\big)_{\variabile{h} = 0, \cdots, \nbin-1}$ intensity is given by
+\begin{equation}\label{eq:normalized_MC_intensity}
+\hat{I}_{MC}(\variabile{p}^{\variabile{h}+1/2}) = \frac{}{}
+\end{equation} 
+% In Figure \ref{fig:intensity_TIR} we show the PS intensity and the MC intensity with
+Finally, defining the error between the approximates intensity $\hat{I}_{A} (A = PS, MC)$ and the reference intensity $\hat{I}_{ref}$:
+%\begin{equation}\label{eq:error}
+%\mbox{error} = \frac{\sum_{\variabile{h}= 1}^{\nbin}| \hat{I}_{A}(\variabile{p}^{\variabile{h}}) - \hat{I}_{\mbox{ref}}(\varaibile{p}^{\variabile{h}})|}{\nbin}
+%\end{equation}
+In Figure \ref{fig:error_nr_tir} we show how the error decreases increasing the number of rays traced for both PS ray tracing and MC ray tracing.
+The MC and PS intensities are calculated several times increasing the number of rays to improve the accuracy.
+Both the approximate intensities are compared with an intensity taken as a reference.
+For some optical systems, there is an explicit solution for the target intensity but this is not the case of the TIR-collimator.
+Therefore, a MC simulation with $1,7 \cdot 10^8$ rays is run to obtain the normalized intensity $\hat{I}_{\mbox{ref}}$ which is used as reference.
+We show how the error,
+defined as:
+\begin{equation}\label{error}
+\mbox{error} = \frac{\sum_{h = 1}^{Nb}| \hat{I}_{PS}(\eta_h) - \hat{I}_{\mbox{ref}}(\eta_h)|}{Nb}\,,
+\end{equation}
+%and is computed for both the PS and MC intensities.
+decreases for increasing number of rays.
+%As a result, the error gradually decreases.
+Table \ref{tab:table} describes how the number of rays traced affects the error and shows the correlation between $\alpha_c$ and the number of rays, which is
+determined by the values of $\epsilon_{x_{min}}$, $\epsilon_{\tau_{min}}$, $\epsilon_{x_{max}}$ and $\epsilon_{\tau_{max}}$ as explained in Section \ref{sec:method}\ref{subsec:triangulation1}. The values of $\alpha_c$ are selected according to the method
+presented in Section \ref{sec:method}$\ref{sec:alpha}$.
+ Then, the intensity for the MC method, $\hat{I}_{MC}$, is computed.
+Replacing $\hat{I}_{PS}$ with $\hat{I}_{MC}$ in Equation (\ref{error}), the error between the reference intensity and the intensity computed with the MC method is
+calculated.
+Increasing the number of rays traced in MC ray tracing, the error gradually decreases.
+In Table $\ref{tab:table2}$ the numerical results found are reported.
+\begin{table}[htbp] \label{tab:table}
+\centering
+\caption{\bf Error values of the PS intensity}
+\begin{tabular}{lllllll}
+ \hline  Number \\ of rays\;  & $\epsilon_{x_{min}} $  & $\epsilon_{x_{max}} $   \;     & $\epsilon_{\tau_{min}}$\;
+  & $\epsilon_{\tau_{max}}$\; & $\alpha_c$  & error \\
+  \hline 
+ $3\,363$ & $0.9$  & $0.1$  & $0.50$  & $0.025$ & $0.119$ & $1.20\cdot10^{-3}$ \\
+$6\,949$  & $0.5$  & $0.050$  & $0.25$  & $0.020$ & $0.098$ & $2.50\cdot 10^{-4}$  \\
+$15\,870$  & $0.4$  & $0.025$  & $0.02$  & $0.001$ & $0.050$ & $5.49\cdot 10^{-4}$ \\
+ $37\,455$  & $0.2$  & $0.020$  & $0.10$ & $0.005$ & $0.037$ & $2.00\cdot 10^{-5}$ \\
+ $66\,855$ & $0.1$  & $0.009$  & $0.05$  & $0.004$ & $0.020$ & $1.00\cdot 10^{-5}$ \\
+ \hline
+ \end{tabular}
+ \label{tab:table}
+ \end{table}
+\begin{table}[htbp]
+\centering
+\caption{\bf Error values of the MC intensity}
+\begin{tabular}{ll} \hline   Number of rays\; & $\mbox{error}_{MC}$\\ \hline $972$  & $2.10\cdot10^{-3}$ \\
+$9\,714$  & $6.69\cdot 10^{-4}$  \\ $97\,103$  & $2.08\cdot 10^{-4}$ \\ $971\,627$  & $7.00\cdot 10^{-5}$ \\ $9\,716\,519$  & $2.00\cdot 10^{-5}$ \\
+ \hline
+ \end{tabular}
+ \label{tab:table2}
+ \end{table}
+\noindent In Figure $\ref{fig:error}$, the results listed in Table $\ref{tab:table}$ and Table $\ref{tab:table2}$ are shown where the red line depicts the behavior of the error for the PS
+intensity, and the blue line indicates the error for the MC simulation.
+\begin{figure}[h!]
+  \begin{center}
+  \includegraphics[width=7.7cm]{error.jpg}
+  \end{center}
+  \caption{\footnotesize{ The red line depicts the error between the intensity on phase space and the exact intensity.
+ The blue line shows the error between the Monte Carlo intensity and the exact intensity.
+  The dashed line represents a straight line with the slope equal to $-\frac{1}{2}$.
+  The horizontal dotted line shows that an error equal to $2.00 \cdot  10^{-5}$ can be obtained tracing at least $10^2$ times fewer rays in phase space.}}
+  \label{fig:error}
+\end{figure}
+\noindent The intensity profile $\hat{I}_{PS}
+$ obtained with the phase space method and tracing $66\,855$ rays is depicted in Fig. \ref{fig:intensityMCPS} with a red line.
+$\hat{I}_{PS}$ is hardly distinguishable from $\hat{I}_{\mbox{ref}}$ (dashed and blue line in Figure $\ref{fig:intensityMCPS}$).
+Figure $\ref{fig:error}$ shows that an error equal to $2.00 \cdot  10^{-5}$ can be obtained by tracing around $9.7 \cdot 10^{6}$ for
+Monte Carlo while in phase space only around $3.7 \cdot 10^4$ rays need  to be traced to obtain the same accuracy of the intensity.
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{intensity.jpg}
+\caption{\footnotesize{The red line shows the PS intensity at the target of the TIR-collimator. The exact intensity is depicted with the dotted blue line.
+The exact intensity is computed using the MC method for a set of $15$ millions of rays. For the PS intensity a set of $6.6\cdot 10^4$
+rays is considered and $\alpha_c = 0.02$ is chosen to compute the boundaries $\partial R_{\textrm{t}, \Pi_j}$. The approximate intensity can hardly be distinguished from the exact
+intensity. }}
+  \label{fig:intensityMCPS}
+\end{figure}
+ 
+
+%Since the PS intensity depends on $\variabile{p}=\n_1\sin(\myangle)\in[-1,1]$ instead of $\optangle\in[-\pi/2, \pi/2]$,
+% Intensity
+% MC intensity
+% Error
+
+% Second TIR collimator
+% Show the results 
 
 
-% 
-\label{sec:Tir_alpha}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
