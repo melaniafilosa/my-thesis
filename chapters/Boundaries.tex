@@ -375,8 +375,8 @@ Therefore, it is expected that $\alpha$-shapes method performs well, even for a 
         The $\alpha$-shapes method gives an accurate approximation of the boundaries.}
   \label{fig:Tir2}
 \end{figure}
- PS and MC ray tracing are implemented for the TIR-collimator in Figure \ref{fig:Tir2}. The approximated intensities $\hat{I}_{\textrm{A}}$ $(\textrm{A} = \textrm{PS}, \textrm{MC})$ are compared with the reference intensity $\hat{I}_{\textrm{ref}}$ (MC ray tracing with$10^7$ rays). The error between $\hat{I}_{\textrm{A}}$ and $\hat{I}_{\textrm{ref}}$ as a function of the number of rays is obtained from Equation (\ref{eq:error}). The convergence of PS and MC ray tracing is shown in Figure \ref{fig:error2}. 
-PS error is depicted with the red line and, MC error is depicted with the blue line.  
+ PS and MC ray tracing are implemented for the TIR-collimator in Figure \ref{fig:Tir2}. The approximated intensities $\hat{I}_{\textrm{A}}$ $(\textrm{A} = \textrm{PS}, \textrm{MC})$ are compared with the reference intensity $\hat{I}_{\textrm{ref}}$ (MC ray tracing with $10^7$ rays). The error between $\hat{I}_{\textrm{A}}$ and $\hat{I}_{\textrm{ref}}$ as a function of the number of rays is obtained from Equation (\ref{eq:error}). The convergence of PS and MC ray tracing is shown in Figure \ref{fig:error2}. 
+PS error is depicted with the red line and, MC error is depicted with the blue line. Still big 
 \begin{figure}[h!]
  \begin{center}
    \includegraphics[width=7.7cm]{error_plot}
@@ -394,7 +394,7 @@ These methods depends on a parameter $\alpha$ that in most cases can be determin
 Using \'{e}tendue conservation, we developed an approach to detect the value of $\alpha$ that better approximates the boundaries in target PS. 
 We applied $\alpha$-shapes to two different kinds of TIR-collimators. The target PS intensity was computed for both the systems several times increasing every time the number of rays traced. Finally, the corresponding errors between the intensities found and a reference intensity was calculated. We observed that PS ray tracing leads to trace far less rays compared to MC ray tracing. Numerical results show that using PS ray tracing the desired accuracy can be achieved reducing the number of rays traced by a factor $2$ for both the optical systems analyzed.\\ \indent 
 However, the error convergence for PS ray tracing strongly depends on the design of the optical system (shapes of the region in target PS). Indeed, the intensity accuracy is related to the precision of the $\alpha$-shape, that is, to the choice of the parameter's value of $\alpha$. For more complicated shapes in PS, more rays need to be traced for a good boundaries reconstruction.\\ \indent
-In order to remove the depends of PS ray tracing from the parameter $\alpha$, we construct another procedure to detect the boundaries of the regions in target PS. 
+In order to remove the dependence of PS ray tracing from the parameter $\alpha$, we construct another procedure to detect the boundaries of the regions in target PS. 
 The new technique is based only on the triangulation refinement explained in Section \ref{sec:PS_raytracing}. The details are explained in the next chapter and numerical results for several optical systems are reported. 
 
 
