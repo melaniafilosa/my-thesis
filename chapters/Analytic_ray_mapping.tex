@@ -227,98 +227,97 @@ L(\variabile{q}, \variabile{p})&>0 \qquad \quad \forall (\variabile{q}, \variabi
 L(\variabile{q}, \variabile{p})&\geq 0 \qquad\quad \forall(\variabile{q}, \variabile{p}) \in (\mbox{\set{T}{$4$,}{\lineai}})_{\lineai=2,3}.\label{third}
 \end{align}
 \end{subequations}
-Once a ray leaves the source \point{S} it can hit the reflectors several times before hitting the target \point{T}. To relate \point{S} and \point{T}, a map \map{M}{$1$,}{$4$}: \set{S}{$1$}{}$\rightarrow$ \set{T}{$4$}{} is introduced such that $\mbox{\map{M}{$1$,}{$4$}}(\pos{s,}{$1$},\dir{s,}{$1$})=(\variabile{q},\variabile{p})$.
-As  not all parts of \set{T}{$4$}{} are illuminated by the source \point{S}, the map
-\map{M}{$1$,}{$4$} is not surjective.
+Once a ray leaves the source \point{S} it can hit the reflectors several times before hitting the target \point{T}. To relate \point{S} and \point{T}, a map $\mapnumb{M}_{1,4}$: \set{S}{$1$}{}$\rightarrow$ \set{T}{$4$}{} is introduced such that $\mapnumb{M}_{1,4}(\pos{s,}{$1$},\dir{s,}{$1$})=(\variabile{q},\variabile{p})$. As  not all parts of \set{T}{$4$}{} are illuminated by the source \point{S}, the map
+$\mapnumb{M}_{1,4}$ is not surjective.
 Therefore, we need to determine the subsets of \set{T}{$4$}{} illuminated by \point{S} corresponding to the regions where the luminance is positive.
 To this purpose, we consider two different kinds of maps.
 The first map relates the coordinates of the source and the target PS of two \textit{different} lines, we call it the propagation map.
 The second map relates the coordinates of the target and the source PS of the \textit{same} line, we call it the reflection map.
-In particular, given two lines \lineai and \lineaj with \lineai$\neq$\lineaj, the propagation map \map{P}{\lineai,}{\lineaj}: \set{S}{\lineai,}{\lineaj}$\mapsto$\set{T}{\lineaj,}{\lineai} relates \set{S}{\lineai,}{\lineaj} with \set{T}{\lineaj,}{\lineai} and, it is defined as follows:
+In particular, given two lines $\lineai$ and $\lineaj$ with $\lineai\neq\lineaj$, the propagation map $\mapnumb{P}_{\lineai,\lineaj}: \mbox{\set{S}{\lineai,}{\lineaj}}\mapsto$\set{T}{\lineaj,}{\lineai} relates \set{S}{\lineai,}{\lineaj} with \set{T}{\lineaj,}{\lineai} and, it is defined as follows:
  \begin{equation}\label{Pij}
-\mbox{\map{P}{\lineai,}{\lineaj}}(\pos{s,}{\lineai},\dir{s,}{\lineai})=(\pos{t,}{\lineaj},\dir{t,}{\lineaj}),
+\mapnumb{P}_{\lineai,\lineaj}(\pos{s,}{\lineai},\dir{s,}{\lineai})=(\pos{t,}{\lineaj},\dir{t,}{\lineaj}),
 \end{equation}
-where $\pos{t,}{\lineaj}$ is given by the \variabile{x}-coordinate of the intersection point between the ray and line \lineaj,
-and $\dir{t,}{\lineaj}$ is computed considering the direction of the incident ray with respect to the normal of line \lineaj. 
-For one single line \lineaj, the reflection map \map{R}{\lineaj,}{\lineak,}$_{h}$:~\set{T}{\lineaj,}{\lineak} $\mapsto$\set{S}{\lineaj,}{h}  relates the regions \set{T}{\lineaj,}{\lineak}$\subset$\set{T}{\lineaj}{} and
-\set{S}{\lineaj,}{h}$\subset$\set{S}{\lineaj}. To simplify the notation, from now on we omit the dependence of \map{R}{\lineaj,}{\lineak,}$_{h}$ from \lineak and \variabile{h}, i.e. \map{R}{\lineaj,}{\lineak,}$_{h} = $\map{R}{\lineaj}{}.The reflection map is defined as follows:
+where $\pos{t,}{\lineaj}$ is given by the \variabile{x}-coordinate of the intersection point between the ray and line $\lineaj$,
+and $\dir{t,}{\lineaj}$ is computed considering the direction of the incident ray with respect to the normal of line $\lineaj$. 
+For one single line $\lineaj$, the reflection map $\mapnumb{R}_{\lineaj,\lineak,h}$:~\set{T}{\lineaj,}{\lineak} $\mapsto$\set{S}{\lineaj,}{h}  relates the regions \set{T}{\lineaj,}{\lineak}$\subset$\set{T}{\lineaj}{} and
+\set{S}{\lineaj,}{h}$\subset$\set{S}{\lineaj}. To simplify the notation, from now on we omit the dependence of $\mapnumb{R}_{\lineaj,\lineak,h}$ from $\lineak$ and \variabile{h}, i.e. $\mapnumb{R}_{\lineaj,\lineak,h} = \mapnumb{R}_{\lineaj}$. The reflection map is defined as follows:
 \begin{equation}\label{Rj}
-\mbox{\map{R}{\lineaj}{}}(\variabile{q}_{\textrm{t},\textit{\lineaj}},\variabile{p}_{\textrm{t},\textit{\lineaj}})=(\variabile{q}_{\textrm{s},\textit{\lineaj}},\variabile{p}_{\textrm{s},\textit{\lineaj}}),
+\mapnumb{R}_{\lineaj}(\variabile{q}_{\textrm{t},\textit{\lineaj}},\variabile{p}_{\textrm{t},\textit{\lineaj}})=(\variabile{q}_{\textrm{s},\textit{\lineaj}},\variabile{p}_{\textrm{s},\textit{\lineaj}}),
 \end{equation}
- where $\dir{t,}{\lineaj}$ changes according to the reflection law and $\pos{t,}{\lineaj}= \pos{s,}{\lineaj}$ as \map{R}{\lineaj}{} maps the target PS into the source PS of the same line \lineaj.
- Using a procedure similar to the ray transport matrices approach (see \cite{hecht1998hecht}, Chapter 6),
-the map \map{M}{$1$,}{$4$} is described by the composition of mappings \map{P}{\lineai,}{\lineaj} and \map{R}{\lineaj}{} defined in Eqs.
+where $\dir{t,}{\lineaj}$ changes according to the reflection law and $\pos{t,}{\lineaj}= \pos{s,}{\lineaj}$ as $\mapnumb{R}_{\lineaj}$ maps the target PS into the source PS of the same line $\lineaj$.
+Using a procedure similar to the ray transport matrices approach (see \cite{hecht1998hecht}, Chapter 6),
+the map $\mapnumb{M}_{1,4}$ is described by the composition of mappings $\mapnumb{P}_{\lineai,\lineaj}$ and $\mapnumb{R}_{\lineaj}$ defined in Eqs.
 $(\ref{Pij})$ and $(\ref{Rj})$, respectively. This composition depends on the path $\Pi$ followed by the rays where we refer to a path as the sequence of lines that
- a ray hits during its propagation from \point{S} to \point{T}. We indicate with \map{M}{$1$,}{$4$}($\Pi$)
-the map \map{M}{$1$,}{$4$} restricted to path $\Pi$ and with $\mbox{\set{R}{}{}}(\Pi)\subset \mbox{\set{T}{$4$}{}}$ the regions on \set{T}{$4$}{} formed by the rays that follow path $\Pi$.
+ a ray hits during its propagation from \point{S} to \point{T}. We indicate with $\mapnumb{M}_{1,4}(\Pi)$
+the map $\mapnumb{M}_{1,4}$ restricted to path $\Pi$ and with \set{R}{}{}$(\Pi)\subset \mbox{\set{T}{$4$}{}}$ the regions on \set{T}{$4$}{} formed by the rays that follow path $\Pi$.
 Considering all the possible paths $\Pi$ from \point{S} to \point{T}, all the regions $\mbox{\set{R}{}{}}(\Pi)$ with positive luminance on \set{T}{$4$}{} can be determined.
 \\ \indent To clarify this concept, we provide the following example.
 Consider a ray that is emitted from the source (line $1$), first hits the left reflector (line $2$) and finally reaches the target (line $4$).
  The path $\Pi$ followed by this ray is defined as $\Pi =(1, 2, 4)$ and
- the corresponding map $\mbox{\map{M}{$1$,}{$4$}}(\Pi):\mbox{\set{S}{$1$}{}}\mapsto \mbox{\set{R}{}{}}(\Pi)$ that describes the propagation of all rays that follow the path $\Pi$ is defined by:
+the corresponding map $\mapnumb{M}_{1,4}(\Pi):\mbox{\set{S}{$1$}{}}\mapsto \mbox{\set{R}{}{}}(\Pi)$ that describes the propagation of all rays that follow the path $\Pi$ is defined by:
 \begin{equation}
 \label{map_example}
-\mbox{\map{M}{$1$,}{$4$}}(\Pi):\mbox{\set{S}{$1$,}{$2$}}\mapsto \mbox{\set{T}{$2$,}{$1$}}\mapsto\mbox{\set{S}{$2$,}{$4$}}\mapsto \mbox{\set{T}{$4$,}{$2$}},
+\mapnumb{M}{1,4}(\Pi):\mbox{\set{S}{$1$,}{$2$}}\mapsto \mbox{\set{T}{$2$,}{$1$}}\mapsto\mbox{\set{S}{$2$,}{$4$}}\mapsto \mbox{\set{T}{$4$,}{$2$}},
 \end{equation} which can be written as:
 \begin{equation}
-\mbox{\map{M}{$1$,}{$4$}}({\Pi}) = \mbox{\map{P}{$2$,}{$4$}}
-\circ \mbox{\map{R}{$2$}{}}\circ \mbox{\map{P}{$1$,}{$2$}}\,.
+\mapnumb{M}_{1,4}(\Pi) = \mapnumb{P}_{2,4}
+\circ \mapnumb{R}_{2}\circ \mapnumb{P}_{1,2}\,.
 \end{equation}
-In general, to construct the map $\mbox{\map{M}{$1$,}{$4$}}(\Pi)$ we need to know its corresponding path $\Pi$.
+In general, to construct the map $\mapnumb{M}_{1,4}(\Pi)$ we need to know its corresponding path $\Pi$.
 To determine all possible paths $\Pi$,
 instead of tracing the rays from \point{S} to \point{T}, we start considering the rays in \set{T}{$4$}{}.
 In particular, along a given direction $\variabile{p}\in[-1,1]$ we consider the intersection points between the line $\variabile{p}=\mbox{const}$ and $(\partial\mbox{\set{T}{$4$,}{\lineai}})_{\lineai=1, 2, 3}$. These points are traced back to line $\lineai$ from which they are emitted and their corresponding coordinates on \set{S}{\lineai}{} and \set{T}{\lineai}{} are computed. This is done applying sequentially the maps $\mbox{\inversemap{P}{\lineai,}{$4$}}:\mbox{\set{T}{$4$,}{\lineai}}\mapsto\mbox{\set{S}{\lineai,}{$4$}}$ and $\mbox{\inversemap{R}{\lineai}{}}:\mbox{\set{S}{\lineai}{}}\mapsto\mbox{\set{T}{\lineai}{}}$.
-Then the same procedure is repeated considering these new coordinates on \set{T}{\lineai}{}.
-The computation stops either when the points found are emitted from the source, that is when they are located on \set{S}{$1$}{}, or when they reach again the target, that is when they are located on \set{T}{$4$}{}.
-If a ray reaches \set{S}{$1$}{}, then a path $\Pi$ from \point{S} to \point{T} is found.
-If a ray reaches again the target \set{T}{$4$}, then we conclude that it is not emitted by
-\point{S} and therefore, it is located inside the parts of \set{T}{$4$}{} with luminance equal to zero. \\ \indent
- Finally, the inverse $\mbox{\inversemap{M}{$1$,}{$4$}}(\Pi)$ of the map \map{M}{$1$,}{$4$}$(\Pi)$ is constructed for every possible path $\Pi$.
- The map \inversemap{M}{$1$,}{$4$}$(\Pi)$ is the composition of the inverses of the propagation and the reflection maps in reverse order according to the path $\Pi$.
-For instance, for path $\Pi = (1,2,4)$, \inversemap{M}{$1$,}{$4$}$(\Pi)$ is given by:
-\begin{equation}
-\label{inverse_map}
-\mbox{\inversemap{M}{$1$,}{$4$}}({\Pi}) = \mbox{\inversemap{P}{$1$,}{$2$}}
-\circ \mbox{\inversemap{R}{$2$}{}}\circ \mbox{\inversemap{P}{$2$,}{$4$}}.
-\end{equation}
-The steps of the procedure are shown in the graph in Fig. \ref{fig:tree} where the map in Eq. (\ref{inverse_map}) is written in red. \\
-\begin{figure}
- \begin{center}
-  \includegraphics[width = \textwidth]{tree2}
-\label{fig:tree}
-  \end{center}
-\caption{Tree that describes how to detect all the possible paths from \point{S} to \point{T}.}
-\label{fig:tree}
-\end{figure}
-%\newpage
-\indent Using the procedure explained above, given a ray with coordinates
-$(\variabile{q}, \variabile{p})\in \mbox{\set{T}{$4$}{}}$ we can establish whether it is located inside one of the regions $\mbox{\set{R}{}{}}(\Pi)$ with positive luminance or not.
-In case the ray is inside a region $\mbox{\set{R}{}{}}(\Pi)$,
-its corresponding coordinates $(\pos{s,}{$1$},\dir{s,}{$1$})\in \mbox{\set{S}{$1$}{}}$ are obtained using $\mbox{\inversemap{M}{$1$,}{$4$}}(\Pi)$, where $\Pi$ is the path followed by this ray. Eq. ($\ref{LT4}$) becomes:
-\begin{subequations}\label{LT}
-\begin{align}
-L(\variabile{q}, \variabile{p})&>0 \qquad \quad \forall (\variabile{q}, \variabile{p})\in \mbox{\set{R}{}{}}(\Pi),\\
-L(\variabile{q}, \variabile{p})&= 0 \qquad \quad \mbox{otherwise},\label{third}
-\end{align}
-\end{subequations}
-for some path $\Pi$ connecting \point{S}{}{} and \point{T}{}{}.
-Assuming a Lambertian source and employing conservation of luminance along a ray (see \cite{chaves2015introduction}, Chapter 16), we have that $L$
-is a positive constant inside \set{R}{}{}($\Pi$) and it has no contribution on the other parts of \set{T}{$4$}{}.
-Indicating with $\variabile{q}^\textrm{\,min}(\Pi,\variabile{p})$ and $\variabile{q}^\textrm{\,max}(\Pi,\variabile{p})$ the minimum and maximum position coordinates of the intersection points between the boundaries $ \partial$\set{R}{}{}($\Pi$) and line $\variabile{p}= \mbox{const}$,
-Eq. (\ref{I(eta)}) reduces to:
-\begin{equation}\label{eta2}
-I_{PS}(\variabile{p}) = \sum_{\Pi}\int_{\variabile{q}^\textrm{\,min}(\Pi, \variabile{p})}^{\variabile{q}^\textrm{\,max}(\Pi,\variabile{p})}L(\variabile{q}, \variabile{p})\textrm{d}\variabile{q} =
-\sum_{\Pi}\big (\variabile{q}^\textrm{max}(\Pi,\variabile{p})-\variabile{q}^\textrm{\,min}(\Pi,\variabile{p})\big )\,,
-\end{equation}
-where the sum is over all the possible paths and the second equation holds as we assume $L=1$ in \set{R}{}{}($\Pi$). 
-Note that for a given ray with corresponding coordinates $(\pos{}{}, \dir{}{})$ on \set{T}{$4$}{}, only one path is possible as we are assuming that all lines are reflective lines.
-Because of this, the regions \set{R}{}{}($\Pi$) do not overlap each other, i.e. 
-\begin{equation}
-\bigcap_{\Pi}\mbox{\set{R}{}{}}(\Pi)= \emptyset,
-\end{equation}
-where the intersection is over all the possible paths. 
-In the next paragraph the details of the procedure to compute the coordinates $\variabile{q}^\textrm{\,min}(\Pi, \variabile{p})$ and $\variabile{q}^\textrm{\,max}(\Pi, \variabile{p})$
-are explained. 
-\section{Results for the two-faceted cup}
-\section{Results for the multi-faceted cup}
-\section{Discussions}
+%Then the same procedure is repeated considering these new coordinates on \set{T}{\lineai}{}.
+%The computation stops either when the points found are emitted from the source, that is when they are located on \set{S}{$1$}{}, or when they reach again the target, that is when they are located on \set{T}{$4$}{}.
+%If a ray reaches \set{S}{$1$}{}, then a path $\Pi$ from \point{S} to \point{T} is found.
+%If a ray reaches again the target \set{T}{$4$}, then we conclude that it is not emitted by
+%\point{S} and therefore, it is located inside the parts of \set{T}{$4$}{} with luminance equal to zero. \\ \indent
+% Finally, the inverse $\mbox{\inversemap{M}{$1$,}{$4$}}(\Pi)$ of the map \mapnumb{M}{$1$,}{$4$}$(\Pi)$ is constructed for every possible path $\Pi$.
+% The map \inversemap{M}{$1$,}{$4$}$(\Pi)$ is the composition of the inverses of the propagation and the reflection maps in reverse order according to the path $\Pi$.
+%For instance, for path $\Pi = (1,2,4)$, \inversemap{M}{$1$,}{$4$}$(\Pi)$ is given by:
+%\begin{equation}
+%\label{inverse_map}
+%\mbox{\inversemap{M}{$1$,}{$4$}}({\Pi}) = \mbox{\inversemap{P}{$1$,}{$2$}}
+%\circ \mbox{\inversemap{R}{$2$}{}}\circ \mbox{\inversemap{P}{$2$,}{$4$}}.
+%\end{equation}
+%The steps of the procedure are shown in the graph in Fig. \ref{fig:tree} where the map in Eq. (\ref{inverse_map}) is written in red. \\
+%\begin{figure}
+% \begin{center}
+%  \includegraphics[width = \textwidth]{tree2}
+%\label{fig:tree}
+%  \end{center}
+%\caption{Tree that describes how to detect all the possible paths from \point{S} to \point{T}.}
+%\label{fig:tree}
+%\end{figure}
+%%\newpage
+%\indent Using the procedure explained above, given a ray with coordinates
+%$(\variabile{q}, \variabile{p})\in \mbox{\set{T}{$4$}{}}$ we can establish whether it is located inside one of the regions $\mbox{\set{R}{}{}}(\Pi)$ with positive luminance or not.
+%In case the ray is inside a region $\mbox{\set{R}{}{}}(\Pi)$,
+%its corresponding coordinates $(\pos{s,}{$1$},\dir{s,}{$1$})\in \mbox{\set{S}{$1$}{}}$ are obtained using $\mbox{\inversemap{M}{$1$,}{$4$}}(\Pi)$, where $\Pi$ is the path followed by this ray. Eq. ($\ref{LT4}$) becomes:
+%\begin{subequations}\label{LT}
+%\begin{align}
+%L(\variabile{q}, \variabile{p})&>0 \qquad \quad \forall (\variabile{q}, \variabile{p})\in \mbox{\set{R}{}{}}(\Pi),\\
+%L(\variabile{q}, \variabile{p})&= 0 \qquad \quad \mbox{otherwise},\label{third}
+%\end{align}
+%\end{subequations}
+%for some path $\Pi$ connecting \point{S}{}{} and \point{T}{}{}.
+%Assuming a Lambertian source and employing conservation of luminance along a ray (see \cite{chaves2015introduction}, Chapter 16), we have that $L$
+%is a positive constant inside \set{R}{}{}($\Pi$) and it has no contribution on the other parts of \set{T}{$4$}{}.
+%Indicating with $\variabile{q}^\textrm{\,min}(\Pi,\variabile{p})$ and $\variabile{q}^\textrm{\,max}(\Pi,\variabile{p})$ the minimum and maximum position coordinates of the intersection points between the boundaries $ \partial$\set{R}{}{}($\Pi$) and line $\variabile{p}= \mbox{const}$,
+%Eq. (\ref{I(eta)}) reduces to:
+%\begin{equation}\label{eta2}
+%I_{PS}(\variabile{p}) = \sum_{\Pi}\int_{\variabile{q}^\textrm{\,min}(\Pi, \variabile{p})}^{\variabile{q}^\textrm{\,max}(\Pi,\variabile{p})}L(\variabile{q}, \variabile{p})\textrm{d}\variabile{q} =
+%\sum_{\Pi}\big (\variabile{q}^\textrm{max}(\Pi,\variabile{p})-\variabile{q}^\textrm{\,min}(\Pi,\variabile{p})\big )\,,
+%\end{equation}
+%where the sum is over all the possible paths and the second equation holds as we assume $L=1$ in \set{R}{}{}($\Pi$). 
+%Note that for a given ray with corresponding coordinates $(\pos{}{}, \dir{}{})$ on \set{T}{$4$}{}, only one path is possible as we are assuming that all lines are reflective lines.
+%Because of this, the regions \set{R}{}{}($\Pi$) do not overlap each other, i.e. 
+%\begin{equation}
+%\bigcap_{\Pi}\mbox{\set{R}{}{}}(\Pi)= \emptyset,
+%\end{equation}
+%where the intersection is over all the possible paths. 
+%In the next paragraph the details of the procedure to compute the coordinates $\variabile{q}^\textrm{\,min}(\Pi, \variabile{p})$ and $\variabile{q}^\textrm{\,max}(\Pi, \variabile{p})$
+%are explained. 
+%\section{Results for the two-faceted cup}
+%\section{Results for the multi-faceted cup}
+%\section{Discussions}
