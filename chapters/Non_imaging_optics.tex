@@ -35,15 +35,15 @@ and is defined as:
  E=E(x) = \frac{\textrm{d}\Phi}{\textrm{d}A}\;,
  \end{equation}
  where $\textrm{d}A$ is an infinitesimal area receiving radiation. The density of light emitted by a point source in a given direction is determined by the solid angle.\\ \indent
-The solid angle in a given direction is expressed by a cone with vertex located at the center of the unit sphere, \cite{koshel2012illumination}. 
-Let $\textrm{d}S$ be the area on the surface of the sphere subtended by the cone,
+The solid angle in a given direction is expressed by a cone of rays emitted in that particular direction by a point source located at the center of the unit sphere, \cite{koshel2012illumination}. 
+Let $\textrm{d}S$ be the area on the unit sphere subtended by the cone,
 the infinitesimal solid angle $\textrm{d}\Omega$ is given by:
 \begin{equation}\label{solid_angle}
 \textrm{d}\Omega = \textrm{d}S= \sin(\theta)\textrm{d}\theta \textrm{d}\phi\,
 \end{equation}
  where $\myangle$ and $\phi$ are the polar and the azimuthal angle that the normal $\boldsymbol{\nu}$ to $\textrm{d}A$ makes with the direction of the central line of $\textrm{d}\Omega$, respectively (see Figure \ref{fig:rad}).
 The solid angle on the entire sphere is $\Omega = 4\pi$ and its unit is steradian $\textrm{sr}$, \cite{arecchi2007field}.
-The luminous intensity $I$ (unit candela \textrm{cd}=\textrm{lm}/\textrm{sr}$) is defined as the luminous flux $\textrm{d}\Phi$ per solid angle
+The luminous intensity $I$ (unit candela $\textrm{cd}=\textrm{lm}/\textrm{sr}$) is defined as the luminous flux $\textrm{d}\Phi$ per solid angle
 $\textrm{d}\Omega$ and is given by:
 \begin{equation}\label{intensity}
 I = I(\myangle, \phi) = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}\;.
@@ -53,28 +53,28 @@ I = I(\myangle, \phi) = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}\;.
   \begin{center}
   \includegraphics[width=6 cm]{SolidAngle}
   \end{center}
-  \caption{Solid angle $\textrm{d}\Omega$ in a direction making an angle $\myangle$ with the normal to the area $\textrm{d}A$.}
+  \caption{Solid angle $\textrm{d}\Omega$ in a given direction $\myangle$ with $\myangle$ the angle that the central line forms with the normal to the area $\textrm{d}A$.}
   \label{fig:rad}
   \end{figure}
-\\ \indent Let us now consider a finite source. %CONTINUA
-The luminance $L$ \big(unit $\big[\textrm{cd} / \textrm{m}^2\big]$\big) is the luminous flux per unit solid angle $\textrm{d}\Omega$ and  per unit projected area $\cos\myangle \textrm{d}A$.  $L$  is given by:
+\\ \indent Let us now consider a finite source $\textrm{d}A$.
+The luminance $L = L(\vect{x}, \myangle)$ (unit \textrm{cd} / \textrm{m}^2$) depends both on the position and the direction, it is the luminous flux per unit solid angle $\textrm{d}\Omega$ and  per unit projected area $\cos\myangle \textrm{d}A$.  $L$  is given by:
 \begin{equation}\label{luminance1}
-  L=\frac{\textrm{d}\Phi}{\cos\myangle\textrm{d}A\textrm{d}\Omega}\,.
+  L=L(\vect{x}, \myangle) = \frac{\textrm{d}\Phi}{\cos\myangle\textrm{d}A\textrm{d}\Omega}\,.
 \end{equation}
 \noindent Note that from ($\ref{intensity}$) and ($\ref{luminance1}$) we can derive a relation between the intensity and the luminance. 
 The intensity $I$ emitted by the infinitesimal area $\textrm{d}A$ is given by:
 \begin{equation}
 I = \frac{\textrm{d}\Phi}{\textrm{d}\Omega}= L(\vect{x},\myangle)\cos\myangle\textrm{d}A \,.
 \end{equation}
-When the luminance is uniform over a finite area $A$, the luminous intensity emitted in the direction $\myangle$ is equal to:
+When the luminance is uniform over a finite area $A$, the luminous intensity emitted in the direction $\myangle$ is:
 \begin{equation}
-I(\myangle) = L(\myangle) A \cos\myangle\,.
+I(\vect{x}, \myangle) = I(\myangle) = L(\myangle) A \cos\myangle\,.
 \end{equation}
 Thus, when $L(\vect{x},\myangle)$ does not depend on the position and the direction (i.e. $L(\vect{x},\myangle)=L$), we obtain Lambert's cosine law:
 \begin{equation}
 I(\myangle) = I_0\cos\myangle\,.
 \end{equation}
-where $I_0 = I(0) = LA$. \\
+where $I_0 = I(\myangle = 0) = LA$. \\
 \indent Finally, the \'{e}tendue $U$ (unit $[\textrm{m sr}]$) describes the ability of a source to emitt light or the capability of an optical system to receive light, \cite{zhu2011etendue}.
 The quantity $ \textrm{d}U $ is defined as:
 \begin{equation}\label{etendue}
