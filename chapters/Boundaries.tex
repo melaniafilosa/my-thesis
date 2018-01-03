@@ -29,17 +29,29 @@ Therefore, every triangle (or tetrahedron in three dimensions) that does not sat
 More precisely, given an arbitrary triangulation $T$ in two-dimension, for each edge $\overline{ab}$ in $T$ which is not on the boundary of the convex hull the two triangles 
 $\Delta_{abc}$ and $\Delta_{abd}$ with the common edge $\overline{ab}$ are found. Then, if either the circumcircle of triangle $\Delta_{abc}$ contains point $d$ or the circumcircle of triangle $\Delta_{abd}$ contains point $c$ the edge $\overline{ab}$ cannot be included in the Delaunay triangulation and, therefore, it is flipped such that the other two possible triangles $\Delta_{acd}$ and $\Delta_{bcd}$ are found. The new edge $\overline{cd}$ locally satisfies the Delaunay property and the triangles $\Delta_{acd}$ and  $\Delta_{bcd}$ are added to the Delaunay triangulation $T^\prime$.  
 \begin{figure}[h]\label{fig:Delaunay}
-\begin{center}
-\includegraphics[width=7cm]{Delaunay_Voronoi.jpg}
+\begin{subfigure}[t]{0.48\textwidth}
+\centering
+\includegraphics[]{triangle_alpha_shapes}
 \label{fig:shape}
-\caption{Triangles flipped.}
+\caption{The point $d$ is inside the circle circumscribed by the triangle $\Delta_{abc}$, therefore the edge $\overline{ab}$ cannot be included in the Delaunay triangulation.}
+\end{subfigure}
+\begin{subfigure}[t]{0.48\textwidth}
+\centering
+\includegraphics[]{triangle_alpha_shapes_flipped}
+\caption{The flipped triangle $\Delta_{acd}$ satisfies the Delaunay property, thus it is included in the Delaunay triangulation.}
+\end{subfigure}
+\caption{Construction of the Delaunay triangulation in 2D.}
 \label{fig:Delaunay}
-\end{center}
 \end{figure}
 \\ \indent Several others algorithm have been developed to construct a Delaunay triangulation, see for example \cite{lee1980two, renka1997algorithm}.
 It can be proved that the Delaunay triangulation $T^\prime$ derived from a triangulation $T$ of a given points set $V$ is unique. It has the property to have the largest minimum angle among all possible triangulation of a point set $V$, \cite{press2007numerical} and, it can be seen as the dual of Voronoi diagram, \cite{fortune1992voronoi}.\\\indent 
 Let us consider a finite set of point $V = \{v_1, \cdots, v_N\}\subset \mathbb{R}^2$. For \textit{almost}\footnote{It is needed to specify the word \textit{almost} because some points can have the same distance with two or more points of $V$.} every point $x\in \mathbb{R}^2$, there is a point which is the closest point to $x$. The Voronoi cell of a point $v_\variabile{i}\in V$ contains all points in $\mathbb{R}^2$ which are closer to $v_{\variabile{i}}$., see Figure \ref{fig:Voronoi}. 
 The Voronoi diagram of $V\subset \mathbb{R}^2$ is defined as the set of all Voronoi cells, \cite{cazals2005conformal}.  For the definition of Voronoi diagram in higher dimensions see \cite{brown1979voronoi}.
+\begin{figure}[h]\label{fig:Voronoi}
+\centering
+\includegraphics[]{Delaunay_Voronoi}
+\caption{Relationship between the Delaunay triangulation (in black) and the Voronoi Diagram (in red), \cite{Wiki4}}
+\end{figure}
 %A formal definition of the Voronoi diagram is given in the following.
 %\begin{defn}
 %Let $X$ be a metric space with a distance $\textrm{d}$ and $V=\{v_1,\cdots,v_N\}$ a set of point in $X$. The Voronoi cell $V_\variabile{i}$ associated with the point $v_\variabile{i}$ with $v_{\variabile{i}}\in\{1,\cdots,N\}$ is defined as:
