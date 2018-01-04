@@ -1,9 +1,9 @@
 \chapter{The $\alpha$-shapes approach to compute the boundaries in target phase space}\label{chap:boundaries_alpha}
 In the previous chapter we presented a new ray tracing approach based on PS. We explained that, in order to compute the target photometric variable, it is useful to know the boundaries of the regions with positive luminance in target PS. Ray tracing in PS allows tracing only the rays close to these boundaries. 
-In order to detect the shape formed by those rays an $\alpha$-shapes approach is employed, \cite{portegies2013fast}. 
+\\ \indent To detect the shape formed by those rays, the $\alpha$-shapes approach is employed, \cite{portegies2013fast}. 
 The $\alpha$-shapes methods are widely used to reconstruct an unknown surface from a set of data points, \cite{guo1997surface}. 
-It can be very hard to select the suitable value of the parameter $\alpha$ and, in most cases it can be selected only by numerical simulations.
-We develop a technique based on $\alpha$-shape that gives a criterion to determine the value of the parameter $\alpha$ for which the better approximation of the boundaries is obtained.  An overview of the state of art about $\alpha$-shapes methods is provided in Section \ref{sec:alpha-shapes}; the technique used for computing the $\alpha$ value is explained in Section \ref{sec:Tir_alpha}; the results for two different kind of total internal reflection (TIR) collimator are given in last paragraph of this chapter.
+It can be very hard to chose the suitable value of the parameter $\alpha$ and, in most cases it can be selected only by numerical simulations.\\ \indent
+We develop a technique based on $\alpha$-shape that gives a criterion to determine the value of the parameter $\alpha$ for which the better approximation of the boundaries is obtained, \cite{filosa2015new}.\\ \indent An overview of the state of art about $\alpha$-shapes methods is provided in Section \ref{sec:alpha-shapes}; the technique used for computing the $\alpha$ value is explained in Section \ref{sec:Tir_alpha}; the results for two different kind of total internal reflection (TIR) collimator are given in the last paragraph of this chapter.
 \section{The $\alpha$-shapes approach}\label{sec:alpha-shapes}
 Given a finite set $V$ of points, $\alpha$-shapes are geometrical objects that give us an approximation of the shape\footnote{It will become clear through this chapter what we intend with the word \textit{shape}.} formed by the points in $V$.\\ \indent
 Before giving a formal definition, we explain an intuitive and nice interpretation of $\alpha$-shapes, \cite{lucieer2004alpha}. 
@@ -13,21 +13,21 @@ We will obtain a shape formed by arcs and points (see Figure \ref{fig:shape2d} f
 \begin{center}
 \includegraphics[width=\textwidth]{alpha_shapes2D}
 \label{fig:shape}
-\caption{Construction of $\alpha$-shape given a set of points (blue dots) in $\mathbb{R}^2$. The boundary of the shape formed by the points cloud (red line) is detected for $\alpha = 1$ (left) and for $\alpha=2$ (right), \cite{sabel2017application}.}
+\caption{Construction of $\alpha$-shape given a set of points (blue dots) in $\mathbb{R}^2$. The boundary of the shape formed by the points cloud (red line) is detected for $\alpha = 1$ (left) and for $\alpha=2$ (right) \cite{sabel2017application}.}
 \label{fig:shape2d}
 \end{center}
 \end{figure}
 Straightening the arcs to line segments we obtain broken lines which constitute the boundaries of the so-called $\alpha$-shape formed by the points of the points set $V$. 
 A very small spoon will allow us to eat the entire ice cream without eating any piece of chocolate, while with a huge spoon we will not be able to eat any part of the ice cream because at least one chocolate peace will be removed from the ice-cream mass. In this example, the chocolates peaces are the points of $V$ and, the parameter $\alpha$ determines the radius of the carving spoon (the spherical spoon in two-dimension is simply a circle).\\ \indent 
-The formal definition of $\alpha$-shape was first given by Edelsbrunner, Kirkpatrick and Seidel in 1983, \cite{edelsbrunner1983shape}. They describe $\alpha$-shape has a generalization of the convex hull of a finite set of point in the plane. Let be $\alpha$ a not negative number $0\leq\alpha<\infty$. 
-If $\alpha$ is equal to $0$ the shape degenerates to the point set $V$. On the other hand, when $\alpha\rightarrow\infty$ the $\alpha$-shape is simply the convex hull of $V$. If $0<\alpha<\infty$ the $\alpha$-shape is a polytope of $V$, \cite{edelsbrunner1994three}. The construction of $\alpha$-shape is closely related to Delaunay triangulation of $V$,\cite{mucke1993shapes}. Therefore, a formal definition of triangulations and Delanauy triangulations is now required. \\ \indent
+The formal definition of $\alpha$-shape was first given by Edelsbrunner, Kirkpatrick and Seidel in 1983, \cite{edelsbrunner1983shape}. They describe $\alpha$-shape has a generalization of the convex hull of a finite set of point in the plane. Let $\alpha$ be a not negative number $0\leq\alpha<\infty$. 
+If $\alpha$ is equal to $0$ the shape degenerates to the point set $V$. On the other hand, when $\alpha\rightarrow\infty$ the $\alpha$-shape is simply the convex hull of $V$. If $0<\alpha<\infty$ the $\alpha$-shape is a polytope of $V$ \cite{edelsbrunner1994three}. The construction of $\alpha$-shape is closely related to Delaunay triangulation of $V$\cite{mucke1993shapes}. Therefore, a formal definition of triangulation and Delanauy triangulation is now required. \\ \indent
 Given a set $V$ of not all aligned points, let us consider the set $E$ of all the straight line segments whose endpoints are in $V$. 
-A triangulation $T$ of $V$ is the maximum subset of $E$ such that all the line segments of $T$ intersect only at their endpoints, \cite{lloyd1977triangulations}. \\ \indent 
-The Delaunay triangulation $T^{\prime}$ of the points set $V$ has the property (called Delaunay property) that the circle circumscribed by any triangle of $T$ does not contain any point of $V$. A very common used algorithm to construct such triangulation is explained in the following. 
+A triangulation $T$ of $V$ is the maximum subset of $E$ such that all the line segments of $T$ intersect only at their endpoints \cite{lloyd1977triangulations}. \\ \indent 
+The Delaunay triangulation $T^{\prime}$ of the points set $V$ has the property that the circle circumscribed by any triangle of $T$ does not contain any point of $V$. This is called the Delaunay property. A very common used algorithm to construct such triangulation is explained in the following. 
 $T^\prime$ is constructed by modifying a general triangulation $T$ such that every point satisfies the Delaunay property. 
 Therefore, every triangle (or tetrahedron in three dimensions) that does not satisfy such property is flipped such that the new edge is part of the triangulation, see Figure \ref{fig:Delaunay}. 
-More precisely, given an arbitrary triangulation $T$ in two-dimension, for each edge $\overline{ab}$ in $T$ which is not on the boundary of the convex hull the two triangles 
-$\Delta_{abc}$ and $\Delta_{abd}$ with the common edge $\overline{ab}$ are found. Then, if either the circumcircle of triangle $\Delta_{abc}$ contains point $d$ or the circumcircle of triangle $\Delta_{abd}$ contains point $c$ the edge $\overline{ab}$ cannot be included in the Delaunay triangulation and, therefore, it is flipped such that the other two possible triangles $\Delta_{acd}$ and $\Delta_{bcd}$ are found. The new edge $\overline{cd}$ locally satisfies the Delaunay property and the triangles $\Delta_{acd}$ and  $\Delta_{bcd}$ are added to the Delaunay triangulation $T^\prime$.  
+Given, for example, an arbitrary triangulation $T$ in two-dimension, for each edge $\overline{ab}$ in $T$ which is not on the boundary of the convex hull the two triangles 
+$\Delta_{abc}$ and $\Delta_{abd}$ with the common edge $\overline{ab}$ are found. Then, if either the circumcircle of triangle $\Delta_{abc}$ contains point $d$ or the circumcircle of triangle $\Delta_{abd}$ contains point $c$ the edge $\overline{ab}$ cannot be included in the Delaunay triangulation and, therefore, it is flipped such that the other two possible triangles $\Delta_{acd}$ and $\Delta_{bcd}$ are found. The new edge $\overline{cd}$ locally satisfies the Delaunay property and the triangles $\Delta_{acd}$ and  $\Delta_{bcd}$ are added to the Delaunay triangulation $T^\prime$, see Figure \ref{fig:Delaunay}.  
 \begin{figure}[h]\label{fig:Delaunay}
 \begin{subfigure}[t]{0.48\textwidth}
 \centering
@@ -44,12 +44,12 @@ $\Delta_{abc}$ and $\Delta_{abd}$ with the common edge $\overline{ab}$ are found
 \label{fig:Delaunay}
 \end{figure}
 \\ \indent Several others algorithm have been developed to construct a Delaunay triangulation, see for example \cite{lee1980two, renka1997algorithm}.
-It can be proved that the Delaunay triangulation $T^\prime$ derived from a triangulation $T$ of a given points set $V$ is unique. It has the property to have the largest minimum angle among all possible triangulation of a point set $V$, \cite{press2007numerical} and, it can be seen as the dual of Voronoi diagram, \cite{fortune1992voronoi}.\\\indent 
-Let us consider a finite set of point $V = \{v_1, \cdots, v_N\}\subset \mathbb{R}^2$. For \textit{almost}\footnote{It is needed to specify the word \textit{almost} because some points can have the same distance with two or more points of $V$.} every point $x\in \mathbb{R}^2$, there is a point which is the closest point to $x$. The Voronoi cell of a point $v_\variabile{i}\in V$ contains all points in $\mathbb{R}^2$ which are closer to $v_{\variabile{i}}$., see Figure \ref{fig:Voronoi}. 
+It can be proved that the Delaunay triangulation $T^\prime$ derived from a triangulation $T$ of a given points set $V$ is unique. Moreover, it has the property to have the largest minimum angle among all possible triangulation of a point set $V$, \cite{press2007numerical} and, it can be seen as the dual of Voronoi diagram which is defined in the following\cite{fortune1992voronoi}.\\\indent 
+Let us consider a finite set of point $V = \{v_1, \cdots, v_N\}\subset \mathbb{R}^2$. For \textit{almost}\footnote{It is needed to specify the word \textit{almost} because some points can have the same distance with two or more points of $V$.} every point $x\in \mathbb{R}^2$, there is a point which is the closest point to $x$. The Voronoi cell of a point $v_\variabile{i}\in V$ contains all points in $\mathbb{R}^2$ which are closer to $v_{\variabile{i}}$, see Figure \ref{fig:Voronoi}. 
 The Voronoi diagram of $V\subset \mathbb{R}^2$ is defined as the set of all Voronoi cells, \cite{cazals2005conformal}.  For the definition of Voronoi diagram in higher dimensions see \cite{brown1979voronoi}.
 \begin{figure}[h]\label{fig:Voronoi}
 \centering
-\includegraphics[]{Delaunay_Voronoi}
+\includegraphics[width = 6cm]{Delaunay_Voronoi}
 \caption{Relationship between the Delaunay triangulation (in black) and the Voronoi Diagram (in red), \cite{Wiki4}}
 \end{figure}
 %A formal definition of the Voronoi diagram is given in the following.
@@ -68,10 +68,10 @@ The Voronoi diagram of $V\subset \mathbb{R}^2$ is defined as the set of all Voro
 %\label{fig:Voronoi}
 %\end{center}
 %\end{figure}
-Delaunay triangulation triangulates the convex hull of $V$ and, therefore it does not constitutes a suitable method for reconstruct the surface formed by a point cloud. 
+Delaunay triangulation triangulates the convex hull of $V$ and, therefore it does not constitutes a suitable method for reconstructing the surface formed by a point cloud. 
 \\ \indent An important method in surface reconstruction is the $\alpha$-shapes method, \cite{edelsbrunner2010alpha, guo1997surface}. Starting from the Delaunay triangulation $T^\prime$ of a point set $V$, the corresponding $\alpha$-shape of $V$ is formed by the only triangles of $T^\prime$ that satisfy the so-called "$\alpha$-test".
-For each triangle we calculate the radius of the circumcircle. If the radius is larger that $\alpha$ the triangle is removed from the shape. The rule of the parameter $\alpha$ is highly significant in this procedure. We would choose $\alpha$ such the better approximation of the shape formed by the points of $V$ is obtained. 
-The choice of the parameter $\alpha$ is closely related to the radius of the circumcircles. A possible strategy is to find the radius of the greater empty circumcircle. Thus $\alpha$ is related to the density $\delta$ of the point sets $V$. In particular $\alpha$ is inversely proportional to $\delta$:
+For each triangle we calculate the radius of the circumcircle. If the radius is larger that $\alpha$ the triangle is removed from the shape. The rule of the parameter $\alpha$ is highly significant in this procedure. We need to choose $\alpha$ such that the better approximation of the shape formed by the points of $V$ is obtained. 
+The choice of the parameter $\alpha$ is closely related to the radius of the circumcircles. A possible strategy is to find the radius of the greater empty circumcircle. Thus $\alpha$ is related to the density $\delta$ of the point sets $V$. For example, $\alpha$ can be chosen inversely proportional to $\delta$:
 \begin{equation}
 \alpha=C\frac{1}{\delta}\;,
 \end{equation}
@@ -121,8 +121,10 @@ The $\alpha$-shape procedure can be outlined as follows.
 %Let us define a Voronoi diagram in a metric space.
 %The simplest case that we can have is the two-dimensional case that is the case where $X=\mathbb{R}^2$.
 %The tuple $\mathcal{S}=\{1,\cdots,n\}\subset \mathbb{R}^2$ is now a set of points. The Voronoi diagram of $\mathcal{S}$ is a subsection of $\mathbb{R}^2$ such that every other region around a point $p\in \mathcal{S}$ contains all points that are closer to $p$ than to every point in $\mathcal{S}$. A triangulation of the point set $\mathcal{S}$ is a set of edges $\mathcal{E}$ whose extremes are points of $\mathcal{S}$ such that the faces of each triangle are bounded by three edges and any edge that is not in $\mathcal{E}$ intersects one of the existing edges. The Delaunay triangulation is the dual graph of the Voronoi diagram: it consists of vertices (the points in $\mathcal{S}$) and it has an edge between two vertices if the two corresponding faces share an edge. \\
-\indent Although $\alpha$-shapes are a powerful tool for surfaces reconstruction, there exist surfaces that are not described well by classical $ \alpha $-shapes. Indeed for some surfaces there exist no value of $\alpha$ that includes all desired triangles and deletes all undesired triangles. For example, it can be difficult to obtain a good approximation of a shape formed by a non-uniform points set if the parameter $\alpha$ is determined according to the density of the point cloud. Furthermore, the $\alpha$-shape method does not work well when the shape we need to approximate has a sharp turn or a joint. In this case $\alpha$-shapes often give a "webbed-foot" appearance at such joints since they improperly connect the adjacent surfaces. To overcome this issue, Teichmann and Capps presented alternatives approaches to establish the value of $\alpha$, \cite{teichmann1998surface}. Their anisotropic density-scaled $\alpha$-shapes method constitutes an improvement of  classical $\alpha$-shapes.
-\\ \indent There are several ways to determine the value of $\alpha$ \cite{mandal1997selection}; we provide a technique that exploits the conservation of \'{e}tendue in PS. 
+\indent Although $\alpha$-shapes are a powerful tool for surfaces reconstruction, there exist surfaces that are not described well by classical $ \alpha $-shapes. Indeed for some surfaces there exist no value of $\alpha$ that includes all desired triangles and deletes all undesired triangles. If the parameter $\alpha$ is determined according to the density of the point cloud, it can be difficult to obtain a good approximation of a shape formed by a non-uniform points set. Furthermore, the $\alpha$-shape method does not work well when the shape we need to approximate has a sharp turn or a joint. 
+%In this case $\alpha$-shapes often give a "webbed-foot" appearance at such joints since they improperly connect the adjacent surfaces. 
+To overcome this issue, Teichmann and Capps presented alternatives approaches to establish the value of $\alpha$, \cite{teichmann1998surface}. Their anisotropic density-scaled $\alpha$-shapes method constitutes an improvement of  classical $\alpha$-shapes.
+\\ \indent There are several ways to determine the value of $\alpha$ \cite{mandal1997selection}; in the next section we provide a technique that exploits the conservation of \'{e}tendue in PS. 
 %The first step of this method is to make a triangulation of the point cloud.
 %Then the key idea is to compute somehow the point-density of each point and use this to get an approximation of the point density of a triangle. In this way one can reduce the $\alpha$-value in areas where the triangle's point density (see equation \ref{delta_t} for the definition) is higher than average in such a way that is possible to obtain a finer level of detail for areas that have an higher density.
 %More precisely, each point $ \textbf{p}\in \mathcal{S} $ has a local point density defined as
@@ -153,30 +155,30 @@ The $\alpha$-shape procedure can be outlined as follows.
 % It is useful to understand whether the approximation is correct
 \section{Determination of $\alpha$ using \'{e}tendue conservation} \label{sec:Tir_alpha}
 As mentioned in Section \ref{sec:PSconcept}, in two-dimensions \'{e}tendue can be seen as an area in PS. 
-Therefore, given an optical system with a line segment source $\point{S} = [-\variabile{a}, \variabile{a}]$, the \'{e}tendue at the source coincides with the area of \set{S}{}{}, given by:
+Therefore, given an optical system with a line segment source $\point{S} = [-\variabile{a}, \variabile{a}]$, the \'{e}tendue at the source coincides with the area of \set{S}{}{}, and it is given by:
 \begin{equation}\label{eq:etenduesource}
 U = 4\n_1 \variabile{a} \sin(\myangle_1^{\textrm{max}})\,,
 \end{equation}
  where $\variabile{a}$ is the half length of the source, $\n_1$ the index of refraction of the medium in which the \point{S} is located and $\myangle_1^{\textrm{max}}$ is the maximum value of the angle that the rays make with the normal $\boldsymbol{\nu}_1$ of the source.\\ \indent 
-For some optical systems, all the rays emitted by the source arrive to the target, for some others there are also rays that can end up to other detectors. 
-Indicating with \set{R}{$1$}{}$(\Pi)$ the regions in source PS formed by the rays that reach the target following path $\Pi$and with \set{R}{}{}$(\Pi)$ the corresponding regions at the target, the \'{e}tendue $U_1$ at source related to the only rays that hit the target is:
+For some optical systems, all the rays emitted by the source arrive to the target, for some others there are also rays that can end up to other detectors which are located outside the system. 
+Indicating with \set{R}{$1$}{}$(\Pi)$ the regions in source PS formed by the rays that reach the target following path $\Pi$ and with \set{R}{}{}$(\Pi)$ the corresponding regions at the target, the \'{e}tendue $U_1$ at source related to the only rays that arrive to the target is:
 \begin{equation}\label{eq:etenduesumsource}
-U_1 = \sum_\Pi{U_1\big(\mbox{\set{R}{$1$}{}}(\Pi)\big)},
+U_1 = \sum_\Pi{U\big(\mbox{\set{R}{$1$}{}}(\Pi)\big)},
 \end{equation}
-where the sum is over all possible paths $\Pi$ and $U_1\big(\mbox{\set{R}{$1$}{}}(\Pi)\big)$ is the contribution to \'{e}tendue given by the rays inside the region 
-\set{R}{$1$}{}$(\Pi)$ in source PS given by:
+where the sum is over all possible paths $\Pi$ and $U\big(\mbox{\set{R}{$1$}{}}(\Pi)\big)$ is the contribution to \'{e}tendue given by the rays inside region 
+\set{R}{$1$}{}$(\Pi)$ in source PS obtained by:
 \begin{equation}\label{eq:etendueintegralsource}
 U_1\big(\mbox{\set{R}{$1$}{}}(\Pi)\big) = {\int\!\!\int}_{\emph{R}_1(\Pi)} \textrm{d}\variabile{q}\,\textrm{d}\variabile{p}.
 \end{equation}
 Similarly the \'{e}tendue at the target of the rays emitted by the source is:
 \begin{equation}
-U_\textrm{t}= \sum_\Pi{U_\textrm{t}\big(\mbox{\set{R}{}{}}(\Pi)\big)},
+U_\textrm{t}= \sum_\Pi{U\big(\mbox{\set{R}{}{}}(\Pi)\big)},
 \end{equation}
 with
 \begin{equation}\label{eq:etendueintegraltarget}
-U_\textrm{t}\big(\mbox{\set{R}{}{}}(\Pi)\big) = {\int\!\!\int}_{\emph{R}(\Pi)} \textrm{d}\variabile{q}\,\textrm{d}\variabile{p}.
+U\big(\mbox{\set{R}{}{}}(\Pi)\big) = {\int\!\!\int}_{\emph{R}(\Pi)} \textrm{d}\variabile{q}\,\textrm{d}\variabile{p}.
 \end{equation}
-In order to determine the value of $\alpha$ in the $\alpha$-shape procedure that better approximates the boundaries $\partial$\set{R}{}{}$(\Pi)$ we use \'{e}tendue conservation, i.e. $U_{\textrm{t}}= U_1$ as explained in the following.\\ \indent
+In order to determine the value of $\alpha$ in the $\alpha$-shape procedure that better approximates the boundaries $\partial$\set{R}{}{}$(\Pi)$ we use \'{e}tendue conservation ($U_{\textrm{t}}= U_1$).\\ \indent
 The $\alpha$-shapes method is applied to every region \set{R}{}{}$(\Pi)$ for a range of values of $\alpha$;
    for each value an approximation of the boundaries $\partial$\set{R}{}{}$(\Pi)$ is obtained and
    the intersection points $\variabile{q}^{\textrm{\,max}}(\Pi,\variabile{p})$ and $\variabile{q}^{\textrm{\,min}}(\Pi,\variabile{p})$ between $\partial$\set{R}{}{}$(\Pi)$
@@ -185,14 +187,14 @@ Therefore Equation (\ref{eq:etendueintegraltarget}) becomes:
 \begin{equation}\label{eq:etenduetarg}
  U_\textrm{t}\big(\mbox{\set{R}{}{}}(\Pi)\big)= \int_{-1}^{1}{\Big(\variabile{q}^{\textrm{\,max}}(\Pi,\variabile{p})-\variabile{q}^{\textrm{\,min}}(\Pi,\variabile{p})\Big)} \textrm{d}\variabile{q}\,\textrm{d}\variabile{p}.
 \end{equation} In case more than two intersection points between line $\variabile{p}=const$ and $\partial$\set{R}{}{}$(\Pi)$ occur, the previous equation needs to be generalized. Suppose that $\variabile{r}$ intersection points $\big(\variabile{q}^{\,\variabile{i}}(\Pi,\variabile{p}), \variabile{p}\big)_{\variabile{i} = 1, \cdots, \variabile{r}}$ are found. 
-First their $\variabile{q}$ coordinates are ordered in ascending order, second the target \'{e}tendue is calculated using
+Ordering their $\variabile{q}$ coordinates in ascending order, the target \'{e}tendue is calculated using:
 \begin{equation}\label{eq:etenduetarg1}
  U_\textrm{t}\big(\mbox{\set{R}{}{}}(\Pi)\big) = \int_{-1}^{1}\sum_{\variabile{i} = 1}^{\variabile{m}}
 {(\variabile{q}^{\,2\variabile{i}}(\Pi,\variabile{p})}-{\variabile{q}^{\,2\variabile{i}-1} (\Pi, \variabile{p}) )} \textrm{d}\variabile{q}\,\textrm{d}\variabile{p}\,,
 \end{equation}
-where $\variabile{m}$ is the integer part of $\variabile{r}/2$ with $\variabile{r}$. 
+where $\variabile{m}$ is the integer part of $\variabile{r}/2$. 
 The integrals in Equations (\ref{eq:etenduetarg}) and (\ref{eq:etenduetarg1}) are calculated discretizing the interval $[-1, 1]$
-   into $\nbin=100$ sub-intervals of equal length, the so-called bins, and using the trapezoidal rule to approximate the integral.
+   into $\nbin=100$ sub-intervals of equal length, the so-called bins, and using the trapezoidal rule.
 \\ \indent Matching the value of the \'{e}tendue at the source $U_1$ with the value of the \'{e}tendue at the target $U_{\textrm{t}}$, a unique value $\alpha_{c}$ of $\alpha$  is determined. Implemented the $\alpha$-shapes procedure with $\alpha = \alpha_c$, the best approximation of the boundaries $\partial$\set{R}{}{}$(\Pi)$ is found and the intensity at the target can be calculated.\\ \indent If two intersection points between $\variabile{p}=const$ and $\partial$\set{R}{}{}$(\Pi)$ are found the target intensity is calculated using Equation ($\ref{eta2}$). If more than two-intersection points are found we use the generalized equation:
 \begin{equation}
 I_{\textrm{PS}}(\variabile{p}) = \sum_{\Pi, \variabile{i} }\int_{\variabile{q}^{\,2\variabile{i}-1}(\Pi, \variabile{p})}^{\variabile{q}^{\,2\variabile{i}}( \Pi, \variabile{p})}L(\variabile{q}, \variabile{p})\textrm{d}\variabile{q} =
@@ -200,8 +202,8 @@ I_{\textrm{PS}}(\variabile{p}) = \sum_{\Pi, \variabile{i} }\int_{\variabile{q}^{
 \variabile{q}^{\,2\variabile{i}-1}( \Pi, \variabile{p})\,,
 \label{eq:Ips}
 \end{equation}
-where $\variabile{q}^{\,2\variabile{i}}( \Pi, \variabile{p})>\variabile{q}^{\,2\variabile{i}-1}( \Pi, \variabile{p})$, the summation over $\Pi$ is for all the paths $\Pi$ for which the intersection $\variabile{p} = const$ and \set{R}{}{}$(\Pi)$ is not empty, and the summation over $\variabile{i}$ is for all $\variabile{i} = 1,2, \cdots, \variabile{m}$. The second equation holds as we assume $L(\variabile{q}, \variabile{p})=1$.
-To clarify our idea we apply the method to two different kinds of TIR collimators optical system.
+where $\variabile{q}^{\,2\variabile{i}}( \Pi, \variabile{p})>\variabile{q}^{\,2\variabile{i}-1}( \Pi, \variabile{p})$, the summation over $\Pi$ is for all the paths $\Pi$ for which the intersection $\variabile{p} = const$ and \set{R}{}{}$(\Pi)$ is not empty, and the summation over $\variabile{i}$ is for all $\variabile{i} = 1,2, \cdots, \variabile{m}$. The second equation holds as we assume $L(\variabile{q}, \variabile{p})=1$.\\ \indent
+To clarify our idea we apply the method to two different optical system.
 %\\ \indent Let us consider the two-faceted cup introduced in Chapter \ref{chap:raytracing} and depicted in Figure \ref{fig:cup}. The half length of the source is $\variabile{a}=2$, the maximum angle is $\myangle_1^{\textrm{max}} = \pi/2$ and \point{S} is located in air, i.e. $\n_1=1$. Therefore, the total \'{e}tendue is $U=8$. For the two-faceted cup all the rays emitted by \point{S} arrive to \point{T}, hence from \'{e}tendue conservation we obtain that $U_{\textrm{t}} =U_1 = 8$.
 %For some optical systems, not all the rays emitted by the source arrive to the target.  
 % Explain the idea: use etendue conservation
@@ -209,14 +211,14 @@ To clarify our idea we apply the method to two different kinds of TIR collimator
 % Explain the TIR collimator
 \section{Results for a TIR collimator}\label{results-Tir-alpha}
 We apply the $\alpha$-shapes method to the set of points in target PS obtained using PS ray tracing.
-In this chapter the procedure is applied to two different kinds of total internal reflection (TIR)-collimators. 
-Let us first describe the TIR-collimator depicted in Figure \ref{fig:tir}. It is an optical system symmetric with respect to the $z$-axis, it consists of a lens (central curve), two broken lines adjacent to the lens,
+In this chapter the procedure is applied to two different kinds of total internal reflection (TIR)-collimators.\\ \indent  
+Let us now describe the TIR-collimator depicted in Figure \ref{fig:tir}. It is an optical system symmetric with respect to the $z$-axis, it consists of a lens (central curve), two broken lines adjacent to the lens,
 two curved lines on each side and a top formed by a horizontal segment. The lens (line $2$) and the broken lines, formed by a collection of three segments (lines $3, 4, \mbox{ and } 5$ and $9, 10 \mbox{ and } 11$), are refractive line segments while the curved lines (labeled with $6$ and $8$) are designed in such a way that light is internally reflected (which explains the name TIR).
 The light source $\mathcal{S}$ (line $1$) and the target $\mathcal{T}$ (line $12$) are two straight line segments normal to the optical axis.
 The source $\point{S}= [-2,2]$ is located at a height $\variabile{z}_{1} = 0.3$ from the $\variabile{x}$-axis.
- The target $\point{T}= [-9.7, 9.7]$ is parallel to the source and is located at a height $ \variabile{z}= 8.2$ both \point{S} and \point{T} are located inside air ($\n_1=1$).
+ The target $\point{T}= [-9.7, 9.7]$ is parallel to the source and is located at a height $ \variabile{z}= 8.2$ both \point{S} and \point{T} are located in air ($\n_1=1$).
 The volume inside the collimator is filled with a material with index of refraction $\n_2=1.5$ (e.g. glass).
-The collimator is surrounded by two vertical lines (lines $13$ and $15$) and two horizontal lines ($12$ and $14$) that receive the light exiting from the optical system; among these the one at the top (line$12$) is assumed to be the target, and it is located at a small distance from the top (line $7$). 
+The collimator is surrounded by two vertical lines (lines $13$ and $15$) and two horizontal lines ($12$ and $14$) that receive the light exiting from the optical system; among these the one at the top (line $12$) is assumed to be the target, and it is located at a small distance from the top (line $7$). 
 \begin{figure}[h]
   \begin{center}
   \includegraphics[width=7.7cm]{TIR}
@@ -246,16 +248,15 @@ $\Pi_7 = (1,4,7,6,15)$ are discarded). To this purpose $U_1$ is calculated by re
  U_{1}\approx 8-2A_{T},
  \end{equation}
  where $A_{T}$ is the approximated area of each of the white regions in Figure $\ref{fig:tir}$ that is the area of the triangles shown in Fig. \ref{fig:sourcePS} with black lines.\\ \indent  $U_{\textrm{t}}$ is calculated several times from Equation (\ref{eq:etenduetarg}) where every time the boundaries $\partial$\set{R}{}{}$(\Pi)$ are obtained by using $\alpha$-shapes for a different value of $\alpha$. The better approximation of $\partial$\set{R}{}{}$(\Pi)$ gives the closer value of $U_{\textrm{t}}$ to the exact \'{e}tendue. 
-Matching $U_1$ with all the approximation of $U_{\textrm{t}}$ we find the best value $\alpha_c$ of $\alpha$ that approximates $\partial$\set{R}{}{}$(\Pi)$ and, therefore, $U_{\textrm{t}}$. \\ \indent In Figure \ref{fig:etendueTS} we represent the approximated value of the source \'{e}tendue $U_1\approx 7.68$ with the dotted red line obtained from Equation (\ref{eq:Usource}). Different approximations of the target \'{e}tendue $U_{\textrm{t}}$ are calculated using Equation (\ref{eq:etenduetarg1}) where every time the boundaries $\partial$\set{R}{}{}$(\Pi)$ are found using $\alpha$-shapes with a different value of $\alpha$. In Figure \ref{fig:etendueTS} we show how the \'{e}tendue change by increasing the value of $\alpha$. Doing $10$ different $\alpha$ test we compute the '{e}tendue behavior which is depicted with the blue line in Figure \ref{fig:etendueTS}. This graph    
-shows that using PS ray tracing with $1.9\cdot 10^4$ rays, the best approximation of the boundaries $\partial$\set{R}{}{}$(\Pi)$ is given considering $\alpha = \alpha_c = 0.041$ in the $\alpha$-shapes procedure.
+Matching $U_1$ with all the approximation of $U_{\textrm{t}}$ we find the best value $\alpha_c$ of $\alpha$ that approximates $\partial$\set{R}{}{}$(\Pi)$ and, therefore, $U_{\textrm{t}}$. \\ \indent In Figure \ref{fig:etendueTS} we represent the approximated value of the source \'{e}tendue $U_1\approx 7.68$ with the dotted red line obtained from Equation (\ref{eq:Usource}). Different approximations of the target \'{e}tendue $U_{\textrm{t}}$ are calculated using Equation (\ref{eq:etenduetarg1}) where every time the boundaries $\partial$\set{R}{}{}$(\Pi)$ are found using $\alpha$-shapes with a different value of $\alpha$. In Figure \ref{fig:etendueTS} we show how the \'{e}tendue change by increasing the value of $\alpha$. Doing $10$ different $\alpha$ test we compute the '{e}tendue behavior which is depicted with the blue line in Figure \ref{fig:etendueTS}. This graph shows that using PS ray tracing with $1.9\cdot 10^4$ rays, the best approximation of the boundaries $\partial$\set{R}{}{}$(\Pi)$ is given considering $\alpha = \alpha_c = 0.041$ in the $\alpha$-shapes procedure.
  \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=7.7cm]{etendue}
+  \includegraphics[width=7.7cm]{etendue_alpha}
   \end{center}
-  \caption{\footnotesize{The source and the target \'{e}tendue are depicted with the dotted red line and the blue line, respectively.
-  $U_\textrm{t}$ is computed for a range of values for $\alpha$. $U_1 \approx 7.68$
-   The green dot indicates the value of $\alpha_c = 0.041$ which gives the best approximation of the boundaries $\partial$\set{R}{}{}$(\Pi)$ at the target.
-   Around $1.9 \cdot 10^4$ rays have been traced in PS.
+  \caption{\footnotesize{The source and the target \'{e}tendue are depicted with the red line and the blue line, respectively.
+  $U_\textrm{t}$ is computed for a range of values for $\alpha$. $U_1 \approx 7.77$
+   The green dot indicates the value of $\alpha_c = 0.139$ which gives the best approximation of the boundaries $\partial$\set{R}{}{}$(\Pi)$ at the target.
+   Around $1.67 \cdot 10^4$ rays have been traced using PS ray tracing.
   }}
   \label{fig:etendueTS}
 \end{figure}
