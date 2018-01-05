@@ -1,15 +1,15 @@
 \chapter{The $\alpha$-shapes approach to compute the boundaries in target phase space}\label{chap:boundaries_alpha}
 In the previous chapter we presented a new ray tracing approach based on PS. We explained that, in order to compute the target photometric variable, it is useful to know the boundaries of the regions with positive luminance in target PS. Ray tracing in PS allows tracing only the rays close to these boundaries. 
 \\ \indent To detect the shape formed by those rays, the $\alpha$-shapes approach is employed, \cite{portegies2013fast}. 
-The $\alpha$-shapes methods are widely used to reconstruct an unknown surface from a set of data points, \cite{guo1997surface}. 
-It can be very hard to chose the suitable value of the parameter $\alpha$ and, in most cases it can be selected only by numerical simulations.\\ \indent
-We develop a technique based on $\alpha$-shape that gives a criterion to determine the value of the parameter $\alpha$ for which the better approximation of the boundaries is obtained, \cite{filosa2015new}.\\ \indent An overview of the state of art about $\alpha$-shapes methods is provided in Section \ref{sec:alpha-shapes}; the technique used for computing the $\alpha$ value is explained in Section \ref{sec:Tir_alpha}; the results for two different kind of total internal reflection (TIR) collimator are given in the last paragraph of this chapter.
+Methods based on $\alpha$-shapes are widely used to reconstruct an unknown surface from a set of data points, \cite{guo1997surface}. 
+The main disadvantage of such methods is that it can be very hard to chose the suitable value of the parameter $\alpha$ and, in most cases it can be selected only by numerical simulations.\\ \indent
+We develop a technique based on $\alpha$-shape that gives a criterion to determine the value of the parameter $\alpha$ for which the better approximation of the boundaries is obtained, \cite{filosa2015new}.\\ \indent This chapter is divided as follows. An overview of the state of art about $\alpha$-shapes methods is provided in Section \ref{sec:alpha-shapes}; the technique used for computing the $\alpha$ value is explained in Section \ref{sec:Tir_alpha}; the results for two different kind of total internal reflection (TIR) collimator are given in the last paragraph of this chapter.
 \section{The $\alpha$-shapes approach}\label{sec:alpha-shapes}
 Given a finite set $V$ of points, $\alpha$-shapes are geometrical objects that give us an approximation of the shape\footnote{It will become clear through this chapter what we intend with the word \textit{shape}.} formed by the points in $V$.\\ \indent
 Before giving a formal definition, we explain an intuitive and nice interpretation of $\alpha$-shapes, \cite{lucieer2004alpha}. 
 Let us think to a mass of a stracciatella ice-cream\footnote{Stracciatella ice cream is made with milk-based ice-cream and fine peaces of chocolate, \cite{Wiki3}.}. If we desire to know the shape formed by the chocolate pieces we can start eating the ice cream using a spoon with a spherical shape and trying to do not remove any piece of chocolate. 
 We will obtain a shape formed by arcs and points (see Figure \ref{fig:shape2d} for the two-dimensional case).
-\begin{figure}[htbp]\label{fig:shape2d}
+\begin{figure}[t]\label{fig:shape2d}
 \begin{center}
 \includegraphics[width=\textwidth]{alpha_shapes2D}
 \label{fig:shape}
@@ -25,32 +25,33 @@ Given a set $V$ of not all aligned points, let us consider the set $E$ of all th
 A triangulation $T$ of $V$ is the maximum subset of $E$ such that all the line segments of $T$ intersect only at their endpoints \cite{lloyd1977triangulations}. \\ \indent 
 The Delaunay triangulation $T^{\prime}$ of the points set $V$ has the property that the circle circumscribed by any triangle of $T$ does not contain any point of $V$. This is called the Delaunay property. A very common used algorithm to construct such triangulation is explained in the following. 
 $T^\prime$ is constructed by modifying a general triangulation $T$ such that every point satisfies the Delaunay property. 
-Therefore, every triangle (or tetrahedron in three dimensions) that does not satisfy such property is flipped such that the new edge is part of the triangulation, see Figure \ref{fig:Delaunay}. 
-Given, for example, an arbitrary triangulation $T$ in two-dimension, for each edge $\overline{ab}$ in $T$ which is not on the boundary of the convex hull the two triangles 
-$\Delta_{abc}$ and $\Delta_{abd}$ with the common edge $\overline{ab}$ are found. Then, if either the circumcircle of triangle $\Delta_{abc}$ contains point $d$ or the circumcircle of triangle $\Delta_{abd}$ contains point $c$ the edge $\overline{ab}$ cannot be included in the Delaunay triangulation and, therefore, it is flipped such that the other two possible triangles $\Delta_{acd}$ and $\Delta_{bcd}$ are found. The new edge $\overline{cd}$ locally satisfies the Delaunay property and the triangles $\Delta_{acd}$ and  $\Delta_{bcd}$ are added to the Delaunay triangulation $T^\prime$, see Figure \ref{fig:Delaunay}.  
+Therefore, every triangle (or tetrahedron in three dimensions) that does not satisfy such property is flipped such that the new edge is part of the triangulation (see Figure \ref{fig:Delaunay}). 
+Given, for example, an arbitrary triangulation $T$ in two-dimension, for each edge $\overline{\textrm{ab}}$ in $T$ which is not on the boundary of the convex hull the two triangles 
+$\Delta_{\textrm{abc}}$ and $\Delta_{\textrm{abd}}$ with the common edge $\overline{\textrm{ab}}$ are found. Then, if either the circumcircle of triangle $\Delta_{\textrm{abc}}$ contains point $d$ or the circumcircle of triangle $\Delta_{\textrm{abd}}$ contains point $c$ the edge $\overline{ab}$ cannot be included in the Delaunay triangulation and, therefore, it is flipped such that the other two possible triangles $\Delta_{\textrm{acd}}$ and $\Delta_{\textrm{bcd}}$ are found. The new edge $\overline{\textrm{cd}}$ locally satisfies the Delaunay property and the triangles $\Delta_{\textrm{acd}}$ and  $\Delta_{\textrm{bcd}}$ are added to the Delaunay triangulation $T^\prime$, see Figure \ref{fig:Delaunay}.  
 \begin{figure}[h]\label{fig:Delaunay}
 \begin{subfigure}[t]{0.48\textwidth}
 \centering
 \includegraphics[]{triangle_alpha_shapes}
 \label{fig:shape}
-\caption{The point $d$ is inside the circle circumscribed by the triangle $\Delta_{abc}$, therefore the edge $\overline{ab}$ cannot be included in the Delaunay triangulation.}
+\caption{The point $d$ is inside the circle circumscribed by the triangle $\Delta_{\textrm{abc}}$, therefore the edge $\overline{\textrm{ab}}$ cannot be included in the Delaunay triangulation.}
 \end{subfigure}
 \begin{subfigure}[t]{0.48\textwidth}
 \centering
 \includegraphics[]{triangle_alpha_shapes_flipped}
-\caption{The flipped triangle $\Delta_{acd}$ satisfies the Delaunay property, thus it is included in the Delaunay triangulation.}
+\caption{The flipped triangle $\Delta_{\textrm{acd}}$ satisfies the Delaunay property, thus it is included in the Delaunay triangulation.}
 \end{subfigure}
 \caption{Construction of the Delaunay triangulation in 2D.}
 \label{fig:Delaunay}
 \end{figure}
 \\ \indent Several others algorithm have been developed to construct a Delaunay triangulation, see for example \cite{lee1980two, renka1997algorithm}.
-It can be proved that the Delaunay triangulation $T^\prime$ derived from a triangulation $T$ of a given points set $V$ is unique. Moreover, it has the property to have the largest minimum angle among all possible triangulation of a point set $V$, \cite{press2007numerical} and, it can be seen as the dual of Voronoi diagram which is defined in the following\cite{fortune1992voronoi}.\\\indent 
+ Given points set $V$ and a triangulation $T$, it can be proved that the corresponding Delaunay triangulation $T^\prime$ is unique. Moreover, it has the property to have the largest minimum angle among all possible triangulation of a point set $V$ \cite{press2007numerical}, and it can be seen as the dual of Voronoi diagram which is defined in the following \cite{fortune1992voronoi}.\\\indent 
 Let us consider a finite set of point $V = \{v_1, \cdots, v_N\}\subset \mathbb{R}^2$. For \textit{almost}\footnote{It is needed to specify the word \textit{almost} because some points can have the same distance with two or more points of $V$.} every point $x\in \mathbb{R}^2$, there is a point which is the closest point to $x$. The Voronoi cell of a point $v_\variabile{i}\in V$ contains all points in $\mathbb{R}^2$ which are closer to $v_{\variabile{i}}$, see Figure \ref{fig:Voronoi}. 
 The Voronoi diagram of $V\subset \mathbb{R}^2$ is defined as the set of all Voronoi cells, \cite{cazals2005conformal}.  For the definition of Voronoi diagram in higher dimensions see \cite{brown1979voronoi}.
-\begin{figure}[h]\label{fig:Voronoi}
+\begin{figure}[h]
 \centering
 \includegraphics[width = 6cm]{Delaunay_Voronoi}
 \caption{Relationship between the Delaunay triangulation (in black) and the Voronoi Diagram (in red), \cite{Wiki4}}
+\label{fig:Voronoi}
 \end{figure}
 %A formal definition of the Voronoi diagram is given in the following.
 %\begin{defn}
@@ -69,9 +70,9 @@ The Voronoi diagram of $V\subset \mathbb{R}^2$ is defined as the set of all Voro
 %\end{center}
 %\end{figure}
 Delaunay triangulation triangulates the convex hull of $V$ and, therefore it does not constitutes a suitable method for reconstructing the surface formed by a point cloud. 
-\\ \indent An important method in surface reconstruction is the $\alpha$-shapes method, \cite{edelsbrunner2010alpha, guo1997surface}. Starting from the Delaunay triangulation $T^\prime$ of a point set $V$, the corresponding $\alpha$-shape of $V$ is formed by the only triangles of $T^\prime$ that satisfy the so-called "$\alpha$-test".
-For each triangle we calculate the radius of the circumcircle. If the radius is larger that $\alpha$ the triangle is removed from the shape. The rule of the parameter $\alpha$ is highly significant in this procedure. We need to choose $\alpha$ such that the better approximation of the shape formed by the points of $V$ is obtained. 
-The choice of the parameter $\alpha$ is closely related to the radius of the circumcircles. A possible strategy is to find the radius of the greater empty circumcircle. Thus $\alpha$ is related to the density $\delta$ of the point sets $V$. For example, $\alpha$ can be chosen inversely proportional to $\delta$:
+\\ \indent Therefore, $\alpha$-shapes methods were developed for surface reconstruction, \cite{edelsbrunner2010alpha, guo1997surface}. Starting from the Delaunay triangulation $T^\prime$ of a point set $V$, the corresponding $\alpha$-shape of $V$ is formed by the only triangles of $T^\prime$ that satisfy the so-called "$\alpha$-test" which is briefly explained in the following.
+For each triangle we calculate the radius of the circumcircle. If the radius is larger that $\alpha$ the triangle is removed from the shape. The rule of the parameter $\alpha$ is highly significant in $\alpha$-shapes procedures and, it has to be selected such that the better approximation of the shape formed by the points of $V$ is obtained. 
+Therefore, $\alpha$ is closely related to the radius of the circumcircles. A possible strategy is to find the radius of the greater empty circumcircle. Thus $\alpha$ is related to the density $\delta$ of the point sets $V$. It can be chosen, for instance, inversely proportional to $\delta$:
 \begin{equation}
 \alpha=C\frac{1}{\delta}\;,
 \end{equation}
@@ -81,13 +82,13 @@ with $C$ a constant and $\delta$:
 \end{equation}
 where $N$ is the number of points in $V$ and the surface area is the area inside the boundaries of the region formed by the points cloud. 
 For a fixed point set, $\delta$ is given and the value of $C$ needs to be determined by numerical simulations.\\ \indent 
-The $\alpha$-shape procedure can be outlined as follows.
+To summarize, $\alpha$-shape procedure can be outlined as follows:
 \begin{enumerate}
-\item Construct a Delaunay triangulation\footnote{In our simulations we use the Matlab function Delaunay.} $T^\prime$ of the point cloud $V$;
+\item Construct a Delaunay triangulation\footnote{In the simulations we present in this chapter the Matlab function \textit{Delaunay} is used.} $T^\prime$ of the point cloud $V$;
 \item For every triangles $T^\prime(i)\in T^\prime$ calculates the radius $r(i)$ of the circle circumscribed by its vertices;
 \item If $r(i)\leq\alpha$ keep the triangle $T^\prime(i)$ in the triangulation;
 \item If $r(i)>\alpha$ remove the triangle from the triangulation;
-\item For every triangle return the edges (facets in $3$D) referred to only one triangle (tetrahedron in $3$D), the so-called \textit{free boundary} edges\footnote{In our simulations we use the Matlab function freeBoundary.}.
+\item For every triangle return the edges (facets in $3$D) referred to only one triangle (tetrahedron in $3$D), the so-called \textit{free boundary} edges\footnote{In the simulations we present in this chapter the Matlab function \textit{freeBoundary} is used.}.
 \end{enumerate}
 %% Insert algorithm
 %\begin{algorithm}[h]
@@ -121,9 +122,9 @@ The $\alpha$-shape procedure can be outlined as follows.
 %Let us define a Voronoi diagram in a metric space.
 %The simplest case that we can have is the two-dimensional case that is the case where $X=\mathbb{R}^2$.
 %The tuple $\mathcal{S}=\{1,\cdots,n\}\subset \mathbb{R}^2$ is now a set of points. The Voronoi diagram of $\mathcal{S}$ is a subsection of $\mathbb{R}^2$ such that every other region around a point $p\in \mathcal{S}$ contains all points that are closer to $p$ than to every point in $\mathcal{S}$. A triangulation of the point set $\mathcal{S}$ is a set of edges $\mathcal{E}$ whose extremes are points of $\mathcal{S}$ such that the faces of each triangle are bounded by three edges and any edge that is not in $\mathcal{E}$ intersects one of the existing edges. The Delaunay triangulation is the dual graph of the Voronoi diagram: it consists of vertices (the points in $\mathcal{S}$) and it has an edge between two vertices if the two corresponding faces share an edge. \\
-\indent Although $\alpha$-shapes are a powerful tool for surfaces reconstruction, there exist surfaces that are not described well by classical $ \alpha $-shapes. Indeed for some surfaces there exist no value of $\alpha$ that includes all desired triangles and deletes all undesired triangles. If the parameter $\alpha$ is determined according to the density of the point cloud, it can be difficult to obtain a good approximation of a shape formed by a non-uniform points set. Furthermore, the $\alpha$-shape method does not work well when the shape we need to approximate has a sharp turn or a joint. 
+\indent Although $\alpha$-shapes are a powerful tool for surfaces reconstruction, there exist surfaces that are not described well by classical $ \alpha $-shapes. Indeed for some surfaces there is no value of $\alpha$ that includes all desired triangles and deletes all undesired triangles. If the parameter $\alpha$ is determined according to the density of the point cloud, it can be difficult to obtain a good approximation of a shape formed by a non-uniform points set. Furthermore, the $\alpha$-shape method does not work well when the shape we need to approximate has a sharp turn or a joint. 
 %In this case $\alpha$-shapes often give a "webbed-foot" appearance at such joints since they improperly connect the adjacent surfaces. 
-To overcome this issue, Teichmann and Capps presented alternatives approaches to establish the value of $\alpha$, \cite{teichmann1998surface}. Their anisotropic density-scaled $\alpha$-shapes method constitutes an improvement of  classical $\alpha$-shapes.
+To overcome these issues, Teichmann and Capps presented alternatives approaches to establish the value of $\alpha$, \cite{teichmann1998surface}. Their anisotropic density-scaled $\alpha$-shapes method constitutes an improvement of  classical $\alpha$-shapes.
 \\ \indent There are several ways to determine the value of $\alpha$ \cite{mandal1997selection}; in the next section we provide a technique that exploits the conservation of \'{e}tendue in PS. 
 %The first step of this method is to make a triangulation of the point cloud.
 %Then the key idea is to compute somehow the point-density of each point and use this to get an approximation of the point density of a triangle. In this way one can reduce the $\alpha$-value in areas where the triangle's point density (see equation \ref{delta_t} for the definition) is higher than average in such a way that is possible to obtain a finer level of detail for areas that have an higher density.
@@ -178,8 +179,8 @@ with
 \begin{equation}\label{eq:etendueintegraltarget}
 U\big(\mbox{\set{R}{}{}}(\Pi)\big) = {\int\!\!\int}_{\emph{R}(\Pi)} \textrm{d}\variabile{q}\,\textrm{d}\variabile{p}.
 \end{equation}
-In order to determine the value of $\alpha$ in the $\alpha$-shape procedure that better approximates the boundaries $\partial$\set{R}{}{}$(\Pi)$ we use \'{e}tendue conservation ($U_{\textrm{t}}= U_1$).\\ \indent
-The $\alpha$-shapes method is applied to every region \set{R}{}{}$(\Pi)$ for a range of values of $\alpha$;
+Note that, since both the source and the target are located in air ($\n_1=1$), in Equations (\ref{eq:etendueintegralsource}) and (\ref{eq:etendueintegraltarget}), and from now on, we omit writing the index of refraction $\n_1$.
+\\ \indent In order to determine the value of $\alpha$ in the $\alpha$-shape procedure that better approximates the boundaries $\partial$\set{R}{}{}$(\Pi)$ we use \'{e}tendue conservation ($U_{\textrm{t}}= U_1$). The $\alpha$-shapes method is applied to every region \set{R}{}{}$(\Pi)$ for a range of values of $\alpha$;
    for each value an approximation of the boundaries $\partial$\set{R}{}{}$(\Pi)$ is obtained and
    the intersection points $\variabile{q}^{\textrm{\,max}}(\Pi,\variabile{p})$ and $\variabile{q}^{\textrm{\,min}}(\Pi,\variabile{p})$ between $\partial$\set{R}{}{}$(\Pi)$
 and the horizontal lines $\variabile{p}=const$, with $\variabile{p}\in[-1,1]$, are computed for every path $\Pi$.
@@ -187,7 +188,7 @@ Therefore Equation (\ref{eq:etendueintegraltarget}) becomes:
 \begin{equation}\label{eq:etenduetarg}
  U_\textrm{t}\big(\mbox{\set{R}{}{}}(\Pi)\big)= \int_{-1}^{1}{\Big(\variabile{q}^{\textrm{\,max}}(\Pi,\variabile{p})-\variabile{q}^{\textrm{\,min}}(\Pi,\variabile{p})\Big)} \textrm{d}\variabile{q}\,\textrm{d}\variabile{p}.
 \end{equation} In case more than two intersection points between line $\variabile{p}=const$ and $\partial$\set{R}{}{}$(\Pi)$ occur, the previous equation needs to be generalized. Suppose that $\variabile{r}$ intersection points $\big(\variabile{q}^{\,\variabile{i}}(\Pi,\variabile{p}), \variabile{p}\big)_{\variabile{i} = 1, \cdots, \variabile{r}}$ are found. 
-Ordering their $\variabile{q}$ coordinates in ascending order, the target \'{e}tendue is calculated using:
+Ordering their $\variabile{q}$ coordinates in ascending order, the target \'{e}tendue is calculated by:
 \begin{equation}\label{eq:etenduetarg1}
  U_\textrm{t}\big(\mbox{\set{R}{}{}}(\Pi)\big) = \int_{-1}^{1}\sum_{\variabile{i} = 1}^{\variabile{m}}
 {(\variabile{q}^{\,2\variabile{i}}(\Pi,\variabile{p})}-{\variabile{q}^{\,2\variabile{i}-1} (\Pi, \variabile{p}) )} \textrm{d}\variabile{q}\,\textrm{d}\variabile{p}\,,
@@ -203,20 +204,20 @@ I_{\textrm{PS}}(\variabile{p}) = \sum_{\Pi, \variabile{i} }\int_{\variabile{q}^{
 \label{eq:Ips}
 \end{equation}
 where $\variabile{q}^{\,2\variabile{i}}( \Pi, \variabile{p})>\variabile{q}^{\,2\variabile{i}-1}( \Pi, \variabile{p})$, the summation over $\Pi$ is for all the paths $\Pi$ for which the intersection $\variabile{p} = const$ and \set{R}{}{}$(\Pi)$ is not empty, and the summation over $\variabile{i}$ is for all $\variabile{i} = 1,2, \cdots, \variabile{m}$. The second equation holds as we assume $L(\variabile{q}, \variabile{p})=1$.\\ \indent
-To clarify our idea we apply the method to two different optical system.
+To clarify our idea we apply the method to two different optical system, the results are presented next.
 %\\ \indent Let us consider the two-faceted cup introduced in Chapter \ref{chap:raytracing} and depicted in Figure \ref{fig:cup}. The half length of the source is $\variabile{a}=2$, the maximum angle is $\myangle_1^{\textrm{max}} = \pi/2$ and \point{S} is located in air, i.e. $\n_1=1$. Therefore, the total \'{e}tendue is $U=8$. For the two-faceted cup all the rays emitted by \point{S} arrive to \point{T}, hence from \'{e}tendue conservation we obtain that $U_{\textrm{t}} =U_1 = 8$.
 %For some optical systems, not all the rays emitted by the source arrive to the target.  
 % Explain the idea: use etendue conservation
 % Do the example for the two faceted cup
 % Explain the TIR collimator
 \section{Results for a TIR collimator}\label{results-Tir-alpha}
-We apply the $\alpha$-shapes method to the set of points in target PS obtained using PS ray tracing.
+We apply the $\alpha$-shapes method to the set of points in target PS obtained by using PS ray tracing.
 In this chapter the procedure is applied to two different kinds of total internal reflection (TIR)-collimators.\\ \indent  
-Let us now describe the TIR-collimator depicted in Figure \ref{fig:tir}. It is an optical system symmetric with respect to the $z$-axis, it consists of a lens (central curve), two broken lines adjacent to the lens,
-two curved lines on each side and a top formed by a horizontal segment. The lens (line $2$) and the broken lines, formed by a collection of three segments (lines $3, 4, \mbox{ and } 5$ and $9, 10 \mbox{ and } 11$), are refractive line segments while the curved lines (labeled with $6$ and $8$) are designed in such a way that light is internally reflected (which explains the name TIR).
+Let us first describe the TIR-collimator depicted in Figure \ref{fig:tir}. It is an optical system symmetric with respect to the $z$-axis, it consists of a lens (central curve), two broken lines adjacent to the lens,
+two curved lines on each side and a top formed by a horizontal segment. The lens (line $2$) and the broken lines, formed by a collection of three segments (lines $3, 4, \mbox{ and } 5$ and $9, 10 \mbox{ and } 11$), are refractive line segments while the curved lines (labeled with $6$ and $8$) are designed in such a way that light is totally internal reflected (which explains the name TIR).
 The light source $\mathcal{S}$ (line $1$) and the target $\mathcal{T}$ (line $12$) are two straight line segments normal to the optical axis.
 The source $\point{S}= [-2,2]$ is located at a height $\variabile{z}_{1} = 0.3$ from the $\variabile{x}$-axis.
- The target $\point{T}= [-9.7, 9.7]$ is parallel to the source and is located at a height $ \variabile{z}= 8.2$ both \point{S} and \point{T} are located in air ($\n_1=1$).
+ The target $\point{T}= [-9.7, 9.7]$ is parallel to the source and is located at a height $ \variabile{z}= 8.2$. Both \point{S} and \point{T} are located in air ($\n_1=1$).
 The volume inside the collimator is filled with a material with index of refraction $\n_2=1.5$ (e.g. glass).
 The collimator is surrounded by two vertical lines (lines $13$ and $15$) and two horizontal lines ($12$ and $14$) that receive the light exiting from the optical system; among these the one at the top (line $12$) is assumed to be the target, and it is located at a small distance from the top (line $7$). 
 \begin{figure}[h]
@@ -230,7 +231,8 @@ The sagitta of the lens is approximately $1.17$}
   \label{fig:tir}
 \end{figure}
 \\ \indent
-Using PS ray tracing explained in Section \ref{sec:PS_raytracing} with around $1.9 \cdot 10^4$ rays traced, seven different paths are found. In Figure \ref{fig:sourcePS} the distribution of the rays traced at the source PS \set{S}{}{} is shown, where we depicted with the same color the rays that follow the same path. Seven different paths are found. The yellow rays follow path $\Pi_1 = (1, 2, 7, 12)$;
+Using PS ray tracing explained in Section \ref{sec:PS_raytracing} with parameters $\varepsilon_{\variabile{q}_1}^{\textrm{max}} = 0.1$, $ \varepsilon_{\variabile{p}}^\textrm{max} = 5\cdot 10^{-2}, $ $\varepsilon_{\variabile{q}}^\textrm{min} = 9\cdot 10^{-3}$ and $\varepsilon_\variabile{p}^\textrm{min} = 4.5 \cdot 10^{-3}$, around $1.9 \cdot 10^4$ rays are traced. 
+We discard rays with direction parallel to the source, therefore $\variabile{p}_1 \in [-0.99, 0.99]$. The ray distribution at the source PS \set{S}{}{} is shown in Figure \ref{fig:sourcePS}, where we depicted with the same color the rays that follow the same path. Seven different paths are found. The yellow rays follow path $\Pi_1 = (1, 2, 7, 12)$;
    the red rays follow path $\Pi_2 ~= ~(1, 10, 8, 7, 12)$; the green rays follow path $\Pi_3 = (1, 4, 6, 7, 12)$;
    the blue rays follow path $\Pi_4= (1, 11, 7, 12)$ and the magenta rays follow path $\Pi_5= (1, 3, 7, 12)$. The rays located inside the white areas correspond to rays that do not reach the target, they follow either path $\Pi_6 = (1, 10, 7, 8, 13)$ or path $\Pi_7 = (1,4,7,6,15)$ and they do not give any contribution to the target intensity.
 \begin{figure}[h]
@@ -243,12 +245,13 @@ Using PS ray tracing explained in Section \ref{sec:PS_raytracing} with around $1
 \end{figure}
 Note that, given two adjacent paths the regions $\mbox{\set{R}{$1$}{}}(\Pi)$ in \set{S}{}{} have usually a common boundary. 
 Since for this system not all the rays emitted by the source arrive to the target, the target \'{e}tendue $U_{\textrm{t}}$ needs to be compared with the \'{e}tendue $U_1$ at the source given by only those rays that reach the target (the rays that follow paths $\Pi_6=(1,10,8,7,12)$ and 
-$\Pi_7 = (1,4,7,6,15)$ are discarded). To this purpose $U_1$ is calculated by removing from the total area $U$ of \set{S}{}{} those areas occupied by the regions formed by the rays that hit the left and the right detector (white regions in Figure $\ref{fig:tir}$).  For the TIR colllimator in Figure \ref{fig:tir} $U = 8$. Hence, $U_1$ can be approximated by:
+$\Pi_7 = (1,4,7,6,15)$ are discarded). To this purpose $U_1$ is calculated by removing from the total area $U$ of \set{S}{}{} those areas occupied by the regions formed by the rays that hit the left and the right detector (white regions in Figure $\ref{fig:tir}$).  For the TIR collimator in Figure \ref{fig:tir}, the total source  \'{e}tendue obtained from Equation (\ref{eq:etenduesource}) is
+ \begin{equation}U = 4\cdot 1\cdot 2\cdot 0.99 = 7.92.\end{equation} Indicating with $A_{T}$ the area of each white region  in Figure $\ref{fig:tir}$, $U_1$ can be approximated by:
  \begin{equation}\label{eq:Usource}
- U_{1}\approx 8-2A_{T},
+ U_{1} = 7.92-2A_{T}\approx 7.77,
  \end{equation}
- where $A_{T}$ is the approximated area of each of the white regions in Figure $\ref{fig:tir}$ that is the area of the triangles shown in Fig. \ref{fig:sourcePS} with black lines.\\ \indent  $U_{\textrm{t}}$ is calculated several times from Equation (\ref{eq:etenduetarg}) where every time the boundaries $\partial$\set{R}{}{}$(\Pi)$ are obtained by using $\alpha$-shapes for a different value of $\alpha$. The better approximation of $\partial$\set{R}{}{}$(\Pi)$ gives the closer value of $U_{\textrm{t}}$ to the exact \'{e}tendue. 
-Matching $U_1$ with all the approximation of $U_{\textrm{t}}$ we find the best value $\alpha_c$ of $\alpha$ that approximates $\partial$\set{R}{}{}$(\Pi)$ and, therefore, $U_{\textrm{t}}$. \\ \indent In Figure \ref{fig:etendueTS} we represent the approximated value of the source \'{e}tendue $U_1\approx 7.68$ with the dotted red line obtained from Equation (\ref{eq:Usource}). Different approximations of the target \'{e}tendue $U_{\textrm{t}}$ are calculated using Equation (\ref{eq:etenduetarg1}) where every time the boundaries $\partial$\set{R}{}{}$(\Pi)$ are found using $\alpha$-shapes with a different value of $\alpha$. In Figure \ref{fig:etendueTS} we show how the \'{e}tendue change by increasing the value of $\alpha$. Doing $10$ different $\alpha$ test we compute the '{e}tendue behavior which is depicted with the blue line in Figure \ref{fig:etendueTS}. This graph shows that using PS ray tracing with $1.9\cdot 10^4$ rays, the best approximation of the boundaries $\partial$\set{R}{}{}$(\Pi)$ is given considering $\alpha = \alpha_c = 0.041$ in the $\alpha$-shapes procedure.
+ where $A_{T}$ is the approximated the area of the triangles shown in Fig. \ref{fig:sourcePS} with black lines.\\ \indent  $U_{\textrm{t}}$ is calculated several times from Equation (\ref{eq:etenduetarg}) where every time the boundaries $\partial$\set{R}{}{}$(\Pi)$ are obtained by using $\alpha$-shapes for a different value of $\alpha$. A better approximation of $\partial$\set{R}{}{}$(\Pi)$ gives a value of $U_{\textrm{t}}$ closer to the exact \'{e}tendue. 
+Matching $U_1$ with all the approximation of $U_{\textrm{t}}$ we find the best value $\alpha_c$ of $\alpha$ that approximates $\partial$\set{R}{}{}$(\Pi)$ and, therefore, $U_{\textrm{t}}$. \\ \indent In Figure \ref{fig:etendueTS} we represent the approximated value of the source \'{e}tendue $U_1\approx 7.77$ with the dotted red line obtained from Equation (\ref{eq:Usource}). Different approximations of the target \'{e}tendue $U_{\textrm{t}}$ are calculated using Equation (\ref{eq:etenduetarg1}) where every time the boundaries $\partial$\set{R}{}{}$(\Pi)$ are found using $\alpha$-shapes for a different value of $\alpha$. In Figure \ref{fig:etendueTS}, we show how the \'{e}tendue change by increasing the value of $\alpha$. This graph shows that using PS ray tracing with $1.67\cdot 10^4$ rays, the best approximation of the boundaries $\partial$\set{R}{}{}$(\Pi)$ is given considering $\alpha = \alpha_c = 0.139$ in the $\alpha$-shapes procedure.
  \begin{figure}[h]
   \begin{center}
   \includegraphics[width=7.7cm]{etendue_alpha}
@@ -266,21 +269,21 @@ $\partial$\set{R}{}{}$(\Pi)$ in target PS \set{T}{}{} with $\alpha_c=0.041$ and 
   \begin{center}
   \includegraphics[width=7.7cm]{target_alpha_shapes.png}
   \end{center}
-  \caption{\footnotesize{Target PS representation of a set of $1.9 \cdot 10^4$ rays.
-  Rays that follow the same path are depicted with the same color. The choice of the colors for each path is the same as in Figure $\ref{fig:sourcePS}$. The boundaries $\partial$\set{R}{}{}$(\Pi)$ are computed through the $\alpha$-shapes method with $\alpha = \alpha_c = 0.041$.}}
+  \caption{\footnotesize{Target PS representation of a set of $1.67 \cdot 10^4$ rays.
+  Rays that follow the same path are depicted with the same color. The choice of the colors for each path is the same as in Figure $\ref{fig:sourcePS}$. The boundaries $\partial$\set{R}{}{}$(\Pi)$ are computed through the $\alpha$-shapes method with $\alpha = \alpha_c = 0.139$.}}
   \label{fig:targetPS}
 \end{figure}
 Once the boundaries are computed, the target intensity $I_{\textrm{PS}}(\variabile{p})$ for every $\variabile{p}\in[-1,1]$ is obtained from Equation (\ref{eta2}). \\ \indent
 To validate our method we compare the PS intensity with the MC intensity. 
 To this purpose a partitioning $P_2:-1=\variabile{p}_{0}<\variabile{p}_1<\cdots<\variabile{p}_{\nbin}=1$ of the interval $[-1,1]$ into $\nbin=100$ bins is considered. 
 The averaged and normalized PS intensity $\hat{I}_{\textrm{PS}}$ is calculated for every 
-$\big(\variabile{p}^{\variabile{h}+1/2} = \frac{1}{2}(\variabile{p}^{\variabile{h}+1}, \variabile{p}^{\variabile{h}})\big)_{\variabile{h}=0, \cdots, \nbin-1}$ dividing the PS averaged intensity by the total \'{e}tendue:
+$\big(\variabile{p}^{\variabile{h}+1/2} = \frac{1}{2}(\variabile{p}^{\variabile{h}+1}+ \variabile{p}^{\variabile{h}})\big)_{\variabile{h}=0, \cdots, \nbin-1}$ dividing the PS averaged intensity by the total \'{e}tendue:
 \begin{equation}\label{eq:normalized_PS_intensity}
 \hat{I}_{\textrm{PS}}(\variabile{p}^{\variabile{h}+1/2}) = \frac{1}{U_{\textrm{t}}}\int_{\variabile{p}_{\variabile{h}}}^{\variabile{p}_{\variabile{h}+1}} I_{\textrm{PS}}(\variabile{p})\textrm{d}\variabile{p}
 \end{equation}
 The averaged and normalized MC intensity $\big(\hat{I}_{\textrm{MC}}(\variabile{p}^{\variabile{h}+1/2})\big)_{\variabile{h} = 0, \cdots, \nbin-1}$ intensity is given by
 \begin{equation}\label{eq:normalized_MC_intensity}
-\hat{I}_{\textrm{MC}}(\variabile{p}^{\variabile{h}+1/2}) = \frac{\nrays[\variabile{p}^{\variabile{h}-1},\variabile{p}^{\variabile{h}})}{\nrays [-1,1)} 
+\hat{I}_{\textrm{MC}}(\variabile{p}^{\variabile{h}+1/2}) = \frac{\nrays[\variabile{p}^{\variabile{h}-1},\variabile{p}^{\variabile{h}})}{\nrays[-1,1)} 
 \qquad \mbox{ for } \variabile{p}\in[\variabile{p}^{\variabile{h}-1}, \variabile{p}^{\variabile{h}}).
 \end{equation} 
 Both the approximate intensities $\hat{I}_{\textrm{A}} (\textrm{A} = \textrm{PS}, \textrm{MC})$ are compared with an intensity $\hat{I}_{\textrm{ref}}$ taken as a reference. For some optical systems, there is an explicit solution for the target intensity but this is not the case of the TIR-collimator.
@@ -339,78 +342,98 @@ $9\,714$  & $6.69\cdot 10^{-4}$  \\ $97\,103$  & $2.08\cdot 10^{-4}$ \\ $971\,62
   \begin{center}
   \includegraphics[width=7.7cm]{error_alpha_shapes1}
   \end{center}
-  \caption{\footnotesize{ The red line depicts the error between the PS intensity and the reference intensity.
+  \caption{ The red line depicts the error between the PS intensity and the reference intensity.
  The blue line shows the error between the MC intensity and the reference intensity.
   The dashed line represents a straight line with the slope equal to $-\frac{1}{2}$.
-  The horizontal dotted line shows that an error equal to $2.00 \cdot  10^{-5}$ can be obtained tracing at least $10^2$ times fewer rays in phase space.}}
+  The horizontal dotted line shows that an error equal to $2.00 \cdot  10^{-5}$ can be obtained tracing at least $10^2$ times fewer rays in phase space.}
   \label{fig:error}
 \end{figure}
-Note from Figure \ref{fig:error} that the error for the MC method decreases as $\frac{1}{\sqrt{Nr}}$, while for the PS simulation the speed of convergence is much higher.\\ \indent
+Note from Figure \ref{fig:error} that the error for the MC method decreases as $\frac{1}{\sqrt{\nrays}}$, while for the PS simulation the speed of convergence is much higher.\\ \indent
 We need to emphasize that the PS ray tracing convergence may change according to the design of the optical system.
 This is because the approximation of the boundaries in PS depends on the accuracy of the $\alpha$-shapes method.
-The $\alpha$-shapes is unable to detect properly the boundaries of regions with a sharp turn if not enough points are given
+The $\alpha$-shapes is unable to properly detect the boundaries of regions with a sharp turn if not enough points are given
 \cite{teichmann1998surface}. Indeed, on the one hand a low density requires a big values of $\alpha$ to accept the triangles in a region, on the other hand,
  choosing $\alpha$ big, the shape of the region could be destroyed (some rays inside the regions could be taken into account).
- \begin{figure}[h]
+\begin{figure}[h]
 \centering
-  \includegraphics[width=7.7cm]{Tir1}
-    \caption{Target PS for the TIR-collimator depicted in
-    Figure \ref{fig:tir}. The red line depicts the best approximations of $\partial$\set{R}{}{}$(\Pi)$ for $3363$ rays with $\alpha_c = 0.119$.
-    The cyan region in the middle of the target PS is formed by rays that hit the lens, it is hard to approximate that region when there is a small number of rays inside it.}
-     \label{fig:Tir1}
-  \end{figure}
-Figure $\ref{fig:Tir1}$ clarifies this concept showing that the region formed by rays that hit the lens is hard to approximate when there is a small number of rays inside the region. Consequently either a region bigger than the area covered by the rays is considered or some triangles which are not part of the boundaries are considered in the triangulation. This results in an inaccurate calculation of the intensity (either too high or to low). To obtain a good approximation of the boundaries of these kind of patches more rays have to be traced. Therefore, the error in the approximate intensity is rather big for few rays (compared to MC error) and it decreases very fast increasing the number of rays (see Table
+\begin{subfigure}{.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{boundaries_alpha1}
+  \caption{Boundaries approximation obtained using the $\alpha$-shapes method with $\alpha_c = 0.3$ (black line).}
+\end{subfigure}
+\begin{subfigure}{.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{boundaries_alpha2}
+  \caption{Boundaries approximation obtained using the $\alpha$-shapes method with $\alpha_c = 0.31$ (black line).}
+\end{subfigure}
+\caption{Boundaries approximation of the regions with positive luminance at the target PS. Tracing $3339$ rays and using $\alpha$-shape the boundaries cannot be approximated well. 
+A small change of the parameter $\alpha$ leads to a completely different approximation of the boundaries.}
+\label{fig:Tir1}
+\end{figure}
+%\centering
+%  \includegraphics[width=7.7cm]{Tir1}
+%    \caption{Target PS for the TIR-collimator depicted in
+%    Figure \ref{fig:tir}. The red line depicts the best approximations of $\partial$\set{R}{}{}$(\Pi)$ for $3363$ rays with $\alpha_c = 0.119$.
+%    The cyan region in the middle of the target PS is formed by rays that hit the lens, it is hard to approximate that region when there is a small number of rays inside it.}
+%     \label{fig:Tir1}
+%  \end{figure}
+Figure $\ref{fig:Tir1}$ clarifies this concept showing that the region formed by rays that hit the lens is hard to approximate when there is a small number of rays inside the region. Consequently either a region bigger than the area covered by the rays is considered or some triangles which are not part of the boundaries are considered in the triangulation. This results in an inaccurate calculation of the intensity (either too high or to low). To obtain a good approximation of the boundaries of these kind of patches more rays have to be traced. Therefore, the error in the approximate intensity is relatively big for few rays (compared to MC error) and it decreases very fast increasing the number of rays (see Table
  \ref{tab:table} and Figure \ref{fig:error}).
- \\
- \indent To show how the error plot changes according to the regularity of the shape of the regions $\partial$\set{R}{}{}$(\Pi)$, we consider another example of TIR-collimator.
- Figure $\ref{fig:Tir1}$ shows that the hardest region to approximate is given by those rays that follow the path $\Pi_1 ~=~ (1,2,7,12)$.
- We now consider the TIR-collimator shown in Figure $\ref{fig:analyticlens}$. The difference with the previous optical system considered is that the lens is flatter and the target is located at a closer distance from the top.
-Figure $\ref{fig:Tir2}$ shows that a flatter lens removes one of the two spikes of the region formed by the rays that hit the lens.
+ \\\indent To show how the error plot changes according to the regularity of the shape of the regions $\partial$\set{R}{}{}$(\Pi)$, we consider another example of TIR-collimator.
+ Figure $\ref{fig:Tir1}$ shows that the hardest region to approximate is given by those rays that follow path $\Pi_1 ~=~ (1,2,7,12)$.
+ We therefore consider a TIR-collimator with a flatter lens and with the target located at a closer distance from the top (see Figure $\ref{fig:analyticlens}$). 
+The source $\mathcal{S}= [-2,2]$ (surface number $1$) is located in air at a height $\variabile{z}_1 = 0.3$ from the $x$-axis.
+       The target $\mathcal{T}= [-9.7, 9.7]$ (surface $12$) is parallel to the source and is located in air at a height $ \variabile{z}= 7.85$.
+       The shape of the collimator is shown as a blue line.
+       Three detectors depicted with green lines (surfaces $13$, $14$, and $15$) are located at the left, the right and the bottom of the optical system.
+ \\ \indent Tracing around $3363$ rays using PS ray tracing, we obtain the target rays distribution shown in Figure $\ref{fig:Tir2}$. 
+Note that a flatter lens removes one of the two spikes of the region formed by the rays that hit the lens.
 Moreover a target located very close to the top makes the shape of that region less stretched along the $\variabile{q}$-axis.
 Therefore, it is expected that $\alpha$-shapes method performs well, even for a small number of rays.
 \begin{figure}[h]
   \begin{center}
   \includegraphics[width=6.5cm]{tir_analytic2}
    \end{center}
-    \caption{\footnotesize{Shape of the TIR-collimator. Each surface of the system is labeled with a number.
-       The source $\mathcal{S}= [-2,2]$ (surface number $1$) is located at a height $\variabile{z}_1 = 0.3$ from the $x$-axis.
-       The target $\mathcal{T}= [-9.7, 9.7]$ (surface $12$) is parallel to the source and is located at a height $ \variabile{z}= 7.85$.
-       The shape of the collimator is shown as a blue line.
-       Three detectors depicted with green lines (surfaces $13$, $14$, and $15$) are located at the left, the right and the bottom of the optical system.
+    \caption{Shape of the TIR-collimator. Each surface of the system is labeled with a number.
+%       The source $\mathcal{S}= [-2,2]$ (surface number $1$) is located at a height $\variabile{z}_1 = 0.3$ from the $x$-axis.
+%       The target $\mathcal{T}= [-9.7, 9.7]$ (surface $12$) is parallel to the source and is located at a height $ \variabile{z}= 7.85$.
+%       The shape of the collimator is shown as a blue line.
+%       Three detectors depicted with green lines (surfaces $13$, $14$, and $15$) are located at the left, the right and the bottom of the optical system.
        $n_1 = 1$ is the refraction index of the medium (air) where the source and the target are located, and
-       $n_2 = 1.5 $ the refraction index of the medium (glass) inside the optical system. The sagitta of the lens is equal to $0.6$}}
+       $n_2 = 1.5 $ the refraction index of the medium (glass) inside the optical system. The sagitta of the lens is equal to $0.6$}
  \label{fig:analyticlens}
 \end{figure}
  \begin{figure}[h]
   \begin{center}
-       \includegraphics[width=7.7cm]{Tir2}
+       \includegraphics[width=7.7cm]{boundaries_alpha3}
    \end{center}
         \caption{Target phase space for the TIR-collimator depicted in
-        Figure \ref{fig:analyticlens}. The red line depicts the best approximation of $\partial$\set{R}{}{}$(\Pi)$ for $3363$ rays. The value of $\alpha$ is $0.06$.
-        The $\alpha$-shapes method gives an accurate approximation of the boundaries.}
+        Figure \ref{fig:analyticlens}. The black line depicts the best approximation of $\partial$\set{R}{}{}$(\Pi)$ for $3281$ rays. 
+The $\alpha$-shapes method gives an accurate approximation of the boundaries for $\alpha_c = 0.9$.}
   \label{fig:Tir2}
 \end{figure}
- PS and MC ray tracing are implemented for the TIR-collimator in Figure \ref{fig:Tir2}. The approximated intensities $\hat{I}_{\textrm{A}}$ $(\textrm{A} = \textrm{PS}, \textrm{MC})$ are compared with the reference intensity $\hat{I}_{\textrm{ref}}$ (MC ray tracing with $10^7$ rays). The error between $\hat{I}_{\textrm{A}}$ and $\hat{I}_{\textrm{ref}}$ as a function of the number of rays is obtained from Equation (\ref{eq:error}). The convergence of PS and MC ray tracing is shown in Figure \ref{fig:error2}. 
-PS error is depicted with the red line and, MC error is depicted with the blue line. Still big 
+\\ \indent PS and MC ray tracing are implemented for the TIR-collimator in Figure \ref{fig:Tir2}. The approximated intensities $\hat{I}_{\textrm{A}}$ $(\textrm{A} = \textrm{PS}, \textrm{MC})$ are compared with the reference intensity $\hat{I}_{\textrm{ref}}$ (MC ray tracing with $10^7$ rays). The error between $\hat{I}_{\textrm{A}}$ and $\hat{I}_{\textrm{ref}}$ as a function of the number of rays is obtained from Equation (\ref{eq:error}). The convergence of PS and MC ray tracing is shown in Figure \ref{fig:error2}. 
+PS error is depicted with the red line and, MC error is depicted with the blue line.\\ \indent
+For the TIR-collimator in Figure \ref{fig:analyticlens} we obtained a speed of convergence of the order of $O\big(\frac{1}{\nrays}\big)$ for PS ray tracing versus an order of convergence of $O\big(\frac{1}{\sqrt{\nrays}}\big)$ for MC ray tracing.
 \begin{figure}[h!]
  \begin{center}
    \includegraphics[width=7.7cm]{error_plot}
     \end{center}
-     \caption{\footnotesize{ The red line depicts the error using the $\alpha$-shapes method to compute the boundaries. The cyan line depicts the error using the triangulation refinement to compute the boundaries.
+     \caption{The red line depicts the error using the $\alpha$-shapes method to compute the boundaries. The cyan line depicts the error using the triangulation refinement to compute the boundaries.
      The blue line shows the error between the Monte Carlo intensity and the exact intensity.
      The dashed black line represents a straight line with slope $-\frac{1}{2}$.
-   The dashed blue line represents a straight line with slope $-1$.}}
+   The dashed blue line represents a straight line with slope $-1$.}
  \label{fig:error2}
 \end{figure}
 \section{Conclusion}
-The aim of this chapter was to detect the boundaries of the regions formed by the rays traced using the PS ray tracing explained in Chapter \ref{chap:PS}.\\
-\indent First, we reported some theory about $\alpha$-shapes methods which are common used in order to approximate the shape formed by a point cloud. 
-These methods depends on a parameter $\alpha$ that in most cases can be determined only by several simulations. 
-Using \'{e}tendue conservation, we developed an approach to detect the value of $\alpha$ that better approximates the boundaries in target PS. 
+The aim of this chapter was to detect the boundaries of the regions formed by the rays traced using $\alpha$-shapes.\\
+\indent First, we reported some theory about $\alpha$-shapes methods which are common used to approximate the shape formed by a point cloud. 
+These methods depend on a parameter $\alpha$ that in most cases can be determined only by several simulations. 
+\\ \indent Using \'{e}tendue conservation, we developed a new approach to detect the value of $\alpha$ that better approximates the boundaries in target PS. 
 We applied $\alpha$-shapes to two different kinds of TIR-collimators. The target PS intensity was computed for both the systems several times increasing every time the number of rays traced. Finally, the corresponding errors between the intensities found and a reference intensity was calculated. We observed that PS ray tracing leads to trace far less rays compared to MC ray tracing. Numerical results show that using PS ray tracing the desired accuracy can be achieved reducing the number of rays traced by a factor $2$ for both the optical systems analyzed.\\ \indent 
-However, the error convergence for PS ray tracing strongly depends on the design of the optical system (shapes of the region in target PS). Indeed, the intensity accuracy is related to the precision of the $\alpha$-shape, that is, to the choice of the parameter's value of $\alpha$. For more complicated shapes in PS, more rays need to be traced for a good boundaries reconstruction.\\ \indent
+However, we observed that the error convergence for PS ray tracing strongly depends on the design of the optical system (shapes of the region in target PS). Indeed, the intensity accuracy is related to the precision of the $\alpha$-shape, that is, to the choice of the parameter value of $\alpha$. For more complicated shapes in PS, more rays need to be traced for a good boundaries reconstruction.\\ \indent
 In order to remove the dependence of PS ray tracing from the parameter $\alpha$, we construct another procedure to detect the boundaries of the regions in target PS. 
-The new technique is based only on the triangulation refinement explained in Section \ref{sec:PS_raytracing}. The details are explained in the next chapter and numerical results for several optical systems are reported. 
+The new technique is based on the triangulation refinement explained in Section \ref{sec:PS_raytracing}. The details are explained in the next chapter and numerical results are reported for several optical systems. 
 
 
 
