@@ -1,19 +1,15 @@
 \chapter{Ray tracing on phase space} \label{chap:PS}
-Ray tracing on phase space is a method which employs the phase space (PS) of the source and the target of the optical systems.
-Moreover, it takes into account of the trajectory that every ray follows during its propagation.
+Ray tracing on phase space is a method which employs the phase space (PS) of the source and the target of the optical system.
+Moreover, it takes into account the trajectory that every ray follows during its propagation.
 Before explaining the method, we introduce the PS concept.
-\section{Phase space concept}\label{sec:PSconcept}
+\section{Phase space}\label{sec:PSconcept}
 The PS of a three-dimensional systems is a four-dimensional space, indeed every ray is described by two position coordinates
 and two direction coordinates.
 The two position coordinates are given by two of the coordinates of the intersection point of the ray with the surface, while the two direction coordinates are
 the momentum coordinates of the vector tangent to the ray projected on the optical surface, \cite{wolf2004geometric}.
-\\ \indent For two-dimensional systems every ray in PS is given by a point in a plane.
-Given an optical line $\lineai$, the ray position coordinate on PS is the \variabile{x}-coordinate of the intersection point between the ray and line $\lineai$.
-The direction coordinate is the sine of the angle that the ray forms with respect to the normal of line $\lineai$ multiplied by the index of refraction of the medium in which the ray is located.
-We indicate the PS with \set{S}{}{}$=$\set{Q}{}{}$\times$\set{P}{}{},
-where \set{Q}{}{} is the set of the position coordinates \variabile{q} and \set{P}{}{} is the set of the direction coordinates $\variabile{p}=\variabile{n}\sin{\myangle}$, with $\myangle$ the angle between the ray segment inside the system and the normal \vect{$\boldsymbol{\nu}$} of the line which we chhose inwards. Angle $\myangle$ is measured conterclokwise and $\myangle \in[-\pi/2, \pi/2]$. The index of refraction of the medium in which the line is located is indicated with \variabile{n}.
-The normal \vect{$\boldsymbol{\nu}$} is always directed inside the same medium in which the incident ray travels and,
-the angle $\myangle$ between the ray and \vect{$\boldsymbol{\nu}$} is measured counterclockwise.
+\\ \indent For two-dimensional systems every ray in PS is given by a point in a two-dimensional space.
+Given an optical line $\lineai$, the ray position coordinate on PS is the $\variabile{x}$-coordinate of the intersection point between the ray and the line $\lineai$. The direction coordinate is the sine of the angle that the ray forms with respect to the normal \vect{$\boldsymbol{\nu}$} of line $\lineai$ which  is always directed inside the same medium in which the incident ray travels, multiplied by the index of refraction \n. We indicate the PS with \set{S}{}{}$=$\set{Q}{}{}$\times$\set{P}{}{},
+where \set{Q}{}{} is the set of the position coordinates \variabile{q} and \set{P}{}{} is the set of the direction coordinates $\variabile{p}=\variabile{n}\sin{\myangle}$, with $\myangle\in[-\pi/2, \pi/2]$ the angle between the ray segment inside the system and the normal measured counterclockwise.
 In the following, the phase space is considered only for the source $\point{S}$ and the target $\point{T}$ and for no other line of the optical system.
 The coordinates of every ray on \set{S}{}{} and \set{T}{}{} are indicated with $(\variabile{q}_1,\variabile{p}_1)$ and $(\variabile{q},\variabile{p})$, respectively.\\ \indent
 \begin{figure}[h]
@@ -31,13 +27,12 @@ The coordinates of every ray on \set{S}{}{} and \set{T}{}{} are indicated with $
    \label{fig:targetPS}
  \end{minipage}
 \end{figure}
-As an example, in Figures \ref{fig:sourcePS} and \ref{fig:targetPS} we show the source and target PS of the two-faceted cup (in Figure \ref{fig:cup}), respectively.
-A sample of $10^4$ random rays randomly are traced within the system. The coordinates of every point in Figure \ref{fig:sourcePS} correspond to the position and direction coordinates of a ray at the source, while the coordinates of every point in Figure \ref{fig:targetPS} correspond to the position and direction coordinates of a ray at the target, which are calculated using the ray tracing procedure. Furthermore, we store the path that every ray follows, where we refer to a path as the sequence of the lines encountered by the ray.
+As an example, in Figures \ref{fig:sourcePS} and \ref{fig:targetPS} we show the source and target PS of the two-faceted cup (in Figure \ref{fig:cup}), respectively, sampled with $10^4$ randomly traced rays. The coordinates of every point in Figure \ref{fig:sourcePS} correspond to the position and direction coordinates of a ray at the source, while the coordinates of every point in Figure \ref{fig:targetPS} correspond to the position and direction coordinates of a ray at the target, which are calculated using the ray tracing procedure. Furthermore, we store the path that every ray follows, where we refer to a path as the sequence of the lines encountered by the ray.
 In Figures \ref{fig:sourcePS} and \ref{fig:targetPS} a color is associated to every path, hence all the rays that follow the same path are depicted with the same color.
 We note that the source and target phase spaces are partitioned into different regions according to the path $\Pi$ followed by the rays.
 Given a path $\Pi$, the corresponding regions are indicated with \set{R}{$1$}{}$(\Pi)$ and \set{R}{}{}$(\Pi)$ at the source and the target PS, respectively.
-Rays that propagate through the two-faceted cup can follow $5$ different paths. Some rays are emitted from the source and arrive to the target without hit any other line, they follow path $\Pi_1= (1,4)$. These rays are depicted in red in the PS pictures. Some other rays can hit the left or the right reflector (line $2$ and $3$, respectively) once, their corresponding paths are $\Pi_2 = (1,2,4)$ and $\Pi_3 = (1,3,4)$, respectively. These rays are the blue and green dots in PS, respectively. Finally, there is the possibility that the rays have two reflections before hit the target. They follow either path $\Pi_4 = (1,2,3,4)$ or path $\Pi_5 = (1,3,2,4)$ and they are depicted with the yellow and cyan points, respectively.
-\\ \indent For the two-faceted cup all light emitted by the source arrives at the target. In order to derive the photometric variables at the target we need to understand where the light ends up, i.e. which parts of the target PS are illuminated by the source. Indeed, while the source PS is completely covered by rays, some parts of the target PS are not reached by any ray, that is
+Rays that propagate through the two-faceted cup can follow $5$ different paths. Some rays are emitted from the source and arrive at the target without hitting any other line, they follow path $\Pi_1= (1,4)$. These rays are depicted in red in the PS pictures. Some other rays can hit the left or the right reflector (line $2$ and $3$, respectively) once, their corresponding paths are $\Pi_2 = (1,2,4)$ and $\Pi_3 = (1,3,4)$, respectively. These rays are the blue and green dots in PS. Finally, there is the possibility that the rays have two reflections before hitting the target. They follow either path $\Pi_4 = (1,2,3,4)$ or path $\Pi_5 = (1,3,2,4)$ and they are depicted with the yellow and cyan points.
+\\ \indent For the two-faceted cup all light emitted by the source arrives at the target. In order to derive the photometric variables at the target we need to understand where light ends up, i.e. which parts of the target PS are illuminated by the source. Indeed, while the source PS is completely covered by rays, some parts of the target PS are not reached by any ray at all, that is 
 \begin{equation}
 \begin{aligned}
 \mbox{\set{S}{}{}} &= \bigcup_{\Pi} \mbox{\set{R}{$1$}{}}(\Pi),\\
@@ -46,36 +41,35 @@ Rays that propagate through the two-faceted cup can follow $5$ different paths. 
 \end{equation}
 where the union is over all the possible paths.
 This means that, while the luminance at the source PS is positive for any possible position and direction, the luminance at the target PS is positive only inside the regions \set{R}{}{}$(\Pi)$, for every path $\Pi$, and it is equal to $0$ outside those regions. For this reason, from now on we will refer to \set{R}{}{}$(\Pi)$ as the regions with positive luminance. \\ \indent
-It is very important to remark that, although \set{S}{}{} and \set{T}{}{} have a different rays distribution, the area covered by the rays is conserved. This is due to the fact that energy is conserved along a ray. Indeed, from (\ref{etendue2d}) we rewrite the two-dimensional \'{e}tendue in PS as:
+It is very important to remark that, although \set{S}{}{} and \set{T}{}{} have a different ray distribution, the area covered by the rays is conserved. This follows from \'{e}tendue conservation. From (\ref{etendue2d}), using $\textrm{d}\variabile{p}= \n\cos(\myangle)\textrm{d}\myangle$, we rewrite the two-dimensional \'{e}tendue in source PS as:
 \begin{equation}
 U = \int_{\mbox{\set{Q}{}{}}}\int_{\mbox{\set{P}{}{}}} \textrm{d}\variabile{q}\,\textrm{d}\variabile{p}.
 \end{equation}
-Therefore, in two dimensions, \'{e}tendue can be seen as an area in PS.  \'{E}tendue conservation leads to the conservation of the areas of regions with positive luminance.\\ \indent
+Therefore, in two dimensions, \'{e}tendue can be seen as an area in PS. Etendue conservation leads to the conservation of the areas of regions with positive luminance.\\ \indent
+For the two-faceted cup in Figure \ref{fig:cup} we have that the \'{e}tendue at the source is $U=8$ (see Figure \ref{fig:sourcePS}). Computing the total area covered by the regions with positive luminance at the target using the t\'{e}tendue trapezoidal rule, we proved that it is equal to $U=8$. 
 From this follows a fundamental principle in non-imaging optics which is referred to as "the edge-ray principle". A literature overview of this principle is given in the next paragraph.
 \section{The edge-ray principle}
-The goal in non-imaging optics is to obtain the optimal transport of light from source to target. 
-Several methods to design ideal optical systems are based on the edge-ray principle. 
-Basically it states that all the light  rays exiting the edges of the source will end up to the edges of the target. 
-This guarantees that all light emitted from the source will arrive to the reflector, see Figure \ref{fig:edge}. 
-Therefore, the edge-ray principle constitutes a tool for designing ideal optical systems, \cite{welford1978problem, minano1992new}.
+The goal in non-imaging optics is to transfer all light from the source aperture to the output aperture. Systems that satisfy this property are referred to \textit{ideal optical systems}.
+Several methods to design ideal optical systems are based on the edge-ray principle, \cite{welford1978problem, minano1992new}. 
+Basically it states that all the light rays exiting the edges of the source will end up at the edges of the target. 
+This guarantees that all light emitted from the source will arrive at the receiver, see Figure \ref{fig:edge}. 
  \begin{figure}[h]
   \begin{center}
   \includegraphics[width= 4cm]{Nonimaging_Optics-RR_SMS_Thin_Edge}
   \end{center}
-  \caption{A lens that receives light from a source $\textrm{S}_1\textrm{S}_2$ and redirects it to the receiver $\textrm{R}_1\textrm{R}_2$. 
-Rays that leave the edges of the source hit the edges of the target (blue and right rays). Rays coming from the interior of the source will end up to the interior of the target (green rays), \cite{wiki2}.}
+  \caption{A lens that receives light from a source $\textrm{A}\textrm{B}$ and redirects it to the receiver $\textrm{D}\textrm{E}$. 
+Rays that leave the edges of the source hit the edges of the target (blue and red rays). Rays coming from the interior of the source will end up to the interior of the target (green rays), \cite{wiki2}.}
   \label{fig:edge}
 \end{figure}
 \\ \indent
-In $1985$ Mi{\~n}ano proved the principle by using the phase space of the source and the target of the optical systems, \cite{minano1986design}. 
+In $1985$ Mi{\~n}ano proved the principle by using the PS of the source and the target of an optical system, \cite{minano1986design}. He proved the principle for systems in inhomogeneous media, where the index of refraction is a continuous function, so that connecting f the regions in PS is a continuous function.
 Suppose that \set{R}{$1$}{} and \set{R}{}{} are the regions of the rays at the source and the target PS, respectively. 
-Indicating with $T(P)$ the trajectory of a point $P$, Mi{\~n}ano showed that if $T(\partial\mbox{\set{R}{$1$}{}})=T(\partial\mbox{\set{R}{}{}})$ then $T(\mbox{\set{R}{$1$}{}})=T(\mbox{\set{R}{}{}})$. He proved the principle for system in inhomogeneous media where the index of refraction is a continuous function, so that the mapping of the regions in phase space is a continuous function. However, for some optical systems, as for instance a Compound parabolic Concentrator (CPC), the ray mapping in phase space is not continuous. This is due to multiple reflections that rays can encounter with the reflectors. 
+Indicating with $\map{M}{}{}(P)$ the optical map of a point $P$, Mi{\~n}ano showed that if $\map{M}{}{}(\partial\mbox{\set{R}{$1$}{}})=\map{M}{}{}(\partial\mbox{\set{R}{}{}})$ then $\map{M}{}{}(\mbox{\set{R}{$1$}{}})=\map{M}{}{}(\mbox{\set{R}{}{}})$. However, for some optical systems, as for instance the compound parabolic concentrator (CPC), the ray mapping in phase space is not continuous. This is due to multiple reflections that rays can encounter with the reflectors. 
 This implies that some rays at the edge of the source could not be mapped into rays at the edges of the target. \\ \indent 
-In 1994 Ries and Rabl reformulated the edge-ray principle such that it is valid also for systems where the mapping in phase space is not continuous, \cite{Ries:2}. They showed that for a given path $\Pi$. the boundaries
+In 1994 Ries and Rabl reformulated the edge-ray principle such that it is valid for all systems even if the mapping in PS is not continuous, \cite{Ries:2}. They showed that for a given path $\Pi$, the boundaries
 $\partial$\set{R}{$1$}{}$(\Pi)$ at the source are mapped into the boundaries $\partial$\set{R}{}{}$(\Pi)$ at the target.
 Then, to map one region from \set{S}{}{} to \set{T}{}{} it is sufficient to map the boundary of this region. 
-Note that no ordered transformation of the rays from $\partial$\set{R}{$1$}{}$(\Pi)$ to $\partial$\set{R}{}{}$(\Pi)$ is required. 
-It is sufficient that the rays of  $\partial$\set{R}{$1$}{}$(\Pi)$ are transformed to the rays of $\partial$\set{R}{}{}$(\Pi)$, \cite{minano1992new}. 
+It is sufficient that the rays of  $\partial$\set{R}{$1$}{}$(\Pi)$ are transformed to the rays of $\partial$\set{R}{}{}$(\Pi)$, \cite{minano1992new, davies1994edge}. 
 \\ \indent Using the PS concept and the edge-ray principle we develop a new ray tracing method. 
 A non uniform distribution of the rays is provided by developing a triangulation refinement at the source PS which is explained in the next section. 
 The triangulation refinement provides more rays close to the boundaries of the regions \set{R}{$1$}{}$(\Pi)$ each of them is formed by the rays that follow the same path $\Pi$.
