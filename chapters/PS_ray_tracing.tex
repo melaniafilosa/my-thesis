@@ -150,9 +150,9 @@ The triangles very close to the boundaries have always vertices whose correspond
 Indeed, since they are crossed by at least one boundaries, a minimum of two different paths are found for the rays at the vertices of those triangles. 
 Because of this, the procedure could continue infinitely, therefore, two parameters $\varepsilon_\variabile{q}^\textrm{min}$ and $\varepsilon_\variabile{p}^\textrm{min}$ are introduced to defined a stopping criterion.
 The algorithm stops when the length of the sides of the triangles is smaller than $\varepsilon_\variabile{q}^\textrm{min}$ and $\varepsilon_\variabile{p}^\textrm{min}$ in $\variabile{q}$ and $\variabile{p}$ direction.
-We indicate all the possible paths with $(\Pi_{\variabile{j}})_{\variabile{j}=1, \cdots, \npath}$ where $\npath$ is the maximum number of paths\footnote{We use the apex to indicate the path $\Pi^\variabile{k}$ followed by rays corresponding to the coordinates $(\variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})$, 
-can happen $\Pi^\variabile{k}= \Pi^\variabile{h}$ for $\variabile{k}\neq\variabile{h}.$
-The subscript refers to the index of one of the possible paths $(\Pi_{\variabile{j}})_{\variabile{j}=1, \cdots, \npath}$, therefore $\Pi_{\variabile{i}}\neq\Pi_{\variabile{j}}$ if $\variabile{i}\neq\variabile{j}$.} (\npath = 5 for the two-faceted cup).
+We indicate all the possible paths with $(\Pi_{\variabile{j}})_{\variabile{j}=1, \cdots, \npath}$ where $\npath$ is the maximum number of paths%\footnote{We use the apex to indicate the path $\Pi^\variabile{k}$ followed by rays corresponding to the coordinates $(\variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})$, 
+%can happen $\Pi^\variabile{k}= \Pi^\variabile{h}$ for $\variabile{k}\neq\variabile{h}.$
+%The subscript refers to the index of one of the possible paths $(\Pi_{\variabile{j}})_{\variabile{j}=1, \cdots, \npath}$, therefore $\Pi_{\variabile{i}}\neq\Pi_{\variabile{j}}$ if $\variabile{i}\neq\variabile{j}$.} (\npath = 5 for the two-faceted cup).
 If the size of the triangles is too big, it can happen that a region formed by rays that follow a path $\Pi_\variabile{j}$ is located completely inside a triangle whose vertices are related to another path $\Pi_\variabile{i}$ with $\variabile{j} \neq  \variabile{i}$, see Figure \ref{fig:region inside}.
 To avoid this, two parameters $\varepsilon_\variabile{q}^{\textrm{max}}$ and $\varepsilon_\variabile{p}^{\textrm{max}}$ are defined for the $\variabile{q}_1$-axis and the $\variabile{p}_1$-axis, respectively.
 When the length of the sides of the triangle are greater than these parameters, a new triangle is defined even if its vertices correspond to the same path.
@@ -167,7 +167,7 @@ Initialize $\varepsilon_{\variabile{q}}^{\textrm{min}}, \varepsilon_{\variabile{
  $\varepsilon_{\variabile{p}}^{\textrm{max}}$, Ray = [empty];\\
 \Comment $\varepsilon_{\variabile{q}}^{\textrm{min}}, \varepsilon_{\variabile{q}}^{\textrm{max}}, \varepsilon_{\variabile{p}}^{\textrm{min}},$ and
  $\varepsilon_{\variabile{p}}^{\textrm{max}}$ are fixed parameters needed to stop the procedure\\
-\Comment Ray: structure that contains all the information about the rays traced.
+\Comment Ray: structure that contains all the information about the rays traced\footnote{A structure is a data type that contains related data in fields. Each field can contain every type of data.}.
 \begin{algorithmic}[1]
 %\Procedure{Triangulation refinement}{}
 \State $(\variabile{q}_1^1, \variabile{p}_1^1)\gets \mbox{left bottom corner of source PS: (-\variabile{a}, -1)}$
@@ -175,16 +175,16 @@ Initialize $\varepsilon_{\variabile{q}}^{\textrm{min}}, \varepsilon_{\variabile{
 \State $(\variabile{q}_1^3, \variabile{p}_1^3)  \gets \mbox{right upper corner of source PS: (\variabile{a}, 1)}$
 \State $(\variabile{q}_1^4, \variabile{p}_1^4) \gets \mbox{left upper corner of source PS: (-\variabile{a}, 1)} $
 \For{$ \variabile{k}= 1 \to 4 $}
-\State \Comment Trace the ray with initial coordinates $(\variabile{q}_1^\variabile{k}, \variabile{p}_1^{\variabile{k}})$ in \set{S}{}{};
-\State \Comment Calculate the corresponding path $\Pi^{\variabile{k}}$;
+\State Trace the ray with initial coordinates $(\variabile{q}_1^\variabile{k}, \variabile{p}_1^{\variabile{k}})$ in \set{S}{}{};
+\State Calculate the corresponding path $\Pi^{\variabile{k}}$; $\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad\quad$
+\Comment Store the information found in the structure Ray;
 \State $\mbox{Ray}.\variabile{q}\gets [\mbox{Ray}.\variabile{q}, \variabile{q}_1^\variabile{k}]$;
 \State $\mbox{Ray}.\variabile{p}\gets [\mbox{Ray}.\variabile{p}, \variabile{p}_1^\variabile{k}]$;
-\State Store the corresponding path $\Pi^{\variabile{k}}$.
 \State $\mbox{Ray}.\Pi\gets [\mbox{Ray}.\Pi, \Pi^{\variabile{k}}]$;
 \EndFor
-\State VL $\gets [1, 2, 4]$ \Comment{VL vertices of the left triangle}
+\State VL $\gets [1, 2, 4]$ \Comment{VL vertices of the left triangle\;\,\,\,}
 \State VR $\gets [2,3, 4]$   \Comment{VR vertices of the right triangle}
-\State \Call{Left Triangle}{VL, Ray, $\varepsilon_{\variabile{q}_1}^{\textrm{min}}, \varepsilon_{\variabile{q}_1}^{\textrm{max}}, \varepsilon_{\variabile{p}_1}^{\textrm{min}}, \varepsilon_{\variabile{p}_1}^{\textrm{max}}$}\Comment{Refine the left triangle} 
+\State \Call{Left Triangle}{VL, Ray, $\varepsilon_{\variabile{q}_1}^{\textrm{min}}, \varepsilon_{\variabile{q}_1}^{\textrm{max}}, \varepsilon_{\variabile{p}_1}^{\textrm{min}}, \varepsilon_{\variabile{p}_1}^{\textrm{max}}$}\Comment{Refine the left triangle\;\,\,} 
 \State \Call{Right Triangle}{VR, Ray, $\varepsilon_{\variabile{q}_1}^{\textrm{min}}, \varepsilon_{\variabile{q}_1}^{\textrm{max}}, \varepsilon_{\variabile{p}_1}^{\textrm{min}}, \varepsilon_{\variabile{p}_1}^{\textrm{max}}$} \Comment{Refine the right triangle} \\
 \Return Ray;
 %\EndProcedure
@@ -225,7 +225,6 @@ Initialize $\varepsilon_{\variabile{q}}^{\textrm{min}}, \varepsilon_{\variabile{
 \For {$\variabile{k} = 5 \to 7 $}
 \If {The ray with coordinates $(\variabile{q}_1^\variabile{k}, \variabile{p}_1^\variabile{k})$ is not traced yet}
 \State Trace the ray with initial coordinates: $(\variabile{q}_1^\variabile{k}, \variabile{p}_1^\variabile{k})$ in PS;
-\State Calculate the path $\Pi^{\variabile{k}}$;
 \State Compute the corresponding path $\Pi^{\variabile{k}}$;
 \State Store the ray's coordinates $\mbox{Ray}.\variabile{q}\gets [\mbox{Ray}.\variabile{q}, \variabile{q}_1^\variabile{k}]$;
 \State Store the ray path $\mbox{Ray}.\Pi\gets [\mbox{Ray}.\Pi, \Pi^{\variabile{k}}]$;
