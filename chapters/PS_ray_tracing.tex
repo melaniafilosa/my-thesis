@@ -146,13 +146,13 @@ the three corresponding rays are traced (unless they were already traced in the 
 \end{minipage}
   \end{figure} \\ \indent
 When all the rays corresponding to the corners of each triangle have the same path, it is not necessary to refine the triangles anymore.
-The triangles very close to the boundaries have always vertices whose corresponding rays follow different paths.
-Indeed, since they are crossed by at least one boundaries, a minimum of two different paths are found for the rays at the vertices of those triangles. 
+The triangles very close to the boundaries have always two vertices whose corresponding rays follow the same path and one vertex whose corresponding ray follows another path.
+Since they are crossed by a boundaries, two different paths are found for the rays at the vertices of those triangles. 
 Because of this, the procedure could continue infinitely, therefore, two parameters $\varepsilon_\variabile{q}^\textrm{min}$ and $\varepsilon_\variabile{p}^\textrm{min}$ are introduced to defined a stopping criterion.
 The algorithm stops when the length of the sides of the triangles is smaller than $\varepsilon_\variabile{q}^\textrm{min}$ and $\varepsilon_\variabile{p}^\textrm{min}$ in $\variabile{q}$ and $\variabile{p}$ direction.
-We indicate all the possible paths with $(\Pi_{\variabile{j}})_{\variabile{j}=1, \cdots, \npath}$ where $\npath$ is the maximum number of paths%\footnote{We use the apex to indicate the path $\Pi^\variabile{k}$ followed by rays corresponding to the coordinates $(\variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})$, 
-%can happen $\Pi^\variabile{k}= \Pi^\variabile{h}$ for $\variabile{k}\neq\variabile{h}.$
-%The subscript refers to the index of one of the possible paths $(\Pi_{\variabile{j}})_{\variabile{j}=1, \cdots, \npath}$, therefore $\Pi_{\variabile{i}}\neq\Pi_{\variabile{j}}$ if $\variabile{i}\neq\variabile{j}$.} (\npath = 5 for the two-faceted cup).
+We indicate all the possible paths with $(\Pi_{\variabile{j}})_{\variabile{j}=1, \cdots, \npath}$ where $\npath$ is the maximum number of paths\footnote{We indicate with $\Pi^\variabile{k} = \Pi(variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})$ the path followed by rays with coordinates $(\variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})$ in Source PS, 
+can happen $\Pi^\variabile{k}= \Pi^\variabile{h}$ for $\variabile{k}\neq\variabile{h}.$
+With $(\Pi_{\variabile{j}})_{\variabile{j}=1, \cdots, \npath}$ we indicate all the possible $\npath$ paths that can occur, therefore $\Pi_{\variabile{i}}\neq\Pi_{\variabile{j}}$ if $\variabile{i}\neq\variabile{j}$.} (\npath = 5 for the two-faceted cup).
 If the size of the triangles is too big, it can happen that a region formed by rays that follow a path $\Pi_\variabile{j}$ is located completely inside a triangle whose vertices are related to another path $\Pi_\variabile{i}$ with $\variabile{j} \neq  \variabile{i}$, see Figure \ref{fig:region inside}.
 To avoid this, two parameters $\varepsilon_\variabile{q}^{\textrm{max}}$ and $\varepsilon_\variabile{p}^{\textrm{max}}$ are defined for the $\variabile{q}_1$-axis and the $\variabile{p}_1$-axis, respectively.
 When the length of the sides of the triangle are greater than these parameters, a new triangle is defined even if its vertices correspond to the same path.
@@ -178,9 +178,9 @@ Initialize $\varepsilon_{\variabile{q}}^{\textrm{min}}, \varepsilon_{\variabile{
 \State Trace the ray with initial coordinates $(\variabile{q}_1^\variabile{k}, \variabile{p}_1^{\variabile{k}})$ in \set{S}{}{};
 \State Calculate the corresponding path $\Pi^{\variabile{k}}$; $\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad\quad$
 \Comment Store the information found in the structure Ray;
-\State $\mbox{Ray}.\variabile{q}\gets [\mbox{Ray}.\variabile{q}, \variabile{q}_1^\variabile{k}]$;
-\State $\mbox{Ray}.\variabile{p}\gets [\mbox{Ray}.\variabile{p}, \variabile{p}_1^\variabile{k}]$;
-\State $\mbox{Ray}.\Pi\gets [\mbox{Ray}.\Pi, \Pi^{\variabile{k}}]$;
+\State $\textrm{Ray}.\variabile{q}\gets [\mbox{Ray}.\variabile{q}, \variabile{q}_1^\variabile{k}]$;
+\State $\textrm{Ray}.\variabile{p}\gets [\mbox{Ray}.\variabile{p}, \variabile{p}_1^\variabile{k}]$;
+\State $\textrm{Ray}.\Pi\gets [\mbox{Ray}.\Pi, \Pi^{\variabile{k}}]$;
 \EndFor
 \State VL $\gets [1, 2, 4]$ \Comment{VL vertices of the left triangle\;\,\,\,}
 \State VR $\gets [2,3, 4]$   \Comment{VR vertices of the right triangle}
@@ -264,7 +264,7 @@ with $\varepsilon_\variabile{q}^{\textrm{min}}=0.1$ and $\varepsilon_\variabile{
   \end{center}
   \caption{Triangulation refinement of source phase space:
   near the boundaries more rays are traced.
-    The values of the parameters are $\varepsilon_{\variabile{q}_{min}}~=~ 0.1$ and $\varepsilon_{\variabile{q}_{max}}~=~1$.}
+    The values of the parameters are $\varepsilon_{\variabile{q}_1^\textrm{min}}~=~ 0.1$ and $\varepsilon_{\variabile{q}_1^\textrm{max}}~=~1$.}
    \label{fig:triangulation_refinement}
   \end{figure}
 Using the triangulation refinement, all the possible paths $(\Pi_\variabile{j})_{\variabile{j} = 1, \cdots, \npath}$ are found and their corresponding regions \set{R}{$1$}{}$(\Pi_\variabile{j})_{\variabile{j} = 1, \cdots, \npath}$ are determined. Using the edge-ray principle, we conclude that also the regions \set{R}{}{}$(\Pi_\variabile{j})_{\variabile{j} = 1, \cdots, \npath}$ at the target are determined and only the rays close to the boundaries
@@ -273,21 +273,21 @@ $\partial$\set{R}{$1$}{} need to be considered to obtain the target ray distribu
 In this chapter we introduced the phase space concept. 
 We explained a new ray tracing method based on the source and the target PS representation. 
 In PS every point corresponds to a unique ray. 
-The coordinates of every point correspond to the initial ray position $\variabile{q}_1$ coordinate and the initial ray direction $\variabile{p}_1 = \sin(\myangle_1)$ 
-coordinate (expressed with respect to the normal of the source). The method also takes into account of the paths followed by every ray traced.
-Considering only reflection law, every single ray follows only one path and, therefore, the PS regions do not overlap to each others. 
+The coordinates of every point correspond to the initial ray position $\variabile{q}_1$ and the initial ray direction $\variabile{p}_1 = \sin(\myangle_1)$ (expressed with respect to the normal of the source). The method also takes into account the paths followed by every ray traced.
+Considering only reflection, every single ray follows only one path and, therefore, the PS regions do not overlap. 
 \\ \indent
-As an example, we provide the source and the target PS representation of a very simple optical system which is the two-faceted cup.
+As an example, we provided the source and the target PS representation of the two-faceted cup.
 The edge-ray principle guarantees that all the rays that follow the same path are located in the same regions in PS. If we know these regions at the source we can determine the corresponding regions at the target. 
 It is sufficient to map the boundaries at the source $\partial$\set{R}{$1$}{}$(\Pi)$ to obtain their corresponding target boundaries $\partial$\set{R}{}{}$(\Pi)$. \\ \indent
-The boundaries $\partial$\set{R}{}{}$(\Pi)$ are particularly relevant because there the discontinuity of the luminance occurs. 
-Assuming a lambertian source, only the rays on the boundaries are needed to compute the target intensity. 
-Based on this idea, a triangulation in \set{S}{}{} is construct such that the rays closest to $\partial$\set{R}{$1$}{}$(\Pi)$
+The boundaries $\partial$\set{R}{}{}$(\Pi)$ are particularly relevant because there the luminance jumps from $0$ to a positive value. 
+Assuming a Lambertian source, only the rays at the boundaries are needed to compute the target intensity. 
+Based on this idea, a triangulation in \set{S}{}{} is constructed such that the rays closest to $\partial$\set{R}{$1$}{}$(\Pi)$
 are selected and more rays in their vicinity are created to get progressively better estimates of the boundaries.
-\\ \indent In Figures \ref{fig:three_distributions} we show three different rays distributions on the source PS of the two-faceted cup. In Figure \ref{fig:mc_sample}, $10^3$ random points are shown. MC ray tracing is based on this random distribution of the initial rays set. In Figure \ref{fig:qmc_sample}, $10^3$ points of a two-dimensional Sobol' sequence are shown. 
-Since Sobol's sequences are defined in a unit square, we scaled it such that all the source PS \set{S}{}{}$=[-2, 2]\times[-1, 1]$ is covered by rays. QMC ray tracing considers as initial set, rays distributed as the points of a Sobol sequence. Such regular distribution can lead to several advantages for the computation of the target intensity, see Section \ref{sec:QMC} of this thesis. Finally, Figure \ref{fig:ps_sample} shows a non-uniform distribution of rays at the source PS. Such distribution is obtained from the triangulation refinement explained in the previous section. The procedure allows tracing more rays close to the boundaries $\partial$\set{R}{$1$}{}$(\Pi)$ of the regions in source PS, each of them is formed by all the rays that follow the same path. From the edge ray-principle, we obtain that these rays will be located close to the boundaries $\partial$\set{R}{}{}$(\Pi)$ of the regions at the target PS.
-PS ray tracing is based on this kind of initial rays distribution at the source.
-\\ \indent The target PS intensity is calculated using only the rays that are located on the boundaries $\partial$\set{R}{}{}$(\Pi)$. Thus, in order to obtain the intensity profile at the target, the boundaries $\partial$\set{R}{}{}$(\Pi)$ need to be determined.\\ \indent 
+\\ \indent In Figures \ref{fig:three_distributions} we show three different ray distributions on the source PS of the two-faceted cup. In Figure \ref{fig:mc_sample}, $10^3$ random points are shown. MC ray tracing is based on this random distribution of the initial rays set. In Figure \ref{fig:qmc_sample}, $10^3$ points of a two-dimensional Sobol sequence are shown. 
+Since Sobol sequences are defined in a unit square, we scaled it such that all the source PS \set{S}{}{}$=[-2, 2]\times[-1, 1]$ is covered by rays. QMC ray tracing considers as initial set, rays distributed as the points of a Sobol sequence. Such regular distribution can lead to several advantages for the computation of the target intensity, see Section \ref{sec:QMC}. Finally, Figure \ref{fig:ps_sample} shows a non-uniform distribution of rays at the source PS. Such distribution is obtained from the triangulation refinement explained in the previous section. The procedure requires tracing more rays close to the boundaries $\partial$\set{R}{$1$}{}$(\Pi)$ and only few rays in their interior.of the regions in source PS. 
+From the edge ray-principle, we obtain that these rays will be located close to the boundaries $\partial$\set{R}{}{}$(\Pi)$ of the regions at the target PS.
+PS ray tracing is based on this kind of initial ray distribution at the source.
+\\ \indent The target PS intensity is calculated using only the rays that are located at the boundaries $\partial$\set{R}{}{}$(\Pi)$. Thus, in order to obtain the intensity profile at the target, the boundaries $\partial$\set{R}{}{}$(\Pi)$ need to be determined.\\ \indent 
 In the next chapter we provide two different approaches to find the boundaries $\partial$\set{R}{}{}$(\Pi)$ using a set of rays given by the triangulation refinement.
 \begin{figure}[h]
  \begin{subfigure}[t]{\textwidth}
@@ -301,17 +301,17 @@ In the next chapter we provide two different approaches to find the boundaries $
 \begin{subfigure}[t]{\textwidth}
 \centering
     \includegraphics[width = 0.57\textwidth]{QMC_source_cup}
-    \caption{$10^3$ rays at the source PS distributed as the point of a Sobol' sequence (QMC ray tracing).}
+    \caption{$10^3$ rays at the source PS distributed as the point of a Sobol sequence (QMC ray tracing).}
     \label{fig:qmc_sample}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{\textwidth}
 \centering
 \includegraphics[width=0.57\textwidth]{PS_source_cup}
-\caption{$1,5\cdot10^3$ rays distributed using the triangulation refinement (PS ray tracing).}
+\caption{$1.5\cdot10^3$ rays distributed using the triangulation refinement (PS ray tracing).}
 \label{fig:ps_sample}
 \end{subfigure}
-\caption{Three different rays distribution at the source of the two-faceted cup.}
+\caption{Three different ray distributions at the source of the two-faceted cup.}
 \label{fig:three_distributions}
 \end{figure}
 
