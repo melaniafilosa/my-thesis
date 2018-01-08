@@ -1,6 +1,56 @@
-\chapter{The triangulation refinement approach}\label{chap:traingulation}
-
+\chapter{The triangulation refinement approach}\label{chap:triangulation}
+The purpose of this chapter is to provide an alternative approach to the $\alpha$-shapes methods for determining the boundaries $\partial \mbox{\set{R}{}{}}(\Pi)$ in target PS. 
+Our method is based on the triangulation refinement of the source PS explained in Section \ref{chap:PS}.
+We have seen that, using the triangulation refinement, more rays close to the boundaries are traced selecting increasingly smaller values for the parameters $\varepsilon_{\variabile{q}_1}^{\textrm{min}}$ and $\varepsilon_{\variabile{p}_1}^{\textrm{min}}$. Once the algorithm stops, only the triangles that are expected to be crossed by a boundary are taken into account. By construction, each of these triangles has two vertices that follow the same path and one vertex that follows another path.
+The triangles are ordered in such a way that two of them are neighbors if they have a side in common. Given a path $\Pi$ the corresponding boundary $\partial\mbox{\set{R}{$1$}{}}(\Pi)$ is approximated by those vertices of the triangles which corresponding rays follow path $\Pi$.
+The boundaries $\partial \mbox{\set{R}{}{}}(\Pi)$ at the target are given by
+\begin{equation}\map{M}{}{}(\partial\mbox{\set{R}{}{}}(\Pi)):\partial\mbox{\set{R}{$1$}{}}(\Pi)\rightarrow\partial\mbox{{R}{}{}}(\Pi),\end{equation}
+where $\map{M}{}{}(\partial\mbox{\set{R}{}{}}(\Pi))$ is the restriction of $\map{M}{}{}$, defined in Equation (\ref{eq:map1}), to $\partial\mbox{\set{R}{}{}}(\Pi)$ for every path 
+$\Pi$. \\\indent In this chapter we develop a criterion to establish the value of the parameters $\varepsilon_{\variabile{q}_1}^{\textrm{min}}$, $\varepsilon_{\variabile{q}_1}^{\textrm{max}}$, $\varepsilon_{\variabile{p}_1}^{\textrm{min}}$ and $\varepsilon_{\variabile{p}_1}^{\textrm{max}}$ that gives a good approximation of $\partial \mbox{\set{R}{}{}}(\Pi)$.
+ Similar to what it was done for selecting $\alpha$ in the $\alpha$-shapes procedure, 
+the triangulation parameters are selected using the \'{e}tendue conservation in PS. The core of our approach is the following.\\
+\indent The \'{e}tendue $U_1$ at the source PS \set{S}{}{} related to all the rays that arrive at the target is calculated. If all the rays emitted by the source are received by the target, $U_1$ can be easily determined by using Equation (\ref{eq:etenduesource}), otherwise Equation (\ref{eq:etenduesumsource}) needs to be computed. 
+\\ \indent The \'{e}tendue $U_{\textrm{t}}$ at the target PS \set{T}{}{} is computed using Equations (\ref{eq:etendueintegraltarget}) and (\ref{eq:etenduetarg1}).
+To calculate the integral in Equation (\ref{eq:etenduetarg1}), the triangulation refinement method is applied to the regions $\mbox{\set{R}{}{}}(\Pi)$ for a range of values of $\varepsilon_{\variabile{q}_1}^{\textrm{max}}$ and for a fixed value of $\varepsilon_{\variabile{q}_1}^{\textrm{min}}$. The parameters along the $\variabile{q}$-axis are scaled as $\varepsilon_{\variabile{p}_1}^{\textrm{max}} = \varepsilon_{\variabile{q}_1}^{\textrm{max}}/w$ and 
+$\varepsilon_{\variabile{p}_1}^{\textrm{min}}  = \varepsilon_{\variabile{q}_1}^{\textrm{min}}/w$ with 
+$w = (\variabile{p}_1^{\textrm{max}}-\variabile{p}_1^{\textrm{min}})/(\variabile{q}_1^{\textrm{max}}-\variabile{q}_1^{\textrm{min}})$ where 
+$\variabile{p}_1^{\textrm{min}}$ and $\variabile{p}_1^{\textrm{max}}$ are the minimum and the maximum $\variabile{p}$-coordinate in \set{S}{}{}, respectively, and 
+$\variabile{q}_1^{\textrm{min}}$ and $\variabile{q}_1^{\textrm{max}}$ are the minimum and the maximum $\variabile{q}$-coordinate in \set{S}{}{}, respectively.
+An approximation of the boundaries $\partial\mbox{\set{R}{}{}}(\Pi)$ is obtained for each of those parameters values.
+Then, the intersection points $(\variabile{q}^{\variabile{i}}( \Pi, \variabile{p}), \Pi)_{\variabile{i} = 1, \cdots, \variabile{r}}$ between $\partial\mbox{\set{R}{}{}}(\Pi)$
+and the horizontal line $\variabile{p}~=~ const$ are calculated for each path $\Pi$, and for $\variabile{p}~\in~[-1,1]$. Ordering their $\variabile{q}$-coordinates in ascending order, the integral in Equation (\ref{eq:etenduetarg1}) is computed.
+Changing the values of the parameters, different approximations of $\partial\mbox{\set{R}{}{}}(\Pi)$ are found and, consequently, different values of $U_{\textrm{t}}$
+\\ \indent In order to use the parameters that give a good accuracy of the target photometric variables, the difference $\Delta U = U_1-U_{\textrm{t}}$ is calculated for every value of $U_{\textrm{t}}$ found. The values of the parameters that give the smaller distance $\Delta$ define the more accurate triangulation at source PS \set{S}{}{}. Hence, these values are chosen for the computation of the target photometric variables. \\\indent
+The method explained above is tested for several optical systems. The results are presented next.
 \section{The two-faceted cup}
+In this paragraph we apply the triangulation refinement in PS to the two-faceted cup described in Chapter \ref{chap:raytracing} and depicted in Figure \ref{fig:cup}. 
+We start tracing rays inside the system using PS ray tracing as explained in Chapter \ref{chap:PS}. We consider rays with initial direction $\variabile{p}_1\in[-1,1]$ and initial position $\variabile{q}\in[-\variabile{a}, \variabile{a}]$. In order to define a stopping criterion for the triangulation, we apply \'{e}tendue conservation. Since the two-faceted cup is formed by only reflective lines and its target is adjacent to the left and the right reflector (it is located exactly at the top of the system),  all the rays emitted by the source arrive to the target. Thus, 
+\begin{equation}U_1 = U=8, \end{equation}
+where the second equality follows from Equation (\ref{eq:etenduesource}) with $\n_1\sin(\myangle_1^{\textrm{max}})=\variabile{p}_1^\textrm{max}=1$ and $\variabile{a}=2$.\\
+To define a stopping criterion for the triangulation at the source PS and determine how many rays we need to trace to obtain a good accuracy of the target intensity, we compute compute the target '{e}tendue $U_{\textrm{t}}$ and we compare the approximated value with the exact value at the source $U_1$. 
+To this purpose, ray tracing in PS is implemented for a range of values of $\varepsilon_{\variabile{q}_1}^{\textrm{min}}$ and 
+$\varepsilon_{\variabile{p}_1}^{\textrm{min}}= \varepsilon_{\variabile{q}_1}^{\textrm{min}}/w$ where $w = (\variabile{p}_1^{\textrm{max}}-\variabile{p}_1^{\textrm{min}})/(\variabile{q}_1^{\textrm{max}}-\variabile{q}_1^{\textrm{min}})=2$, 
+while $\varepsilon_{\variabile{q}_1}^{\textrm{max}}$ and $\varepsilon_{\variabile{p}_1}^{\textrm{max}}$ are fixed. 
+The approximated boundaries are computed for each of these values joining the vertices of those triangles crossed by a boundary that follow the same path $\Pi$. 
+In Figure \ref{fig:boundaries_cup} we show the boundaries of \set{R}{$1$}{}$(\Pi)$ and \set{R}{}{}$(\Pi)$ found for two different values of $\varepsilon_{\variabile{q}_1}^{\textrm{min}}$ with the black lines. Note that, decreasing the value of the parameter $\varepsilon_{\variabile{q}_1}^{\textrm{min}}$, the number of rays increases and the boundary approximation is more accurate. 
+% Pictures of te boundaries with two different values of the parameters 
+In order to understand which value of  $\varepsilon_{\variabile{q}_1}^{\textrm{min}}$ gives a good approximation of the boundaries and, therefore, of the target photometric variable, we calculate the target '{e}tendue for the every set of rays traced using Equation (\ref{}). Then the difference $\Delta U = U_1-\U_{\textrm{t}}$ is found.
+The smaller $\Delta U$ we have the better approximation of $U_{\textrm{t}}$ is found. 
+% For instance in the example $$ and $$
+In Figure\ref{fig:etendue_cup} we show with the blue line how the target \'{e}tendue varies as a function of the parameter $\varepsilon_{\variabile{q}_1}^{\textrm{min}}$ where the other parameter have always a fixed value. The exact \'{e}tendue $U=8$ is depicted with the red line and is computed using Equation (\ref{}). By decreasing $\varepsilon_{\variabile{q}_1}^{\textrm{min}}$ and increase of $U_{\textrm{t}}$ is observed. Furthermore, by construction $U_{\textrm{t}}$ is always underestimated because the approximated boundaries are found joining the vertices of the \textit{boundaries triangles}\footnote{From now on we call \textit{boundary triangles} those triangles crossed by a boundary.} which are \textit{inside} the regions \set{R}{}{}$(\Pi)$. 
+% Show graph of etendue
+We note that for .. good value of etendue...
+% Show graph of boundaries for the best parameters
+
+% Compute the intensity
+
+% Show graph of the intensity
+% Compute error
+% Show graph of the error
+
 \section{Results for a TIR collimator}
+
+
 \section{Results for a Parabolic reflector}
+
 \section{Results for the Compound Parabolic Concentrator (CPC)}

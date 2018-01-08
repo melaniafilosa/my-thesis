@@ -1,11 +1,11 @@
-\chapter{The $\alpha$-shapes approach to compute the boundaries in target phase space}\label{chap:boundaries_alpha}
+\chapter{The $\alpha$-shapes approach}\label{chap:boundaries_alpha}
 In the previous chapter we presented a new ray tracing approach based on PS. We explained that, in order to compute the target photometric variable, it is useful to know the boundaries of the regions with positive luminance in target PS. Ray tracing in PS allows tracing only the rays close to these boundaries. 
 \\ \indent To detect the shape formed by those rays, the $\alpha$-shapes approach is employed, \cite{portegies2013fast}. 
 Methods based on $\alpha$-shapes are widely used to reconstruct an unknown surface from a set of data points, \cite{guo1997surface}. 
 The main disadvantage of such methods is that it can be very hard to chose the suitable value of the parameter $\alpha$ and, in most cases it can be selected only by numerical simulations.\\ \indent
 We develop a technique based on $\alpha$-shape that gives a criterion to determine the value of the parameter $\alpha$ for which the better approximation of the boundaries is obtained, \cite{filosa2015new}.\\ \indent This chapter is divided as follows. An overview of the state of art about $\alpha$-shapes methods is provided in Section \ref{sec:alpha-shapes}; the technique used for computing the $\alpha$ value is explained in Section \ref{sec:Tir_alpha}; the results for two different kind of total internal reflection (TIR) collimator are given in the last paragraph of this chapter.
-\section{The $\alpha$-shapes approach}\label{sec:alpha-shapes}
-Given a finite set $V$ of points, $\alpha$-shapes are geometrical objects that give us an approximation of the shape\footnote{It will become clear through this chapter what we intend with the word \textit{shape}.} formed by the points in $V$.\\ \indent
+\section{$\alpha$-shapes theory}\label{sec:alpha-shapes}
+Given a finite set $V$ of points, $\alpha$-shapes are geometrical objects that give us an approximation of the shape formed by the points in $V$.\\ \indent
 Before giving a formal definition, we explain an intuitive and nice interpretation of $\alpha$-shapes, \cite{lucieer2004alpha}. 
 Let us think to a mass of a stracciatella ice-cream\footnote{Stracciatella ice cream is made with milk-based ice-cream and fine peaces of chocolate, \cite{Wiki3}.}. If we desire to know the shape formed by the chocolate pieces we can start eating the ice cream using a spoon with a spherical shape and trying to do not remove any piece of chocolate. 
 We will obtain a shape formed by arcs and points (see Figure \ref{fig:shape2d} for the two-dimensional case).
@@ -27,7 +27,7 @@ The Delaunay triangulation $T^{\prime}$ of the points set $V$ has the property t
 $T^\prime$ is constructed by modifying a general triangulation $T$ such that every point satisfies the Delaunay property. 
 Therefore, every triangle (or tetrahedron in three dimensions) that does not satisfy such property is flipped such that the new edge is part of the triangulation (see Figure \ref{fig:Delaunay}). 
 Given, for example, an arbitrary triangulation $T$ in two-dimension, for each edge $\overline{\textrm{ab}}$ in $T$ which is not on the boundary of the convex hull the two triangles 
-$\Delta_{\textrm{abc}}$ and $\Delta_{\textrm{abd}}$ with the common edge $\overline{\textrm{ab}}$ are found. Then, if either the circumcircle of triangle $\Delta_{\textrm{abc}}$ contains point $d$ or the circumcircle of triangle $\Delta_{\textrm{abd}}$ contains point $c$ the edge $\overline{ab}$ cannot be included in the Delaunay triangulation and, therefore, it is flipped such that the other two possible triangles $\Delta_{\textrm{acd}}$ and $\Delta_{\textrm{bcd}}$ are found. The new edge $\overline{\textrm{cd}}$ locally satisfies the Delaunay property and the triangles $\Delta_{\textrm{acd}}$ and  $\Delta_{\textrm{bcd}}$ are added to the Delaunay triangulation $T^\prime$, see Figure \ref{fig:Delaunay}.  
+$\Delta_{\textrm{abc}}$ and $\Delta_{\textrm{abd}}$ with the common edge $\overline{\textrm{ab}}$ are found. Then, if either the circumcircle of triangle $\Delta_{\textrm{abc}}$ contains point \textrm{d} or the circumcircle of triangle $\Delta_{\textrm{abd}}$ contains point \textrm{c} the edge $\overline{ab}$ cannot be included in the Delaunay triangulation and, therefore, it is flipped such that the other two possible triangles $\Delta_{\textrm{acd}}$ and $\Delta_{\textrm{bcd}}$ are found. The new edge $\overline{\textrm{cd}}$ locally satisfies the Delaunay property and the triangles $\Delta_{\textrm{acd}}$ and  $\Delta_{\textrm{bcd}}$ are added to the Delaunay triangulation $T^\prime$, see Figure \ref{fig:Delaunay}.  
 \begin{figure}[h]\label{fig:Delaunay}
 \begin{subfigure}[t]{0.48\textwidth}
 \centering
@@ -338,11 +338,11 @@ $9\,714$  & $6.69\cdot 10^{-4}$  \\ $97\,103$  & $2.08\cdot 10^{-4}$ \\ $971\,62
  \label{tab:table2}
  \end{table}
 \noindent In Figure $\ref{fig:error}$, the results listed in Table $\ref{tab:table}$ and Table $\ref{tab:table2}$ are shown. The red line depicts the convergence of the PS error and the blue line indicates the MC error.
-\begin{figure}[h!]
+\begin{figure}[h]
   \begin{center}
-  \includegraphics[width=7.7cm]{error_alpha_shapes1}
+  \includegraphics[width=7cm]{error_alpha_shapes1}
   \end{center}
-  \caption{ The red line depicts the error between the PS intensity and the reference intensity.
+  \caption{The red line depicts the error between the PS intensity and the reference intensity.
  The blue line shows the error between the MC intensity and the reference intensity.
   The dashed line represents a straight line with the slope equal to $-\frac{1}{2}$.
   The horizontal dotted line shows that an error equal to $2.00 \cdot  10^{-5}$ can be obtained tracing at least $10^2$ times fewer rays in phase space.}
