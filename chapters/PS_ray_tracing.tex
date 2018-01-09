@@ -55,7 +55,7 @@ Basically it states that all the light rays exiting the edges of the source will
 This guarantees that all light emitted from the source will arrive at the receiver, see Figure \ref{fig:edge}. 
  \begin{figure}[h]
   \begin{center}
-  \includegraphics[width= 4cm]{Nonimaging_Optics-RR_SMS_Thin_Edge}
+  \includegraphics[width= 4cm]{Edge-ray}%{Nonimaging_Optics-RR_SMS_Thin_Edge}
   \end{center}
   \caption{A lens that receives light from a source $\textrm{A}\textrm{B}$ and redirects it to the receiver $\textrm{D}\textrm{E}$. 
 Rays that leave the edges of the source hit the edges of the target (blue and red rays). Rays coming from the interior of the source will end up to the interior of the target (green rays), \cite{wiki2}.}
@@ -150,7 +150,7 @@ The triangles very close to the boundaries have always two vertices whose corres
 Since they are crossed by a boundaries, two different paths are found for the rays at the vertices of those triangles. 
 Because of this, the procedure could continue infinitely, therefore, two parameters $\varepsilon_\variabile{q}^\textrm{min}$ and $\varepsilon_\variabile{p}^\textrm{min}$ are introduced to defined a stopping criterion.
 The algorithm stops when the length of the sides of the triangles is smaller than $\varepsilon_\variabile{q}^\textrm{min}$ and $\varepsilon_\variabile{p}^\textrm{min}$ in $\variabile{q}$ and $\variabile{p}$ direction.
-We indicate all the possible paths with $(\Pi_{\variabile{j}})_{\variabile{j}=1, \cdots, \npath}$ where $\npath$ is the maximum number of paths\footnote{We indicate with $\Pi^\variabile{k} = \Pi(variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})$ the path followed by rays with coordinates $(\variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})$ in Source PS, 
+We indicate all the possible paths with $(\Pi_{\variabile{j}})_{\variabile{j}=1, \cdots, \npath}$ where $\npath$ is the maximum number of paths\footnote{We indicate with $\Pi^\variabile{k} = \Pi(\variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})$ the path followed by rays with coordinates $(\variabile{q}_1^\variabile{k},\variabile{p}_1^\variabile{k})$ in Source PS, 
 can happen $\Pi^\variabile{k}= \Pi^\variabile{h}$ for $\variabile{k}\neq\variabile{h}.$
 With $(\Pi_{\variabile{j}})_{\variabile{j}=1, \cdots, \npath}$ we indicate all the possible $\npath$ paths that can occur, therefore $\Pi_{\variabile{i}}\neq\Pi_{\variabile{j}}$ if $\variabile{i}\neq\variabile{j}$.} (\npath = 5 for the two-faceted cup).
 If the size of the triangles is too big, it can happen that a region formed by rays that follow a path $\Pi_\variabile{j}$ is located completely inside a triangle whose vertices are related to another path $\Pi_\variabile{i}$ with $\variabile{j} \neq  \variabile{i}$, see Figure \ref{fig:region inside}.
@@ -195,9 +195,9 @@ Initialize $\varepsilon_{\variabile{q}}^{\textrm{min}}, \varepsilon_{\variabile{
 \begin{algorithmic}[1]
 \Procedure{Left triangle}{VL, Ray, $\varepsilon_{\variabile{q}}^{\textrm{min}}, \varepsilon_{\variabile{q}}^{\textrm{max}}, \varepsilon_{\variabile{p}}^{\textrm{min}}, \varepsilon_{\variabile{p}}^{\textrm{max}}$}
 \State $\textrm{VL}\gets [1,2,4]$
-\State $\variabile{q}_1^1\gets Ray.\variabile{q}(\textrm{VL}(1))$, $\variabile{p}_1^1\gets Ray.\variabile{p}(\textrm{VL}(1))$
-\State $\variabile{q}_1^2\gets Ray.\variabile{q}(\textrm{VL}(2))$, $\variabile{p}_1^2\gets Ray.\variabile{p}(\textrm{VL}(2))$
-\State $\variabile{q}_1^3\gets Ray.\variabile{q}(\textrm{VL}(3))$, $\variabile{p}_1^3\gets Ray.\variabile{p}(\textrm{VL}(4))$
+\State $\variabile{q}_1^1\gets \textrm{Ray}.\variabile{q}(\textrm{VL}(1))$, $\variabile{p}_1^1\gets Ray.\variabile{p}(\textrm{VL}(1))$
+\State $\variabile{q}_1^2\gets \textrm{Ray}.\variabile{q}(\textrm{VL}(2))$, $\variabile{p}_1^2\gets Ray.\variabile{p}(\textrm{VL}(2))$
+\State $\variabile{q}_1^3\gets \textrm{Ray}.\variabile{q}(\textrm{VL}(3))$, $\variabile{p}_1^3\gets Ray.\variabile{p}(\textrm{VL}(4))$
 \State $\textrm{dist}_\variabile{q}\gets \mbox{$|\variabile{q}_1^2-\variabile{q}_1^1|$}$
 \State $\textrm{dist}_\variabile{p}\gets \mbox{$|\variabile{p}_1^{3}-\variabile{p}_1^1|$}$
 \State RefineTriangle $\gets$  false;
