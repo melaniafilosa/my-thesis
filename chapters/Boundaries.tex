@@ -240,13 +240,13 @@ The sagitta of the lens is approximately $1.17$}
 \\ \indent
 Using PS ray tracing explained in Section \ref{sec:PS_raytracing} with parameters $\varepsilon_{\variabile{q}_1}^{\textrm{max}} = 0.1$, $ \varepsilon_{\variabile{p}_1}^\textrm{max} = 5\cdot 10^{-2}, $ $\varepsilon_{\variabile{q}_1}^\textrm{min} = 9\cdot 10^{-3}$ and $\varepsilon_{\variabile{p}_1}^\textrm{min} = 4.5 \cdot 10^{-3}$, around $1.9 \cdot 10^4$ rays are traced. 
 We discard rays with direction parallel to the source, therefore $\variabile{p}_1 \in [-0.99, 0.99]$. The ray distribution at the source PS \set{S}{}{} is shown in Figure \ref{fig:sourcePS}, where we depicted the rays that follow the same path with the same color. Seven different paths are found. The yellow rays follow path $\Pi_1 = (1, 2, 7, 12)$;
-   the red rays follow path $\Pi_2 ~= ~(1, 10, 8, 7, 12)$; the green rays follow path $\Pi_3 = (1, 4, 6, 7, 12)$;
-   the blue rays follow path $\Pi_4= (1, 11, 7, 12)$ and the magenta rays follow path $\Pi_5= (1, 3, 7, 12)$. The rays located inside the white areas correspond to rays that do not reach the target, they follow either path $\Pi_6 = (1, 10, 7, 8, 13)$ or path $\Pi_7 = (1,4,7,6,15)$ and they do not give any contribution to the target intensity.
+   the red rays follow path $\Pi_2 ~= ~(1, 4, 6, 7, 12)$; the green rays follow path $\Pi_3 = (1, 10, 8, 7, 12)$;
+   the blue rays follow path $\Pi_4= (1, 3, 7, 12)$ and the magenta rays follow path $\Pi_5= (1, 11, 7, 12)$. The rays located inside the white areas correspond to rays that do not reach the target, they follow either path $\Pi_6 = (1, 4, 7, 6, 13)$ or path $\Pi_7 = (1,10,7,8,15)$ and they do not give any contribution to the target intensity.
 \begin{figure}[h]
   \begin{center}
   \includegraphics[width=7.7cm]{source1}
   \end{center}
-  \caption{Distribution of the rays on \point{S}{}{}. Around $1.9 \cdot 10^4$ rays are traced using the triangulation refinement with parameters:
+  \caption{Distribution of the rays on \point{S}{}{}. Around $1.67 \cdot 10^4$ rays are traced using the triangulation refinement with parameters:
   $\varepsilon_\variabile{q}^\textrm{max} = 0.1 ,$ $ \varepsilon_{\variabile{p}}^\textrm{max} = 5\cdot 10^{-2}, $ $\varepsilon_{\variabile{q}}^\textrm{min} = 9\cdot 10^{-3}, \varepsilon_\variabile{p}^\textrm{min} = 4.5 \cdot 10^{-3}$. Rays that belong to the same region are depicted with the same color. The rays located inside the white areas do not reach the target. The boundaries of the two white regions are approximated by triangles depicted with black lines.}
   \label{fig:sourcePS}
 \end{figure}
