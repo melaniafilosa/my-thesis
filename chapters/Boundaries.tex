@@ -1,39 +1,48 @@
 \chapter{The $\alpha$-shapes approach}\label{chap:boundaries_alpha}
-In the previous chapter we presented a new ray tracing approach based on PS. We explained that, in order to compute the target photometric variable, it is useful to know the boundaries of the regions with positive luminance in target PS. Ray tracing in PS allows tracing only the rays close to these boundaries. 
-\\ \indent To detect the shape formed by those rays, the $\alpha$-shapes approach is employed, \cite{portegies2013fast}. 
-Methods based on $\alpha$-shapes are widely used to reconstruct an unknown surface from a set of data points, \cite{guo1997surface}. 
-The main disadvantage of such methods is that it can be very hard to chose the suitable value of the parameter $\alpha$ and, in most cases it can be selected only by numerical simulations.\\ \indent
-We develop a technique based on $\alpha$-shape that gives a criterion to determine the value of the parameter $\alpha$ for which the better approximation of the boundaries is obtained, \cite{filosa2015new}.\\ \indent This chapter is divided as follows. An overview of the state of art about $\alpha$-shapes methods is provided in Section \ref{sec:alpha-shapes}; the technique used for computing the $\alpha$ value is explained in Section \ref{sec:Tir_alpha}; the results for two different kind of total internal reflection (TIR) collimator are given in the last paragraph of this chapter.
+In the previous chapter we presented a new ray tracing approach based on PS. We explained that, in order to compute the target intensity, it is necessary to know the boundaries of the regions in target PS with positive luminance. Ray tracing in PS requires tracing only the rays close to these boundaries. The rays traced can be seen as a point cloud in PS. To detect the shape formed by those rays, the $\alpha$-shapes approach is employed \cite{portegies2013fast}.\\ \indent
+Methods based on $\alpha$-shapes are widely used to reconstruct an unknown shape formed by a set of finite data points \cite{guo1997surface}. In two dimensions, $\alpha$-shapes gives the contour of the point cloud which is approximated by a family of broken curved lines. 
+The only disadvantage of such methods is that it can be very hard to choose the appropriate value of the parameter $\alpha$ and, in most cases it can be selected only by numerical simulations.\\ \indent
+We develop a technique based on $\alpha$-shape that gives a criterion to determine the value of the parameter $\alpha$, for which the boundaries are approximated well \cite{filosa2015new}.\\ \indent This chapter is organized as follows. An overview of the-state-of-the-art about $\alpha$-shape methods is provided in Section \ref{sec:alpha-shapes}; the technique used for computing the $\alpha$ value is explained in Section \ref{sec:Tir_alpha}; the results for two different kind of total internal reflection (TIR)-collimators are given in Section \ref{sec:results-Tir-alpha}. Discussions are conclusions are provided in the last paragraph of this chapter.
 \section{$\alpha$-shapes theory}\label{sec:alpha-shapes}
-Given a finite set $V$ of points, $\alpha$-shapes are geometrical objects that give us an approximation of the shape formed by the points in $V$.\\ \indent
-Before giving a formal definition, we explain an intuitive and nice interpretation of $\alpha$-shapes, \cite{lucieer2004alpha}. 
-Let us think to a mass of a stracciatella ice-cream\footnote{Stracciatella ice cream is made with milk-based ice-cream and fine peaces of chocolate, \cite{Wiki3}.}. If we desire to know the shape formed by the chocolate pieces we can start eating the ice cream using a spoon with a spherical shape and trying to do not remove any piece of chocolate. 
+Given a finite set $V = \{v_1, \cdots, v_N\}\subset \mathbb{R}^2$ of points, $\alpha$-shapes are geometrical objects that give us an approximation of the shape formed by the point cloud. For now we do not further specify the notion of shape. A more precise definition will be provided later.\\ \indent
+Before giving a formal definition, we explain an intuitive and nice interpretation of $\alpha$-shapes \cite{lucieer2004alpha}. 
+Let us think of a stracciatella ice-cream\footnote{Stracciatella ice cream is made with milk-based ice-cream and fine pieces of chocolate, \cite{Wiki3}.}. If we desire to know the shape formed by the chocolate pieces we can start eating the ice cream using a spoon with a spherical scoop and try not to remove any piece of chocolate. 
 We will obtain a shape formed by arcs and points (see Figure \ref{fig:shape2d} for the two-dimensional case).
 \begin{figure}[t]\label{fig:shape2d}
 \begin{center}
 \includegraphics[width=\textwidth]{alpha_shapes2D}
 \label{fig:shape}
-\caption{Construction of $\alpha$-shape given a set of points (blue dots) in $\mathbb{R}^2$. The boundary of the shape formed by the points cloud (red line) is detected for $\alpha = 1$ (left) and for $\alpha=2$ (right) \cite{sabel2017application}.}
+\caption{Construction of $\alpha$-shapes given a set of points (blue dots) in $\mathbb{R}^2$. The boundary of the shape formed by the point cloud (red line) is detected for $\alpha = 1$ (left) and for $\alpha=2$ (right) \cite{sabel2017application}.}
 \label{fig:shape2d}
 \end{center}
 \end{figure}
-Straightening the arcs to line segments we obtain broken lines which constitute the boundaries of the so-called $\alpha$-shape formed by the points of the points set $V$. 
-A very small spoon will allow us to eat the entire ice cream without eating any piece of chocolate, while with a huge spoon we will not be able to eat any part of the ice cream because at least one chocolate peace will be removed from the ice-cream mass. In this example, the chocolates peaces are the points of $V$ and, the parameter $\alpha$ determines the radius of the carving spoon (the spherical spoon in two-dimension is simply a circle).\\ \indent 
-The formal definition of $\alpha$-shape was first given by Edelsbrunner, Kirkpatrick and Seidel in 1983, \cite{edelsbrunner1983shape}. They describe $\alpha$-shape has a generalization of the convex hull of a finite set of point in the plane. Let $\alpha$ be a not negative number $0\leq\alpha<\infty$. 
-If $\alpha$ is equal to $0$ the shape degenerates to the point set $V$. On the other hand, when $\alpha\rightarrow\infty$ the $\alpha$-shape is simply the convex hull of $V$. If $0<\alpha<\infty$ the $\alpha$-shape is a polytope of $V$ \cite{edelsbrunner1994three}. The construction of $\alpha$-shape is closely related to Delaunay triangulation of $V$\cite{mucke1993shapes}. Therefore, a formal definition of triangulation and Delanauy triangulation is now required. \\ \indent
-Given a set $V$ of not all aligned points, let us consider the set $E$ of all the straight line segments whose endpoints are in $V$. 
-A triangulation $T$ of $V$ is the maximum subset of $E$ such that all the line segments of $T$ intersect only at their endpoints \cite{lloyd1977triangulations}. \\ \indent 
-The Delaunay triangulation $T^{\prime}$ of the points set $V$ has the property that the circle circumscribed by any triangle of $T$ does not contain any point of $V$. This is called the Delaunay property. A very common used algorithm to construct such triangulation is explained in the following. 
+Straightening the arcs to line segments we obtain broken lines which constitute the boundary of the so-called $\alpha$-shape of the point set $V$. 
+A very small spoon will allow us to eat the entire ice cream without eating any piece of chocolate, while with a larger spoon we are not able to eat any chunk of the ice cream without chocolate pieces. In this example, the chocolates peaces are the points of $V$ and, the parameter $\alpha$ determines the radius of the carving spoon (the spherical spoon in two-dimension is simply a circle).\\ \indent 
+The formal definition of $\alpha$-shape was first given by Edelsbrunner, Kirkpatrick and Seidel in 1983, \cite{edelsbrunner1983shape}. They describe $\alpha$-shape as a generalization of the convex hull of a finite set of points in the plane. Let $\alpha$ be a non negative number $0\leq\alpha<\infty$. 
+If $\alpha = 0$ the shape degenerates to the point set $V$. On the other hand, when $\alpha\rightarrow\infty$ the $\alpha$-shape is simply the convex hull of $V$. If $0<\alpha<\infty$ the $\alpha$-shape is a polytope of $V$ \cite{edelsbrunner1994three}. The construction of the $\alpha$-shape is closely related to the Delaunay triangulation of $V$ \cite{mucke1993shapes}. Therefore, a formal definition of triangulation and Delanauy triangulation is now required. \\ \indent
+Given a set $V$ of not all aligned points, let us consider the set $E$ of all the straight-line segments whose endpoints are in $V$. 
+A triangulation $T$ of $V$ is the subset of $E$ with the maximum number of segments such that all the line segments of $T$ intersect only at their endpoints \cite{lloyd1977triangulations}. 
+A more formal definition of triangulation is provided in the following \\ \indent Let $\Omega\subset \mathbb{R}^2$ be the convex hull of $V$ and $T_h = \{K_1, \cdots, K_h\}$ be a partition of $\Omega$ into closed triangles, that is triangles that included their boundary. Suppose that the following properties are verified:
+\begin{itemize}
+\item[$(a)$] $\Omega = \bigcup_{i = 1}^{h}K_i$;
+\item[b)] For $K_i, K_j \in T_h$, $K_i \neq K_j$, and 
+\begin{equation*}
+\textrm{int}(K_i)\cap \textrm{int}(K_j) = \emptyset,
+\end{equation*}
+where $\textrm{int}(K) = K-\partial K$.
+\end{itemize}
+Then $T_h$ is called a \textit{triangulation} of $\Omega$ \cite{Numericalmethods}. \\ \indent
+The Delaunay triangulation $T^{\prime}$ of the points set $V$ has the property that the circle circumcircle of any triangle of $T$ does not contain any point of $V$. This is called the Delaunay property. A very commonly used algorithm to construct such triangulation is explained in the following. 
 $T^\prime$ is constructed by modifying a general triangulation $T$ such that every point satisfies the Delaunay property. 
 Therefore, every triangle (or tetrahedron in three dimensions) that does not satisfy such property is flipped such that the new edge is part of the triangulation (see Figure \ref{fig:Delaunay}). 
-Given, for example, an arbitrary triangulation $T$ in two-dimension, for each edge $\overline{\textrm{ab}}$ in $T$ which is not on the boundary of the convex hull the two triangles 
+Given, for example, an arbitrary triangulation $T$ in two-dimensions, for each edge $\overline{\textrm{ab}}$ in $T$ which is not on the boundary of the convex hull the two triangles 
 $\Delta_{\textrm{abc}}$ and $\Delta_{\textrm{abd}}$ with the common edge $\overline{\textrm{ab}}$ are found. Then, if either the circumcircle of triangle $\Delta_{\textrm{abc}}$ contains point \textrm{d} or the circumcircle of triangle $\Delta_{\textrm{abd}}$ contains point \textrm{c} the edge $\overline{ab}$ cannot be included in the Delaunay triangulation and, therefore, it is flipped such that the other two possible triangles $\Delta_{\textrm{acd}}$ and $\Delta_{\textrm{bcd}}$ are found. The new edge $\overline{\textrm{cd}}$ locally satisfies the Delaunay property and the triangles $\Delta_{\textrm{acd}}$ and  $\Delta_{\textrm{bcd}}$ are added to the Delaunay triangulation $T^\prime$, see Figure \ref{fig:Delaunay}.  
 \begin{figure}[h]\label{fig:Delaunay}
 \begin{subfigure}[t]{0.48\textwidth}
 \centering
 \includegraphics[]{triangle_alpha_shapes}
 \label{fig:shape}
-\caption{The point $d$ is inside the circle circumscribed by the triangle $\Delta_{\textrm{abc}}$, therefore the edge $\overline{\textrm{ab}}$ cannot be included in the Delaunay triangulation.}
+\caption{The point $d$ is inside the circle circumscribing the triangle $\Delta_{\textrm{abc}}$, therefore the edge $\overline{\textrm{ab}}$ cannot be included in the Delaunay triangulation.}
 \end{subfigure}
 \begin{subfigure}[t]{0.48\textwidth}
 \centering
@@ -43,52 +52,50 @@ $\Delta_{\textrm{abc}}$ and $\Delta_{\textrm{abd}}$ with the common edge $\overl
 \caption{Construction of the Delaunay triangulation in 2D.}
 \label{fig:Delaunay}
 \end{figure}
-\\ \indent Several others algorithm have been developed to construct a Delaunay triangulation, see for example \cite{lee1980two, renka1997algorithm}.
- Given points set $V$ and a triangulation $T$, it can be proved that the corresponding Delaunay triangulation $T^\prime$ is unique. Moreover, it has the property to have the largest minimum angle among all possible triangulation of a point set $V$ \cite{press2007numerical}, and it can be seen as the dual of Voronoi diagram which is defined in the following \cite{fortune1992voronoi}.\\\indent 
-Let us consider a finite set of point $V = \{v_1, \cdots, v_N\}\subset \mathbb{R}^2$. For \textit{almost}\footnote{It is needed to specify the word \textit{almost} because some points can have the same distance with two or more points of $V$.} every point $x\in \mathbb{R}^2$, there is a point which is the closest point to $x$. The Voronoi cell of a point $v_\variabile{i}\in V$ contains all points in $\mathbb{R}^2$ which are closer to $v_{\variabile{i}}$, see Figure \ref{fig:Voronoi}. 
-The Voronoi diagram of $V\subset \mathbb{R}^2$ is defined as the set of all Voronoi cells, \cite{cazals2005conformal}.  For the definition of Voronoi diagram in higher dimensions see \cite{brown1979voronoi}.
+\\ \indent Several other algorithms have been developed to construct a Delaunay triangulation, see for example \cite{lee1980two, renka1997algorithm}.
+ Given a point set $V$ and a triangulation $T$, it can be proved that the corresponding Delaunay triangulation $T^\prime$ is unique. Moreover, it has the property to have the largest minimum angle among all possible triangulations of a point set $V$ \cite{press2007numerical}.
+\\ \indent Alternatively the Delaunay triangulation can be constructed as the dual of the Voronoi diagram \cite{fortune1992voronoi}.\\\indent 
+ For \textit{almost}\footnote{It is needed to specify the word \textit{almost} because some points can have the same distance with two or more points of $V$.} every point $x\in \mathbb{R}^2$, there is a point which is the closest point to $x$. The Voronoi cell of a point $v_\variabile{i}\in V$ contains all points in $\mathbb{R}^2$ which are closer to $v_{\variabile{i}}$, see Figure \ref{fig:Voronoi}. The Voronoi diagram of $V\subset \mathbb{R}^2$ is defined as the set of all Voronoi cells, \cite{cazals2005conformal}. A more formal definition of the Voronoi diagram is given in the following.
+\begin{defn}
+Let $V=\{v_1,\cdots,v_N\}$ be a set of point in $\mathbb{R}^2$. The Voronoi cell $V_\variabile{i}$ associated to point $v_\variabile{i}$ is defined as:
+\begin{equation}
+V_\variabile{i}=\{x\in \mathbb{R}^2\; | \;|x-v_\variabile{i}|<|x-v_\variabile{j}| \quad \forall \variabile{j}\neq \variabile{i} \}\,,
+\end{equation}
+The Voronoi diagram $U$ is defined as 
+\begin{equation}
+U = \bigcup_{\variabile{i}=1}^N V_\variabile{i}
+\end{equation}
+ where $V_{\variabile{i}}\cap V_{\variabile{j}}= \emptyset$ for $\variabile{i}\neq\variabile{j}$.
+\end{defn}
+For the definition of Voronoi diagram in higher dimensions see \cite{brown1979voronoi}.
 \begin{figure}[h]
 \centering
 \includegraphics[width = 6cm]{Delaunay_Voronoi}
 \caption{Relationship between the Delaunay triangulation (in black) and the Voronoi Diagram (in red), \cite{Wiki4}}
 \label{fig:Voronoi}
 \end{figure}
-%A formal definition of the Voronoi diagram is given in the following.
-%\begin{defn}
-%Let $X$ be a metric space with a distance $\textrm{d}$ and $V=\{v_1,\cdots,v_N\}$ a set of point in $X$. The Voronoi cell $V_\variabile{i}$ associated with the point $v_\variabile{i}$ with $v_{\variabile{i}}\in\{1,\cdots,N\}$ is defined as:
-%\begin{equation}
-%V_\variabile{i}=\{x\in X\; | \;\textrm{d}(x,v_\variabile{i})\leq \textrm{d}(x,v_\variabile{j}) \quad \forall \variabile{j}\neq \variabile{i} \}\,,
-%\end{equation}
-%The Voronoi diagram is defined as the union $U = \bigcup_{\variabile{i}=1}^N V_\variabile{i}$ where $V_{\variabile{i}}\cap V_{\variabile{j}}= \emptyset$ for $\variabile{i}\neq\variabile{j}$.
-%\end{defn}
-%Figure \ref{fig:Voronoi}
-%\begin{figure}[h]\label{fig:Voronoi}
-%\begin{center}
-%\includegraphics[width=7cm]{Delaunay_Voronoi.jpg}
-%\caption{The Delaunay triangulation in black is the dual of the Voronoi diagram in red, \cite{Wiki4}.}
-%\label{fig:Voronoi}
-%\end{center}
-%\end{figure}
-Delaunay triangulation triangulates the convex hull of $V$ and, therefore it does not constitutes a suitable method for reconstructing the surface formed by a point cloud. 
-\\ \indent Therefore, $\alpha$-shapes methods were developed for surface reconstruction, \cite{edelsbrunner2010alpha, guo1997surface}. Starting from the Delaunay triangulation $T^\prime$ of a point set $V$, the corresponding $\alpha$-shape of $V$ is formed by the only triangles of $T^\prime$ that satisfy the so-called "$\alpha$-test" which is briefly explained in the following.
-For each triangle we calculate the radius of the circumcircle. If the radius is larger that $\alpha$ the triangle is removed from the shape. The rule of the parameter $\alpha$ is highly significant in $\alpha$-shapes procedures and, it has to be selected such that the better approximation of the shape formed by the points of $V$ is obtained. 
-Therefore, $\alpha$ is closely related to the radius of the circumcircles. A possible strategy is to find the radius of the greater empty circumcircle. Thus $\alpha$ is related to the density $\delta$ of the point sets $V$. It can be chosen, for instance, inversely proportional to $\delta$:
-\begin{equation}
-\alpha=C\frac{1}{\delta}\;,
-\end{equation}
+% How it is defined the dual of the Voronoi diagram
+\\ \indent The Delaunay triangulation triangulates the convex hull of $V$ and, therefore it does not constitute a suitable method for reconstructing the contour formed by a point cloud. Therefore, $\alpha$-shape methods were developed to solve such problem \cite{edelsbrunner2010alpha, guo1997surface}. Starting from the Delaunay triangulation $T^\prime$ of a point set $V$, the corresponding $\alpha$-shape of $V$ is formed by the only triangles of $T^\prime$ that satisfy the so-called "$\alpha$-test" which is now briefly explained.
+For each triangle we calculate the circumradius, i.e. the radius of the circumcircle. If the radius is larger than $\alpha$ the triangle is removed from the shape. The choice of the parameter $\alpha$ is highly significant in the $\alpha$-shapes procedure and, it has to be selected such that the desired approximation of the shape formed by the points of $V$ is obtained. 
+Therefore, $\alpha$ is closely related to the radius of the circumcircles. A possible strategy is to find the radius of the greater empty circumcircle. Thus $\alpha$ can be selected according to the density $\delta$ of the point sets $V$
 with $C$ a constant and $\delta$:
 \begin{equation}
-\delta=\frac{N}{\mbox{surface area}}\; ,
+\delta=\frac{N}{A}\; ,
 \end{equation}
-where $N$ is the number of points in $V$ and the surface area is the area inside the boundaries of the region formed by the points cloud. 
-For a fixed point set, $\delta$ is given and the value of $C$ needs to be determined by numerical simulations.\\ \indent 
-To summarize, $\alpha$-shape procedure can be outlined as follows:
+where $N$ is the number of points in $V$ and $A$ is the area of the convex hull of $V$.
+%Note that, if we scale the dimensions of the  
+The value of $\alpha$ can be chosen, for instance, inversely proportional to $\sqrt{\delta}$:
+\begin{equation}
+\alpha=C\frac{1}{\sqrt{\delta}}\;,
+\end{equation}
+Note that, while $\delta$ is given for a fixed point set $V$, the value of $C$ needs to be determined by numerical simulations.\\ \indent 
+To summarize, the $\alpha$-shape construction can be outlined as follows:
 \begin{enumerate}
 \item Construct a Delaunay triangulation\footnote{In the simulations we present in this chapter the Matlab function \textit{Delaunay} is used.} $T^\prime$ of the point cloud $V$;
-\item For every triangles $T^\prime(i)\in T^\prime$ calculates the radius $r(i)$ of the circle circumscribed by its vertices;
+\item For every triangle $T^\prime(i)\in T^\prime$ calculate its circumradius $r(i)$;
 \item If $r(i)\leq\alpha$ keep the triangle $T^\prime(i)$ in the triangulation;
 \item If $r(i)>\alpha$ remove the triangle from the triangulation;
-\item For every triangle return the edges (facets in $3$D) referred to only one triangle (tetrahedron in $3$D), the so-called \textit{free boundary} edges\footnote{In the simulations we present in this chapter the Matlab function \textit{freeBoundary} is used.}.
+\item For every triangle return the edges belong to only one triangle of $T^{\prime}$, the so-called \textit{free boundary} edges\footnote{In the simulations we present in this chapter the Matlab function \textit{freeBoundary} is used.}. By definition, the free boundary edges are not a common edge of two triangles.
 \end{enumerate}
 %% Insert algorithm
 %\begin{algorithm}[h]
@@ -122,7 +129,7 @@ To summarize, $\alpha$-shape procedure can be outlined as follows:
 %Let us define a Voronoi diagram in a metric space.
 %The simplest case that we can have is the two-dimensional case that is the case where $X=\mathbb{R}^2$.
 %The tuple $\mathcal{S}=\{1,\cdots,n\}\subset \mathbb{R}^2$ is now a set of points. The Voronoi diagram of $\mathcal{S}$ is a subsection of $\mathbb{R}^2$ such that every other region around a point $p\in \mathcal{S}$ contains all points that are closer to $p$ than to every point in $\mathcal{S}$. A triangulation of the point set $\mathcal{S}$ is a set of edges $\mathcal{E}$ whose extremes are points of $\mathcal{S}$ such that the faces of each triangle are bounded by three edges and any edge that is not in $\mathcal{E}$ intersects one of the existing edges. The Delaunay triangulation is the dual graph of the Voronoi diagram: it consists of vertices (the points in $\mathcal{S}$) and it has an edge between two vertices if the two corresponding faces share an edge. \\
-\indent Although $\alpha$-shapes are a powerful tool for surfaces reconstruction, there exist surfaces that are not described well by classical $ \alpha $-shapes. Indeed for some surfaces there is no value of $\alpha$ that includes all desired triangles and deletes all undesired triangles. If the parameter $\alpha$ is determined according to the density of the point cloud, it can be difficult to obtain a good approximation of a shape formed by a non-uniform points set. Furthermore, the $\alpha$-shape method does not work well when the shape we need to approximate has a sharp turn or a joint. 
+\indent Although $\alpha$-shapes are a powerful tool for determine the shape of a point cloud, there exist shapes that are not described well by classical $ \alpha $-shapes. Indeed for some surfaces there is no value of $\alpha$ that includes all desired triangles and deletes all undesired triangles. If the parameter $\alpha$ is determined according to the density of the point cloud, it can be difficult to obtain a good approximation of a shape formed by a non-uniform points set. Furthermore, the $\alpha$-shape method does not work well when the shape we need to approximate has a sharp turn or a joint. 
 %In this case $\alpha$-shapes often give a "webbed-foot" appearance at such joints since they improperly connect the adjacent surfaces. 
 To overcome these issues, Teichmann and Capps presented alternatives approaches to establish the value of $\alpha$, \cite{teichmann1998surface}. Their anisotropic density-scaled $\alpha$-shapes method constitutes an improvement of  classical $\alpha$-shapes.
 \\ \indent There are several ways to determine the value of $\alpha$ \cite{mandal1997selection}; in the next section we provide a technique that exploits the conservation of \'{e}tendue in PS. 
@@ -210,7 +217,7 @@ To clarify our idea we apply the method to two different optical systems, the re
 % Explain the idea: use etendue conservation
 % Do the example for the two faceted cup
 % Explain the TIR collimator
-\section{Results for a TIR-collimator}\label{results-Tir-alpha}
+\section{Results for a TIR-collimator}\label{sec:results-Tir-alpha}
 We apply the $\alpha$-shapes method to the set of points in target PS obtained by using PS ray tracing.
 In this chapter the procedure is applied to two different kinds of total internal reflection (TIR)-collimators.\\ \indent  
 Let us first describe the TIR-collimator depicted in Figure \ref{fig:tir}. It is an optical system symmetric with respect to the $z$-axis, it consists of a lens (central curve), two broken lines adjacent to the lens,
@@ -313,7 +320,6 @@ Note that increasing the number of rays the value of $\alpha_c$ and the correspo
 \centering
 \caption{\bf Errors of the PS intensity}
 \begin{tabular}{lllllll}
-
  \hline  Number \\ of rays\;  & $\varepsilon^{\textrm{max}}_{\variabile{q}} $  & $\varepsilon^{\textrm{min}}_{\variabile{q}} $   \;     & $\varepsilon^{\textrm{max}}_{\variabile{p}}$\;
   & $\varepsilon^{\textrm{min}}_\variabile{p}$\; & $\alpha_c$  & PS error \\
   \hline 
@@ -370,13 +376,6 @@ The $\alpha$-shapes procedure is unable to properly detect the boundaries of reg
 A small change of the parameter $\alpha$ leads to a completely different approximation of the boundaries.}
 \label{fig:Tir1}
 \end{figure}
-%\centering
-%  \includegraphics[width=7.7cm]{Tir1}
-%    \caption{Target PS for the TIR-collimator depicted in
-%    Figure \ref{fig:tir}. The red line depicts the best approximations of $\partial$\set{R}{}{}$(\Pi)$ for $3363$ rays with $\alpha_c = 0.119$.
-%    The cyan region in the middle of the target PS is formed by rays that hit the lens, it is hard to approximate that region when there is a small number of rays inside it.}
-%     \label{fig:Tir1}
-%  \end{figure}
 Figure $\ref{fig:Tir1}$ clarifies this concept showing that the region formed by rays that hit the lens is hard to approximate when there is a small number of rays inside the region. Consequently either a region bigger than the area covered by the rays is considered or some triangles which are not part of the boundaries are considered in the triangulation. This results in an inaccurate calculation of the intensity (either too high or to low). To obtain a good approximation of the boundaries of these kind of patches more rays have to be traced. The PS error decreases very fast increasing the number of rays (see Table
  \ref{tab:table} and Figure \ref{fig:error}).
  \\\indent To show how the error plot changes according to the regularity of the shape of the regions $\partial$\set{R}{}{}$(\Pi)$, we consider another example of a TIR-collimator.
@@ -395,10 +394,6 @@ Therefore, it is expected that $\alpha$-shapes method performs well, even for a 
   \includegraphics[width=6.5cm]{tir_analytic2}
    \end{center}
     \caption{Shape of the TIR-collimator. Each surface of the system is labeled with a number.
-%       The source $\mathcal{S}= [-2,2]$ (surface number $1$) is located at a height $\variabile{z}_1 = 0.3$ from the $x$-axis.
-%       The target $\mathcal{T}= [-9.7, 9.7]$ (surface $12$) is parallel to the source and is located at a height $ \variabile{z}= 7.85$.
-%       The shape of the collimator is shown as a blue line.
-%       Three detectors depicted with green lines (surfaces $13$, $14$, and $15$) are located at the left, the right and the bottom of the optical system.
        $n_1 = 1$ is the refraction index of the medium (air) where the source and the target are located, and
        $n_2 = 1.5 $ the refraction index of the medium (glass) inside the optical system. The sagitta of the lens is equal to $0.6$}
  \label{fig:analyticlens}
@@ -413,14 +408,20 @@ The $\alpha$-shapes method gives an accurate approximation of the boundaries for
   \label{fig:Tir2}
 \end{figure}
 \\ \indent PS and MC ray tracing are implemented for the TIR-collimator in Figure \ref{fig:Tir2}. The approximated intensities $\hat{I}_{\textrm{A}}$ $(\textrm{A} = \textrm{PS}, \textrm{MC})$ are compared with the reference intensity $\hat{I}_{\textrm{ref}}$ (MC ray tracing with $10^7$ rays).
-PS error is depicted with the red line and, MC error is depicted with the blue line.\\ \indent
+PS error is depicted with the red line and, MC error is depicted with the blue line. \\ \indent
+% Lets indicate with $\big(\hat{I}_{\textrm{A}, n}\big)_{n \in \mathbb{N}}$ the sequence of the approximated intensity. Every term of the sequence is calculated by increasing the number of rays, for example $\hat{I}_{\textrm{A}, 1}$ is computed tracing $\nrays = 10$ rays,   $\hat{I}_{\textrm{A}, 2}$ is computed tracing $\nrays = 100$ rays, and so on. The speed or rate of convergence of the approximate intensity $\big(\hat{I}_{\textrm{A}, n}\big)$ describes how quickly the terms of sequence $\big(\hat{I}_{\textrm{A}, n}\big)$ converge to the reference intensity $\hat{I}_{\textrm{ref}}$ by increasing the number of rays. Suppose $m$ is a real number, the sequence $\big(\hat{I}_{\textrm{A}, n}\big)$ converges to $\hat{I}_{\textrm{ref}}$ if
+%\begin{equation}
+%\lim_{\nrays\rightarrow \infty} \frac{|\hat{I}_{\textrm{A}, n+1}-\hat{I}_{\textrm{ref}}|}{|\hat{I}_{\textrm{A}, n}-\hat{I}_{\textrm{ref}}|^m} = \mu
+%\end{equation}
+%and $\mu$ is called the rate of convergence and $m$ is the order of convergence. For $m\in[0,1]$ we have the linear convergence, for $m=2$ the quadratic convergence, etc. 
+%\\ \indent
 For the TIR-collimator in Figure \ref{fig:analyticlens} we obtained a speed of convergence of the order of $O\big(\frac{1}{\nrays}\big)$ for PS ray tracing versus an order of convergence of $O\big(\frac{1}{\sqrt{\nrays}}\big)$ for MC ray tracing.
 \begin{figure}[h!]
  \begin{center}
    \includegraphics[width=7.7cm]{error_plot}
     \end{center}
-     \caption{The red line depicts the error using the $\alpha$-shapes method to compute the boundaries. The cyan line depicts the error using the triangulation refinement to compute the boundaries.
-     The blue line shows the error between the Monte Carlo intensity and the exact intensity.
+     \caption{The red line depicts the error using the $\alpha$-shapes method to compute the boundaries. 
+The blue line shows the error between the Monte Carlo intensity and the exact intensity.
      The dashed black line represents a straight line with slope $-\frac{1}{2}$.
    The dashed blue line represents a straight line with slope $-1$.}
  \label{fig:error2}

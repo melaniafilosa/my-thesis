@@ -50,26 +50,54 @@ For the two-faceted cup in Figure \ref{fig:cup} we have that the \'{e}tendue at 
 From this follows a fundamental principle in non-imaging optics which is referred to as "the edge-ray principle". A literature overview of this principle is given in the next paragraph.
 \section{The edge-ray principle}
 The goal in non-imaging optics is to transfer all light from the source aperture to the output aperture. Systems that satisfy this property are referred to \textit{ideal optical systems}.
-Several methods to design ideal optical systems are based on the edge-ray principle, \cite{welford1978problem, minano1992new}. 
-Basically it states that all the light rays exiting the edges of the source will end up at the edges of the target. 
+Several methods to design ideal optical systems are based on the edge-ray principle, \cite{welford1978problem, benitez1997design}. 
+Basically it states that all the light rays exiting the edges of the source will end at the edges of the target. 
 This guarantees that all light emitted from the source will arrive at the receiver, see Figure \ref{fig:edge}. 
  \begin{figure}[h]
   \begin{center}
-  \includegraphics[width= 4cm]{Edge-ray}%{Nonimaging_Optics-RR_SMS_Thin_Edge}
+  \includegraphics[width= 4cm]{Edge-ray}
   \end{center}
   \caption{A lens that receives light from a source $\textrm{A}\textrm{B}$ and redirects it to the receiver $\textrm{D}\textrm{E}$. 
-Rays that leave the edges of the source hit the edges of the target (blue and red rays). Rays coming from the interior of the source will end up to the interior of the target (green rays), \cite{wiki2}.}
+Rays that leave the edges of the source hit the edges of the target (blue and red rays). Rays coming from the interior of the source will end at the interior of the target (green rays), \cite{wiki2}.}
   \label{fig:edge}
 \end{figure}
 \\ \indent
-In $1985$ Mi{\~n}ano proved the principle by using the PS of the source and the target of an optical system, \cite{minano1986design}. He proved the principle for systems in inhomogeneous media, where the index of refraction is a continuous function, so that connecting f the regions in PS is a continuous function.
-Suppose that \set{R}{$1$}{} and \set{R}{}{} are the regions of the rays at the source and the target PS, respectively. 
-Indicating with $\map{M}{}{}(P)$ the optical map of a point $P$, Mi{\~n}ano showed that if $\map{M}{}{}(\partial\mbox{\set{R}{$1$}{}})=\map{M}{}{}(\partial\mbox{\set{R}{}{}})$ then $\map{M}{}{}(\mbox{\set{R}{$1$}{}})=\map{M}{}{}(\mbox{\set{R}{}{}})$. However, for some optical systems, as for instance the compound parabolic concentrator (CPC), the ray mapping in phase space is not continuous. This is due to multiple reflections that rays can encounter with the reflectors. 
-This implies that some rays at the edge of the source could not be mapped into rays at the edges of the target. \\ \indent 
-In 1994 Ries and Rabl reformulated the edge-ray principle such that it is valid for all systems even if the mapping in PS is not continuous, \cite{Ries:2}. They showed that for a given path $\Pi$, the boundaries
-$\partial$\set{R}{$1$}{}$(\Pi)$ at the source are mapped into the boundaries $\partial$\set{R}{}{}$(\Pi)$ at the target.
-Then, to map one region from \set{S}{}{} to \set{T}{}{} it is sufficient to map the boundary of this region. 
-It is sufficient that the rays of  $\partial$\set{R}{$1$}{}$(\Pi)$ are transformed to the rays of $\partial$\set{R}{}{}$(\Pi)$, \cite{minano1992new, davies1994edge}. 
+In $1985$ Mi{\~n}ano proved the principle by using the PS of the source and the target of an optical system, \cite{minano1985two, minano1986design}. He proved the principle for systems in inhomogeneous media, where the index of refraction is a continuous function, so the map that connects the source and target phase spaces is a continuous map.
+Indicating with $\map{M}{}{}(P)$ the optical map of a point $P$, Mi{\~n}ano showed that if $\map{M}{}{}(\partial\mbox{\set{S}{}{}})=\map{M}{}{}(\partial\mbox{\set{T}{}{}})$ then 
+$\map{M}{}{}(\mbox{\set{S}{}{}})=\map{M}{}{}(\mbox{\set{T}{}{}})$ and vice versa. Note that the trajectory of two rays in PS cannot cross. The first version of the edge-ray principle \cite{minano1986design} can be enunciated in two-dimensions as follows:
+\begin{lemma}{Edge-ray principle (version1)}\\ 
+Suppose that:
+\begin{itemize}
+\item[a)] There are two regions \set{R}{$1$}{} and \set{R}{}{} in the PS with the same area such that $\map{M}{}{}(\partial\mbox{\set{R}{$1$}{}}) = \map{M}{}{}(\partial\mbox{\set{R}{}{}})$; 
+\item[b)] The refractive-index distribution $\n$ is a continuous function; 
+\item[c)] They have the direction cosine with respect to the optical axis greater than $0$;
+\end{itemize}
+Then, the following relation holds: $$\map{M}{}{}(\mbox{\set{R}{$1$}{}}) = \map{M}{}{}(\mbox{\set{R}{}{}}).$$
+\end{lemma} 
+The second assumption in the previous lemma implies that the optical map is continuous in PS.
+However, for some optical systems, as for instance the compound parabolic concentrator (CPC), the ray mapping in phase space is not continuous. This is due to multiple reflections that rays can encounter with the reflectors. 
+This implies that some rays at the edge of the source could not be mapped into rays at the edges of the target \cite{davies1994edge}. \\ \indent 
+In 1994 Ries and Rabl reformulated the edge-ray principle such that it is valid for all systems even if the ray map in PS is not continuous \cite{Ries:2}. 
+Suppose that \set{R}{$1$}{}$(\Pi)$ and \set{R}{}{}$(\Pi)$ are the regions, corresponding to path $\Pi$, at the source and the target PS, respectively. 
+They showed that, for a given path $\Pi$, if the boundaries
+$\partial$\set{R}{$1$}{}$(\Pi)$ are mapped into the boundaries $\partial$\set{R}{}{}$(\Pi)$, then also the regions \set{R}{$1$}{}$(\Pi)$ are mapped into the regions \set{R}{}{}$(\Pi)$.
+Then, to map \set{S}{}{} to \set{T}{}{} it is necessary and sufficient that the first version of the edge ray principle is observed for all part of \set{S}{}{} and \set{T}{}{} defined by the number of reflections \cite{Ries:2}. 
+\begin{lemma}{Edge-ray principle (generalized version)}
+Let indicate every possible path with $(\Pi_\variabile{j})_{\variabile{j}=1, \cdots, \npath}$, where $\npath$ is the number of all possible paths.
+Every possible path correspond to a certain number of reflections.
+Let denote with \set{R}{$1$}{}$(\Pi_\variabile{j})$ and \set{R}{}{}$(\Pi_\variabile{j})$ the regions at \set{S}{}{} and \set{}{}{} associated to path $\Pi_\variabile{i}$ such that they are a partition of \set{S}{}{} and \set{T}{}{}, that is:
+\begin{equation*}
+\begin{aligned}
+\mbox{\set{S}{}{}} &= \bigcup_{\variabile{j}=1}^{\npath} \mbox{\set{R}{$1$}{}}(\Pi_\variabile{i}), \mbox{ with } \mbox{\set{R}{$1$}{}}(\Pi_\variabile{j})\cap \mbox{\set{R}{$1$}{}}(\Pi_\variabile{i}) = \emptyset \mbox{ for } \variabile{i}\neq \variabile{j}\\
+\mbox{\set{T}{}{}} & = \bigcup_{\variabile{j}=1}^{\npath} \mbox{\set{R}{}{}}(\Pi_\variabile{i}), \mbox{ with } \mbox{\set{R}{}{}}(\Pi_\variabile{j})\cap \mbox{\set{R}{}{}}(\Pi_{\variabile{i}}) = \emptyset \mbox{ for } \variabile{j}\neq \variabile{i}.
+\end{aligned}
+\end{equation*} 
+Then, to map a source region into a target, it is necessary and sufficient that the first version of the edge ray principle is observed for all parts of \set{S}{}{} and \set{T}{}{} defined by the number of reflections: 
+\begin{equation*}
+\map{M}{}{}\big(\partial\mbox{\set{R}{$1$}{}}(\Pi_{\variabile{j}})\big) = \partial\mbox{\set{R}{}{}}(\Pi_{\variabile{j}}), \quad \forall \variabile{j}\in\{1, \cdots, \npath\}.
+\end{equation*}
+\end{lemma}
+Hence, the edge-ray principle constitutes a tool for designing ideal systems and, to this purpose, it is sufficient that the rays of $\partial$\set{R}{$1$}{}$(\Pi)$ are transformed to the rays of $\partial$\set{R}{}{}$(\Pi)$ for every path $\Pi$ \cite{minano1992new}. 
 \\ \indent Using the PS concept and the edge-ray principle we develop a new ray tracing method. 
 A non-uniform distribution of the rays is provided by developing a triangulation refinement at the source PS which is explained in the next section. 
 The triangulation refinement provides more rays close to the boundaries of the regions \set{R}{$1$}{}$(\Pi)$ each of them is formed by the rays that follow the same path $\Pi$.
