@@ -1,7 +1,7 @@
 \chapter{The $\alpha$-shapes approach}\label{chap:boundaries_alpha}
 In the previous chapter we presented a new ray tracing approach based on PS. We explained that, in order to compute the target intensity, it is necessary to know the boundaries of the regions in target PS with positive luminance. Ray tracing in PS requires tracing only the rays close to these boundaries. The rays traced can be seen as a point cloud in PS. To detect the shape formed by those rays, the $\alpha$-shapes approach is employed \cite{portegies2013fast}.\\ \indent
-Methods based on $\alpha$-shapes are widely used to reconstruct an unknown shape formed by a set of finite data points \cite{guo1997surface}. In two dimensions, $\alpha$-shapes gives the contour of the point cloud which is approximated by a family of broken curved lines. 
-The only disadvantage of such methods is that it can be very hard to choose the appropriate value of the parameter $\alpha$ and, in most cases it can be selected only by numerical simulations.\\ \indent
+Methods based on $\alpha$-shapes are widely used to reconstruct an unknown shape formed by a set of finite data points \cite{guo1997surface}. $\alpha$-shapes are a very powerful tool to construct the shape of a point cloud. As $\alpha$ varies, we can obtain different $\alpha$-shapes from the point set itself to the convex
+hull \cite{xu2003automatic}. The disadvantage of such methods is that it can be very hard to choose the appropriate value of the parameter $\alpha$ and, in most cases it can be selected only by numerical simulations.\\ \indent
 We develop a technique based on $\alpha$-shape that gives a criterion to determine the value of the parameter $\alpha$, for which the boundaries are approximated well \cite{filosa2015new}.\\ \indent This chapter is organized as follows. An overview of the-state-of-the-art about $\alpha$-shape methods is provided in Section \ref{sec:alpha-shapes}; the technique used for computing the $\alpha$ value is explained in Section \ref{sec:Tir_alpha}; the results for two different kind of total internal reflection (TIR)-collimators are given in Section \ref{sec:results-Tir-alpha}. Discussions are conclusions are provided in the last paragraph of this chapter.
 \section{$\alpha$-shapes theory}\label{sec:alpha-shapes}
 Given a finite set $V = \{v_1, \cdots, v_N\}\subset \mathbb{R}^2$ of points, $\alpha$-shapes are geometrical objects that give us an approximation of the shape formed by the point cloud. For now we do not further specify the notion of shape. A more precise definition will be provided later.\\ \indent
@@ -12,7 +12,7 @@ We will obtain a shape formed by arcs and points (see Figure \ref{fig:shape2d} f
 \begin{center}
 \includegraphics[width=\textwidth]{alpha_shapes2D}
 \label{fig:shape}
-\caption{Construction of $\alpha$-shapes given a set of points (blue dots) in $\mathbb{R}^2$. The boundary of the shape formed by the point cloud (red line) is detected for $\alpha = 1$ (left) and for $\alpha=2$ (right) \cite{sabel2017application}.}
+\caption{\textbf{Construction of $\alpha$-shapes.} The boundary of the shape (red line) formed by a set of points (blue dots) in $\mathbb{R}^2$ is detected for $\alpha = 1$ (left) and for $\alpha=2$ (right) \cite{sabel2017application}.}
 \label{fig:shape2d}
 \end{center}
 \end{figure}
@@ -128,8 +128,10 @@ To summarize, the $\alpha$-shape construction can be outlined as follows:
 %\\
 %Let us define a Voronoi diagram in a metric space.
 %The simplest case that we can have is the two-dimensional case that is the case where $X=\mathbb{R}^2$.
-%The tuple $\mathcal{S}=\{1,\cdots,n\}\subset \mathbb{R}^2$ is now a set of points. The Voronoi diagram of $\mathcal{S}$ is a subsection of $\mathbb{R}^2$ such that every other region around a point $p\in \mathcal{S}$ contains all points that are closer to $p$ than to every point in $\mathcal{S}$. A triangulation of the point set $\mathcal{S}$ is a set of edges $\mathcal{E}$ whose extremes are points of $\mathcal{S}$ such that the faces of each triangle are bounded by three edges and any edge that is not in $\mathcal{E}$ intersects one of the existing edges. The Delaunay triangulation is the dual graph of the Voronoi diagram: it consists of vertices (the points in $\mathcal{S}$) and it has an edge between two vertices if the two corresponding faces share an edge. \\
-\indent Although $\alpha$-shapes are a powerful tool for determine the shape of a point cloud, there exist shapes that are not described well by classical $ \alpha $-shapes. Indeed for some surfaces there is no value of $\alpha$ that includes all desired triangles and deletes all undesired triangles. If the parameter $\alpha$ is determined according to the density of the point cloud, it can be difficult to obtain a good approximation of a shape formed by a non-uniform points set. Furthermore, the $\alpha$-shape method does not work well when the shape we need to approximate has a sharp turn or a joint. 
+%The tuple $\mathcal{S}=\{1,\cdots,n\}\subset \mathbb{R}^2$ is now a set of points. The Voronoi diagram of $\mathcal{S}$ is a subsection of $\mathbb{R}^2$ such that every other region around a point $p\in \mathcal{S}$ contains all points that are closer to $p$ than to every point in $\mathcal{S}$. A triangulation of the point set $\mathcal{S}$ is a set of edges $\mathcal{E}$ whose extremes are points of $\mathcal{S}$ such that the faces of each triangle are bounded by three edges and any edge that is not in $\mathcal{E}$ intersects one of the existing edges. The Delaunay triangulation is the dual graph of the Voronoi diagram: it consists of vertices (the points in $\mathcal{S}$) and it has an edge between two vertices if the two corresponding faces share an edge. 
+$\alpha$-shapes provide a nice mathematical definition of the \textit{shape} of
+a set of points. In two dimensions, $\alpha$-shapes gives the contour of the point cloud which is approximated by a family of broken curved lines. 
+Although they are a powerful tool for determining the shape of a point cloud, there exist shapes that are not described well by classical $ \alpha $-shapes. Indeed for some surfaces there is no value of $\alpha$ that includes all desired triangles and deletes all undesired triangles. If the parameter $\alpha$ is determined according to the density of the point cloud, it can be difficult to obtain a good approximation of a shape formed by a non-uniform points set. Furthermore, the $\alpha$-shape method does not work well when the shape we need to approximate has a sharp turn or a joint. 
 %In this case $\alpha$-shapes often give a "webbed-foot" appearance at such joints since they improperly connect the adjacent surfaces. 
 To overcome these issues, Teichmann and Capps presented alternatives approaches to establish the value of $\alpha$, \cite{teichmann1998surface}. Their anisotropic density-scaled $\alpha$-shapes method constitutes an improvement of  classical $\alpha$-shapes.
 \\ \indent There are several ways to determine the value of $\alpha$ \cite{mandal1997selection}; in the next section we provide a technique that exploits the conservation of \'{e}tendue in PS. 
@@ -231,10 +233,10 @@ The collimator is surrounded by two vertical lines (lines $13$ and $15$) and two
   \begin{center}
   \includegraphics[width=7.7cm]{TIR}
   \end{center}
-  \caption{Shape of the TIR-collimator. Each surface of the system is labeled with a number.
+  \caption{\textbf{Shape of the TIR-collimator.} Each surface of the system is labeled with a number.
    The shape of the collimator is shown with a blue line.
-   Three detectors depicted with green lines (surfaces $13$, $14$, and $15$) are located at the left, the right and the bottom of the optical system.
-The sagitta of the lens is approximately $1.17$}
+   Three detectors depicted with green lines (surfaces $13$, $14$, and $15$) are located at the left, the right and the bottom of the optical system. The source (line$1$) and the target (line $12$) are depicted in red.
+The sagitta of the lens is approximately $1.17$.}
   \label{fig:tir}
 \end{figure}
 \\ \indent
@@ -246,7 +248,7 @@ We discard rays with direction parallel to the source, therefore $\variabile{p}_
   \begin{center}
   \includegraphics[width=7.7cm]{source1}
   \end{center}
-  \caption{Distribution of the rays on \point{S}{}{}. Around $1.67 \cdot 10^4$ rays are traced using the triangulation refinement with parameters:
+  \caption{\textbf{Distribution of the rays on \point{S}{}{}}. Around $1.67 \cdot 10^4$ rays are traced using the triangulation refinement with parameters:
   $\varepsilon_\variabile{q}^\textrm{max} = 0.1 ,$ $ \varepsilon_{\variabile{p}}^\textrm{max} = 5\cdot 10^{-2}, $ $\varepsilon_{\variabile{q}}^\textrm{min} = 9\cdot 10^{-3}, \varepsilon_\variabile{p}^\textrm{min} = 4.5 \cdot 10^{-3}$. Rays that belong to the same region are depicted with the same color. The rays located inside the white areas do not reach the target. The boundaries of the two white regions are approximated by triangles depicted with black lines.}
   \label{fig:sourcePS}
 \end{figure}
@@ -263,11 +265,11 @@ Matching $U_1$ with all the approximations of $U_{\textrm{t}}$ we find the best 
   \begin{center}
   \includegraphics[width=7.7cm]{etendue_alpha}
   \end{center}
-  \caption{\footnotesize{The source and the target \'{e}tendue are depicted with the red line and the blue line, respectively.
+  \caption{\textbf{Etendue for the TIR-.collimator}
   $U_\textrm{t}$ is computed for a range of values for $\alpha$. $U_1 \approx 7.77$
    The green dot indicates the value of $\alpha_c = 0.139$ which gives the best approximation of the boundaries $\partial$\set{R}{}{}$(\Pi)$ at the target.
    Around $1.67 \cdot 10^4$ rays have been traced using PS ray tracing.
-  }}
+  }
   \label{fig:etendueTS}
 \end{figure}
 Applying $\alpha$-shapes with $\alpha=\alpha_c$, a good approximation of $\partial$\set{R}{}{}$(\Pi)$ is found. In Figure \ref{fig:targetPS} we show the boundaries 
@@ -301,9 +303,9 @@ $\hat{I}_{\textrm{PS}}$ is hardly distinguishable from $\hat{I}_{\textrm{ref}}$ 
   \begin{figure}[h]
     \centering
     \includegraphics[width=7.7 cm]{intensity_alpha_shapes}
-\caption{The red line shows the PS intensity at the target of the TIR-collimator. The exact intensity is depicted with the dotted blue line.
-The exact intensity is computed using the MC method for a set of $1.7\cdots 10^8$ rays. For the PS intensity a set of $6.6\cdot 10^4$
-rays is considered and $\alpha_c = 0.02$ is chosen to compute the boundaries $\partial$\set{R}{}{}$(\Pi)$.}%The approximate intensity can hardly be distinguished from the reference intensity.}
+\caption{\textbf{Target intensity profile.}
+The exact intensity is computed using the MC method for a set of $1.7\cdot10^8$ rays. For the PS intensity a set of $6.6\cdot 10^4$
+rays is considered and $\alpha_c = 0.02$ is chosen to compute the boundaries $\partial$\set{R}{}{}$(\Pi)$.}
   \label{fig:intensityMCPS}
 \end{figure}
 Finally, we calculate the error between $\hat{I}_{\textrm{A}}$ and $\hat{I}_{\textrm{ref}}$, defined as:
@@ -348,9 +350,7 @@ $9\,714$  & $6.69\cdot 10^{-4}$  \\ $97\,103$  & $2.08\cdot 10^{-4}$ \\ $971\,62
   \begin{center}
   \includegraphics[width=7cm]{error_alpha_shapes1}
   \end{center}
-  \caption{The red line depicts the error between the PS intensity and the reference intensity.
- The blue line shows the error between the MC intensity and the reference intensity.
-  The dashed line represents a straight line with the slope equal to $-\frac{1}{2}$.
+  \caption{\textbf{PS and MC errors as a function of the number of rays}
   The horizontal dotted line shows that an error equal to $2.00 \cdot  10^{-5}$ can be obtained tracing at least $10^2$ times fewer rays in phase space.}
   \label{fig:error}
 \end{figure}
@@ -372,7 +372,7 @@ The $\alpha$-shapes procedure is unable to properly detect the boundaries of reg
   \includegraphics[width=\textwidth]{boundaries_alpha2}
   \caption{Boundaries approximation obtained using the $\alpha$-shapes method with $\alpha_c = 0.31$ (black line).}
 \end{subfigure}
-\caption{Approximated boundaries at the target PS. Tracing $3339$ rays and using $\alpha$-shapes, the boundaries cannot be approximated well. 
+\caption{\textbf{Approximated boundaries at the target PS.} Tracing $3339$ rays and using $\alpha$-shapes, the boundaries cannot be approximated well. 
 A small change of the parameter $\alpha$ leads to a completely different approximation of the boundaries.}
 \label{fig:Tir1}
 \end{figure}
@@ -393,17 +393,17 @@ Therefore, it is expected that $\alpha$-shapes method performs well, even for a 
   \begin{center}
   \includegraphics[width=6.5cm]{tir_analytic2}
    \end{center}
-    \caption{Shape of the TIR-collimator. Each surface of the system is labeled with a number.
+    \caption{\textbf{Shape of the TIR-collimator.} Each surface of the system is labeled with a number.
        $n_1 = 1$ is the refraction index of the medium (air) where the source and the target are located, and
-       $n_2 = 1.5 $ the refraction index of the medium (glass) inside the optical system. The sagitta of the lens is equal to $0.6$}
+       $n_2 = 1.5 $ the refraction index of the medium (glass) inside the optical system. The sagitta of the lens is equal to $0.6$.}
  \label{fig:analyticlens}
 \end{figure}
  \begin{figure}[h]
   \begin{center}
        \includegraphics[width=7.7cm]{boundaries_alpha3}
    \end{center}
-        \caption{Target phase space for the TIR-collimator depicted in
-        Figure \ref{fig:analyticlens}. The black line depicts the best approximation of $\partial$\set{R}{}{}$(\Pi)$ for $3281$ rays. 
+        \caption{\textbf{Target phase space for the TIR-collimator depicted in
+        Figure \ref{fig:analyticlens}.} The black line depicts the best approximation of $\partial$\set{R}{}{}$(\Pi)$ for $3281$ rays. 
 The $\alpha$-shapes method gives an accurate approximation of the boundaries for $\alpha_c = 0.9$.}
   \label{fig:Tir2}
 \end{figure}
@@ -420,10 +420,11 @@ For the TIR-collimator in Figure \ref{fig:analyticlens} we obtained a speed of c
  \begin{center}
    \includegraphics[width=7.7cm]{error_plot}
     \end{center}
-     \caption{The red line depicts the error using the $\alpha$-shapes method to compute the boundaries. 
-The blue line shows the error between the Monte Carlo intensity and the exact intensity.
-     The dashed black line represents a straight line with slope $-\frac{1}{2}$.
-   The dashed blue line represents a straight line with slope $-1$.}
+     \caption{\textbf{PS and MC errors.} The errors are in a logarithmic scale.}
+%The red line depicts the error using the $\alpha$-shapes method to compute the boundaries. 
+%The blue line shows the error between the Monte Carlo intensity and the exact intensity.
+%     The dashed black line represents a straight line with slope $-\frac{1}{2}$.
+%   The dashed blue line represents a straight line with slope $-1$.}
  \label{fig:error2}
 \end{figure}
 \section{Conclusion}
