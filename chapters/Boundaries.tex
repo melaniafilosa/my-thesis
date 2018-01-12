@@ -44,6 +44,7 @@ $\Delta_{\textrm{abc}}$ and $\Delta_{\textrm{abd}}$ with the common edge $\overl
 \label{fig:shape}
 \caption{The point $d$ is inside the circle circumscribing the triangle $\Delta_{\textrm{abc}}$, therefore the edge $\overline{\textrm{ab}}$ cannot be included in the Delaunay triangulation.}
 \end{subfigure}
+\hfill
 \begin{subfigure}[t]{0.48\textwidth}
 \centering
 \includegraphics[]{triangle_alpha_shapes_flipped}
@@ -365,12 +366,13 @@ The $\alpha$-shapes procedure is unable to properly detect the boundaries of reg
 \begin{subfigure}{.48\textwidth}
   \centering
   \includegraphics[width=\textwidth]{boundaries_alpha1}
-  \caption{Boundaries approximation obtained using the $\alpha$-shapes method with $\alpha_c = 0.3$ (black line).}
+  \caption{Boundaries approximation obtained using the $\alpha$-shapes method with $\alpha_c = 0.3$ (black lines).}
 \end{subfigure}
+\hfill
 \begin{subfigure}{.48\textwidth}
   \centering
   \includegraphics[width=\textwidth]{boundaries_alpha2}
-  \caption{Boundaries approximation obtained using the $\alpha$-shapes method with $\alpha_c = 0.31$ (black line).}
+  \caption{Boundaries approximation obtained using the $\alpha$-shapes method with $\alpha_c = 0.31$ (black lines).}
 \end{subfigure}
 \caption{\textbf{Approximated boundaries at the target PS.} Tracing $3339$ rays and using $\alpha$-shapes, the boundaries cannot be approximated well. 
 A small change of the parameter $\alpha$ leads to a completely different approximation of the boundaries.}
