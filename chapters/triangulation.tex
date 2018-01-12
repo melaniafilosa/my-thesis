@@ -127,14 +127,14 @@ The results shown in Figure \ref{fig:etendue_tir_triangulation} give the \'{e}te
 % \end{table}
  \begin{figure}[h!]
   \center
-  \includegraphics[width= 7cm]{etendue_tir_triangulation}
+  \includegraphics[width = 0.47\textwidth]{etendue_tir_triangulation}
   \caption{\textbf{Etendue of the TIR-collimator.} A comparison between $U_1$ and $U_{\textrm{t}}$ shows that by decreasing the value of $\varepsilon_{\variabile{q}_{1}^{\textrm{min}}}$, $\Delta U= U_1-U_{\textrm{t}}$ decreases.}
   \label{fig:etendue_tir_triangulation}
 \end{figure}
 \\ \indent The boundaries $\partial\mbox{\set{R}{$1$}{}}(\Pi_{\lineai})$ and $\partial\mbox{\set{R}{}{}}(\Pi_{\lineai})$ with $\lineai = \{1, \cdots, 5\}$ computed using the triangulation refinement with 
-$\varepsilon_{\variabile{q}_1}^{\textrm{min}}=1.6\cdot 10^{-3}$ are shown in Figure \ref{fig:boundaries_TIR_triangulation} with the black lines. 
+$\varepsilon_{\variabile{q}_1}^{\textrm{min}}=1.6\cdot 10^{-3}$ are shown in Figure \ref{fig:boundaries_TIR_triangulation} with the black lines. Around $1.62 \cdot 10^5$ rays are traced using the triangulation refinement in PS with $\varepsilon_{\variabile{q}_1}^{\textrm{min}}=1.6\cdot 10^{-3}, \varepsilon_{\variabile{q}_1}^{\textrm{max}}=1, \varepsilon_{\variabile{p}_1}^{\textrm{min}}=\varepsilon_{\variabile{q}_1}^{\textrm{min}}/2$ and $\varepsilon_{\variabile{p}_1}^{\textrm{max}} = \varepsilon_{\variabile{q}_1}^{\textrm{max}}/2$.
 \begin{figure}[h]
- \begin{subfigure}[]{0.47\textwidth}
+ \begin{subfigure}[t]{0.47\textwidth}
 \centering
     \includegraphics[width=\textwidth]{boundaries_triang_source_tir}
     \caption{Boundaries at the source PS.}
@@ -150,13 +150,7 @@ $\varepsilon_{\variabile{q}_1}^{\textrm{min}}=1.6\cdot 10^{-3}$ are shown in Fig
 \caption{\textbf{Boundaries at \set{S}{}{} and \set{T}{}{} of the TIR-collimator} The black lines show the boundaries found using $\varepsilon_{\variabile{q}_1}^{\textrm{min}}=1.6\cdot 10^{-3}$ in the triangulation refinement of the source PS.}
  \label{fig:boundaries_TIR_triangulation}
 \end{figure}
-% \begin{figure}[ht]
-%  \center
-%  \includegraphics[width= 7cm]{boundaries_triang_target_tir}
-%  \caption{\textbf{Boundaries at \set{S}{}{} and \set{T}{}{} of the TIR-collimator} The black lines show the boundaries found using $\varepsilon_{\variabile{q}_1}^{\textrm{min}}=1.6\cdot 10^{-3}$ in the triangulation refinement of the source PS..}
-%  \label{fig:boundaries_TIR_triangulation}
-%\end{figure}
-Around $1.62 \cdot 10^5$ rays are traced using the triangulation refinement in PS with $\varepsilon_{\variabile{q}_1}^{\textrm{min}}=1.6\cdot 10^{-3}, \varepsilon_{\variabile{q}_1}^{\textrm{max}}=1, \varepsilon_{\variabile{p}_1}^{\textrm{min}}=\varepsilon_{\variabile{q}_1}^{\textrm{min}}/2$ and $\varepsilon_{\variabile{p}_1}^{\textrm{max}} = \varepsilon_{\variabile{q}_1}^{\textrm{max}}/2$. \\ \indent 
+ \\ \indent 
 The target PS intensity $\hat{I}_{\textrm{PS}}$ is found for those parameters and it is compared with a reference intensity $\hat{I}_{\textrm{ref}}$ which is given by QMC ray tracing with $10^7$ rays (as the exact intensity for the TIR-collimator is unknown). The profile of the two intensities is given in Figure \ref{fig:intensity_tir_triangulation}. 
 The difference between the two intensity profiles is not discernible by eye.
  \begin{figure}[ht]
@@ -180,7 +174,7 @@ To validate our method, PS ray tracing is compared to both MC and QMC ray tracin
   \caption{\textbf{Error as a function of the CPU-time} The PS intensity $\hat{I}_{\textrm{PS}}$ is computed using PS ray tracing with around $1.62\cdot 10^5$ rays. The reference intensity $\hat{I}_{\textrm{ref}}$ is obtained by QMC ray tracing with $10^7$ rays.}
   \label{fig:error_tir_triangulation_time}
 \end{figure}
-The results shown in Figures \ref{fig:error_tir_triangulation} and \ref{fig:error_tir_triangulation_time} are reported in Tables \ref{tab:ps_error_triangulation} and  \ref{tab:qmc_error_triangulation}.
+\\ \indent The results shown in Figures \ref{fig:error_tir_triangulation} and \ref{fig:error_tir_triangulation_time} are reported in Tables \ref{tab:ps_error_triangulation} and  \ref{tab:qmc_error_triangulation}.
 \begin{table}[ht] \label{tab:table_tir_triangulation}
 \centering
 \caption{\bf Errors of the PS intensity}
@@ -213,8 +207,24 @@ $10^5$  & $1.92\cdot 10^{-4}$  & $5.82\cdot 10^{-5}$  & $259.92$  & $258.28$  \\
  \end{table}
 
 
-
 \section{A Parabolic reflector}
+
+Given a Cartesian coordinate system  $(\variabile{x},\variabile{z})$, the two-dimensional system in Figure \ref{CPC} is defined in the $(\variabile{x},\variabile{z})$-plane.
+ It consists of a source \point{S} (line $1$), a target \point{T} (line $4$) parallel to \point{S} and two reflectors (lines $2$ and $3$) which are arcs of the same parabola. 
+  The minimum of the parabola is located at the point with $\variabile{x}$-coordinate equal to $0$. $\point{S}=[\const{-a}, \const{a}]$ (with $\const{a}=2$) and $\point{T}=[-\const{b},\const{b}]$ (with $\const{b}=17$) are lines perpendicular to the optical axis and are located at $\variabile{z}=0$ and $\variabile{z}=40$, respectively.
+All the optical lines are located in air, therefore the index of refraction ${n}_{\variabile{i}}=1$ for every line $\variabile{i}=1, \cdots, 4$.
+The optical axis of the system in Figure \ref{CPC} corresponds to the \variabile{z}-axis.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.5\textwidth]{parabolic_reflector}
+\caption{The two-dimensional optical system with parabolic mirrors.  Each line of the system is labeled with a number.
+   The source \point{S}$= [2,2]$ (line $1$) is located on the $\variabile{x}$-axis.
+   The target \point{T}$= [-17, 17]$ (line $4$) is parallel to the source and is located at a height $ \variabile{z}= 40$.
+   The left and right reflectors (lines $2$ and $3$) are arcs of the same parabola.}
+\label{CPC}
+\end{figure}
+
+
 % Intensity 
 % Error
 
