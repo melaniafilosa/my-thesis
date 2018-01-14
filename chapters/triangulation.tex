@@ -208,23 +208,41 @@ $10^5$  & $1.92\cdot 10^{-4}$  & $5.82\cdot 10^{-5}$  & $259.92$  & $258.28$  \\
 
 
 \section{A Parabolic reflector}
-
 Given a Cartesian coordinate system  $(\variabile{x},\variabile{z})$, the two-dimensional system in Figure \ref{CPC} is defined in the $(\variabile{x},\variabile{z})$-plane.
  It consists of a source \point{S} (line $1$), a target \point{T} (line $4$) parallel to \point{S} and two reflectors (lines $2$ and $3$) which are arcs of the same parabola. 
   The minimum of the parabola is located at the point with $\variabile{x}$-coordinate equal to $0$. $\point{S}=[\const{-a}, \const{a}]$ (with $\const{a}=2$) and $\point{T}=[-\const{b},\const{b}]$ (with $\const{b}=17$) are lines perpendicular to the optical axis and are located at $\variabile{z}=0$ and $\variabile{z}=40$, respectively.
-All the optical lines are located in air, therefore the index of refraction ${n}_{\variabile{i}}=1$ for every line $\variabile{i}=1, \cdots, 4$.
+All the optical lines are located in air, therefore the index of refraction ${n}=1$ for every line.
 The optical axis of the system in Figure \ref{CPC} corresponds to the \variabile{z}-axis.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.5\textwidth]{parabolic_reflector}
-\caption{The two-dimensional optical system with parabolic mirrors.  Each line of the system is labeled with a number.
+\caption{\textrm{A parabolic reflector.}  Each line of the system is labeled with a number.
    The source \point{S}$= [2,2]$ (line $1$) is located on the $\variabile{x}$-axis.
    The target \point{T}$= [-17, 17]$ (line $4$) is parallel to the source and is located at a height $ \variabile{z}= 40$.
    The left and right reflectors (lines $2$ and $3$) are arcs of the same parabola.}
 \label{CPC}
 \end{figure}
-
-
+We trace rays in PS with source direction coordinates $\variabile{p}_1 = [-1,1]$ and source position coordinates $\variabile{q}_1\in[-\variabile{a}+\varepsilon,\variabile{a}-\varepsilon]$ where $\varepsilon>0$ is a small number. In particular we take $\varepsilon = 10^{-12}$. Considering the parameters $$\varepsilon_{\variabile{q}_1}^{\textrm{min}} = 0.025, \; \varepsilon_{\variabile{q}_1}^{\textrm{max}} = 0.25, \; \varepsilon_{\variabile{p}_1}^{\textrm{max}} = \varepsilon_{\variabile{q}_1}^{\textrm{min}}/2, \mbox{ and }  \varepsilon_{\variabile{p}_1}^{\textrm{max}} = \varepsilon_{\variabile{q}_1}^{\textrm{max}}/2, $$ around $7700$ rays are traced in PS. Their distribution at \set{S}{}{} and \set{T}{}{} is shown in Figures \ref{fig:source_triang_pr} and \ref{fig:target_triang_pr}, respectively. 
+\begin{figure}[h]
+ \begin{subfigure}[t]{0.47\textwidth}
+\centering
+    \includegraphics[width=\textwidth]{parabolic_reflector}
+    \caption{Source PS \set{S}{}{} $= [-\variabile{a}+\varepsilon,\variabile{a}-\varepsilon]\times[-1,1]$}
+    \label{fig:source_triang_pr}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.47\textwidth}
+\centering
+    \includegraphics[width = \textwidth]{parabolic_reflector}
+    \caption{Target PS \set{T}{}{} $= [-\variabile{b},\variabile{b}]\times[-1,1]$}
+    \label{fig:target_triang_pr}
+\end{subfigure}
+\caption{\textbf{Rays distribution at \set{S}{}{} and \set{T}{}{} of the parabolic reflector.} Around $7700$ rays are traced using PS ray tracing with parameters $\varepsilon_{\variabile{q}_1}^{\textrm{min}} = 0.025, \; \varepsilon_{\variabile{q}_1}^{\textrm{max}} = 0.25, \; \varepsilon_{\variabile{p}_1}^{\textrm{max}} = \varepsilon_{\variabile{q}_1}^{\textrm{min}}/2, \mbox{ and }  \varepsilon_{\variabile{p}_1}^{\textrm{max}} = \varepsilon_{\variabile{q}_1}^{\textrm{max}}/2$ . $17$ different path are found each of them correspond to a certain number of reflection.}
+ \label{fig:phase_space_pr}
+\end{figure}\\ 
+The distribution of the rays in PS gives information about the path they follow. We note that for the parabolic reflector many paths are found. Every path corresponds to a given number of reflections. Rays can have multiple reflections before arrive at the target. These are the rays that leaves the end points of the source with direction tangential to the mirrors $2$ and $3$. The parameters used in the triangulation refinement establish not only the number of rays traced but also the number of paths detected. For instance, for the values of the parameters defined above, the triangulation refinement is able to detect $17$ different paths. Decreasing the values of the parameters more reflections can be found. 
+Increasing the number of reflections considered, the regions in PS formed by the rays that have multiple reflections are smaller and smaller, see Figure \ref{fig:phase_space_pr}.\\ \indent 
+ Rays with a large number of reflection do not give a significant contribution to the target intensity. 
 % Intensity 
 % Error
 
