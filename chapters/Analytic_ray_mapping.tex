@@ -1,18 +1,20 @@
 \chapter{The inverse ray mapping method: analytic approach}\label{chap:raymapping1}
-PS ray tracing based on the source and the target PS constitutes an improvement of MC and QMC ray tracing. 
-Now, a method that employs not only the source and the target PS but also the PS of \textit{all} the other lines that constitute the optical system is introduced. %Furthermore, instead of starting from the source, the new approach is an inverse method which starts considering rays on target PS.
-All lines can be modeled as detectors of the incident light and emitters of the reflected light.
+In the previous chapter we have seen that PS ray tracing based on the source and the target PS constitutes an improvement of MC and QMC ray tracing. 
+Now, a method that employs not only the source and the target PS but also the PS of \textit{all} the other lines that constitute the optical system is introduced. 
+% Furthermore, instead of starting from the source, the new approach is an inverse method which starts considering rays on target PS.
+All lines can be modeled as detectors of the incident light and emitters of the reflected light, they constitute
+the target for incident rays and the source for reflected rays.
 Moreover, we assume that the source can only emit light and the target can only receive light.
-Therefore, one PS is taken into account for the source and one for the target while both the source and target phase spaces are considered for the other lines. Every line of the system (except for the source \point{S} and the target \point{T}) constitutes
-the target for incident rays and the source for reflected rays. Therefore, two different phase spaces are considered for the reflectors and one PS for
+%Therefore, 
+%one PS is taken into account for the source and one for the target while both the source and target phase spaces are considered for the other lines. E%
+%Every line of the system (except for the source \point{S} and the target \point{T}) . 
+Therefore, two different phase spaces are considered for the reflectors and one PS for
 \point{S} and \point{T}. All these phase spaces are connected through a map which relates the rays coordinates on every PS. In order to compute the target photometric variables an inverse ray mapping reconstruction from the target to the source is involved.
 \\\indent
-In this chapter two different optical systems are investigated.
-First, the method is explained for the two-faceted cup. 
-Then, it is extended to a more complicated system, the so-called multi-faceted cup, which is formed by only straight lines segments.
+In this chapter we explaine the method for systems formed by straight lines segment. 
+Two different optical systems are investigated here: the two-faceted cup and the so-called multi-faceted cup.
 \section{Explanation of the method}
-Using the PS of \textit{all} the lines that form the system, a map from the source to the target of the system is constructed. This map can be written as the concatenation of many maps which
-can be classified as two different kinds of maps, i.e. the map that connects the source and the target PS of two \textit{different} lines and the map that connects the target and the source PS of the \textit{same} line.
+Using the PS of \textit{all} the lines that form the system, a map from the source to the target of the system is constructed. It can be written as the concatenation of many maps which can be classified as two different kinds of maps, i.e. the map that connects the source and the target PS of two \textit{different} lines and the map that connects the target and the source PS of the \textit{same} line.
 Employing the inverses of these maps we are able to detect the parts on target PS illuminated by the source.
 All the PS considered are divided into regions, the boundaries of which can be determined exactly for systems formed by straight lines.
 We make the assumption of a Lambertian source; hence, the luminance is a positive constant when different from $0$. 
@@ -24,11 +26,12 @@ We use the same notations of Chapter \ref{chap:PS} to indicate the PS $\mbox{\se
 $(\variabile{q}, \variabile{p})$ in \set{S}{}{}.\\ \indent
 Let's now introduce some new notation. 
 The source and the target PS of a line $\lineai$ are indicated with \set{S}{\lineai}{} and \set{T}{\lineai}{}, respectively.
-The coordinates of every ray that reaches the line $\lineai\in\{1, 2, 3\}$ are indicated  with $(\pos{t,}{\lineai}, \dir{t,}{\lineai})$ on \set{T}{\lineai}{}.
-After reflection, the ray leaves line $\lineai \in\{1, 2, 3\}$ at the same position and with a new direction, the new coordinates are indicated with 
+The coordinates of every ray that reaches the line $\lineai\in\{1, 2, 3\}$ are indicated  with $(\pos{t,}{\lineai}, \dir{t,}{\lineai})$ on \set{T}{\lineai}{}. 
+In the following, to simplify the notation, we indicate the target coordinates of the rays on \set{T}{$4$}{} with (\variabile{q}, \variabile{p}) instead of $(\pos{t,}{$4$}, \dir{t,}{$4$})$.
+After reflection, the ray leaves line $\lineai \in\{1, 2, 3\}$ at the same position and with a new direction, the new rays coordinates are indicated with 
 $(\pos{s,}{\lineai}, \dir{s,}{\lineai})$ on \set{S}{\lineai}{}.
 Note that $\pos{s,}{\lineai}= \pos{t,}{\lineai}$ while $\dir{s,}{\lineai}$ is obtained applying the reflection law to the direction coordinate $\dir{t,}{\lineai}$ of the incident ray.
-The phase spaces \set{S}{\lineai}{} and  \set{T}{\lineai}{} of each line $\lineai$ are partitioned into different regions, (\set{S}{\lineai,}{\lineaj})$_{\lineaj=2, 3, 4}$ and (\set{T}{\lineai,}{\lineak})$_{\lineak=1, 2, 3}$, respectively, where $\lineaj\neq \lineai$ is the index of the line that is illuminated by $\lineai$ and $\lineak\neq\lineai$ is the index of the line that illuminates $\lineai$. Hence, we indicate with \set{S}{\lineai,}{\lineaj}$\subset$ \set{S}{\lineai}{} the part of \set{S}{\lineai}{} corresponding to rays that illuminate line $\lineaj$ and with \set{T}{\lineai,}{\lineak} $\subset$ \set{T}{\lineai}{} the part of \set{T}{\lineai}{} corresponding to rays originating from the line $\lineak$. Note that, due to the fact that the source only emits light, we do not define its target phase space \set{T}{$1$}{}. Similarly, since the target only receives light, its source phase space \set{S}{$4$}{} is not defined.
+The phase spaces \set{S}{\lineai}{} and  \set{T}{\lineai}{} of each line $\lineai$ are partitioned into different regions, (\set{S}{\lineai,}{\lineaj})$_{\lineaj=2, 3, 4}$ and (\set{T}{\lineai,}{\lineak})$_{\lineak=1, 2, 3}$, respectively, where $\lineaj\neq \lineai$ is the index of the line that is illuminated by $\lineai$ and $\lineak\neq\lineai$ is the index of the line that illuminates $\lineai$. Hence, \set{S}{\lineai,}{\lineaj}$\subset$ \set{S}{\lineai}{} is the part of \set{S}{\lineai}{} corresponding to rays that illuminate line $\lineaj$, and \set{T}{\lineai,}{\lineak} $\subset$ \set{T}{\lineai}{} is the part of \set{T}{\lineai}{} corresponding to rays originating from the line $\lineak$. Note that, due to the fact that the source only emits light, we do not define its target PS \set{T}{$1$}{}. Similarly, since the target only receives light, its source PS \set{S}{$4$}{} is not defined.
 For the two-faceted cup, six different phase spaces need to be considered which are given by the following expressions:
 \begin{equation}
 \label{SPS}
@@ -45,11 +48,11 @@ For the two-faceted cup, six different phase spaces need to be considered which 
  \end{equation}
 We need to note that, as the source cannot receive light and the target cannot emit light,  the regions $(\mbox{\set{S}{\lineai,}{$1$}})_{\lineai=2,3}$ and $(\mbox{\set{T}{\lineai,}{$4$}})_{\lineai=2, 3}$ are not considered.
 The boundaries $\partial \mbox{\set{S}{\lineai,}{\lineaj}}$ are mapped into the boundaries $\partial \mbox{\set{T}{\lineaj,}{\lineai}}$ for every $\lineai=\{1, 2, 3\}$ 
-and $\lineaj=\{2, 3,4\}$ with $\lineaj\neq \lineai$ (edge-ray principle \cite{Ries}). For the two-faceted cup and for all systems that are formed by straight lines, they are determined analytically as explained in the following.
+and $\lineaj=\{2, 3,4\}$ with $\lineaj\neq \lineai$ (edge-ray principle). For the two-faceted cup and for all systems that are formed by straight lines, they are determined analytically as explained in the following.
 Given two lines $\lineai$ and $\lineak$
-with $\lineai\neq \lineak$, we show how to compute the boundaries of the region formed by the rays that leave line $\lineai$ and hit line $\lineak$. We do that both on \set{S}{\lineai}{} and on \set{T}{\lineak}{}.
-We indicate with $(\variable{x}_{\lineai, \ell}, \variable{z}_{\lineai, \ell})$ and with $(\variable{x}_{\lineai, \textrm{r}},\variable{z}_{\lineai, \textrm{r}})$ the coordinates of the points located at the left and the right extreme of line $\lineai$, respectively.
-Similarly, $(\variable{x}_{\lineak, \ell}, \variable{z}_{\lineak, \ell})$ and $(\variable{x}_{\lineak, \textrm{r}},\variable{z}_{\lineak, \textrm{r}})$ are the coordinates of the points located at the left and the right extreme of line $\lineak$, respectively.
+with $\lineai\neq \lineak$, we show how to compute the boundaries of the region formed by the rays that leave line $\lineai$ and hit line $\lineak$. We do that on both \set{S}{\lineai}{} and \set{T}{\lineak}{}.
+We indicate with $(\variabile{x}_{\lineai, \ell}, \variabile{z}_{\lineai, \ell})$ and with $(\variabile{x}_{\lineai, \textrm{r}},\variabile{z}_{\lineai, \textrm{r}})$ the coordinates of the points located at the left and the right extreme of line $\lineai$, respectively.
+Similarly, $(\variabile{x}_{\lineak, \ell}, \variabile{z}_{\lineak, \ell})$ and $(\variabile{x}_{\lineak, \textrm{r}},\variabile{z}_{\lineak, \textrm{r}})$ are the coordinates of the points located at the left and the right extreme of line $\lineak$, respectively.
 The boundaries $\partial$\set{S}{\lineai,}{\lineak} and $\partial$\set{T}{\lineak,}{\lineai} are obtained considering all the rays that leave the extremes of line $\lineai$ 
 and all the rays that reach the extremes of the target.
 Given two lines $\lineai$ and $\lineak$ with $\lineai\neq \lineak$, $\partial$\set{S}{\lineai,}{\lineak} and $\partial$\set{T}{\lineak,}{\lineai}
@@ -60,11 +63,11 @@ The boundaries $\partial$\set{S}{\lineai,}{\lineak} and $\partial$\set{T}{\linea
  \begin{equation}
 \label{eq:analytic_boundaries}
  \begin{split}
- \partial\mbox{\set{S}{i,}{k}} & = \partial\mbox{\setbound{S}{i,}{k}{\,1}}\cup \partial\mbox{\setbound{S}{i,}{k}{\,2}} \cup \partial\mbox{\setbound{S}{i,}{k}{\,3}}\cup \partial\mbox{\setbound{S}{i,}{k}{\,4}},\\
-\partial\mbox{\set{T}{k,}{i}} & = \partial\mbox{\setbound{T}{k,}{i}{\,1}}\cup \partial\mbox{\setbound{T}{k,}{i}{\,2}}\cup \partial\mbox{\setbound{T}{k,}{i}{\,3}}\cup \partial\mbox{\setbound{T}{k,}{i}{\,4}}.
+ \partial\mbox{\set{S}{\lineai,}{\lineak}} & = \partial\mbox{\setbound{S}{\lineai,}{\lineak}{\,1}}\cup \partial\mbox{\setbound{S}{\lineai,}{\lineak}{\,2}} \cup \partial\mbox{\setbound{S}{\lineai,}{\lineak}{\,3}}\cup \partial\mbox{\setbound{S}{\lineai,}{\lineak}{\,4}},\\
+\partial\mbox{\set{T}{\lineak,}{\lineai}} & = \partial\mbox{\setbound{T}{\lineak,}{\lineai}{\,1}}\cup \partial\mbox{\setbound{T}{\lineak,}{\lineai}{\,2}}\cup \partial\mbox{\setbound{T}{\lineak,}{\lineai}{\,3}}\cup \partial\mbox{\setbound{T}{\lineak,}{\lineai}{\,4}}.
  \end{split}
  \end{equation}
-In the following we explain in more details the case of $\variabile{\lineai}=1$ and $\variabile{\lineak}=4$; see Fig. \ref{fig:cups}.
+In the following we explain in more details the case of $\variabile{\lineai}=1$ and $\variabile{\lineak}=4$, see Figure \ref{fig:cups}.
 \begin{figure}[h]
 \centering
 \begin{subfigure}{.48\textwidth}
@@ -73,25 +76,28 @@ In the following we explain in more details the case of $\variabile{\lineai}=1$ 
   \caption{Rays that leave the left end point of the source (line $1$) and trace out the target (line $4$).}
   \label{fig:cup1}
 \end{subfigure}%
+\hfill
 \begin{subfigure}{.48\textwidth}
   \centering
   \includegraphics[width=\textwidth]{rays_cup2}
   \caption{Rays that trace out the source (line $1$) and hit the right end point of the target (line $4$).}
   \label{fig:cup2}
 \end{subfigure} %
+\hfill
 \begin{subfigure}{.48\textwidth}
   \centering
   \includegraphics[width = \textwidth]{rays_cup3}
   \caption{Rays that leave the right end point of the source (line $1$) and trace out the target (line $4$).}
   \label{fig:cup3}
 \end{subfigure}%
+\hfill
 \begin{subfigure}{.48\textwidth}
   \centering
   \includegraphics[width=\textwidth]{rays_cup4}
   \caption{Rays that trace out the source (line $1$) and hit the left end point of the target (line $4$).}
   \label{fig:cup4}
 \end{subfigure}
-\caption{Rays located on the boundaries of the regions $\partial$\set{S}{$1$,}{$4$} and $\partial$\set{T}{$4$,}{$1$}.
+\caption{\textbf{Rays located on the boundaries of the regions $\partial$\set{S}{$1$,}{$4$} and $\partial$\set{T}{$4$,}{$1$}}.
 $A = (\variabile{x}_{1 \ell}, \variabile{z}_{1, \ell}) =(-2, 0)$ and 
 $D = (\variabile{x}_{1, \textrm{r}}, \variabile{z}_{1, \textrm{r}}) = (2, 0)$ 
 are the left and right corner points (or end points) of
@@ -101,26 +107,26 @@ $B =  (\variabile{x}_{4, \ell}, \variabile{z}_{4, \ell}) = (-17, 40)$ and $C =  
 \end{figure} \\
  The boundaries $\partial$\set{S}{$1$,}{$4$} and $\partial$\set{T}{$4$,}{$1$} are given in Figs. \ref{fig:S14} and \ref{fig:T411}, respectively.
 $\partial$\setbound{S}{$1$,}{$4$}{1} and $\partial$\setbound{T}{$4$,}{$1$}{1} are obtained tracing out line $4$ from
-$\variabile{q}_{4, \textrm{min}} = -\variabile{b}$ to $\variabile{q}_{4, \textrm{max}} = \variabile{b}$
- by rays leaving $\variabile{q}_{1, \textrm{min}}= -\variabile{a}$ with varying $\variabile{p}_1$, these rays are shown in Fig. \ref{fig:cup1}, and the boundary segments
+$\variabile{q}^{\textrm{min}} = -\variabile{b}$ to $\variabile{q}^{\textrm{max}} = \variabile{b}$
+ by rays leaving $\variabile{q}_{1}^{\textrm{min}}= -\variabile{a}$ with varying $\variabile{p}_1$, these rays are shown in Fig. \ref{fig:cup1}, and the boundary segments
  $\partial$\setbound{S}{$1$,}{$4$}{1} and $\partial$\setbound{T}{$4$,}{$1$}{1} are the orange line segments labeled with \const{c}. 
  $\partial$\setbound{S}{$1$,}{$4$}{2} and $\partial$\setbound{T}{$4$,}{$1$}{2} are given tracing out line $1$ from
  $\variabile{q}_{1, \textrm{min}}= -\variabile{a}$ to $\variabile{q}_{1, \textrm{max}}= \variabile{a}$
- with varying $\variabile{p}_1$, such that all rays hit $\variabile{q}_{4, \textrm{max}} = \variabile{b}$, these rays are shown in Fig. \ref{fig:cup2}, the boundary segments
+ with varying $\variabile{p}_1$, such that all rays hit $\variabile{q}_{\textrm{max}} = \variabile{b}$, these rays are shown in Fig. \ref{fig:cup2}, the boundary segments
  $\partial$\setbound{S}{$1$,}{$4$}{2} and $\partial$\setbound{T}{$4$,}{$1$}{2} are depicted in blue (lines segments labeled with \const{d}).
  Likewise, $\partial$\setbound{S}{$1$,}{$4$}{3} and $\partial$\setbound{T}{$4$,}{$1$}{3} are obtained tracing out line $4$ from
-$\variabile{q}_{4, \textrm{max}}= \variabile{b}$ to $\variabile{q}_{4, \textrm{min}}= -\variabile{b}$ 
+$\variabile{q}_{\textrm{max}}= \variabile{b}$ to $\variabile{q}_{\textrm{min}}= -\variabile{b}$ 
  by rays leaving $\variabile{q}_{1, \textrm{max}}=\variabile{x}_{1, \textrm{r}} = \variabile{a}$ with varying $\variabile{p}_{1}$. These rays are shown in Fig. \ref{fig:cup3}, 
  $\partial$\setbound{S}{$1$,}{$4$}{3} and $\partial$\setbound{T}{$4$,}{$1$}{3} are the red line segments labeled with \const{e}.
   Finally, $\partial$\setbound{S}{$1$,}{$4$}{4} and $\partial$\setbound{T}{$4$,}{$1$}{4} are given tracing out line $1$ from
 $\variabile{q}_{1, \textrm{max}} = \variabile{a}$ to  $\variabile{q}_{1, \textrm{min}} = -\variabile{a}$ 
- with varying $\variabile{p}_{1}$, such that all rays hit $\variabile{q}_{4, \textrm{min}} = -\variabile{b}$, these rays are shown in Fig. \ref{fig:cup4}, 
+ with varying $\variabile{p}_{1}$, such that all rays hit $\variabile{q}_{\textrm{min}} = -\variabile{b}$, these rays are shown in Fig. \ref{fig:cup4}, 
  $\partial$\setbound{S}{$1$,}{$4$}{4} and $\partial$\setbound{T}{$4$,}{$1$}{4} are the green lines segments labeled with \const{f}. 
 We remind that we use the notation $(\variabile{x}, \variabile{z})$ for the Cartesian coordinates system of real space, while phase space has $(\variabile{q}, \variabile{p})$ coordinates. 
 It is worth noting that  $\variabile{q}_{1, \textrm{min}}=\variabile{x}_{1, \ell}$,  $\variabile{q}_{1, \textrm{max}}=\variabile{x}_{1, \textrm{r}}$,  
-$\variabile{q}_{4, \textrm{min}}=\variabile{x}_{4, \ell}$ and  $\variabile{q}_{4, \textrm{max}}=\variabile{x}_{4, \textrm{r}}$.\\ \indent
- For the two-faceted cup there is an analytic expression for every line segment $\partial\mbox{\setbound{S}{\lineai,}{\lineak}{\variabile{\,j}}}$ and
- $\partial\mbox{\setbound{T}{\lineak,}{\lineai}{\variabile{\,j}}}$ in Eq. (\ref{eq:analytic_boundaries}) with $\variabile{\lineaj}\in\{1, \cdots, 4\}$.
+$\variabile{q}_{\textrm{min}}=\variabile{x}_{4, \ell}$ and  $\variabile{q}_{\textrm{max}}=\variabile{x}_{4, \textrm{r}}$.\\ \indent
+ For the two-faceted cup there is an analytic expression for every line segment $\partial\mbox{\setbound{S}{\lineai,}{\lineak}{\variabile{\,m}}}$ and
+ $\partial\mbox{\setbound{T}{\lineak,}{\lineai}{\variabile{\,m}}}$ in Eq. (\ref{eq:analytic_boundaries}) with $\variabile{m}\in\{1, \cdots, 4\}$.
  For instance, the rays on the boundaries $\partial\mbox{\setbound{S}{\lineai,}{\lineak}{\,1}}$ and $\partial \mbox{\setbound{T}{\lineak,}{\lineai}{\,1}}$
   are parameterized in the (\variabile{x}, \variabile{z})-plane by
  \begin{equation}
@@ -131,7 +137,8 @@ $\variabile{q}_{4, \textrm{min}}=\variabile{x}_{4, \ell}$ and  $\variabile{q}_{4
 \variabile{z}_{\variabile{\lineak}, \ell}-\variabile{z}_{\variabile{\lineai}, \ell}+t(\variabile{z}_{\variabile{\lineak}, \textrm{r}}-\variabile{z}_{\variabile{\lineak},\ell})
 \end{array} \right) \qquad \quad 0\leq t\leq 1\,.
 \end{equation}
- These rays are located on a vertical line segment in \set{S}{\lineai}{} as only the $\mbox{\variabile{p}}_{\variabile{\lineai}}$-coordinate changes and on a curved line in \set{T}{\lineak}{}
+ These rays are located on a vertical line segment in \set{S}{\lineai}{} as only the $\mbox{\variabile{p}}_{\variabile{\lineai}}$-coordinate changes and on a curved line in 
+\set{T}{\lineak}{}
   as both the target position and direction vary. The analytic expressions for $\partial \mbox{\setbound{S}{\lineai,}{\lineak}{\,1}}$ and $\partial \mbox{\setbound{T}{\lineak,}{\lineai}{\,1}}$ are
 \begin{equation}
 \label{S_boundary}
@@ -149,14 +156,14 @@ where we have indicated with $\hat{\vect{r}}_{\variabile{\lineai}, \variabile{\l
  $ \boldsymbol{\nu}_\variabile{\lineai}$ and $\boldsymbol{\nu}_\variabile{\lineak}$ are the normalized inward normals to lines $\variabile{\lineai}$ and $\variabile{\lineak}$, respectively.
  Note that,  $\sin{\tau_\variabile{\lineai}} = |\nu_{\variabile{\lineai}}\times \hat{\vect{r}}_{\variabile{\lineai}, \variabile{\lineak}}(\variabile{t})|$ and $\sin{\tau_\variabile{\lineak}} = |\nu_{\variabile{\lineak}}\times \hat{\vect{r}}_{\variabile{\lineai}, \variabile{\lineak}}(\variabile{t})|$.
  \begin{figure}
- \begin{minipage}[]{.5\textwidth}
+ \begin{minipage}[]{.48\textwidth}
    \centering
    \includegraphics[width=\textwidth]{S141}
    \caption{Source phase space of line $1$.
    Boundary of the region \set{S}{$1$,}{$4$}.}
    \label{fig:S14}
- \end{minipage}
-  \begin{minipage}[]{0.5\textwidth}
+ \end{minipage}\hfill
+  \begin{minipage}[]{0.48\textwidth}
   \centering
    \includegraphics[width=\textwidth]{T411}
    \caption{Target phase space of line $4$.
@@ -164,8 +171,8 @@ where we have indicated with $\hat{\vect{r}}_{\variabile{\lineai}, \variabile{\l
     \label{fig:T411}
  \end{minipage}
  \end{figure}
- Likewise, the boundaries $\partial$\setbound{S}{\lineai,}{\lineak}{\variabile{\lineaj}} and
- $\partial$\setbound{T}{\lineak,}{\lineai}{\variabile{\lineaj}} are calculated for every $\variabile{\lineaj}\in\{2,3,4\}$ and $\partial$\set{S}{\lineai,}{\lineak} and $\partial$\set{T}{\lineak,}{\lineai} are found using Eq. (\ref{eq:analytic_boundaries}). \\
+ Likewise, the boundaries $\partial$\setbound{S}{\lineai,}{\lineak}{\variabile{\,m}} and
+ $\partial$\setbound{T}{\lineak,}{\lineai}{\variabile{\,m}} are calculated for every $\variabile{m}\in\{2,3,4\}$ and $\partial$\set{S}{\lineai,}{\lineak} and $\partial$\set{T}{\lineak,}{\lineai} are found using Eq. (\ref{eq:analytic_boundaries}). \\
  \begin{figure}
  \begin{minipage}[]{.43\textwidth}
    \includegraphics[width=\textwidth]{S1}
@@ -213,7 +220,6 @@ $(\variabile{q}, \variabile{p}) = (-9.5, 0)$ and translation from $(\variabile{q
 %In the next section, we show how the phase spaces are related to each other and we define the target photometric variables on \set{T}{$4$}{}.
 \subsection{The structure of the algorithm}
 In this section we explain how to compute the target photometric variables in PS.
-In the following, to simplify the notation, we indicate the target coordinates of the rays on \set{T}{$4$}{} with (\variabile{q}, \variabile{p}) instead of $(\pos{t,}{$4$}, \dir{t,}{$4$})$.
 The intensity $I$ along a given direction $\variabile{p}\in [-1,1]$ in target phase space \set{T}{$4$}{} is a function of the luminance $L(\variabile{q}, \variabile{p})$ defined as in Equation (\ref{eq:PSintensity}). For the two-faceted cup, it becomes:
 \begin{equation}\label{I(eta)}
 I_{\textrm{PS}}(\variabile{p}) = \int_{-\variabile{b}}^{\variabile{b}} L(\variabile{q},\variabile{p}) \textrm{d}\variabile{q}\,.
@@ -243,11 +249,13 @@ For one single line $\lineaj$, the reflection map $\mapnumb{R}_{\lineaj,\lineak,
 \begin{equation}\label{Rj}
 \mapnumb{R}_{\lineaj}(\variabile{q}_{\textrm{t},\textit{\lineaj}},\variabile{p}_{\textrm{t},\textit{\lineaj}})=(\variabile{q}_{\textrm{s},\textit{\lineaj}},\variabile{p}_{\textrm{s},\textit{\lineaj}}),
 \end{equation}
-where $\dir{t,}{\lineaj}$ changes according to the reflection law and $\pos{t,}{\lineaj}= \pos{s,}{\lineaj}$ as $\mapnumb{R}_{\lineaj}$ maps the target PS into the source PS of the same line $\lineaj$.
+where $\dir{t,}{\lineaj}$ changes according to the reflection law and $\pos{t,}{\lineaj}= \pos{s,}{\lineaj}$ as $\mapnumb{R}_{\lineaj}$ maps the target PS into the source PS of the same line $\lineaj$, that is \set{S}{\lineaj}{} into \set{T}{\lineaj}{}.
 Using a procedure similar to the ray transport matrices approach (see \cite{hecht1998hecht}, Chapter 6),
 the map $\mapnumb{M}_{1,4}$ is described by the composition of mappings $\mapnumb{P}_{\lineai,\lineaj}$ and $\mapnumb{R}_{\lineaj}$ defined in Eqs.
-$(\ref{Pij})$ and $(\ref{Rj})$, respectively. This composition depends on the path $\Pi$ followed by the rays where we refer to a path as the sequence of lines that
- a ray hits during its propagation from \point{S} to \point{T}. We indicate with $\mapnumb{M}_{1,4}(\Pi)$
+$(\ref{Pij})$ and $(\ref{Rj})$, respectively. This composition depends on the path $\Pi$ followed by the rays.
+% where we refer to a path as the sequence of lines that
+% a ray hits during its propagation from \point{S} to \point{T}. 
+We indicate with $\mapnumb{M}_{1,4}(\Pi)$
 the map $\mapnumb{M}_{1,4}$ restricted to path $\Pi$ and with \set{R}{}{}$(\Pi)\subset \mbox{\set{T}{$4$}{}}$ the regions on \set{T}{$4$}{} formed by the rays that follow path $\Pi$.
 Considering all the possible paths $\Pi$ from \point{S} to \point{T}, all the regions $\mbox{\set{R}{}{}}(\Pi)$ with positive luminance on \set{T}{$4$}{} can be determined.
 \\ \indent To clarify this concept, we provide the following example.
@@ -754,9 +762,9 @@ The averaged normalized PS intensity is given by Equation (\ref{eq:normalized_PS
  where the integrals are calculated using the trapezoidal rule.
 \begin{figure}[t]
   \begin{center}
-  \includegraphics[scale=.4]{final_T.eps}
+  \includegraphics[scale=.4]{final_T}
   \end{center}
-  \caption{Target phase space for the two-faceted cup divided into $100$ bins.
+  \caption{\textbf{Target phase space of the two-faceted cup divided into $100$ bins.}
   Five different paths are found. The rays with coordinates $(\variabile{q}^\textrm{\,min}, \variabile{p})$ and $(\variabile{q}^\textrm{\,max}, \variabile{p})$ in \set{T}{$4$}{} that are located at the boundaries $\partial \mbox{\set{R}{}{}}(\Pi)$ are depicted with dots, the color of the dots depends on the path $\Pi$ followed by the rays.
   Using the ray mapping method, only these rays need to be traced from $\point{S}$ to $\point{T}$ for the intensity computation.}
   \label{fig:final_T}
@@ -773,23 +781,16 @@ In order to compare the speed of convergence of the two methods, we consider the
 As the accuracy of the ray tracing method depends on the number of rays traced, the MC intensity is calculated for increasing numbers of rays traced through the system and, the error between the approximate intensity and the reference intensity is computed using Equation (\ref{eq:error}). In Fig. $\ref{fig:error_cup}$ the behavior of the MC error as a function of the CPU-time is depicted with the blue line. Increasing the number of rays the MC error decreases proportionally to the inverse of the square root of the number of rays traced. Next, the PS error is computed using Equation (\ref{eq:error}). It is depicted in Fig. $\ref{fig:error_cup}$ with the green dot. From the numerical results shown in Fig. $\ref{fig:error_cup}$ we can conclude that the PS ray mapping method is able to compute the output intensity of the two-faceted cup exactly. Also, it is much faster than the classical ray tracing approach when an error smaller than $10^{-4}$ is required.
 \begin{figure}[h]
   \begin{center}
-  \includegraphics[scale=.4]{intensity.eps}
+  \includegraphics[scale=.4]{intensity_cup_raymapping}
   \end{center}
-  \caption{Intensities for the two-faceted cup with three different approaches.
-  The red line shows the exact  intensity.
-  The blue line depicts the intensity computed with MC raytracing with $10^7$ rays.
-  The dotted green line shows the intensity
-  found with the new method.}
+  \caption{\textbf{Intensities for the two-faceted cup.} The intensities found with three different approaches are shown.}
   \label{fig:intensity_cup}
 \end{figure}
 \begin{figure}[h]
   \begin{center}
-  \includegraphics[scale=.4]{error_MC_PS.eps}
+  \includegraphics[scale=.4]{error_cup_raymapping}
   \end{center}
-  \caption{Error between the approximated intensities and the reference intensity as a function of the CPU time (in seconds).
-  The convergence of the ray tracing approach is depicted with the blue line.
-  The error decreases increasing the number of rays traced.
-  The green dot shows the error obtained with the PS method.}
+  \caption{\textbf{Errors for the two-faceted cup.} The errors is depicted as a function of the CPU time (in seconds) and it is shown in a logarithmic scale.}
   \label{fig:error_cup}
 \end{figure}
 
@@ -835,7 +836,7 @@ For all the systems formed by straight line segments, the boundaries $(\partial\
 \centering
 \label{fig:T20}
 \includegraphics[scale=.35]{target10facetedcup1}
-\caption{Target phase space of the $20$-faceted cup.
+\caption{\textbf{Target phase space of the $20$-faceted cup.}
 The red lines are the boundaries $(\partial\mbox{\set{T}{$22$,}{\lineak}})_{\lineak=1, \cdots, 21}$ which are determined analytically. The numbers inside the regions \set{T}{$22$,}{\lineak} indicate the value of the index \lineak.}
 \label{fig:T20}
 \end{figure}
@@ -857,7 +858,7 @@ Their profiles are depicted in Fig. \ref{fig:intensity10cup} with a blue line an
 They are compared with a reference intensity $\hat{I}_{\textrm{ref}}$ (red line) which is computed using MC ray tracing with $10^8$ rays.
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.4]{intensities10cup.eps}
+\includegraphics[scale=.4]{intensity_10_cup_raymapping}
 \caption{Intensity for the $20$-faceted cup.
 The red line shows the reference intensity computed using MC ray tracing with $10^8$ rays.
 The blue line depicts the MC intensity with $10^7$ rays.
@@ -866,10 +867,8 @@ The green and dotted line shows the intensity found with the ray mapping method.
 \end{figure}
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.4]{error_10cup1.eps}
-\caption{Error of the approximated intensities as a function of the CPU time. The convergence
-of MC ray tracing is depicted with the blue line.
-The PS error is shown with the green dots. The ray mapping method is more accurate than MC ray tracing and it is faster in case an error smaller than, say $10^{-4}$, is desired.}
+\includegraphics[scale=.4]{error_10_cup_raymapping}
+\caption{\textbf{Errors for the $20$-faceted cup as a function of the CPU.} The ray mapping method is more accurate than QMC ray tracing and it is faster in case an error smaller than, say $10^{-4}$, is desired.}
 \label{fig:error10cup} 
 \end{figure}
 Note that the intensity profile in Fig. \ref{fig:intensity10cup} is more concentrated around the direction $\variabile{p}=0$ than the intensity of the two-faceted cup (see Fig. \ref{fig:intensity_cup}). In particular, increasing the number of left and right reflectors the intensity profile becomes more and more peaked around the center approaching the profile of a parabolic reflector, (see \cite{filosa2017}).
