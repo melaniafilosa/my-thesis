@@ -11,11 +11,11 @@ Moreover, we assume that the source can only emit light and the target can only 
 Therefore, two different phase spaces are considered for the reflectors and one PS for
 \point{S} and \point{T}. All these phase spaces are connected through a map which relates the rays coordinates on every PS. In order to compute the target photometric variables an inverse ray mapping reconstruction from the target to the source is involved.
 \\\indent
-In this chapter we explaine the method for systems formed by straight lines segment. 
+In this chapter we explain the method for systems formed by straight lines segment. 
 Two different optical systems are investigated here: the two-faceted cup and the so-called multi-faceted cup.
 \section{Explanation of the method}
 Using the PS of \textit{all} the lines that form the system, a map from the source to the target of the system is constructed. It can be written as the concatenation of many maps which can be classified as two different kinds of maps, i.e. the map that connects the source and the target PS of two \textit{different} lines and the map that connects the target and the source PS of the \textit{same} line.
-Employing the inverses of these maps we are able to detect the parts on target PS illuminated by the source.
+Employing the inverses of these maps we are able to detect the parts of target PS illuminated by the source.
 All the PS considered are divided into regions, the boundaries of which can be determined exactly for systems formed by straight lines.
 We make the assumption of a Lambertian source; hence, the luminance is a positive constant when different from $0$. 
 As a consequence, the output intensity along a given direction is given by the total width of all the patches with positive luminance, measured along that direction.\\ \indent Next, the details of the procedure are explained for a very simple optical system: the two-faceted-cup.
@@ -30,7 +30,7 @@ The coordinates of every ray that reaches the line $\lineai\in\{1, 2, 3\}$ are i
 In the following, to simplify the notation, we indicate the target coordinates of the rays on \set{T}{$4$}{} with (\variabile{q}, \variabile{p}) instead of $(\pos{t,}{$4$}, \dir{t,}{$4$})$.
 After reflection, the ray leaves line $\lineai \in\{1, 2, 3\}$ at the same position and with a new direction, the new rays coordinates are indicated with 
 $(\pos{s,}{\lineai}, \dir{s,}{\lineai})$ on \set{S}{\lineai}{}.
-Note that $\pos{s,}{\lineai}= \pos{t,}{\lineai}$ while $\dir{s,}{\lineai}$ is obtained applying the reflection law to the direction coordinate $\dir{t,}{\lineai}$ of the incident ray.
+Note that $\pos{s,}{\lineai}= \pos{t,}{\lineai}$, while $\dir{s,}{\lineai}$ is obtained applying the reflection law to the direction coordinate $\dir{t,}{\lineai}$ of the incident ray.
 The phase spaces \set{S}{\lineai}{} and  \set{T}{\lineai}{} of each line $\lineai$ are partitioned into different regions, (\set{S}{\lineai,}{\lineaj})$_{\lineaj=2, 3, 4}$ and (\set{T}{\lineai,}{\lineak})$_{\lineak=1, 2, 3}$, respectively, where $\lineaj\neq \lineai$ is the index of the line that is illuminated by $\lineai$ and $\lineak\neq\lineai$ is the index of the line that illuminates $\lineai$. Hence, \set{S}{\lineai,}{\lineaj}$\subset$ \set{S}{\lineai}{} is the part of \set{S}{\lineai}{} corresponding to rays that illuminate line $\lineaj$, and \set{T}{\lineai,}{\lineak} $\subset$ \set{T}{\lineai}{} is the part of \set{T}{\lineai}{} corresponding to rays originating from the line $\lineak$. Note that, due to the fact that the source only emits light, we do not define its target PS \set{T}{$1$}{}. Similarly, since the target only receives light, its source PS \set{S}{$4$}{} is not defined.
 For the two-faceted cup, six different phase spaces need to be considered which are given by the following expressions:
 \begin{equation}
@@ -48,15 +48,13 @@ For the two-faceted cup, six different phase spaces need to be considered which 
  \end{equation}
 We need to note that, as the source cannot receive light and the target cannot emit light,  the regions $(\mbox{\set{S}{\lineai,}{$1$}})_{\lineai=2,3}$ and $(\mbox{\set{T}{\lineai,}{$4$}})_{\lineai=2, 3}$ are not considered.
 The boundaries $\partial \mbox{\set{S}{\lineai,}{\lineaj}}$ are mapped into the boundaries $\partial \mbox{\set{T}{\lineaj,}{\lineai}}$ for every $\lineai=\{1, 2, 3\}$ 
-and $\lineaj=\{2, 3,4\}$ with $\lineaj\neq \lineai$ (edge-ray principle). For the two-faceted cup and for all systems that are formed by straight lines, they are determined analytically as explained in the following.
+and $\lineaj=\{2, 3,4\}$ with $\lineaj\neq \lineai$ (edge-ray principle). For the two-faceted cup, and for all systems formed by straight line segments, these boundaries are determined analytically. 
 Given two lines $\lineai$ and $\lineak$
-with $\lineai\neq \lineak$, we show how to compute the boundaries of the region formed by the rays that leave line $\lineai$ and hit line $\lineak$. We do that on both \set{S}{\lineai}{} and \set{T}{\lineak}{}.
-We indicate with $(\variabile{x}_{\lineai, \ell}, \variabile{z}_{\lineai, \ell})$ and with $(\variabile{x}_{\lineai, \textrm{r}},\variabile{z}_{\lineai, \textrm{r}})$ the coordinates of the points located at the left and the right extreme of line $\lineai$, respectively.
+with $\lineai\neq \lineak$, the boundaries \set{S}{\lineai}{} and \set{T}{\lineak}{} are determined as follows. Let $(\variabile{x}_{\lineai, \ell}, \variabile{z}_{\lineai, \ell})$ and $(\variabile{x}_{\lineai, \textrm{r}},\variabile{z}_{\lineai, \textrm{r}})$ be the coordinates of the points located at the left and the right extreme of line $\lineai$, respectively.
 Similarly, $(\variabile{x}_{\lineak, \ell}, \variabile{z}_{\lineak, \ell})$ and $(\variabile{x}_{\lineak, \textrm{r}},\variabile{z}_{\lineak, \textrm{r}})$ are the coordinates of the points located at the left and the right extreme of line $\lineak$, respectively.
-The boundaries $\partial$\set{S}{\lineai,}{\lineak} and $\partial$\set{T}{\lineak,}{\lineai} are obtained considering all the rays that leave the extremes of line $\lineai$ 
-and all the rays that reach the extremes of the target.
-Given two lines $\lineai$ and $\lineak$ with $\lineai\neq \lineak$, $\partial$\set{S}{\lineai,}{\lineak} and $\partial$\set{T}{\lineak,}{\lineai}
-are formed by four different curves,
+The boundaries $\partial$\set{S}{\lineai,}{\lineak} and $\partial$\set{T}{\lineak,}{\lineai} are obtained considering all the rays that leave the end points of line $\lineai$ 
+and all the rays that reach the end points of the target.
+They are formed by four different curves,
 two of them are given by all the rays that leave the end points of line $\lineai$ and hit line $\lineak$ and, the others two are given by the rays
 that leave the extremes of line $\lineai$ and hit the extremes of line $\lineak$.
 The boundaries $\partial$\set{S}{\lineai,}{\lineak} and $\partial$\set{T}{\lineak,}{\lineai} are given by:
@@ -107,24 +105,24 @@ $B =  (\variabile{x}_{4, \ell}, \variabile{z}_{4, \ell}) = (-17, 40)$ and $C =  
 \end{figure} \\
  The boundaries $\partial$\set{S}{$1$,}{$4$} and $\partial$\set{T}{$4$,}{$1$} are given in Figs. \ref{fig:S14} and \ref{fig:T411}, respectively.
 $\partial$\setbound{S}{$1$,}{$4$}{1} and $\partial$\setbound{T}{$4$,}{$1$}{1} are obtained tracing out line $4$ from
-$\variabile{q}^{\textrm{min}} = -\variabile{b}$ to $\variabile{q}^{\textrm{max}} = \variabile{b}$
- by rays leaving $\variabile{q}_{1}^{\textrm{min}}= -\variabile{a}$ with varying $\variabile{p}_1$, these rays are shown in Fig. \ref{fig:cup1}, and the boundary segments
+$\variabile{q}_{\ell} = -\variabile{b}$ to $\variabile{q}_{\textrm{r}} = \variabile{b}$
+ by rays leaving $\variabile{q}_{1, \ell}= -\variabile{a}$ with varying $\variabile{p}_1$, these rays are shown in Fig. \ref{fig:cup1}, and the boundary segments
  $\partial$\setbound{S}{$1$,}{$4$}{1} and $\partial$\setbound{T}{$4$,}{$1$}{1} are the orange line segments labeled with \const{c}. 
  $\partial$\setbound{S}{$1$,}{$4$}{2} and $\partial$\setbound{T}{$4$,}{$1$}{2} are given tracing out line $1$ from
- $\variabile{q}_{1, \textrm{min}}= -\variabile{a}$ to $\variabile{q}_{1, \textrm{max}}= \variabile{a}$
- with varying $\variabile{p}_1$, such that all rays hit $\variabile{q}_{\textrm{max}} = \variabile{b}$, these rays are shown in Fig. \ref{fig:cup2}, the boundary segments
+ $\variabile{q}_{1, \ell}= -\variabile{a}$ to $\variabile{q}_{1, \textrm{r}}= \variabile{a}$
+ with varying $\variabile{p}_1$, such that all rays hit $\variabile{q}_{\textrm{r}} = \variabile{b}$, these rays are shown in Fig. \ref{fig:cup2}, the boundary segments
  $\partial$\setbound{S}{$1$,}{$4$}{2} and $\partial$\setbound{T}{$4$,}{$1$}{2} are depicted in blue (lines segments labeled with \const{d}).
  Likewise, $\partial$\setbound{S}{$1$,}{$4$}{3} and $\partial$\setbound{T}{$4$,}{$1$}{3} are obtained tracing out line $4$ from
-$\variabile{q}_{\textrm{max}}= \variabile{b}$ to $\variabile{q}_{\textrm{min}}= -\variabile{b}$ 
- by rays leaving $\variabile{q}_{1, \textrm{max}}=\variabile{x}_{1, \textrm{r}} = \variabile{a}$ with varying $\variabile{p}_{1}$. These rays are shown in Fig. \ref{fig:cup3}, 
+$\variabile{q}_{\textrm{r}}= \variabile{b}$ to $\variabile{q}_{\ell}= -\variabile{b}$ 
+ by rays leaving $\variabile{q}_{1, \textrm{r}}=\variabile{x}_{1, \textrm{r}} = \variabile{a}$ with varying $\variabile{p}_{1}$. These rays are shown in Fig. \ref{fig:cup3}, 
  $\partial$\setbound{S}{$1$,}{$4$}{3} and $\partial$\setbound{T}{$4$,}{$1$}{3} are the red line segments labeled with \const{e}.
   Finally, $\partial$\setbound{S}{$1$,}{$4$}{4} and $\partial$\setbound{T}{$4$,}{$1$}{4} are given tracing out line $1$ from
-$\variabile{q}_{1, \textrm{max}} = \variabile{a}$ to  $\variabile{q}_{1, \textrm{min}} = -\variabile{a}$ 
- with varying $\variabile{p}_{1}$, such that all rays hit $\variabile{q}_{\textrm{min}} = -\variabile{b}$, these rays are shown in Fig. \ref{fig:cup4}, 
+$\variabile{q}_{1, \textrm{r}} = \variabile{a}$ to  $\variabile{q}_{1, \ell} = -\variabile{a}$ 
+ with varying $\variabile{p}_{1}$, such that all rays hit $\variabile{q}_{\ell} = -\variabile{b}$, these rays are shown in Fig. \ref{fig:cup4}, 
  $\partial$\setbound{S}{$1$,}{$4$}{4} and $\partial$\setbound{T}{$4$,}{$1$}{4} are the green lines segments labeled with \const{f}. 
 We remind that we use the notation $(\variabile{x}, \variabile{z})$ for the Cartesian coordinates system of real space, while phase space has $(\variabile{q}, \variabile{p})$ coordinates. 
-It is worth noting that  $\variabile{q}_{1, \textrm{min}}=\variabile{x}_{1, \ell}$,  $\variabile{q}_{1, \textrm{max}}=\variabile{x}_{1, \textrm{r}}$,  
-$\variabile{q}_{\textrm{min}}=\variabile{x}_{4, \ell}$ and  $\variabile{q}_{\textrm{max}}=\variabile{x}_{4, \textrm{r}}$.\\ \indent
+It is worth noting that  $\variabile{q}_{1, \ell}=\variabile{x}_{1, \ell}$,  $\variabile{q}_{1, \textrm{r}}=\variabile{x}_{1, \textrm{r}}$,  
+$\variabile{q}_{\ell}=\variabile{x}_{4, \ell}$ and  $\variabile{q}_{\textrm{r}}=\variabile{x}_{4, \textrm{r}}$.\\ \indent
  For the two-faceted cup there is an analytic expression for every line segment $\partial\mbox{\setbound{S}{\lineai,}{\lineak}{\variabile{\,m}}}$ and
  $\partial\mbox{\setbound{T}{\lineak,}{\lineai}{\variabile{\,m}}}$ in Eq. (\ref{eq:analytic_boundaries}) with $\variabile{m}\in\{1, \cdots, 4\}$.
  For instance, the rays on the boundaries $\partial\mbox{\setbound{S}{\lineai,}{\lineak}{\,1}}$ and $\partial \mbox{\setbound{T}{\lineak,}{\lineai}{\,1}}$
@@ -142,14 +140,14 @@ $\variabile{q}_{\textrm{min}}=\variabile{x}_{4, \ell}$ and  $\variabile{q}_{\tex
   as both the target position and direction vary. The analytic expressions for $\partial \mbox{\setbound{S}{\lineai,}{\lineak}{\,1}}$ and $\partial \mbox{\setbound{T}{\lineak,}{\lineai}{\,1}}$ are
 \begin{equation}
 \label{S_boundary}
-\partial \mbox{\setbound{S}{\lineai,}{\lineak}{1}}(\variabile{t})= \bigg\{ (\variabile{q}_{\variabile{\lineai}}, \variabile{p}_{\variabile{\lineai}}) = \Big(\variabile{q}_{\variabile{\lineai}, \textrm{min}},
+\partial \mbox{\setbound{S}{\lineai,}{\lineak}{1}}(\variabile{t})= \bigg\{ (\variabile{q}_{\variabile{\lineai}}, \variabile{p}_{\variabile{\lineai}}) = \Big(\variabile{q}_{\variabile{\lineai}, \ell},
 |\boldsymbol{\nu}_{\variabile{\lineai}}\times \hat{\vect{r}}_{\variabile{\lineai}, \variabile{\lineak}}(\variabile{t})|
 \Big), \bigg\}
 \end{equation}
 \begin{equation}
 \label{T_boundary}
 \partial\mbox{\setbound{T}{\lineak,}{\lineai}{\,1}}(\variabile{t})=\bigg\{(\variabile{q}_{\variabile{\lineak}}, \variabile{p}_{\variabile{\lineak}}) =
-\Big(\variabile{q}_{\variabile{\lineak}, \textrm{max}}-\variabile{q}_{\variabile{\lineai}, \textrm{min}}+t(\variabile{q}_{\variabile{\lineak}, \textrm{max}}-\variabile{q}_{\variabile{\lineak},\textrm{min}}),
+\Big(\variabile{q}_{\variabile{\lineak}, \textrm{l}}-\variabile{q}_{\variabile{\lineai}, \ell}+t(\variabile{q}_{\variabile{\lineak}, \textrm{r}}-\variabile{q}_{\variabile{\lineak},\ell}),
 |\boldsymbol{\nu}_{\variabile{\lineak}}\times \hat{\vect{r}}_{\variabile{\lineai}, \variabile{\lineak}}(\variabile{t})|\Big) \bigg\}\,,
 \end{equation}
 where we have indicated with $\hat{\vect{r}}_{\variabile{\lineai}, \variabile{\lineak}}(\variabile{t})$ the normalization of the ray in Eq. ($\ref{extremes_rays}$) and,
@@ -172,7 +170,7 @@ where we have indicated with $\hat{\vect{r}}_{\variabile{\lineai}, \variabile{\l
  \end{minipage}
  \end{figure}
  Likewise, the boundaries $\partial$\setbound{S}{\lineai,}{\lineak}{\variabile{\,m}} and
- $\partial$\setbound{T}{\lineak,}{\lineai}{\variabile{\,m}} are calculated for every $\variabile{m}\in\{2,3,4\}$ and $\partial$\set{S}{\lineai,}{\lineak} and $\partial$\set{T}{\lineak,}{\lineai} are found using Eq. (\ref{eq:analytic_boundaries}). \\
+ $\partial$\setbound{T}{\lineak,}{\lineai}{\variabile{\,m}} are calculated for every $\variabile{m}\in\{2,3,4\}$. Finally, $\partial$\set{S}{\lineai,}{\lineak} and $\partial$\set{T}{\lineak,}{\lineai} are found using Eq. (\ref{eq:analytic_boundaries}). \\
  \begin{figure}
  \begin{minipage}[]{.43\textwidth}
    \includegraphics[width=\textwidth]{S1}
@@ -226,12 +224,12 @@ I_{\textrm{PS}}(\variabile{p}) = \int_{-\variabile{b}}^{\variabile{b}} L(\variab
 \end{equation}
 The parts of \set{T}{$4$}{} that are illuminated by \set{S}{$1$}{} correspond to parts with positive luminance, for the other parts the luminance is equal to zero.
 Assuming positive luminance on \point{S}, the following relations hold:
-\begin{subequations}\label{LT4}
-\begin{align}
+\begin{equation}\label{LT4}
+\begin{aligned}
 L(\variabile{q}, \variabile{p})&>0 \qquad \quad \forall (\variabile{q}, \variabile{p})\in \mbox{\set{T}{$4$,}{$1$}},\\
-L(\variabile{q}, \variabile{p})&\geq 0 \qquad\quad \forall(\variabile{q}, \variabile{p}) \in (\mbox{\set{T}{$4$,}{\lineai}})_{\lineai=2,3}.\label{third}
-\end{align}
-\end{subequations}
+L(\variabile{q}, \variabile{p})&\geq 0 \qquad\quad \forall(\variabile{q}, \variabile{p}) \in (\mbox{\set{T}{$4$,}{\lineai}})_{\lineai=2,3}.
+\end{aligned}
+\end{equation}
 Once a ray leaves the source \point{S} it can hit the reflectors several times before hitting the target \point{T}. To relate \point{S} and \point{T}, a map $\mapnumb{M}_{1,4}$: \set{S}{$1$}{}$\rightarrow$ \set{T}{$4$}{} is introduced such that $\mapnumb{M}_{1,4}(\pos{s,}{$1$},\dir{s,}{$1$})=(\variabile{q},\variabile{p})$. As  not all parts of \set{T}{$4$}{} are illuminated by the source \point{S}, the map
 $\mapnumb{M}_{1,4}$ is not surjective.
 Therefore, we need to determine the subsets of \set{T}{$4$}{} illuminated by \point{S} corresponding to the regions where the luminance is positive.
@@ -245,13 +243,13 @@ In particular, given two lines $\lineai$ and $\lineaj$ with $\lineai\neq\lineaj$
 where $\pos{t,}{\lineaj}$ is given by the \variabile{x}-coordinate of the intersection point between the ray and line $\lineaj$,
 and $\dir{t,}{\lineaj}$ is computed considering the direction of the incident ray with respect to the normal of line $\lineaj$. 
 For one single line $\lineaj$, the reflection map $\mapnumb{R}_{\lineaj,\lineak,h}$:~\set{T}{\lineaj,}{\lineak} $\mapsto$\set{S}{\lineaj,}{h}  relates the regions \set{T}{\lineaj,}{\lineak}$\subset$\set{T}{\lineaj}{} and
-\set{S}{\lineaj,}{h}$\subset$\set{S}{\lineaj}. To simplify the notation, from now on we omit the dependence of $\mapnumb{R}_{\lineaj,\lineak,h}$ from $\lineak$ and \variabile{h}, i.e. $\mapnumb{R}_{\lineaj,\lineak,h} = \mapnumb{R}_{\lineaj}$. The reflection map is defined as follows:
+\set{S}{\lineaj,}{h}$\subset$\set{S}{\lineaj}. To simplify the notation, from now on we omit the dependence of $\mapnumb{R}_{\lineaj,\lineak,h}$ from $\lineak$ and \variabile{h}, i.e. $\mapnumb{R}_{\lineaj,\lineak,h} = \mapnumb{R}_{\lineaj}$. The reflection map is defined as:
 \begin{equation}\label{Rj}
 \mapnumb{R}_{\lineaj}(\variabile{q}_{\textrm{t},\textit{\lineaj}},\variabile{p}_{\textrm{t},\textit{\lineaj}})=(\variabile{q}_{\textrm{s},\textit{\lineaj}},\variabile{p}_{\textrm{s},\textit{\lineaj}}),
 \end{equation}
 where $\dir{t,}{\lineaj}$ changes according to the reflection law and $\pos{t,}{\lineaj}= \pos{s,}{\lineaj}$ as $\mapnumb{R}_{\lineaj}$ maps the target PS into the source PS of the same line $\lineaj$, that is \set{S}{\lineaj}{} into \set{T}{\lineaj}{}.
 Using a procedure similar to the ray transport matrices approach (see \cite{hecht1998hecht}, Chapter 6),
-the map $\mapnumb{M}_{1,4}$ is described by the composition of mappings $\mapnumb{P}_{\lineai,\lineaj}$ and $\mapnumb{R}_{\lineaj}$ defined in Eqs.
+the map $\mapnumb{M}_{1,4}$ is described by the composition of $\mapnumb{P}_{\lineai,\lineaj}$ and $\mapnumb{R}_{\lineaj}$ defined in Eqs.
 $(\ref{Pij})$ and $(\ref{Rj})$, respectively. This composition depends on the path $\Pi$ followed by the rays.
 % where we refer to a path as the sequence of lines that
 % a ray hits during its propagation from \point{S} to \point{T}. 
@@ -259,9 +257,9 @@ We indicate with $\mapnumb{M}_{1,4}(\Pi)$
 the map $\mapnumb{M}_{1,4}$ restricted to path $\Pi$ and with \set{R}{}{}$(\Pi)\subset \mbox{\set{T}{$4$}{}}$ the regions on \set{T}{$4$}{} formed by the rays that follow path $\Pi$.
 Considering all the possible paths $\Pi$ from \point{S} to \point{T}, all the regions $\mbox{\set{R}{}{}}(\Pi)$ with positive luminance on \set{T}{$4$}{} can be determined.
 \\ \indent To clarify this concept, we provide the following example.
-Consider a ray that is emitted from the source (line $1$), first hits the left reflector (line $2$) and finally reaches the target (line $4$).
+Consider a ray that is emitted from the source (line $1$), hits the left reflector (line $2$) and finally reaches the target (line $4$).
  The path $\Pi$ followed by this ray is defined as $\Pi =(1, 2, 4)$ and
-the corresponding map $\mapnumb{M}_{1,4}(\Pi):\mbox{\set{S}{$1$}{}}\mapsto \mbox{\set{R}{}{}}(\Pi)$ that describes the propagation of all rays that follow the path $\Pi$ is defined by:
+the corresponding map $\mapnumb{M}_{1,4}(\Pi):\mbox{\set{S}{$1$}{}}\mapsto \mbox{\set{R}{}{}}(\Pi)$ that describes the propagation of all rays that follow path $\Pi$ is defined by:
 \begin{equation}
 \label{map_example}
 \mapnumb{M}_{1,4}(\Pi):\mbox{\set{S}{$1$,}{$2$}}\mapsto \mbox{\set{T}{$2$,}{$1$}}\mapsto\mbox{\set{S}{$2$,}{$4$}}\mapsto \mbox{\set{T}{$4$,}{$2$}},
@@ -287,7 +285,7 @@ For instance, for path $\Pi = (1,2,4)$, $\inversemap{M}{1,}{4}(\Pi)$ is given by
 \inversemap{M}{1,}{4}({\Pi}) = \inversemap{P}{1,}{2}
 \circ \inversemap{R}{2}{}\circ \inversemap{P}{2,}{4}.
 \end{equation}
-The steps of the procedure are shown in the graph in Fig. \ref{fig:tree} where the map in Eq. (\ref{inverse_map}) is written in red. \\
+The steps of the procedure are shown in Figure \ref{fig:tree} where the map in Eq. (\ref{inverse_map}) is written in red. \\
 \begin{figure}
  \begin{center}
   \includegraphics[width = \textwidth]{tree2}
@@ -296,32 +294,28 @@ The steps of the procedure are shown in the graph in Fig. \ref{fig:tree} where t
 \caption{Tree that describes how to detect all the possible paths from \point{S} to \point{T}.}
 \label{fig:tree}
 \end{figure}
-%%\newpage
-\\ \indent Using the procedure explained above, given a ray with coordinates
+Using the procedure explained above, given a ray with coordinates
 $(\variabile{q}, \variabile{p})\in \mbox{\set{T}{$4$}{}}$ we can establish whether it is located inside one of the regions $\mbox{\set{R}{}{}}(\Pi)$ with positive luminance or not.
 In case the ray is inside a region $\mbox{\set{R}{}{}}(\Pi)$,
 its corresponding coordinates $(\pos{s,}{$1$},\dir{s,}{$1$})\in \mbox{\set{S}{$1$}{}}$ are obtained using $\inversemap{M}{1,}{4}(\Pi)$, where $\Pi$ is the path followed by this ray. The luminance in Equation ($\ref{LT4}$) is, therefore, defined as in Equation (\ref{eq:PSluminance}), 
-for some path $\Pi$ connecting \point{S}{}{} and \point{T}{}{}.
-Assuming a Lambertian source and employing conservation of luminance along a ray (see \cite{chaves2015introduction}, Chapter 16), we have that $L$
-is a positive constant inside \set{R}{}{}($\Pi$) and it has no contribution on the other parts of \set{T}{$4$}{}.
+for some path $\Pi$ connecting \point{S}{}{} and \point{T}{}{}. The target intensity is calculated from Equation (\ref{I(eta)}). 
 Indicating with $\variabile{q}^\textrm{\,min}(\Pi,\variabile{p})$ and $\variabile{q}^\textrm{\,max}(\Pi,\variabile{p})$ the minimum and maximum position coordinates of the intersection points between the boundaries $ \partial$\set{R}{}{}($\Pi$) and line $\variabile{p}= \mbox{const}$,
-Eq. (\ref{I(eta)}) reduces to Equation (\ref{eta2}), if only two intersection points are found, and to Equation (\ref{eq:Ips}) in case more than two intersection points occur. For the two-faceted cup there are only two intersection points between line $\dir{}{}{}=const$ and $\partial$\set{R}{}{}$(\Pi)$, hence, in this chapter we use Equation (\ref{eta2}) for the intensity calculation.
+Equation (\ref{I(eta)}) reduces to Equation (\ref{eta2}), if only two intersection points are found, and to Equation (\ref{eq:Ips}) in case more than two intersection points occur. For the two-faceted cup there are only two intersection points between line $\dir{}{}{}=constant$ and $\partial$\set{R}{}{}$(\Pi)$, hence, in this chapter we use Equation (\ref{eta2}) for the intensity calculation.
 We remark that, for a given ray with corresponding coordinates $(\pos{}{}, \dir{}{})$ on \set{T}{$4$}{}, only one path is possible as we are assuming that all lines are reflective lines.
 Because of this, the regions \set{R}{}{}($\Pi$) do not overlap.
-where the intersection is over all the possible paths. 
 Next, the details of the procedure to compute the coordinates $\variabile{q}^\textrm{\,min}(\Pi, \variabile{p})$ and $\variabile{q}^\textrm{\,max}(\Pi, \variabile{p})$
 are explained. \\ \indent
-The goal is to determine the intensity of the light that reaches the target with a given direction $\variabile{p}=\const{const}$.
-Since we assume a Lambertian source, this is equal to the sum of the lengths of the line segments given by the intersection of the line $\variabile{p} = \mbox{const}$ and the support of $L$ (see Eq. (\ref{eta2})).
+The goal is to determine the target intensity along a given direction $\variabile{p}=\const{const}$.
+Also in the ray mapping method, we assume a Lambertian source, therefore the intensity is equal to the sum of the lengths of the line segments given by the intersection of the line $\variabile{p} = \mbox{const}$ and the support of $L$ (see Equation (\ref{eta2})).
 To determine these line segments, a recursive procedure is developed.
-The procedure starts on \set{T}{$4$}{} with a given direction $\variabile{p} = \const{const.}$ and with the parallel rays corresponding to the end points $(\pos{}{}^{\textrm{min}}, \variabile{p}) = (-\variabile{b}, \variabile{p})$ and $(\pos{}{}^{\textrm{max}}, \variabile{p}) = (\variabile{b}, \variabile{p})$. 
-We set the initial intensity $I(\variabile{p})=0$ along direction $\variabile{p} = \const{const.}$. 
+The procedure starts on \set{T}{$4$}{} with a given direction $\variabile{p} = \const{constant}$ and with the parallel rays corresponding to the end points $(\variabile{q}_{\ell}, \variabile{p}) = (-\variabile{b}, \variabile{p})$ and $(\variabile{q}_{\textrm{r}}, \variabile{p}) = (\variabile{b}, \variabile{p})$. 
+We set the initial intensity $I(\variabile{p})=0$ along direction $\variabile{p} = \const{constant}$. 
 Considering the intersection between the line $\variabile{p}=\textrm{const}$ and the boundaries ($\partial$\set{T}{$4$,}{i})$_{\lineai=1,2,3}$ three intervals are found.
 Each interval corresponds to rays emitted by line $\variabile{i}$ (\variabile{i}$=\{1,2,3\}$).
 The rays corresponding to the end points of these intervals are traced back from \set{T}{$4$}{} to \set{T}{\lineai}{} where $\lineai$ is the line from which
-the rays are emitted. Then, another interval of parallel rays along the corresponding direction in \set{T}{\lineai}{} has to be considered and the intersection points between the line $\dir{}{} = \dir{t,}{\lineai}$ and $\partial$\set{T}{\lineai,}{\lineaj} (with $\variabile{j}\neq\lineai,4$) are calculated, where $\dir{t,}{\lineai}$ is the new direction of the rays traced back.
+they are emitted. Then, another interval of parallel rays along the corresponding direction in \set{T}{\lineai}{} has to be considered and the intersection points between the line $\dir{}{} = \dir{t,}{\lineai}$ and $\partial$\set{T}{\lineai,}{\lineaj} (with $\variabile{j}\neq4$) are calculated, where $\dir{t,}{\lineai}$ is the new direction of the rays traced back.
 The procedure continues recursively until the source is found. 
-\\ \indent Before explaining the details, let us introduce some notation. The role of the variables we introduce will become clear later on in this chapter.
+\\ \indent Before explaining the details, let us introduce some new notation. The role of the variables we introduce will become clear later on in this chapter.
 The coordinates in \set{T}{\lineaj}{} of the rays traced back from line $\lineai\neq\lineaj$ to
 line $\lineaj$ are indicated with $(\pos{t,}{\lineaj}^1, \dir{t,}{\lineaj})$ and $(\pos{t,}{\lineaj}^2, \dir{t,}{\lineaj})$.
 The minimum and the maximum position coordinates are $\pos{t,}{\lineaj}^\textrm{\,min} = \min\{\pos{t,}{\lineaj}^1, \pos{t,}{\lineaj}^2\}$ and 
@@ -340,7 +334,7 @@ $[\variabile{v}_{\lineaj,\lineai}^\textrm{\,min}, \variabile{v}_{\lineaj,\lineai
 [\variabile{v}_{4, \lineai}^\textrm{\,min}, \variabile{v}_{4, \lineai}^\textrm{\,max}] = [\variabile{u}_{4, \lineai}^\textrm{\,min}, \variabile{u}_{4, \lineai}^\textrm{\,max}]\cap
  [\pos{}{}^\textrm{\,min}, \pos{}{}^\textrm{\,max}]
 \end{equation*}
-\item If $\lineai= 1$, coordinates $(\variabile{v}_{4,1}^\textrm{\,min}, \variabile{p})$ and $(\variabile{v}_{4,1}^\textrm{\,max}, \variabile{p})$ equal the coordinates $(\variabile{q}^\textrm{\,min}(\Pi, \variabile{p}), \variabile{p})$ and $(\variabile{q}^\textrm{\,max}(\Pi, \variabile{p}), \variabile{p})$ of the rays located on the boundary $\partial$\set{R}{}{}$(\Pi)$ with $\Pi = (1,4)$. All the parallel rays with direction coordinate $\variabile{p}$ and $\variabile{q}$-position coordinate $\variabile{u}_{4,1}^\textrm{\,min}\leq \variabile{q} \leq \variabile{u}_{4,1}^\textrm{\,max}$ are emitted by the source and they directly hit the target. \\
+\item If $\lineai= 1$, the coordinates $(\variabile{v}_{4,1}^\textrm{\,min}, \variabile{p})$ and $(\variabile{v}_{4,1}^\textrm{\,max}, \variabile{p})$ equal the coordinates $(\variabile{q}^\textrm{\,min}(\Pi, \variabile{p}), \variabile{p})$ and $(\variabile{q}^\textrm{\,max}(\Pi, \variabile{p}), \variabile{p})$ of the rays located on the boundary $\partial$\set{R}{}{}$(\Pi)$ with $\Pi = (1,4)$. All the parallel rays with direction coordinate $\variabile{p}$ and $\variabile{q}$-position coordinate $\variabile{u}_{4,1}^\textrm{\,min}\leq \variabile{q} \leq \variabile{u}_{4,1}^\textrm{\,max}$ are emitted by the source and they directly hit the target. \\
 \indent Update the intensity using Eq. (\ref{eta2})
 \begin{equation*}
 I(\variabile{p})= I(\variabile{p})+\variabile{q}^\textrm{\,min}(\Pi, \dir{}{})-\variabile{q}^\textrm{\,max}(\Pi, \dir{}{}).
@@ -364,7 +358,7 @@ $[\pos{t,}{\lineai}^\textrm{\,min}, \pos{t,}{\lineai}^\textrm{\,max}]$ follow th
 [\variabile{v}_{\lineai, \lineaj}^\textrm{\,min}, \variabile{v}_{\lineai, \lineaj}^\textrm{\,max}] = [\variabile{u}_{\lineai, \lineaj}^\textrm{\,min}, \variabile{u}_{\lineai, \lineaj}^\textrm{\,max}]\cap
  [\pos{t,}{\lineai}^\textrm{\,min}, \pos{t,}{\lineai}^\textrm{\,max}].
 \end{equation*}
-\item For $\lineaj\neq 1$ 
+\item If $\lineaj\neq 1$ 
 \begin{itemize}
 \item[a)] Trace back $(\variabile{v}_{\lineai, \lineaj}^\textrm{\,min}, \dir{t,}{\lineai})$ and $(\variabile{v}_{\lineai, \lineaj}^\textrm{\,max}, \dir{t,}{\lineai})$ from $\lineai$ to $\lineaj$ 
 \begin{equation*}
@@ -376,7 +370,7 @@ $[\pos{t,}{\lineai}^\textrm{\,min}, \pos{t,}{\lineai}^\textrm{\,max}]$ follow th
 \item[b)] Update the path $\Pi = (\lineaj, \Pi)$
 \item[c)] Put $\lineai=\lineaj$ and repeat the procedure from point $7$.
 \end{itemize}
-\item If $\lineaj=1$, the rays reached the source and a possible path $\Pi = (1, \cdots, 4)$ is found. 
+\item Else if $\lineaj=1$, the rays reached the source and a possible path $\Pi = (1, \cdots, 4)$ is found. 
 \begin{itemize}
 \item[a)]
 Apply 
@@ -386,7 +380,7 @@ Apply
 (\pos{s,}{$1$}^{\,2}, \dir{s,}{$1$}) & =\inversemap{P}{1,}{\lineai}(\variabile{v}_{\lineai, 1}^\textrm{\,max}, \dir{t,}{\lineai})
 \end{aligned}
 \end{equation*}
-\item[b)] Apply the direct map $\mapnumb{M}_{1,4}(\Pi)$ restricted to the path $\Pi$ found:
+\item[b)] Apply 
 \begin{equation*}
 \begin{aligned}
  (\pos{}{}^{1}(\Pi, \dir{}{}), \dir{}{})&= \mapnumb{M}_{1,4}(\Pi)(\pos{s,}{$1$}^{\,1}, \dir{s,}{$1$})\\
@@ -401,8 +395,8 @@ where $\pos{}{}^\textrm{min} = \min\{ \pos{}{}^{1}(\Pi, \dir{}{}), \pos{}{}^{2}(
 To clarify the technique, we make an example that describes how the target intensity along direction $\variabile{p}= -0.2$ is calculated.
 From Fig. $\ref{fig:T41}$ to Fig. $\ref{fig:T43}$ the steps used in this example are shown.
 A detailed description of those figures is given in the following.
-\\ \indent The procedure starts with the rays with direction $\variabile{p} = 0.2$ on \set{T}{$4$}{}, where $\variabile{q}^\textrm{min}= -\variabile{b}$ and
-$\variabile{q}^\textrm{max}= \variabile{b}$ are the left and the right end points of the target \point{T}, respectively.
+\\ \indent The procedure starts with the rays with direction $\variabile{p} = 0.2$ on \set{T}{$4$}{}, where $\variabile{q}_\ell= -\variabile{b}$ and
+$\variabile{q}_\textrm{r}= \variabile{b}$ are the left and the right end points of the target \point{T}, respectively.
  The intersection points $(\variabile{u}_{4,\lineai}^\textrm{\,min}, \variabile{p})$ and
 $(\variabile{u}_{4,\lineai}^\textrm{\,max}, \variabile{p})$
 of the line $\variabile{p}= -0.2$
@@ -425,22 +419,22 @@ They are depicted in Fig. \ref{fig:T42} with the magenta dots. also the intersec
 \begin{equation}
 [\variabile{v}_{4,2}^\textrm{\,min}, \variabile{v}_{4,2}^\textrm{\,max}] = [\variabile{u}_{4,2}^\textrm{\,min}, \variabile{u}_{4,2}^\textrm{\,max}]\cap [\variabile{q}^\textrm{min}, \variabile{q}^\textrm{max}]
 \end{equation}
-is calculated\footnote{In \set{T}{$4$}{} $\variabile{v}_{4,2}^\textrm{\,min} = \variabile{u}_{4,2}^\textrm{\,min}$ and $\variabile{v}_{4,2}^\textrm{\,max} = \variabile{u}_{4,2}^\textrm{\,max}$ because $\variabile{q}^\textrm{min} = -\variabile{b}$ and $\variabile{q}^\textrm{max} = \variabile{b}$ always coincide with the end points of \set{T}{$4$}{}.}.
+is calculated. In \set{T}{$4$}{} $\variabile{v}_{4,2}^\textrm{\,min} = \variabile{u}_{4,2}^\textrm{\,min}$ and $\variabile{v}_{4,2}^\textrm{\,max} = \variabile{u}_{4,2}^\textrm{\,max}$ because $\variabile{q}^\textrm{min} = -\variabile{b}$ and $\variabile{q}^\textrm{max} = \variabile{b}$ always coincide with the end points of \set{T}{$4$}{}.
 Their corresponding position coordinates $\pos{s,}{$2$}^1$ and $\pos{s,}{$2$}^2$ on \set{S}{$2$}{}
 are obtained from:
 \begin{equation}\label{inverseP}
 \begin{split}
  \inversemap{P}{2,}{4}
-(\variabile{v}_{4,2}^\textrm{\,min}, \variabile{p}) &=  (\pos{s,}{$2$}^1, \dir{s,}{2}), \\
+(\variabile{v}_{4,2}^\textrm{\,min}, \variabile{p}) &=  (\pos{s,}{$2$}^1, \dir{s,}{$2$}), \\
  \inversemap{P}{2,}{4}
-(\variabile{v}_{4,2}^\textrm{\,max}, \variabile{p}) &=  (\pos{s,}{$2$}^2, \dir{s,}{2}).
+(\variabile{v}_{4,2}^\textrm{\,max}, \variabile{p}) &=  (\pos{s,}{$2$}^2, \dir{s,}{$2$}).
 \end{split}
 \end{equation}
  The directions
 $\dir{s,}{$2$}^\textrm{\,min}$ and $\dir{s,}{$2$}^\textrm{\,max} $ on \set{S}{$2$}{}
 are given considering the direction $\dir{t,}{$2$} = \dir{}{}$ with respect to the normal
 $\boldsymbol{\nu}_{2}$ of line $2$.
- Note that $\dir{s,}{$2$}^1=\dir{s,}{$2$}^2$ because all the lines are straight, their normals do not depend on the position at which it is computed.
+ Note that $\dir{s,}{$2$}^1=\dir{s,}{$2$}^2$ because all the lines are straight lines, their normals do not depend on the position at which it is computed.
  Then, the corresponding direction $\dir{t,}{$2$}^1=\dir{t,}{$2$}^2$ on \set{T}{$2$}{}
  is calculated from:
 \begin{equation}\label{inverseR}
@@ -458,8 +452,8 @@ Note that $\pos{s,}{$2$}^1 = \pos{t,}{$2$}^1$ and $\pos{s,}{$2$}^2= \pos{t,}{$2$
 \end{equation} The map $\inversemap{R}{2}{}\circ \inversemap{P}{2,}{4}$  is depicted in red in Fig. \ref{fig:tree}.
 The minimum 
  $\pos{t,}{$2$}^\textrm{\,min} = \min\{\pos{t,}{$2$}^1, \pos{t,}{$2$}^2\}$ and the maximum
- $\pos{t,}{$2$}^\textrm{\,max} = \max\{\pos{t,}{$2$}^1, \pos{t,}{$2$}^2\}$ are calculated. The points with coordinates  $(\pos{t,}{$2$}^\textrm{\,min}, \dir{t,}{$2$})$  and  $(\pos{t,}{$2$}^\textrm{\,max}, \dir{t,}{$2$})$  are depicted in Fig. \ref{fig:T21} where $\dir{t,}{$2$}=0.82$.
- To understand whether the corresponding rays are illuminated or not by the source, the preceding procedure used for
+ $\pos{t,}{$2$}^\textrm{\,max} = \max\{\pos{t,}{$2$}^1, \pos{t,}{$2$}^2\}$ are calculated. The points with coordinates  $(\pos{t,}{$2$}^\textrm{\,min}, \dir{t,}{$2$})$  and  $(\pos{t,}{$2$}^\textrm{\,max}, \dir{t,}{$2$})$  are depicted in blue Fig. \ref{fig:T21}, where $\dir{t,}{$2$}=0.82$.
+ To understand whether the corresponding rays are illuminated or not by the source, the procedure used for
  \set{T}{$4$}{} is now applied to \set{T}{$2$}{}
  along direction $\dir{t,}{$2$}=0.82$. \\ \indent
   Next, the intersection points $(\variabile{u}_{2,\lineai}^\textrm{\,min}, \dir{t,}{$2$})$ and
@@ -471,7 +465,7 @@ of line $\dir{t,}{$2$}= 0.82$
  Now, the position coordinates $\variabile{v}_{2, 1}^\textrm{\,min} = \max\{\pos{t,}{$2$}^ \textrm{\,min},\variabile{u}_{2,1}^\textrm{\,min}\}$
  and $\variabile{v}_{2, 1}^\textrm{\,max} = \min\{\pos{t,}{$2$}^ \textrm{\,max},\variabile{u}_{2, 1}^\textrm{\,max}\}$ need to be considered.
  All the rays located inside the segment $[\variabile{v}_{2, 1}^\textrm{\,min},\variabile{v}_{2, 1}^\textrm{\,max}]$ in
-  \set{T}{$2$}{} and with direction $\dir{t,}{2}$ follow the path $\Pi_2 = (1,2,4)$. In particular, the rays corresponding to the coordinates $(\variabile{v}_{2, 1}^\textrm{\,min},\dir{t,}{2} )$ and $(\variabile{v}_{2, 1}^\textrm{\,max},\dir{t,}{2} )$ are  located on the boundaries of the region \set{R}{}{}$(\Pi_2)$ on \set{T}{$4$}{}
+  \set{T}{$2$}{} and with direction $\dir{t,}{$2$}$ follow path $\Pi_2 = (1,2,4)$. In particular, the rays corresponding to the coordinates $(\variabile{v}_{2, 1}^\textrm{\,min},\dir{t,}{$2$} )$ and $(\variabile{v}_{2, 1}^\textrm{\,max},\dir{t,}{$2$} )$ are  located on the boundaries of the region \set{R}{}{}$(\Pi_2)$ on \set{T}{$4$}{}
   formed by all the rays that follow path $\Pi_2$.
   Their corresponding coordinates $(\variabile{q}^{1}(\Pi_2, \variabile{p}), \variabile{p})$ and
  $(\variabile{q}^{2}(\Pi_2, \variabile{p}), \variabile{p})$ on \set{T}{$4$}{} are obtained from:\footnote{With a slight abuse of notation we indicate  $\variabile{q}^{1}(\Pi, \variabile{p})$ with $\variabile{q}^{1}$ and 
@@ -482,17 +476,17 @@ $ \variabile{q}^{2}(\Pi, \variabile{p})$ with $\variabile{q}^{2}$.}
 \mapnumb{P}_{2,4} \circ \mapnumb{R}_{2} (\variabile{v}_{2, 1}^\textrm{\,max},\dir{t,}{$2$} ) & = (\variabile{q}^{2}, \variabile{p}).
 \end{split}
 \end{equation} 
-The rays corresponding to the coordinates  $(\variabile{q}^{1}, \variabile{p})$ and $ (\variabile{q}^{1}, \variabile{p})$ are located
+The rays corresponding to the coordinates $(\variabile{q}^{1}, \variabile{p})$ and $(\variabile{q}^{2}, \variabile{p})$ are located
  on the boundary $\partial$\set{R}{}{}$(\Pi_2)$ along direction $\variabile{p}=-0.2$.
 Indicating with $\variabile{q}^{\textrm{min}} = \min\{\variabile{q}^{1}, \variabile{q}^2\}$ and $\variabile{q}^{\textrm{max}} = \max\{\variabile{q}^{1}, \variabile{q}^2\}$, the distance $\variabile{q}^{\textrm{max}}-\variabile{q}^{\textrm{min}}$ gives the contribution to the intensity $I(\variabile{p})$ of the rays located in \set{R}{}{}$(\Pi_2)$ where $\variabile{p}=-0.2$.\\
 \indent  \set{T}{$2$}{} can also be illuminated by line $3$, therefore the intersection points $(\variabile{u}_{2, 3}^\textrm{\,min}, \dir{t,}{$2$})$ and $(\variabile{u}_{2, 3}^\textrm{\,max}, \dir{t,}{$2$})$ of line
  $\dir{t,}{$2$}=0.82$ and $\partial \mbox{\set{T}{$2$,}{$3$}}$ are calculated, these points are depicted in Fig. \ref{fig:T22}.
  The coordinates $(\variabile{v}_{2, 3}^\textrm{\,min}, \dir{t,}{$2$})$ and $(\variabile{v}_{2, 3}^\textrm{\,max}, \dir{t,}{$2$})$ are shown in the same figure.
- As the source is not reached yet ($\lineai=3$), the rays corresponding to $(\variabile{v}_{2, 3}^\textrm{\,min}, \dir{t,}{$2$})$ and $(\variabile{v}_{2, 3}^\textrm{\,max}, \dir{t,}{$2$})$ are followed back using the inverses of the propagation and the reflection maps. The coordinates on \set{T}{$3$}{} are shown in Fig. \ref{fig:T31} with blue circles and they obtained from:
+ As the source is not reached yet ($\lineai=3$), the rays corresponding to $(\variabile{v}_{2, 3}^\textrm{\,min}, \dir{t,}{$2$})$ and $(\variabile{v}_{2, 3}^\textrm{\,max}, \dir{t,}{$2$})$ are followed back using the inverses of the propagation and the reflection maps. The coordinates on \set{T}{$3$}{} are shown  with blue circles in Figure \ref{fig:T31} and they are obtained from:
  \begin{equation}
 \begin{split}
-\inversemap{R}{3}{}\circ \inversemap{P}{2,3}(\variabile{v}_{2, 3}^\textrm{\,min}, \dir{t,}{$2$}) &= (\pos{t,}{$3$}^{1}, \dir{t,}{$3$}),\\
-\inversemap{R}{3}{}\circ \inversemap{P}{2,3}(\variabile{v}_{2, 3}^\textrm{\,max}, \dir{t,}{$2$}) &= (\pos{t,}{$3$}^{2}, \dir{t,}{$3$}).
+\inversemap{R}{3}{}\circ \inversemap{P}{3,2}{}(\variabile{v}_{2, 3}^\textrm{\,min}, \dir{t,}{$2$}) &= (\pos{t,}{$3$}^{1}, \dir{t,}{$3$}),\\
+\inversemap{R}{3}{}\circ \inversemap{P}{2,3}{}(\variabile{v}_{2, 3}^\textrm{\,max}, \dir{t,}{$2$}) &= (\pos{t,}{$3$}^{2}, \dir{t,}{$3$}).
 \end{split}
 \end{equation}
 The minimum and the maximum position coordinates are $\pos{t,}{$3$}^{\textrm{min}}= \min\{\pos{t,}{$3$}^{1}, \pos{t,}{$3$}^{2}\}$ and 
@@ -506,15 +500,15 @@ The procedure continues recursively.
   If the source is reached, then a valid path $\Pi = (1,3,2,4)$ is found. Using the inverse of the propagation map, we compute
 \begin{equation}
 \begin{aligned}
-\inversemap{P}{1,3}(\pos{t,}{$3$}^\textrm{min}, \dir{t,}{$3$}) = (\pos{s,}{$1$}^1, \dir{s,}{$1$}), \\ 
-\inversemap{P}{1,3}(\pos{t,}{$3$}^\textrm{max}, \dir{t,}{$3$}) = (\pos{s,}{$1$}^2, \dir{s,}{$1$}).
+\inversemap{P}{1,3}{}(\pos{t,}{$3$}^\textrm{min}, \dir{t,}{$3$}) = (\pos{s,}{$1$}^1, \dir{s,}{$1$}), \\ 
+\inversemap{P}{1,3}{}(\pos{t,}{$3$}^\textrm{max}, \dir{t,}{$3$}) = (\pos{s,}{$1$}^2, \dir{s,}{$1$}).
  \end{aligned}
 \end{equation} 
 The direct map $\mapnumb{M}_{1,4}(\Pi)$:\set{S}{$1$}{}$\mapsto$\set{R}{}{}$(\Pi)$ restricted to path $\Pi = (1,3,2,4)$, i.e.
 \begin{equation}
 \mapnumb{M}_{1,4} = \mapnumb{P}_{2,4}\circ\mapnumb{R}_{2}\circ\mapnumb{P}_{3,2}\circ\mapnumb{R}_{3}\circ\mapnumb{P}_{1,3}
 \end{equation}
-is applied to the coordinates $(\pos{s,}{$1$}^{1}, \dir{s,}{$1$})$ and $(\pos{s,}{$1$}^{1}, \dir{s,}{$1$})$ giving:
+is applied to the coordinates $(\pos{s,}{$1$}^{1}, \dir{s,}{$1$})$ and $(\pos{s,}{$1$}^{1}, \dir{s,}{$1$})$:
 \begin{equation}
 \begin{split}
 \mapnumb{M}_{1,4}(\pos{s,}{$1$}^{1}, \dir{s,}{$1$}) &= (\variabile{q}^{1}(\Pi, \variabile{p}), \variabile{p}),\\
@@ -523,8 +517,7 @@ is applied to the coordinates $(\pos{s,}{$1$}^{1}, \dir{s,}{$1$})$ and $(\pos{s,
 \end{equation} 
 the coordinates $(\variabile{q}^{1}(\Pi, \variabile{p}), \variabile{p})$ and
   $(\variabile{q}^{2}(\Pi, \variabile{p}), \variabile{p})$ located on $\partial$\set{R}{}{}$(\Pi)$ in \set{T}{$4$}{} are found.
-Indicating with $\variabile{q}^{\textrm{min}}= \min\{\variabile{q}^{1}, \variabile{q}^{2}\}$ and $\variabile{q}^{\textrm{max}}= \max\{\variabile{q}^{1}, \variabile{q}^{2}\}$, 
-Thus, the contribution to the intensity due to the rays that follow the path $\Pi$ is given by 
+Indicating with $\variabile{q}^{\textrm{min}}= \min\{\variabile{q}^{1}, \variabile{q}^{2}\}$ and $\variabile{q}^{\textrm{max}}= \max\{\variabile{q}^{1}, \variabile{q}^{2}\}$, the contribution to the intensity due to the rays that follow path $\Pi$ is given by:
 \begin{equation}
 I(\variabile{p}) = I(\variabile{p})+\variabile{q}^{\textrm{max}}(\Pi, \variabile{p})-\variabile{q}^{\textrm{min}}(\Pi, \variabile{p}). 
 \end{equation}
@@ -554,15 +547,15 @@ I(\variabile{p}) = I(\variabile{p})+\variabile{q}^{\textrm{max}}(\Pi, \variabile
  \inversemap{R}{2}{}\circ\inversemap{P}{2,}{3}(\variabile{v}_{3, 2}^\textrm{\,max},-0.29) & = (\pos{t,}{$2$}^{\textrm{max}}, \dir{t,}{$2$}),\\
 \end{split}
 \end{equation}
-  the corresponding coordinates $(\pos{t,}{$2$}^{\textrm{max}}, \dir{t,}{$2$})$ and $(\pos{t,}{$2$}^{\textrm{min}}, \dir{t,}{$2$})$ on \set{T}{$2$}{} are found (Fig. \ref{fig:T23})
+  the corresponding coordinates $(\pos{t,}{$2$}^{\textrm{max}}, \dir{t,}{$2$})$ and $(\pos{t,}{$2$}^{\textrm{min}}, \dir{t,}{$2$})$ on \set{T}{$2$}{} are found (see Figure \ref{fig:T23})
   with $\dir{t,}{$2$}=-0.41$.
-  Now the procedure is repeated again for \set{T}{2}{} along the direction $\dir{t,}{$2$}=-0.41$.
-  No intersection points between line $\dir{t,}{$2$}=-0.41$ and $\partial$\set{T}{$2$,}{$1$} occur.
-  Only, the intersection points $(\variabile{u}_{2,3}^\textrm{\,min},\dir{t,}{$2$})$ and $(\variabile{u}_{2,3}^\textrm{\,max},\dir{t,}{$2$})$
-  of line $\dir{t,}{$2$}=-0.41$ and $\partial$\set{T}{$2$,}{$3$} are found (see Fig. \ref{fig:T23}).
+  Now the procedure is repeated again for \set{T}{$2$}{} along the direction $\dir{t,}{$2$}$.
+  No intersection points between line $\dir{t,}{$2$}=-0.41$ and $\partial$\set{T}{$2$,}{$1$} occur. 
+Only, the intersection points $(\variabile{u}_{2,3}^\textrm{\,min},\dir{t,}{$2$})$ and $(\variabile{u}_{2,3}^\textrm{\,max},\dir{t,}{$2$})$
+  of line $\dir{t,}{$2$}=-0.41$ and $\partial$\set{T}{$2$,}{$3$} are found.
   The intersection segment 
 \begin{equation}
-[\variabile{v}_{2,3}^\textrm{\,min},\variabile{v}_{2,3}^\textrm{\,max}] = [\pos{t,}{$2$}^\textrm{\,min},\pos{t,}{$2$}^\textrm{\,max}] \cap  [\pos{t,}{$2$}^\textrm{\,min},\pos{t,}{$2$}^\textrm{\,max}]
+[\variabile{v}_{2,3}^\textrm{\,min},\variabile{v}_{2,3}^\textrm{\,max}] = [\variabile{u}_{2,3}^\textrm{\,min},\variabile{u}_{2,3}^\textrm{\,max}] \cap  [\pos{t,}{$2$}^\textrm{\,min},\pos{t,}{$2$}^\textrm{\,max}]
 \end{equation}
 is calculated. 
 The coordinates on \set{T}{$3$}{} corresponding to the end points of the intersection interval are found using:
@@ -572,22 +565,22 @@ The coordinates on \set{T}{$3$}{} corresponding to the end points of the interse
 \inversemap{R}{3}{}\circ\inversemap{P}{3,}{2} (\variabile{v}_{2,3}^\textrm{\,max},\dir{t,}{$2$})& = (\pos{t,}{$3$}^\textrm{\,max},\dir{t,}{$3$}),
 \end{split}
 \end{equation}  where $ \dir{t,}{$3$} = 0.91$ (see Fig. \ref{fig:T32}). \\ \indent
- Considering the PS \set{T}{$3$}{} and the direction $\dir{t,}{$3$}=0.91$, we note that there are no intersection points between line
- $\dir{t,}{$3$}=0.91$ and both $\partial$\set{T}{$3$,}{$1$} and $\partial$\set{T}{$3$,}{$2$}.
+ Considering the PS \set{T}{$3$}{} and the direction $\dir{t,}{$3$}=0.91$, we note that there are no intersection points of line
+ $\dir{t,}{$3$}=0.91$ with both $\partial$\set{T}{$3$,}{$1$} and $\partial$\set{T}{$3$,}{$2$}.
  Indeed, the whole segment $[\pos{t,}{$3$}^\textrm{\,min},\pos{t,}{$3$}^\textrm{\,max}]$ is outside both
  \set{T}{$3$,}{$2$} and \set{T}{$3$,}{$1$}. Because of this, all the rays with $\variabile{q}$-coordinates inside the interval
  $[\pos{t,}{$3$}^\textrm{\,min},\pos{t,}{$3$}^\textrm{\,max}]$
-and with direction $\variabile{p}= \dir{t,}{3}$ are not illuminated by the source and no new real path is found.
+and with direction $\variabile{p}= \dir{t,}{$3$}$ are not illuminated by the source and no new real path is found.
 \\ \indent
 Finally, the recursive procedure is applied to \set{T}{$4$,}{$3$}.
 The first step is depicted in Fig. \ref{fig:T43}.
  We decided not to show all the steps for \set{T}{$4$,}{$3$} as they are similar to those used for \set{T}{$4$,}{$2$} and explained above.
- \\ \indent Finally, to compute the intensity along another direction $\variabile{p}^{\lineak}\in[-1,1]$ on \set{T}{$4$}{},
-the procedure explained for $\variabile{p}=-0.2$ is repeated for $\variabile{p}= \variabile{p}^{\lineak}$.
+ \\ \indent Finally, to compute the intensity along another direction $\variabile{p}^{\variabile{h}}\in[-1,1]$ on \set{T}{$4$}{},
+the procedure explained for $\variabile{p}=-0.2$ is repeated for $\variabile{p}= \variabile{p}^{\variabile{h}}$.
 In this way we find all the possible paths $\Pi$ and the regions \set{R}{}{}$(\Pi)$ with positive luminance on \set{T}{$4$}{}.
-Furthermore, considering every time the coordinates located on the boundaries of the regions \set{T}{\lineai,}{\lineaj} for every $\lineaj$, also the boundaries $\partial$\set{R}{}{}$(\Pi)$ are determined for a given path $\Pi$ as well as the coordinates $\variabile{q}^\textrm{max}(\Pi,\variabile{p})$ and $\variabile{q}^\textrm{\,min}(\Pi,\variabile{p})$ for every $\variabile{p}\in [-1,1]$.
-In Algorithm \ref{alg} they are the main steps to calculate the intensity $I(\variabile{p})$ along a given direction
-$\variabile{p} = \variabile{p}^{\lineak}$ in \set{T}{$4$}{}, where for the first step we take $\lineaj=4$.
+Furthermore, considering every time the coordinates located on the boundaries of the regions \set{T}{\lineai,}{\lineaj} for every $\lineaj$, also the boundaries $\partial$\set{R}{}{}$(\Pi)$ are determined for a given path $\Pi$ as well as the coordinates $\variabile{q}^\textrm{\,min}(\Pi,\variabile{p})$ and $\variabile{q}^\textrm{\,max}(\Pi,\variabile{p})$ for every $\variabile{p}\in [-1,1]$.
+In Algorithm \ref{alg}, there are the main steps to calculate the intensity $I(\variabile{p})$ along a given direction
+$\variabile{p} = \variabile{p}^{\variabile{h}}$ in \set{T}{$4$}{}, where for the first step we take $\lineaj=4$.
 \begin{figure}
 \begin{minipage}[]{.48\textwidth}
 \centering
@@ -744,16 +737,14 @@ Initialize { $\lineaj=4,$  $\pos{t,}{$4$}^\textrm{\,min} = \variabile{q}^{\textr
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
- \indent In the next section we provide the numerical results for the two-faceted cup. 
-
+ \\ \indent In the next section we provide the numerical results for the two-faceted cup. 
 \section{Results for the two-faceted cup}
 To demonstrate the accuracy of the method, a comparison with the ray tracing approach is provided.
-In particular, we compare our method with MC ray tracing.
-The MC intensity is computed tracing randomly a large number of rays from the source to the target of the system.
-Then, a partitioning $P:-1 = \variabile{p}^0 < \cdots< \variabile{p}^\textrm{Nb} = 1$ of the interval $[-1,1]$ is considered, where $\textrm{Nb}$ indicates the number of bins in the partitioning.
-The MC intensity along the direction $\variabile{p}\in[\variabile{p}^\variabile{h}, \variabile{p}^{\variabile{h}+1}]$ is given by the ratio of the number of rays $\textrm{Nr}[\variabile{p}^\variabile{h}, \variabile{p}^{\variabile{h}+1}]$ that arrive at the bin $[\variabile{p}^\variabile{h}, \variabile{p}^{\variabile{h}+1}]$ and the total number of rays $\textrm{Nr}[-1, 1]$ that arrive at the target for every $\variabile{p}\in[\variabile{p}^\variabile{h}, \variabile{p}^{\variabile{h}+1}]$ as defined in Equation (\ref{eq:normalized_MC_intensity}). Hence, the MC intensity is piecewise constant. Note that $\hat{I}_{\textrm{MC}}$ is normalized. In order to compute the intensity distribution for all the directions, the partitioning $P$ of the target is considered. Then, the procedure explained above is repeated for $\Big(\variabile{p}^{\variabile{h}+1/2} = \frac{1}{2}(\variabile{p}^{\variabile{h}+1}+\variabile{p}^\variabile{h})\Big)_{\variabile{h} = 0, \cdots, \textrm{Nb}-1}$ and the MC intensity is calculated over every bin. The profile of the MC intensity is depicted in Fig. \ref{fig:intensity_cup} with a blue line. There the intensity is calculated tracing $10^7$ rays and taking $\textrm{Nb} = 100$.\\
-\indent Next, we compute the intensity at the target employing the PS ray mapping method. Using the procedure explained in Section \ref{sec:algorithm}, we are able to detect all the possible paths $\Pi$ that a ray can follow during the propagation through the system. 
-For the two-faceted cup $5$ different paths are found. Given a path $\Pi$, the coordinates $(\variabile{q}^\textrm{min}(\Pi, \variabile{p}^ \variabile{h}), \variabile{p}^ \variabile{h})$ and $(\variabile{q}^\textrm{\,max}(\Pi, \variabile{p}^ \variabile{h}), \variabile{p}^\variabile{h})$ of the rays located on $\partial \mbox{\set{R}{}{}}(\Pi)$ are determined for every $\variabile{p} = (\variabile{p}^\variabile{h})_{\variabile{h}=0, \cdots, \textrm{Nb}}$ where the values $\variabile{p}^\variabile{h}$ are given from the partitioning $P$ used for MC ray tracing. These rays are depicted in Fig. \ref{fig:final_T}, where all the rays that follow the same path are shown with the same color. The PS intensity is obtained from Eq. (\ref{eta2}). Note from Fig. $\ref{fig:final_T}$ that only $2\textrm{Nb}$ rays need to be traced through the system for the intensity computation.
+In particular, we compare our method with QMC ray tracing.
+The QMC intensity is computed as explained in Chapter \ref{chap:raytracing}. 
+We consider here the same partitioning $P:-1 = \variabile{p}^0 < \cdots< \variabile{p}^\textrm{Nb} = 1$ of the interval $[-1,1]$ used for all the simulation presented in the previous chapters. 
+The profile of the QMC intensity obtained tracing $10^7$ rays and taking $\textrm{Nb} = 100$ is depicted in Figure \ref{fig:intensity_cup} with a blue line.\\
+\indent Next, we compute the intensity at the target employing the PS ray mapping method. We are able to detect all the possible paths $\Pi$ that a ray can follow during the propagation through the system. According to the results obtained with PS ray tracing, $5$ different paths are found for the two-faceted cup. Given a path $\Pi$, the coordinates $(\variabile{q}^\textrm{min}(\Pi, \variabile{p}^ \variabile{h}), \variabile{p}^ \variabile{h})$ and $(\variabile{q}^\textrm{\,max}(\Pi, \variabile{p}^ \variabile{h}), \variabile{p}^\variabile{h})$ of the rays located on $\partial \mbox{\set{R}{}{}}(\Pi)$ are determined for every $\variabile{p} = (\variabile{p}^\variabile{h})_{\variabile{h}=0, \cdots, \textrm{Nb}}$ where the values $\variabile{p}^\variabile{h}$ are given from the partitioning $P$ used for QMC ray tracing. These rays are depicted in Figure \ref{fig:final_T}, where all the rays that follow the same path are shown with the same color. The PS intensity is obtained from Eq. (\ref{eta2}). Note from Fig. $\ref{fig:final_T}$ that only $2\textrm{Nb}$ rays need to be traced through the system for the intensity computation.
 The averaged normalized PS intensity is given by Equation (\ref{eq:normalized_PS_intensity})
 %\begin{equation}\label{eq:intensity}
 % \hat{I}_{\textrm{PS}}(\variabile{p}^{\variabile{h}+1/2}) = \frac{\int_{\variabile{p}^\variabile{h}}^{\variabile{p}^{\variabile{h}+1}}{\lineai}_{PS}(\variabile{p})\textrm{d}\variabile{p}}{\int_{-1}^{1}{\lineai}_{PS}(\variabile{p})\textrm{d}\variabile{p}}\,,
