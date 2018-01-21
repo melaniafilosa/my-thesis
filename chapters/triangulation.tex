@@ -12,7 +12,7 @@ $\Pi$. \\\indent In this chapter we develop a criterion to establish the value o
 To calculate the integral in Equation (\ref{eq:etenduetarg1}), the triangulation refinement method is applied to the regions $\mbox{\set{R}{}{}}(\Pi)$ for a range of values of $\varepsilon_{\variabile{q}_1}^{\textrm{max}}$ and for a fixed value of $\varepsilon_{\variabile{q}_1}^{\textrm{min}}$. The parameters along the $\variabile{p}$-axis are scaled as 
 \begin{equation}\label{eq:scaled_parameters}
 \begin{aligned}
-& w = \frac{\variabile{p}_1^{\textrm{max}}-\variabile{p}_1^{\textrm{min}}}{\variabile{q}_1^{\textrm{max}}-\variabile{q}_1^{\textrm{min}}}=2,\\
+& w = \frac{\variabile{q}_1^{\textrm{max}}-\variabile{q}_1^{\textrm{min}}}{\variabile{p}_1^{\textrm{max}}-\variabile{p}_1^{\textrm{min}}},\\
 &\varepsilon_{\variabile{p}_1}^{\textrm{min}}= \frac{\varepsilon_{\variabile{q}_1}^{\textrm{min}}}{w}, \\
 &\varepsilon_{\variabile{p}_1}^{\textrm{max}}= \frac{\varepsilon_{\variabile{q}_1}^{\textrm{max}}}{w}.
 \end{aligned}
@@ -144,10 +144,10 @@ The difference between the two intensity profiles is not discernible by eye.
   \label{fig:intensity_tir_triangulation}
 \end{figure}
 \\ \indent
-To validate our method, PS ray tracing is compared to both MC and QMC ray tracing. The error between the approximated intensities $\hat{I}_{\textrm{A}} (\textrm{A}=\textrm{QMC}, \textrm{MC}, \textrm{PS})$ and the reference intensity $\hat{I}_{\textrm{ref}}$ as a function of the number of rays traced is calculated. The error plot is shown in a logarithmic scale in Figure \ref{fig:error_tir_triangulation} where the MC, QMC and PS convergences are shown with the green, the blue and the red line, respectively. The black dotted line is a line with slope $-\frac{1}{2}$, the blue dotted line has slope $-1$.The graph shows that MC ray tracing converges with an order of $\mathcal{O}(\frac{1}{\sqrt{\nrays}})$, while both PS ray tracing and QMC have a speed of convergence of the order $\mathcal{O}(\frac{1}{N})$. Note that PS ray tracing allows tracing $10^2$ times less rays compared to MC ray tracing and around $10$ times less rays compared to QMC ray tracing.
+To validate our method, PS ray tracing is compared to both MC and QMC ray tracing. The error between the approximated intensities $\hat{I}_{\textrm{A}} (\textrm{A}=\textrm{QMC}, \textrm{MC}, \textrm{PS})$ and the reference intensity $\hat{I}_{\textrm{ref}}$ as a function of the number of rays traced is calculated. The error plot is shown in a logarithmic scale in Figure \ref{fig:error_tir_triangulation} where the MC, QMC and PS convergences are shown with the green, the blue and the red line, respectively. The black dotted line is a line with slope $-\frac{1}{2}$, the blue dotted line has slope $-1$.The graph shows that MC ray tracing converges, for $\nrays \rightarrow \infty$, with an order of $\mathcal{O}(\frac{1}{\sqrt{\nrays}})$, while both PS and QMC ray tracing have a speed of convergence of the order $\mathcal{O}(\frac{1}{\nrays})$. Note that PS ray tracing allows tracing $10^2$ times less rays compared to MC ray tracing and around $10$ times less rays compared to QMC ray tracing.
  \begin{figure}[h!]
   \center
-  \includegraphics[width= 0.5\textwidth]{error_tir_triangulation}
+  \includegraphics[width= 0.5\textwidth]{error_nr_triangulation_tir}
   \caption{\textbf{Error as a function of the number of rays for the TIR-collimator.} The reference intensity $\hat{I}_{\textrm{ref}}$ is obtained by QMC ray tracing with $10^7$ rays.}
   \label{fig:error_tir_triangulation}
 \end{figure}
@@ -158,12 +158,12 @@ To validate our method, PS ray tracing is compared to both MC and QMC ray tracin
   \label{fig:error_tir_triangulation_time}
 \end{figure}
 \\ \indent Finally, in order to show the advantages of PS ray tracing in terms of the computational time, in Figure \ref{fig:error_tir_triangulation_time} we provide an error convergence as a function of the CPU-time for all the three methods (MC, QMC and PS raytracing). The choice of the colours is consistent with Figure \ref{fig:intensity_tir_triangulation}.
-\\ \indent The results shown in Figures \ref{fig:error_tir_triangulation} and \ref{fig:error_tir_triangulation_time} are reported in Tables \ref{tab:ps_error_triangulation}, \ref{tab:mc_error_triangulation} and  \ref{tab:qmc_error_triangulation}.
+\\ \indent The results shown in Figures \ref{fig:error_tir_triangulation} and \ref{fig:error_tir_triangulation_time} are reported in Tables \ref{tab:ps_error_triangulation} and \ref{tab:mc_error_triangulation}.
 \begin{table}[t] 
 \centering
 \caption{\bf Errors of the PS intensity for the TIR-collimator}
 \begin{tabular}{lllll}
- \hline   $\varepsilon_{\variabile{q}}^{\textrm{max}} $  & $\nrays$ & Etendue & PS error & CPU-time (sec.) \\
+ \hline   $\varepsilon_{\variabile{q}}^{\textrm{max}} $  & $\nrays$ & Etendue & PS error & PS CPU-time (sec.) \\
   \hline 
  $0.05$ & $3\,547$   & $7.50$   &  $1.75\cdot10^{-4}$ & $1.98$\\
 $0.025$  & $8\,055$    & $7.61$    & $1.49\cdot 10^{-4}$ & $4.69$ \\
@@ -177,39 +177,39 @@ $1.6 \cdot 10^{-3}$ & $162\,300$  & $7.76$    & $1.20\cdot 10^{-5}$ & $240.53$\\
  \end{table}
 \begin{table}[t] \label{tab:table_tir_triangulation}
 \centering
-\caption{\bf Errors of the MC intensity for the TIR-collimator}
-\begin{tabular}{lll}
- \hline   $\nrays$ & MC error & CPU-time (sec.) \\
+\caption{\bf Errors of the MC and QMC intensities for the TIR-collimator}
+\begin{tabular}{lllll}
+ \hline   $\nrays$ & MC error & MC CPU-time (sec.) & QMC error  & QMC CPU-time (sec.)\\
   \hline 
- $10^3$     & $2.09\cdot 10^{-3}$ & $2.73$\\
- $10^4$     & $6.42\cdot 10^{-4}$ & $25.98$ \\
- $10^5$     & $1.92\cdot 10^{-4}$ & $259.92$\\
- $10^6$     & $7.45\cdot 10^{-5}$ & $2585.83$\\
+ $10^3$     & $2.09\cdot 10^{-3}$ & $2.73$ & $1.43\cdot10^{-3}$    & $2.63$\\
+ $10^4$     & $6.42\cdot 10^{-4}$ & $25.98$ & $3.03\cdot 10^{-4}$   & $25.84$\\
+ $10^5$     & $1.92\cdot 10^{-4}$ & $259.92$ & $5.82\cdot 10^{-5}$   & $258.28$\\
+ $10^6$     & $7.45\cdot 10^{-5}$ & $2585.83$   & $1.28\cdot 10^{-5}$   & $2482.67$\\
  \hline
  \end{tabular}
  \label{tab:mc_error_triangulation}
  \end{table}
-\begin{table}[ht] 
-\centering
-\caption{\bf Errors of the QMC intensity for the TIR-collimator}
-\begin{tabular}{lllll}
- \hline  $\nrays$\;  & QMC error  & CPU-time (sec.)\\
-  \hline 
- $10^3$   & $1.43\cdot10^{-3}$    & $2.63$  \\
-$10^4$    & $3.03\cdot 10^{-4}$   & $25.84$   \\
-$10^5$    & $5.82\cdot 10^{-5}$   & $258.28$  \\
- $10^6$   & $1.28\cdot 10^{-5}$   & $2482.67$  \\
- \hline
- \end{tabular}
- \label{tab:qmc_error_triangulation}
- \end{table}
-We observe that PS ray tracing outperforms both MC and QMC ray tracing. PS ray tracing speed up MC ray tracing by a factor $2$ and QMC ray tracing by a factor $1$.\\ \indent Next we show the result for a system where more than $5$ paths are possible. 
+%\begin{table}[t] 
+%\centering
+%\caption{\bf Errors of the QMC intensity for the TIR-collimator}
+%\begin{tabular}{lllll}
+% \hline  $\nrays$\;  & QMC error  & CPU-time (sec.)\\
+%  \hline 
+% $10^3$   & $1.43\cdot10^{-3}$    & $2.63$  \\
+%$10^4$    & $3.03\cdot 10^{-4}$   & $25.84$   \\
+%$10^5$    & $5.82\cdot 10^{-5}$   & $258.28$  \\
+% $10^6$   & $1.28\cdot 10^{-5}$   & $2482.67$  \\
+% \hline
+% \end{tabular}
+% \label{tab:qmc_error_triangulation}
+% \end{table}
+We observe that PS ray tracing outperforms both MC and QMC ray tracing. 
+Using PS ray tracing an error equal to $10^{-4}$ is achieved tracing almost $10$ time less compared to QMC ray tracing and $100$ times less rays compared to QMC ray tracing. THis makes PS ray tracing $10$ times faster than QMC ray tracing and $100$ times faster than MC ray tracing.\\ \indent Next we show the result for a system where more than $5$ paths are possible. 
 In particular we present the results for an optical system for which multiple reflections between rays and the mirrors can occur.
 \section{A Parabolic reflector}
-In this section we show an example of a parabolic reflector the design of which is explained in the following. 
-Given a Cartesian coordinate system  $(\variabile{x},\variabile{z})$, the two-dimensional system in Figure \ref{fig:PR} is defined in the $(\variabile{x},\variabile{z})$-plane.
+In this section we show an example of a parabolic reflector the design of which is depicted in Figure \ref{fig:PR}.
  It consists of a source \point{S} (line $1$), a target \point{T} (line $4$) parallel to \point{S} and two reflectors (lines $2$ and $3$) which are arcs of the same parabola. 
-  The minimum of the parabola is located at the point with $\variabile{x}$-coordinate equal to $0$. $\point{S}=[\const{-a}, \const{a}]$ (with $\const{a}=2$) and $\point{T}=[-\const{b},\const{b}]$ (with $\const{b}=17$) are lines perpendicular to the optical axis and are located at $\variabile{z}=0$ and $\variabile{z}=40$, respectively.
+  The minimum of the parabola is located at the point with $\variabile{x}$-coordinate equal to $0$. $\point{S}=[\const{-a}, \const{a}]$ (with $\const{a}=2$) and $\point{T}=[-\const{b},\const{b}]$ (with $\const{b}=17$) are lines perpendicular to the optical axis (\variabile{z}-axis) and are located at $\variabile{z}=0$ and $\variabile{z}=40$, respectively.
 All the optical lines are located in air, therefore the index of refraction ${n}=1$ for every line.
 The optical axis of the system in Figure \ref{fig:PR} corresponds to the \variabile{z}-axis.
 \begin{figure}[h!]
@@ -221,31 +221,30 @@ The optical axis of the system in Figure \ref{fig:PR} corresponds to the \variab
    The left and right reflectors (lines $2$ and $3$) are arcs of the same parabola.}
 \label{fig:PR}
 \end{figure}
-We trace rays in PS with source direction coordinates $\variabile{p}_1 = [-1,1]$ and source position coordinates $\variabile{q}_1\in[-\variabile{a}+\varepsilon,\variabile{a}-\varepsilon]$ where $\varepsilon>0$ is a small number. In particular we take $\varepsilon = 10^{-12}$.\\ \indent As an example we show the triangulation refinement obtained from the parameters $$\varepsilon_{\variabile{q}_1}^{\textrm{min}} = 0.025, \; \varepsilon_{\variabile{q}_1}^{\textrm{max}} = 0.25, \; \varepsilon_{\variabile{p}_1}^{\textrm{max}} = \varepsilon_{\variabile{q}_1}^{\textrm{min}}/2, \mbox{ and }  \varepsilon_{\variabile{p}_1}^{\textrm{max}} = \varepsilon_{\variabile{q}_1}^{\textrm{max}}/2, $$ for which around $7700$ rays are traced in PS. Their distribution at \set{S}{}{} and \set{T}{}{} is shown in Figures \ref{fig:source_triang_pr} and \ref{fig:target_triang_pr}, respectively. 
+We trace rays in PS with source direction coordinates $\variabile{p}_1 = [-1,1]$ and source position coordinates $\variabile{q}_1\in[-\variabile{a}+\varepsilon,\variabile{a}-\varepsilon]$ where $\varepsilon>0$ is a small number. In particular we take $\varepsilon = 10^{-12}$.\\ \indent As an example we show the triangulation refinement obtained for the parameters $$\varepsilon_{\variabile{q}_1}^{\textrm{min}} = 0.025, \; \varepsilon_{\variabile{q}_1}^{\textrm{max}} = 0.25, \; \varepsilon_{\variabile{p}_1}^{\textrm{max}} = \varepsilon_{\variabile{q}_1}^{\textrm{min}}/2, \mbox{ and }  \varepsilon_{\variabile{p}_1}^{\textrm{max}} = \varepsilon_{\variabile{q}_1}^{\textrm{max}}/2, $$ for which around $7700$ rays are traced in PS. Their distribution at \set{S}{}{} and \set{T}{}{} is shown in Figures \ref{fig:source_triang_pr} and \ref{fig:target_triang_pr}, respectively. 
 \begin{figure}[h]
- \begin{subfigure}[t]{0.47\textwidth}
+ \begin{subfigure}[h]{0.47\textwidth}
 \centering
     \includegraphics[width=\textwidth]{pr_source}
     \caption{Source PS \set{S}{}{} $= [-\variabile{a}+\varepsilon,\variabile{a}-\varepsilon]\times[-1,1]$}
     \label{fig:source_triang_pr}
 \end{subfigure}
 \hfill
-\begin{subfigure}[t]{0.47\textwidth}
+\begin{subfigure}[h]{0.47\textwidth}
 \centering
     \includegraphics[width = \textwidth]{pr_target}
     \caption{Target PS \set{T}{}{} $= [-\variabile{b},\variabile{b}]\times[-1,1]$}
     \label{fig:target_triang_pr}
 \end{subfigure}
-\caption{\textbf{Rays distribution at \set{S}{}{} and \set{T}{}{} of the parabolic reflector.} Around $7700$ rays are traced using PS ray tracing with parameters $\varepsilon_{\variabile{q}_1}^{\textrm{min}} = 0.025, \; \varepsilon_{\variabile{q}_1}^{\textrm{max}} = 0.25, \; \varepsilon_{\variabile{p}_1}^{\textrm{max}} = \varepsilon_{\variabile{q}_1}^{\textrm{min}}/2, \mbox{ and }  \varepsilon_{\variabile{p}_1}^{\textrm{max}} = \varepsilon_{\variabile{q}_1}^{\textrm{max}}/2$ . $17$ different path are found each of them correspond to a certain number of reflection.}
+\caption{\textbf{Rays distribution at \set{S}{}{} and \set{T}{}{} of the parabolic reflector.} Around $7700$ rays are traced using PS ray tracing with parameters $\varepsilon_{\variabile{q}_1}^{\textrm{min}} = 0.025, \; \varepsilon_{\variabile{q}_1}^{\textrm{max}} = 0.25, \; \varepsilon_{\variabile{p}_1}^{\textrm{max}} = \varepsilon_{\variabile{q}_1}^{\textrm{min}}/2, \mbox{ and }  \varepsilon_{\variabile{p}_1}^{\textrm{max}} = \varepsilon_{\variabile{q}_1}^{\textrm{max}}/2$ . $17$ different paths are found, each of them correspond to a certain number of reflections.}
  \label{fig:phase_space_pr}
-\end{figure}\\ 
-The distribution of the rays in PS gives information about the path they follow. We note that for the parabolic reflector many paths are found. Every path corresponds to a given number of reflections. Rays can have multiple reflections before arrive at the target. These are the rays that leaves the end points of the source with direction tangential to the mirrors $2$ and $3$. The parameters used in the triangulation refinement establish not only the number of rays traced but also the number of paths detected. For instance, for the values of the parameters defined above, the triangulation refinement is able to detect $17$ different paths.  Rays that reflect many times before reaching the target do not give a significant contribution to the target intensity. Decreasing the values of the parameter $\varepsilon_{\variabile{q}_1}^{\textrm{min}}$ more paths can be found. In order to find \textit{all} the possible paths, also the parameter $\varepsilon_{\variabile{q}_1}^{\textrm{max}}$ needs to be decreased. In fact, very small regions cannot be detected if $\varepsilon_{\variabile{q}_1}^{\textrm{max}}$ is too large, see the example shown in Figure \ref{fig:region inside}. Increasing the number of reflections considered, the corresponding regions in PS are smaller and smaller, see Figure \ref{fig:phase_space_pr}. \\ \indent Likewise the optical systems considered in the previous sections, a stopping criterion of the triangulation refinement is determined for the parabolic reflector. Etendue conservation is used in order to find the values of the parameters that give the best approximation of the boundaries of the regions with positive luminance in PS. For the parabolic reflector in Figure \ref{fig:PR} all the rays that leave the source arrive at the target. Indeed, line $2$ and $3$ can only reflect rays (refraction law is not involved) and the target coincides with the source. From Equation (\ref{eq:etenduesource}) we obtain:
+\end{figure} The distribution of the rays in PS gives information about the path they follow. We note that for the parabolic reflector many paths are found. Every path corresponds to a given number of reflections. Rays can have multiple reflections at lines $2$ and $3$ before arriving at the target. These are the rays that leaves the end points of the source with direction tangential to the mirrors $2$ and $3$. The parameters used in the triangulation refinement establish not only the number of rays traced but also the number of paths detected. For instance, for the values of the parameters defined above, the triangulation refinement is able to detect $17$ different paths.  Rays that reflect many times before reaching the target do not give a significant contribution to the target intensity. Decreasing the value of the parameter $\varepsilon_{\variabile{q}_1}^{\textrm{min}}$, more paths can be found. In order to find \textit{all} the possible paths, also the parameter $\varepsilon_{\variabile{q}_1}^{\textrm{max}}$ needs to be decreased. In fact, very small regions cannot be detected if $\varepsilon_{\variabile{q}_1}^{\textrm{max}}$ is too large, see the example shown in Figure \ref{fig:region inside}. Increasing the number of reflections considered, the corresponding regions in PS become smaller and smaller, see Figure \ref{fig:phase_space_pr}. \\ \indent Like for the optical systems considered in the previous sections, a stopping criterion of the triangulation refinement is determined for the parabolic reflector. Etendue conservation is used in order to find the values of the parameters that give the best approximation of the boundaries of the regions with positive luminance in PS. For the parabolic reflector in Figure \ref{fig:PR} all the rays that leave the source arrive at the target. Indeed, line $2$ and $3$ can only reflect rays (refraction law is not involved) and the target coincides with the source. From Equation (\ref{eq:etenduesource}) we obtain:
 \begin{equation}
 U = U_1 = 4(\variabile{a}-\varepsilon)\approx 8.
 \end{equation}
-Then, a range of values of $\varepsilon_{\variabile{q}_1}^{\textrm{min}}$ and $\varepsilon_{\variabile{q}_1}^{\textrm{max}}$ is considered (the triangulation parameters for the $\variabile{p}$-axis depend on those for the $\variabile{q}$-axis according to Equation (\ref{eq:scaled_parameters})). For each couple of values, an approximation of the boundaries $\partial$\set{R}{}{}$(\Pi)$ is found for every path $\Pi$ as explained at the beginning of this chapter. $U_{\textrm{t}}$ is calculated for the approximated boundaries using Equation (\ref{eq:etenduetarg}). In Table \ref{tab:etendue_pr} we show how the number of rays traced, the paths found and the value for the target \'{e}tendue depend on the triangulation parameters.
-We observe that, decreasing $\varepsilon_{\variabile{q}_1}^{\textrm{min}}$ and $\varepsilon_{\variabile{q}_1}^{\textrm{max}}$ the number of both the rays traced and the paths found increases. A maximum of $17$ different paths are found. Furthermore, the value of $U_{\textrm{t}}$ gets closer and closer to the exact \'{e}tendue $U$.
-\begin{table}[ht] 
+A range of values of $\varepsilon_{\variabile{q}_1}^{\textrm{min}}$ and $\varepsilon_{\variabile{q}_1}^{\textrm{max}}$ is considered (the triangulation parameters for the $\variabile{p}$-axis depend on the $\variabile{q}$-axis parameters according to Equation (\ref{eq:scaled_parameters})). For each couple of values, an approximation of the boundaries $\partial$\set{R}{}{}$(\Pi)$ is found for every path $\Pi$ as explained. $U_{\textrm{t}}$ is calculated for the approximated boundaries using Equation (\ref{eq:etenduetarg}). In Table \ref{tab:etendue_pr} we show how the number of rays traced, the paths found and the value for the target \'{e}tendue depend on the triangulation parameters.
+We observe that, decreasing $\varepsilon_{\variabile{q}_1}^{\textrm{min}}$ and $\varepsilon_{\variabile{q}_1}^{\textrm{max}}$ the number of both the rays traced and the paths found increases. A maximum of $17$ different paths are detected. Furthermore, the value of $U_{\textrm{t}}$ gets closer and closer to the exact \'{e}tendue $U$.
+\begin{table}[t] 
 \centering
 \caption{\bf Results of the triangulation refinement.}
 \begin{tabular}{lllll}
@@ -263,7 +262,7 @@ $0.025/16$ & $0.5/16$  & $176\,215$    & $17$ & $7.98$\\
  \label{tab:etendue_pr}
  \end{table}
 \\ \indent Using the triangulation refinement that gives the best \'{e}tendue approximation, we calculate the target PS intensity $\hat{I}_{\textrm{PS}}$ from Equation (\ref{eq:PSintensity}).
-The intensity profile is shown with the red line in Figure \ref{fig:intensity_pr}. The PS intensity is compared to a reference intensity $\hat{I}_{\textrm{ref}}$ given using QMC ray tracing with $10^7$ rays. $\hat{I}_{\textrm{ref}}$ is depicted Figure \ref{fig:intensity_pr} with the dotted blue line. The graph shows that the two intensities overlap.
+The intensity profile is shown with the red line in Figure \ref{fig:intensity_pr}. The PS intensity is compared to a reference intensity $\hat{I}_{\textrm{ref}}$, computed using QMC ray tracing with $10^7$ rays. $\hat{I}_{\textrm{ref}}$ is depicted Figure \ref{fig:intensity_pr} with the dotted blue line. The graph shows that the two intensities coincide.
  \begin{figure}[h!]
   \center
   \includegraphics[width = 0.6\textwidth]{intensity_pr}
@@ -277,9 +276,10 @@ The intensity profile is shown with the red line in Figure \ref{fig:intensity_pr
  \hline   $\nrays$ & PS error & CPU-time (sec.) \\
   \hline 
  $241$        & $1.10\cdot10^{-3}$ & $0.14$\\
+ $625$       & $8.60\cdot 10^{-4}$ & $0.20$\\
  $1\,500$     & $5.16\cdot 10^{-4}$ & $0.44$ \\
  $7\,700$     & $2.70\cdot 10^{-4}$ & $2.07$\\
- $17\,400,$   & $1.27\cdot 10^{-5}$ & $5.78$\\
+ $17\,400$   & $1.27\cdot 10^{-4}$ & $5.78$\\
  $81\,500$    & $2.45\cdot 10^{-5}$ & $60.35$\\
  $176\,215$   & $1.10\cdot 10^{-5}$ & $241.79$\\
  \hline
@@ -288,15 +288,15 @@ The intensity profile is shown with the red line in Figure \ref{fig:intensity_pr
 \\ \indent 
 Now, our method is compared to both MC and QMC ray tracing. 
 The error between the approximate intensities $\hat{I}_{\textrm{A}}(\textrm{A}=\textrm{PS}, \textrm{MC}, \textrm{QMC})$ and the reference intensity is calculated. In Figure \ref{fig:error_rays_pr} the error as a function of the number of rays traced is shown for the three methods.
-The green line represents MC error, the blue line pictures the QMC error and the red line depicts PS error. The errors are shown in a logarithmic scale, the dotted black line has slope $-\frac{1}{2}$, the dotted blue line has slope $-1$. Likewise the other systems, MC ray tracing converges proportionally to $\frac{1}{\sqrt{\nrays}}$. QMC ray tracing is proportional to $\frac{1}{\nrays}$. PS ray tracing has a behaviour similar to MC ray tracing until all the possible path are found. Once all the path are detected, PS ray tracing converges proportional to $\frac{1}{\nrays}$. Less rays compared to both MC and QMC ray tracing are needed to trace in PS.
+The green line represents MC error, the blue line pictures the QMC error and the red line depicts PS error. The errors are shown in a logarithmic scale, the dotted black line has slope $-\frac{1}{2}$, the dotted blue line has slope $-1$. Likewise for the other systems, MC ray tracing converges proportionally to $\frac{1}{\sqrt{\nrays}}$. QMC convergence is proportional to $\frac{1}{\nrays}$. The PS convergence behaviour is similar to MC ray tracing until all the possible paths are found. Once all the paths are detected, PS ray tracing converges proportional to $\frac{1}{\nrays}$. Less rays compared to both MC and QMC ray tracing are needed to trace in PS. In particular, to achive an error of $10^{-4}$, around $10$ times less rays in PS are needed compared to MC and few rays less than QMC.
 \begin{figure}[h!]
   \center
-  \includegraphics[width = 0.47\textwidth]{error_nr_pr}
+  \includegraphics[width = 0.47\textwidth]{error_nr_triangulation_pr}
   \caption{\textbf{Error as a function of the number of rays traced.} Less rays are needed using PS ray tracing compared to both MC and QMC ray tracing.}
   \label{fig:error_rays_pr}
 \end{figure} 
 \\ \indent
-Finally, the error as a function of the CPU-time is shown in Figure \ref{fig:error_time_pr}. The MC, QMC and PS errors are depicted with the green, blue and red line, respectively. We observe that PS ray tracing is $10$ times faster than MC ray tracing. Note that PS ray tracing is faster than QMC ray tracing if an error of around $10^-4$ is desired, for a better accuracy, PS ray tracing becomes slightly slower than QMC ray tracing.
+Finally, the error as a function of the CPU-time is shown in Figure \ref{fig:error_time_pr}. The MC, QMC and PS errors are depicted with the green, blue and red line, respectively. We observe that PS ray tracing is $10$ times faster than MC ray tracing. Note that PS ray tracing is faster than QMC ray tracing if an error of around $10^{-4}$ is desired, for a better accuracy, PS ray tracing becomes slightly slower than QMC ray tracing. The detailed results of the numerical simulations are reported in Tables \ref{tab:mc_error_pr_triangulation} and \ref{tab:QMC_error_pr_triangulation}.
 \begin{figure}[h!]
   \center
   \includegraphics[width = 0.5\textwidth]{error_time_pr}
@@ -332,9 +332,9 @@ Finally, the error as a function of the CPU-time is shown in Figure \ref{fig:err
  \label{tab:QMC_error_triangulation}
  \end{table}
 \section{Discussion and conclusions}
-In this chapter we presented a method to calculate the boundaries of the regions with positive luminance in PS. This method does not depend on the parameter $\alpha$ needed for the $\alpha$-shape method presented in Chapter \ref{chap:boundaries_alpha}. Indeed, given a triangulation at the source PS, the boundaries are computed joining the vertices of the boundaries triangles, that is triangles crossed by a boundary, that follow the same path. Employing \'{e}tendue conservation, a stopping criterion for the triangulation refinement was developed. We applied the method to three different optical systems: a two-faceted cup, a TIR-collimator, and a parabolic reflector. Numerical results show that PS ray tracing is faster and more accurate than MC ray tracing. Compared to QMC ray tracing we observed accuracy and speed advantages of an order of magnitude with our method for the TIR-collimator. 
-For the two-faceted cup, PS ray tracing has a slower convergence compared to QMC ray tracing. For the parabolic reflector PS and QMC ray tracing have similar results.
-The insight is that QMC ray tracing performs better than PS ray tracing for very simple optical systems, but the PS approach is more suitable for more complicated optical systems.
+In this chapter we presented a method to calculate the boundaries of the regions with positive luminance in PS. This method does not depend on a parameter $\alpha$ needed for the $\alpha$-shape method presented in Chapter \ref{chap:boundaries_alpha}. Indeed, given a triangulation at the source PS, the boundaries are computed connecting the vertices of the boundary triangles, i.e. triangles crossed by a boundary, that follow the same path. Employing \'{e}tendue conservation, a stopping criterion for the triangulation refinement was developed. We applied the method to three different optical systems: the two-faceted cup, a TIR-collimator, and a parabolic reflector. Numerical results show that PS ray tracing is faster and more accurate than MC ray tracing. Compared to QMC ray tracing we observed accuracy and speed advantages of an order of magnitude with our method for the TIR-collimator. 
+For the two-faceted cup, PS ray tracing has a slower convergence compared to QMC ray tracing. For the parabolic reflector PS and QMC ray tracing display similar convergence.
+The conclusion is that QMC ray tracing performs better than PS ray tracing for very simple optical systems, but the PS approach is more suitable for more complicated optical systems.
 \\ \indent In order to further improve PS ray tracing we develop a new method which employs the PS of \textit{all} the optical lines. The approach is explained in the next chapter.
 %We claim that PS ray tracing is also more accurate than the ray tracing procedure proposed by Moore (2013), \cite{moore2013methods}.
 %The novelty of our approach compared to the method used by Moore, is briefly explained below. First, to compute the output intensity, we employ the phase space of the target. This avoids the use of any interpolation to compute the photometric variables and therefore, more accurate results are obtained.
