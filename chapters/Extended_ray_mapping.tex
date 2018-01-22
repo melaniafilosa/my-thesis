@@ -1,7 +1,94 @@
 \chapter{The extended ray mapping method}
 \label{chap:raymapping2}
-
+In Chapter \ref{chap:raymapping1} we introduced an inverse method based on a ray mapping reconstruction on PS.
+The goal was to calculate the intensity distribution at the target of optical systems. 
+The idea is to construct a map from the target \point{T} to the source \point{S}. 
+The method involves the PS representation of all the optical lines. Each of them is divided into regions.  
+The method we developed in the previous chapter requires that the boundaries of the regions of every PS can be determined exactly. This is possible for systems formed by straight line segments.
+The results found show that the procedure allows tracing only the rays located exactly on the boundaries of the regions with positive luminance. From these rays, the output intensity is calculated. Since the boundaries in PS are computed analytically, the output intensity is the \textit{exact} intensity. \\ \indent
+In this chapter we extend the method to systems formed by curved lines. In this case, the boundaries of the regions that form the PS cannot be determined exactly.
+Because of this, we need to use a numerical procedure. In particular, we develop a method that employs only the PS of the target of the system. 
+The boundaries in target PS of the regions illuminated by the source are detected using a bisection procedure and the inverse ray tracing procedure.\\ \indent
+The details are explained in the next section. In this chapter we apply the method to two optical systems: the TIR-collimator and a parabolic reflector. The results are presented in Section \ref{sec:TIR} and \ref{sec:PR}, respectively.
 \section{Explanation of the method}
-\section{Bisection procedure}
-\section{Results for a parabolic reflector}
-\section{Results for two different kind of TIR-collimators}
+The purpose of this chapter is to present the inverse ray mapping method generalized to systems formed by curved lines. In PS the target intensity is given by Equation (\ref{eta2}). Therefore, the problem reduces to calculate the coordinates 
+$\variabile{q}^{\textrm{\,min}}(\Pi, \variabile{p})$ and $\variabile{q}^{\textrm{\,max}}(\Pi, \variabile{p})$ of the rays on $\partial$\set{R}{}{}$(\Pi)$ for every path $\Pi$.\\ \indent 
+Given a direction $\variabile{p}$, the procedure starts considering the end points $(\variabile{q}^{\,\textrm{a}}, \variabile{p})$ and $(\variabile{q}^{\,\textrm{b}}, \variabile{p})$ of \set{T}{}{} along direction $\variabile{p}$, where $\variabile{q}^{\,\textrm{a}} = -\variabile{b}$ and $\variabile{q}^{\,\textrm{b}} = \variabile{b}$. Then, the 
+inverse ray tracing is applied to the corresponding rays $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$. We indicate with $\nline$ the index of the target (line $\nline$) and with $\lineai\in\{1,\cdots, \nline-1\}$ and $\lineaj\in\{1,\cdots, \nline-1\}$ the lines from which $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ are emitted, respectively. $\Pi_\textrm{a} = (\lineai, \nline)$ and $\Pi_\point{B} = (\nline, \lineaj)$ are the paths followed by ray $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$, respectively. If $\lineai= \lineaj$, then $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ are hit the same line before reaching the target. 
+Next, their coordinates $(\variabile{q}_{\lineai}^{\,\textrm{a}}, \variabile{p}_{\lineai}^{\,\textrm{a}})$ and $(\variabile{q}_{\lineai}^{\,\textrm{b}}, \variabile{p}_{\lineai}^{\,\textrm{b}})$ on \set{T}{\lineai}{} are calculated. The corresponding rays are traced back from line $\lineai$ using the inverse ray tracing. Note that since $\lineai$ is a curved line, $ \variabile{p}_{\lineai}^{\,\textrm{a}}\neq \variabile{p}_{\lineai}^{\,\textrm{b}}$.
+\\ \indent Now, if $\lineai\neq \lineaj$ the rays $\vect{r}_\textrm{a}$ and $\vect{r}_\textrm{b}$ are emitted by two-different lines, hence $\Pi_{\textrm{a}}\neq \Pi_{\textrm{b}}$ and belong to different regions \set{R}{}{}$(\Pi_{\textrm{a}})$ and \set{R}{}{}$(\Pi_{\textrm{b}})$ in \set{T}{}{}. To determine the ray on the boundary $\partial$\set{R}{}{}$(\Pi_{\textrm{a}})$, the bisection method is applied to the interval $[\variabile{q}_{\lineai}^{\,\textrm{a}}, \variabile{q}_{\lineai}^{\,\textrm{b}}]$ on target \set{}{}{} along direction $\variabile{p}$. This interval is halves until the coordinates in target PS of the ray that follow the same path of ray $\vect{r}_{\textrm{a}}$ are found. \\ \indent Bisection procedure continues until the length of the segment considered becomes smaller than a fixed tolerance. In our simulation we take the tolerance $\textrm{tol}= 10^{-12}$. 
+Giving as input the rays coordinates $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$, path $\Pi_\textrm{a}$, the tolerance \textrm{tol} and a variable $\textrm{count} = 0$, the bisection method is implemented as in Algorithm \ref{bisection}.
+\begin{algorithm}
+\caption{Bisection}\label{bisection}
+\begin{algorithmic}[1]
+\While {$|\variabile{q}^{\,\textrm{a}}-\variabile{q}^{\,\textrm{b}}|>\textrm{tol}$}
+\State $\Pi_{\textrm{m}}\gets \nline,$
+\State $\variabile{q}^{\,\textrm{m}}\gets \frac{\variabile{q}^{\,\textrm{a}}+\variabile{q}^{\,\textrm{b}}}{2},$ 
+\State $\variabile{p}^{\,\textrm{m}}\gets\variabile{p},$
+\State $\vect{r}_{\textrm{m}}\gets \variabile{q}^{\,\textrm{m}}+s \variabile{p}^{\,\textrm{m}}$ with $s>0$ the arc-length,
+\While {$\textrm{count}<\mbox{length}(\Pi_\textrm{a})-1$}
+\State Apply the inverse of ray tracing to ray $\vect{r}_{\textrm{m}}$
+\State Find the line $\lineak$ that the ray $\vect{r}_{M}$ hits.
+\State $\Pi_{\textrm{m}}\gets (\lineak,\Pi_{\textrm{m}})$.
+\If {$\lineak=1$ or $\lineak=\nline$}
+$\textrm{count} = \mbox{length}(\Pi_\point{A})$
+\Else \State $\textrm{count}\gets\textrm{count}+1$ 
+\EndIf
+\EndWhile
+\If {$\Pi_\textrm{a} = \Pi_\textrm{m}$}
+\State $(\variabile{q}^{\,\textrm{a}}, \variabile{p}^{\,\textrm{a}})\gets (\variabile{q}^{\,\textrm{m}}, \variabile{p}^{\,\textrm{m}})$
+\State $\vect{r}_{\textrm{z}}\gets \vect{r}_{\textrm{m}}$
+\Else 
+\State $(\variabile{q}^{\,\textrm{b}}, \variabile{p}^{\,\textrm{b}})\gets (\variabile{q}^{\,\textrm{m}}, \variabile{p}^{\,\textrm{m}})$
+\State $\vect{r}_{\point{B}}\gets \vect{r}_{\textrm{m}}$
+\State $\Pi_\textrm{b}\gets \Pi_{\textrm{m}}$
+\EndIf
+\EndWhile
+\State $(\variabile{q}^{\,\textrm{c}}, \variabile{p}^{\,\textrm{c}})\gets (\variabile{q}^{\,\textrm{a}}, \variabile{p}^{\,\textrm{a}}), \vect{r}_{\textrm{c}}\gets \vect{r}_{\textrm{a}}, \Pi_\textrm{c}\gets \Pi_{\textrm{a}}.$
+\State $(\variabile{q}^{\,\textrm{d}}, \variabile{p}^{\,\textrm{d}})\gets (\variabile{q}^{\,\textrm{b}}, \variabile{p}^{\,\textrm{b}}), \vect{r}_{\textrm{d}}\gets \vect{r}_{\textrm{b}}, \Pi_\textrm{d}\gets \Pi_{\textrm{b}}.$
+\State \Return $\textrm{c}, \textrm{d}, \vect{r}_\textrm{c}, \vect{r}_\textrm{d}$
+\end{algorithmic}
+\end{algorithm}
+\\ \indent Once bisection stops, two points with coordinates $(\variabile{q}^{\,\textrm{c}}, \variabile{p})$ and $(\variabile{q}^{\,\textrm{d}}, \variabile{p})$ in \set{T}{}{} are found. The corresponding rays $\vect{r}_{\textrm{c}}$ and $\vect{r}_{\textrm{d}}$ follow path $\Pi_{\textrm{c}}=\Pi_{\textrm{a}}$ and $\Pi_{\textrm{d}}\neq\Pi_{\textrm{a}}$, respectively. 
+All the rays with target coordinates $(\variabile{q}, \variabile{p})$ and $\variabile{q}^{\,\textrm{a}}\leq\variabile{q}\leq\variabile{q}^{\,\textrm{c}}$ follow path $\Pi = \Pi_{\textrm{a}}$, while the rays with target coordinates $(\variabile{q}, \variabile{p})$ with $\variabile{q}^{\,\textrm{d}}\leq\variabile{q}\leq\variabile{q}^{\,\textrm{b}}$ follow path $\Pi \neq \Pi_{\textrm{a}}$
+\\ \indent In order to determine the boundaries of all the patches formed by the rays that are illuminated by the source, the procedure explained above needs to be applied to the interval 
+$[\variabile{q}^{\textrm{a}},\variabile{q}^{\textrm{c}}]$ until the source is reached, i.e. until $\lineai=1$. 
+\\ \indent
+When $\lineai=1$, the source is reached by the rays traced back from the target. This means that a physical path $\Pi$ is found and the position coordinates $\variabile{q}^{\textrm{\,min}}(\Pi, \variabile{p})$ and $\variabile{q}^{\textrm{\,max}}(\Pi, \variabile{p})$ on \set{T}{}{} of the rays located at the boundaries $\partial$\set{R}{}{}$(\Pi)$ of the rays that follow that path are determined. \\ \indent 
+Finally, to detect all the physical paths that can occur along direction $\variabile{p}$ the procedure explained above is applied also to the segment $[\variabile{q}^{\textrm{d}}, \variabile{\textrm{b}}]$ along direction $\variabile{p}$. 
+%% Bisection procedure algorithm
+%\\ \indent
+The method is developed using a recursive algorithm which main steps are summarized in the following.
+\begin{enumerate}
+\item Given a direction \variabile{p}, consider the end points $(\variabile{q}^{\,\textrm{a}}, \variabile{p})$ and $(\variabile{q}^{\,\textrm{b}}, \variabile{p})$ of the target PS \set{T}{}{}.
+\item \label{ray trace} Using the inverse ray tracing procedure, trace back the rays $\vect{r}_{\textrm{a}}$ and $\vect{r}_\textrm{b}$ corresponding to the coordinates  $(\variabile{q}^{\,\textrm{a}}, \variabile{p})$ and $ (\variabile{q}^{\,\textrm{b}}, \variabile{p})$,
+\item Determine indices $\lineai$ and $\lineaj$ of the lines that  $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$  hit, respectively.\\
+Calculate the corresponding coordinates $(\variabile{q}^{\,\textrm{a}}_{\lineai}, \variabile{p}_\lineai)$ and $(\variabile{q}^{\,\textrm{b}}_\lineaj\, \variabile{p}_\lineaj)$  in \set{T}{\lineai}{} and \set{T}{\lineaj}{} of the rays $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$, respectively.
+\item Update the paths $\Pi_\textrm{a}$ and $\Pi_\textrm{b}$ of rays $\vect{r}_\textrm{a}$ and $\vect{r}_\textrm{b}$, respectively.  $\Pi_\textrm{a} = (\lineai, \Pi_{\textrm{a}})$ and $\Pi_\textrm{b} = (\lineaj, \Pi_\textrm{b}),$
+\item If $\lineai=\lineaj \neq 1$ restart the procedure from point \ref{ray trace} considering the coordinates  $(\variabile{q}^{\,\textrm{a}}_{\lineai}, \variabile{p}_\lineai)$ and $(\variabile{q}^{\,\textrm{b}}_\lineaj\, \variabile{p}_\lineaj)$,
+\item If $\lineai\neq\lineaj$ apply the bisection method to the segment $[\variabile{q}^{\textrm{a}}, \variabile{q}^{\textrm{b}}]$ along direction $\variabile{p}$.
+\item Find the points with coordinates $(\variabile{q}^{\,\textrm{c}}, \variabile{p})$ and $(\variabile{q}^{\,\textrm{d}}, \variabile{p})$ in target PS \set{T}{}{}. 
+\item If $\lineai\neq 1$ restart from \ref{ray trace} with $\variabile{q}^{\textrm{a}}$ and $\variabile{q}^{\textrm{c}}$,
+\item Restart from \ref{ray trace} with coordinates $\variabile{q}^{\textrm{d}}$ and $\variabile{q}^{\textrm{b}}$,
+\item If $\lineai=\lineaj= 1$ a relevant path $\Pi_{\textrm{a}}$ is found. 
+\item Determine 
+\begin{equation*}
+\begin{aligned}
+\variabile{q}^{\textrm{min}}(\Pi_{\textrm{a}}, \variabile{p})&=\min\{\variabile{q}^{\textrm{a}}(\Pi_{\textrm{a}}, \variabile{p}), \variabile{q}^{\textrm{c}}(\Pi_{\textrm{a}}, \variabile{p})\}\\ 
+\variabile{q}^{\textrm{max}}(\Pi_{\textrm{a}}, \variabile{p})&=\max\{\variabile{q}^{\textrm{a}}(\Pi_{\textrm{a}}, \variabile{p}), \variabile{q}^{\textrm{c}}(\Pi_{\textrm{a}}, \variabile{p})\},
+\end{aligned}
+\end{equation*}
+\item Update the intensity $$I(\variabile{p}) = I(p)+\variabile{q}^{\textrm{max}}(\Pi_{\textrm{a}}, \variabile{p})-\variabile{q}^{\textrm{min}}(\Pi_{\textrm{a}}, \variabile{p})$$
+\item If $\lineai=\lineaj= 4$ stop the procedure (the rays reach the target again).
+\end{enumerate}
+The explained procedure is able to determine all the possible paths that the rays can follow during their propagation from \set{S}{}{} to \set{T}{}{}. Also, the rays located exactly on the boundaries of the regions with positive luminance on target PS \set{T}{}{} are found.\\ \indent
+%
+\section{Results for a TIR-collimator}\label{sec:TIR}
+%The parabolic reflector shown in Fig. \ref{fig:parabolic_reflector} is a very challenging example of optical system. Indeed, the rays that propagate through such a system can reflect many times along the left and the right mirror 
+\section{Results for a parabolic reflector}\label{sec:PR}
+%% Difference between PR and cup (show tree), no analytic boundaries
+%% Bisection procedure
+%% Divide into bins
+%% Stopping criterion
+%% Intensity
+%% Error
