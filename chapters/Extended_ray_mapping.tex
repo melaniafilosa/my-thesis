@@ -11,10 +11,14 @@ Because of this, we need to use a numerical procedure. In particular, we develop
 The boundaries in target PS of the regions illuminated by the source are detected using a bisection procedure and the inverse ray tracing procedure.\\ \indent
 The details are explained in the next section. In this chapter we apply the method to two optical systems: the TIR-collimator and a parabolic reflector. The results are presented in Section \ref{sec:TIR} and \ref{sec:PR}, respectively.
 \section{Explanation of the method}
-The purpose of this chapter is to present the inverse ray mapping method generalized to systems formed by curved lines. In PS the target intensity is given by Equation (\ref{eta2}). Therefore, the problem reduces to calculate the coordinates 
+The purpose of this chapter is to present the inverse ray mapping method generalized to systems formed by curved lines. 
+% Given a partitioning 
+
+In PS the target intensity is given by Equation (\ref{eta2}).
+Therefore, the problem reduces to calculate the coordinates 
 $\variabile{q}^{\textrm{\,min}}(\Pi, \variabile{p})$ and $\variabile{q}^{\textrm{\,max}}(\Pi, \variabile{p})$ of the rays on $\partial$\set{R}{}{}$(\Pi)$ for every path $\Pi$.\\ \indent 
 Given a direction $\variabile{p}$, the procedure starts considering the end points $(\variabile{q}^{\,\textrm{a}}, \variabile{p})$ and $(\variabile{q}^{\,\textrm{b}}, \variabile{p})$ of \set{T}{}{} along direction $\variabile{p}$, where $\variabile{q}^{\,\textrm{a}} = -\variabile{b}$ and $\variabile{q}^{\,\textrm{b}} = \variabile{b}$. Then, the 
-inverse ray tracing is applied to the corresponding rays $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$. We indicate with $\nline$ the index of the target (line $\nline$) and with $\lineai\in\{1,\cdots, \nline-1\}$ and $\lineaj\in\{1,\cdots, \nline-1\}$ the lines from which $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ are emitted, respectively. $\Pi_\textrm{a} = (\lineai, \nline)$ and $\Pi_\point{B} = (\nline, \lineaj)$ are the paths followed by ray $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$, respectively. If $\lineai= \lineaj$, then $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ are hit the same line before reaching the target. 
+inverse ray tracing is applied to the corresponding rays $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$. We indicate with $\nline$ the index of the target (line $\nline$) and with $\lineai\in\{1,\cdots, \nline-1\}$ and $\lineaj\in\{1,\cdots, \nline-1\}$ the lines from which $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ are emitted, respectively. $\Pi_\textrm{a} = (\lineai, \nline)$ and $\Pi_\textrm{b} = (\nline, \lineaj)$ are the paths followed by ray $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$, respectively. If $\lineai= \lineaj$, then $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ are hit the same line before reaching the target. 
 Next, their coordinates $(\variabile{q}_{\lineai}^{\,\textrm{a}}, \variabile{p}_{\lineai}^{\,\textrm{a}})$ and $(\variabile{q}_{\lineai}^{\,\textrm{b}}, \variabile{p}_{\lineai}^{\,\textrm{b}})$ on \set{T}{\lineai}{} are calculated. The corresponding rays are traced back from line $\lineai$ using the inverse ray tracing. Note that since $\lineai$ is a curved line, $ \variabile{p}_{\lineai}^{\,\textrm{a}}\neq \variabile{p}_{\lineai}^{\,\textrm{b}}$.
 \\ \indent Now, if $\lineai\neq \lineaj$ the rays $\vect{r}_\textrm{a}$ and $\vect{r}_\textrm{b}$ are emitted by two-different lines, hence $\Pi_{\textrm{a}}\neq \Pi_{\textrm{b}}$ and belong to different regions \set{R}{}{}$(\Pi_{\textrm{a}})$ and \set{R}{}{}$(\Pi_{\textrm{b}})$ in \set{T}{}{}. To determine the ray on the boundary $\partial$\set{R}{}{}$(\Pi_{\textrm{a}})$, the bisection method is applied to the interval $[\variabile{q}_{\lineai}^{\,\textrm{a}}, \variabile{q}_{\lineai}^{\,\textrm{b}}]$ on target \set{}{}{} along direction $\variabile{p}$. This interval is halves until the coordinates in target PS of the ray that follow the same path of ray $\vect{r}_{\textrm{a}}$ are found. \\ \indent Bisection procedure continues until the length of the segment considered becomes smaller than a fixed tolerance. In our simulation we take the tolerance $\textrm{tol}= 10^{-12}$. 
 Giving as input the rays coordinates $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$, path $\Pi_\textrm{a}$, the tolerance \textrm{tol} and a variable $\textrm{count} = 0$, the bisection method is implemented as in Algorithm \ref{bisection}.
@@ -37,10 +41,10 @@ $\textrm{count} = \mbox{length}(\Pi_\point{A})$
 \EndWhile
 \If {$\Pi_\textrm{a} = \Pi_\textrm{m}$}
 \State $(\variabile{q}^{\,\textrm{a}}, \variabile{p}^{\,\textrm{a}})\gets (\variabile{q}^{\,\textrm{m}}, \variabile{p}^{\,\textrm{m}})$
-\State $\vect{r}_{\textrm{z}}\gets \vect{r}_{\textrm{m}}$
+\State $\vect{r}_{\textrm{a}}\gets \vect{r}_{\textrm{m}}$
 \Else 
 \State $(\variabile{q}^{\,\textrm{b}}, \variabile{p}^{\,\textrm{b}})\gets (\variabile{q}^{\,\textrm{m}}, \variabile{p}^{\,\textrm{m}})$
-\State $\vect{r}_{\point{B}}\gets \vect{r}_{\textrm{m}}$
+\State $\vect{r}_{\textrm{b}}\gets \vect{r}_{\textrm{m}}$
 \State $\Pi_\textrm{b}\gets \Pi_{\textrm{m}}$
 \EndIf
 \EndWhile
@@ -55,9 +59,7 @@ All the rays with target coordinates $(\variabile{q}, \variabile{p})$ and $\vari
 $[\variabile{q}^{\textrm{a}},\variabile{q}^{\textrm{c}}]$ until the source is reached, i.e. until $\lineai=1$. 
 \\ \indent
 When $\lineai=1$, the source is reached by the rays traced back from the target. This means that a physical path $\Pi$ is found and the position coordinates $\variabile{q}^{\textrm{\,min}}(\Pi, \variabile{p})$ and $\variabile{q}^{\textrm{\,max}}(\Pi, \variabile{p})$ on \set{T}{}{} of the rays located at the boundaries $\partial$\set{R}{}{}$(\Pi)$ of the rays that follow that path are determined. \\ \indent 
-Finally, to detect all the physical paths that can occur along direction $\variabile{p}$ the procedure explained above is applied also to the segment $[\variabile{q}^{\textrm{d}}, \variabile{\textrm{b}}]$ along direction $\variabile{p}$. 
-%% Bisection procedure algorithm
-%\\ \indent
+Finally, to detect all the possible paths that can occur along direction $\variabile{p}$ the procedure explained above is applied also to the segment $[\variabile{q}^{\textrm{d}}, \variabile{\textrm{b}}]$ along direction $\variabile{p}$. 
 The method is developed using a recursive algorithm which main steps are summarized in the following.
 \begin{enumerate}
 \item Given a direction \variabile{p}, consider the end points $(\variabile{q}^{\,\textrm{a}}, \variabile{p})$ and $(\variabile{q}^{\,\textrm{b}}, \variabile{p})$ of the target PS \set{T}{}{}.
@@ -66,7 +68,7 @@ The method is developed using a recursive algorithm which main steps are summari
 Calculate the corresponding coordinates $(\variabile{q}^{\,\textrm{a}}_{\lineai}, \variabile{p}_\lineai)$ and $(\variabile{q}^{\,\textrm{b}}_\lineaj\, \variabile{p}_\lineaj)$  in \set{T}{\lineai}{} and \set{T}{\lineaj}{} of the rays $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$, respectively.
 \item Update the paths $\Pi_\textrm{a}$ and $\Pi_\textrm{b}$ of rays $\vect{r}_\textrm{a}$ and $\vect{r}_\textrm{b}$, respectively.  $\Pi_\textrm{a} = (\lineai, \Pi_{\textrm{a}})$ and $\Pi_\textrm{b} = (\lineaj, \Pi_\textrm{b}),$
 \item If $\lineai=\lineaj \neq 1$ restart the procedure from point \ref{ray trace} considering the coordinates  $(\variabile{q}^{\,\textrm{a}}_{\lineai}, \variabile{p}_\lineai)$ and $(\variabile{q}^{\,\textrm{b}}_\lineaj\, \variabile{p}_\lineaj)$,
-\item If $\lineai\neq\lineaj$ apply the bisection method to the segment $[\variabile{q}^{\textrm{a}}, \variabile{q}^{\textrm{b}}]$ along direction $\variabile{p}$.
+\item If $\lineai\neq\lineaj$ apply the bisection method to the interval $[\variabile{q}^{\textrm{a}}, \variabile{q}^{\textrm{b}}]$ along direction $\variabile{p}$.
 \item Find the points with coordinates $(\variabile{q}^{\,\textrm{c}}, \variabile{p})$ and $(\variabile{q}^{\,\textrm{d}}, \variabile{p})$ in target PS \set{T}{}{}. 
 \item If $\lineai\neq 1$ restart from \ref{ray trace} with $\variabile{q}^{\textrm{a}}$ and $\variabile{q}^{\textrm{c}}$,
 \item Restart from \ref{ray trace} with coordinates $\variabile{q}^{\textrm{d}}$ and $\variabile{q}^{\textrm{b}}$,
@@ -82,10 +84,68 @@ Calculate the corresponding coordinates $(\variabile{q}^{\,\textrm{a}}_{\lineai}
 \item If $\lineai=\lineaj= 4$ stop the procedure (the rays reach the target again).
 \end{enumerate}
 The explained procedure is able to determine all the possible paths that the rays can follow during their propagation from \set{S}{}{} to \set{T}{}{}. Also, the rays located exactly on the boundaries of the regions with positive luminance on target PS \set{T}{}{} are found.\\ \indent
-%
-\section{Results for a TIR-collimator}\label{sec:TIR}
-%The parabolic reflector shown in Fig. \ref{fig:parabolic_reflector} is a very challenging example of optical system. Indeed, the rays that propagate through such a system can reflect many times along the left and the right mirror 
+Next, the method is applied to two example of optical systems formed by curved lines. In the next section we show the results for the TIR-collimator.
+\section{Results for the TIR-collimator}\label{sec:TIR}
+% Introduction 
+In this section we apply the extended inverse ray mapping to the TIR-collimator presented in Chapter \ref{chap:boundaries_alpha} and depicted in Figure \ref{fig:analyticlens}. The target PS of this system is the rectangular \set{T}{}{}$= [-\variabile{b}, \variabile{b}]\times[-1,1]$ with $\variabile{b}=9.7$. The aim is to detect all the possible path $\Pi$ and the rays located on the boundaries $\partial$\set{R}{}{}$(\Pi)$ of the corresponding regions in target PS. 
+\\ \indent In Chapter \ref{chap:boundaries_alpha} we found that for the the TIR-collimator $5$ different paths are found, and the boundaries of the corresponding regions in \set{T}{}{} are in general difficult to approximate. Furthermore, along the same direction $\dir{}{}$ more than two points can be located on the boundary $\partial$\set{R}{}{}$(\Pi)$ of the region \set{R}{}{}$(\Pi)$ corresponding to a certain path $\Pi$. To determine properly all the boundaries 
+$\partial$\set{R}{}{}$(\Pi)$, we divide the interval $[-\variabile{b}, \variabile{b}]$ in 
+\set{T}{}{} into intervals of the same length (bins). Hence, we consider a partitioning 
+$Q = -\variabile{b}=\variabile{q}^{0}<\variabile{q}^{1}<\cdots<\variabile{q}^{\textrm{Ni}}=\variabile{b}$ of the interval $[-\variabile{b}, \variabile{b}]$ where $\textrm{Ni}$ is the total number of bins along the $\variabile{q}$-axis.
+For each direction $\dir{}{}\in [-1,1]$ the procedure explained in the previous section is repeated for every sub-interval $[\variabile{q}^{\textrm{h}}(\dir{}{}), \variabile{q}^{\textrm{h}+1}(\dir{}{})]\subset [\variabile{q}^{\textrm{a}}(\dir{}{}), \variabile{q}^{\textrm{b}}(\dir{}{})]$ with $\textrm{h}=0, \cdots, \textrm{Ni}-1$ and $\variabile{q}^{\textrm{a}}(\dir{}{}) = -\variabile{b}$ and $\variabile{q}^{\textrm{b}}(\dir{}{}) = \variabile{b}$.\\ \indent
+To establish in how many \textrm{Ni} bins we need to divide the target 
+As an example, in Figure \ref{fig:boundaries_TIR_ray_mapping} we show the distribution of the rays traced using the inverse ray mapping method with $\textrm{Ni}=30$ and $\nbin = 100.$ 
+\begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=0.7\textwidth]{triangulation_source}
+  \end{center}
+  \caption{\textbf{Rays distribution at target PS of the TIR-collimator.}
+ The $\variabile{q}$-axis is divided into $\textrm{Ni}=30$ bins, the $\variabile{p}$-axis is divided into $\nbin = 100$ bins. Using the ray mapping method only few rays are traced from the target to the source (red dots). Because of numerical error, few rays outside the region with positive luminance are found (Rays rimmed in red).}
+\label{fig:boundaries_TIR_ray_mapping}
+ \end{figure}
+The inverse ray mapping detects $9$ different paths from the source to the target. 
+We observe that $5$ of them are paths that we expected from PS ray tracing (see Chapter \ref{chap:boundaries_alpha}). 
+The inverse ray mapping also detect the following paths:
+\begin{equation}
+\begin{array}{llll}
+\Pi_6&=(1,2,9,8,7,12), & \Pi_7&=(1,2,5,6,7,12), \\
+\Pi_8&=(1,2,2,7,12),& \Pi_9&=(1,7,12),\\
+\Pi_{10}&=(1,2,4,6,7,12),& \Pi_{11}&=(1,2,10,8,7,12).
+\end{array}\end{equation}
+Those paths are due to numerical error. Indeed, the bisection method and the inverse ray tracing depend a given tolerance. We remark that in the inverse ray tracing, the intersection between the ray and the lens (line $2$) is computed using the Newton-Raphson procedure which leads to numerical error as well.
+In order to detect only the boundaries of the regions formed by the rays that follow the \textit{physical} $\Pi_{\variabile{j}}$ with $\variabile{j}\in\{1, \cdots, 5\}$, we check the index of refraction that every ray has once it arrives at the source.
+If this is equal to the same index of \point{S} ($\n=1$ for the TIR-collimator), then the ray follows a physical path, otherwise it is discarded and it is not considered for the intensity calculation. This gives the rays distribution at the target PS shown in Figure\ref{fig:boundaries_TIR_ray_mapping1}. We observe that $5$ different paths are found. These are the same paths we obtained using PS ray tracing (see Chapter \ref{chap:boundaries_alpha}).
+\begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=0.7\textwidth]{triangulation_source}
+  \end{center}
+  \caption{\textbf{Rays distribution at target PS of the TIR-collimator.}
+ The $\variabile{q}$-axis is divided into $\textrm{Ni}=30$ bins, the $\variabile{p}$-axis is divided into $\nbin = 100$ bins. Using the ray mapping method only few rays are traced from the target to the source (red dots). Because of numerical error, few rays outside the region with positive luminance are found (Rays rimmed in red).}
+\label{fig:boundaries_TIR_ray_mapping1}
+ \end{figure}
+Figure \ref{fig:boundaries_TIR_ray_mapping1} shows that the rays on the boundaries $\partial$\set{R}{}{}$(\Pi_{\variabile{j}})$ are determined for every path $\Pi_{\variabile{j}}$ with $\variabile{j}\in\{1, \cdots, 5\}$. Moreover, some rays inside the boundaries are traced. This is related to the fact that we divide the target PS along the $\variabile{q}$-axis into $\textrm{Ni}=30$ bins. As a consequence, all the rays located at the end points of every bin are traced. \\
+\indent The target PS intensity $\hat{I}_{\textrm{PS}}$ is calculated using Equation \ref{}. The profile of $\hat{I}_{\textrm{PS}}$ obtained form inverse ray mapping with $\textrm{Ni}=30$ is depicted in Figure \ref{fig:intensity_tir_raymapping} with the red line. It is compared with the reference intensity (blue line) that is given by QMC ray tracing with $10^7$ rays. The picture shows that the inverse ray mapping method calculates the intensity correctly.
+\begin{figure}[t]
+  \begin{center}
+  \includegraphics[width=0.7\textwidth]{triangulation_source}
+  \end{center}
+  \caption{\textbf{Profile of the intensity for the TIR-collimator.}
+ The ray mapping intensity is calculated dividing the $\variabile{q}$-axis into $\textit{Ni}=30$ bins. The reference intensity is obtained from QMC ray tracing with $10^7$ rays.}
+\label{fig:intensity_tir_raymapping}
+ \end{figure}
+\\ \indent 
+Finally, we compare the inverse ray mapping with QMC ray tracing. The errors plot in a logarithmic scale is shown in Figure \ref{fig:error_tir_raymapping}.
+\begin{figure}[t]
+  \begin{center}
+  \includegraphics[width=0.7\textwidth]{intensity_tir_raymapping}
+  \end{center}
+  \caption{\textbf{Profile of the intensity for the TIR-collimator.}
+ The ray mapping intensity is calculated dividing the $\variabile{q}$-axis into $\textrm{Ni}=30$ bins. The reference intensity is obtained from QMC ray tracing with $10^7$ rays.}
+\label{fig:error_tir_raymapping}
+ \end{figure}
+% Error
 \section{Results for a parabolic reflector}\label{sec:PR}
+%The parabolic reflector shown in Fig. \ref{fig:parabolic_reflector} is a very challenging example of optical system. Indeed, the rays that propagate through such a system can reflect many times along the left and the right mirror 
 %% Difference between PR and cup (show tree), no analytic boundaries
 %% Bisection procedure
 %% Divide into bins
