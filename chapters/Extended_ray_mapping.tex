@@ -101,7 +101,7 @@ The method is developed using the recursive Algorithm \ref{alg:recursiveraymappi
 \caption{Recursive function for the extended ray mapping}\label{alg:recursiveraymapping}
 Initialize $\lineai = \nline$, $\variabile{q}^{\,\textrm{a}}= \variabile{q}^{\,\textrm{a}}_{\lineai}=-\variabile{b}$, $\variabile{q}^{\,\textrm{b}}= \variabile{q}^{\,\textrm{b}}_{\lineai}=\variabile{b}$, $\dir{}{}=\variabile{p}^{\textrm{a}}_\lineai=\variabile{p}^{\textrm{b}}_\lineai=\textrm{const}$, $\Pi_{\textrm{a}}=({\nline})$.
 \begin{algorithmic}[1]
-\Procedure {Intensity computation}{$\variabile{q}^{\,\textrm{a}}$,  $\variabile{q}^{\,\textrm{b}}$, $\variabile{q}^{\,\textrm{a}}_{\lineai},$  $\variabile{q}^{\,\textrm{b}}_{\lineai},$ , $\dir{}{}$, $\variabile{p}^{\textrm{a}}_{\lineai}$, $\variabile{p}^{\textrm{b}}_{\lineai}$, $\Pi_{\textrm{a}}$, $\lineai$}
+\Procedure {Intensity computation}{$\variabile{q}^{\,\textrm{a}}$,  $\variabile{q}^{\,\textrm{b}}$, $\variabile{q}^{\,\textrm{a}}_{\lineai},$  $\variabile{q}^{\,\textrm{b}}_{\lineai},$ $\dir{}{}$, $\variabile{p}^{\textrm{a}}_{\lineai}$, $\variabile{p}^{\textrm{b}}_{\lineai}$, $\Pi_{\textrm{a}}$, $\lineai$}
 \State Apply the inverse ray tracing to the coordinates $(\variabile{q}^{\,\textrm{a}}_{\lineai},\variabile{p}^{\textrm{a}}_{\lineai})$ and $(\variabile{q}^{\,\textrm{b}}_{\lineai},\variabile{p}^{\textrm{b}}_{\lineai})$ on $\lineai$ of the rays $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$.
 \State Find the lines $\lineaj$ and $\lineak$ from which $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ are emitted, respectively.
 \State Update path $\Pi_{\textrm{a}}\gets(\lineaj, \Pi_{\textrm{a}})$
@@ -130,12 +130,12 @@ Next, the method is applied to two example of optical systems formed by curved l
 \section{Results for the TIR-collimator}\label{sec:TIR}
 % Introduction 
 In this section we apply the extended inverse ray mapping to the TIR-collimator presented in Chapter \ref{chap:boundaries_alpha} and depicted in Figure \ref{fig:analyticlens}. The target PS of this system is the rectangular \set{T}{}{}$= [-\variabile{b}, \variabile{b}]\times[-1,1]$ with $\variabile{b}=9.7$. The aim is to detect all the possible path $\Pi$ and the rays located on the boundaries $\partial$\set{R}{}{}$(\Pi)$ of the corresponding regions in target PS. 
-\\ \indent In Chapter \ref{chap:boundaries_alpha} we found $5$ different paths are found for the the TIR-collimator, and the boundaries of the corresponding regions in \set{T}{}{} are in general difficult to approximate. Furthermore, along the same direction $\dir{}{}$ more than two points can be located on the boundary $\partial$\set{R}{}{}$(\Pi)$ of the region \set{R}{}{}$(\Pi)$ corresponding to a certain path $\Pi$. To determine properly all the boundaries 
-$\partial$\set{R}{}{}$(\Pi)$, we divide the interval $[-\variabile{b}, \variabile{b}]$ in 
+\\ \indent In Chapter \ref{chap:boundaries_alpha} five different paths are found for the the TIR-collimator, and the boundaries of the corresponding regions in target PS \set{T}{}{} are in general difficult to approximate. Furthermore, along the same direction $\dir{}{}$ more than two points can be located on the boundary $\partial$\set{R}{}{}$(\Pi)$ of the region \set{R}{}{}$(\Pi)$ corresponding to a certain path $\Pi$. To determine properly all the boundaries 
+$\partial$\set{R}{}{}$(\Pi)$, we need to divide the interval $[-\variabile{b}, \variabile{b}]$ in 
 \set{T}{}{} into intervals of the same length (bins). Hence, we consider a partitioning 
-$Q = -\variabile{b}=\variabile{q}^{0}<\variabile{q}^{1}<\cdots<\variabile{q}^{\textrm{Ni}}=\variabile{b}$ of the interval $[-\variabile{b}, \variabile{b}]$ where $\textrm{Ni}$ is the total number of bins along the $\variabile{q}$-axis.
-For each direction $\dir{}{}\in [-1,1]$ the procedure explained in the previous section is repeated for every sub-interval $[\variabile{q}^{\textrm{h}}(\dir{}{}), \variabile{q}^{\textrm{h}+1}(\dir{}{})]\subset [\variabile{q}^{\textrm{a}}(\dir{}{}), \variabile{q}^{\textrm{b}}(\dir{}{})]$ with $\textrm{h}=0, \cdots, \textrm{Ni}-1$ and $\variabile{q}^{\textrm{a}}(\dir{}{}) = -\variabile{b}$ and $\variabile{q}^{\textrm{b}}(\dir{}{}) = \variabile{b}$.\\ \indent
-To establish in how many \textrm{Ni} bins we need to divide the target, we exploit \'{e}tendue conservation. The idea is  
+$Q = -\variabile{b}=\variabile{q}^{0}<\variabile{q}^{1}<\cdots<\variabile{q}^{\textrm{Ni}}=\variabile{b}$ of $[-\variabile{b}, \variabile{b}]$ where $\textrm{Ni}$ is the total number of bins along the $\variabile{q}$-axis.
+For each direction $\dir{}{}\in [-1,1]$ the procedure explained in Section \ref{chap:raymapping2} is repeated for every sub-interval $[\variabile{q}^{\textrm{k}}(\dir{}{}), \variabile{q}^{\textrm{k}+1}(\dir{}{})]\subset [\variabile{q}^{\textrm{a}}(\dir{}{}), \variabile{q}^{\textrm{b}}(\dir{}{})]$ with $\textrm{k}=0, \cdots, \textrm{Ni}-1$ and $\variabile{q}^{\textrm{a}}(\dir{}{}) = -\variabile{b}$ and $\variabile{q}^{\textrm{b}}(\dir{}{}) = \variabile{b}$.\\ \indent
+To establish in how many \textrm{Ni} bins we need to divide the target, we exploit \'{e}tendue conservation. The same idea applied to determine the value of $\alpha$ for $\alpha$-shapes methods or to provide a stopping criterion for the triangulation refinement is used here, see Chapters \ref{} and \ref{}.
 \begin{figure}[h]
   \begin{center}
   \includegraphics[width=0.7\textwidth]{etendue_raymapping_tir}
@@ -144,7 +144,6 @@ To establish in how many \textrm{Ni} bins we need to divide the target, we explo
  The $\variabile{q}$-axis is divided into $\textrm{Ni}=30$ bins, the $\variabile{p}$-axis is divided into $\nbin = 100$ bins. Using the ray mapping method only few rays are traced from the target to the source (red dots). Because of numerical error, few rays outside the region with positive luminance are found (Rays rimmed in red).}
 \label{fig:boundaries_TIR_ray_mapping}
  \end{figure}
-
 As an example, in Figure \ref{fig:boundaries_TIR_ray_mapping} we show the distribution of the rays traced using the inverse ray mapping method with $\textrm{Ni}=30$ and $\nbin = 100.$ 
 \begin{figure}[h]
   \begin{center}
