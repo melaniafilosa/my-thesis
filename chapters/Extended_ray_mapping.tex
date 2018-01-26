@@ -9,7 +9,7 @@ In this chapter we extend the method to systems formed by curved lines. In this 
 Because of this, we need to use a numerical procedure. In particular, we develop a method that employs only the PS of the target of the system. 
 The boundaries are detected applying sequentially a bisection procedure in target PS and the inverse ray tracing.\\ \indent
 In this chapter we test the method for two optical systems: the TIR-collimator and a parabolic reflector. The results are presented in Section \ref{sec:TIR} and \ref{sec:PR}, respectively.
-\section{Explanation of the method}
+\section{Explanation of the method}\label{sec:raymapping_explanation}
 The purpose of this section is to present the generalized inverse ray mapping method valid for systems formed by curved lines. 
 Given a partition $-1 = \variabile{p}^0<\variabile{p}^1<\cdots<\variabile{p}^{\nbin}$ of the interval $[-1,1]$ with $\nbin$ the number of rays in the partitioning, the intensity in target PS is given by Equation (\ref{eta2}) for every $\dir{}{}\in P$.
 Therefore, the problem reduces to calculate the coordinates 
@@ -57,15 +57,15 @@ Initialize $\textrm{step} = 0$
 \end{algorithm}
 \\ \indent Once bisection stops, two points with coordinates $(\variabile{q}^{\,\textrm{c}}, \variabile{p})$ and $(\variabile{q}^{\,\textrm{d}}, \variabile{p})$ in \set{T}{}{} are found. The corresponding rays $\vect{r}_{\textrm{c}}$ and $\vect{r}_{\textrm{d}}$ follow path $\Pi_{\textrm{c}}=\Pi_{\textrm{a}}$ and $\Pi_{\textrm{d}}\neq\Pi_{\textrm{a}}$. 
 All the rays with target coordinates $(\variabile{q}, \variabile{p})$ and $\variabile{q}^{\,\textrm{a}}\leq\variabile{q}\leq\variabile{q}^{\,\textrm{c}}$ follow path $\Pi = \Pi_{\textrm{a}}$, while the rays with target coordinates $(\variabile{q}, \variabile{p})$ with $\variabile{q}^{\,\textrm{d}}\leq\variabile{q}\leq\variabile{q}^{\,\textrm{b}}$ follow another path $\Pi \neq \Pi_{\textrm{a}}.$ 
-%To clarify the procedure, in Figure \ref{fig:bisec}, we show an example of target PS of an optical system where Algorithm \ref{alg:bisection} is run for the interval $[\variabile{q}^{\textrm{a}}, \variabile{q}^{\textrm{b}}]$ along direction $\variabile{p}=0$. Applying bisection the coordinates $(\variabile{q}^{\textrm{c}}(\variabile{p}), \variabile{p})$ and $(\variabile{q}^{\textrm{d}}(\variabile{p}), \variabile{p})$ of two points are found. The corresponding rays follow the paths $\Pi_{\textrm{c}}$ and $\Pi_{\textrm{d}}$, where $\Pi_{\textrm{c}}= \Pi_{\textrm{a}}\neq\Pi_{\textrm{d}}$. If $\Pi_{\textrm{c}}$ is a path from the source to the target, Algorithm \ref{alg:bisection} is applied to the sub-interval 
-%$[\variabile{q}^{\textrm{a}}(\variabile{p}), \variabile{q}^{\textrm{c}}(\variabile{p})]$, otherwise the it is applied again to the sub-interval $[\variabile{q}^{\textrm{d}}(\variabile{p}), \variabile{q}^{\textrm{b}}(\variabile{p})]$. The bisection procedure is repeated for all the sub-intervals found along direction $\variabile{p}$, until the entire interval $[\variabile{q}^{\textrm{a}}(\variabile{p}), \variabile{q}^{\textrm{c}}(\variabile{p})]$ is investigated.
+To clarify the procedure, in Figure \ref{fig:bisec} we show an example of target PS of an optical system where Algorithm \ref{alg:bisection} is run for the interval $[\variabile{q}^{\textrm{a}}, \variabile{q}^{\textrm{b}}]$ along direction $\variabile{p}=0$. Applying bisection the coordinates $(\variabile{q}^{\textrm{c}}(\variabile{p}), \variabile{p})$ and $(\variabile{q}^{\textrm{d}}(\variabile{p}), \variabile{p})$ of two points are found. The corresponding rays follow the paths $\Pi_{\textrm{c}}$ and $\Pi_{\textrm{d}}$, where $\Pi_{\textrm{c}}= \Pi_{\textrm{a}}\neq\Pi_{\textrm{d}}$. If $\Pi_{\textrm{c}}$ is a path from the source to the target, Algorithm \ref{alg:bisection} is applied to the sub-interval 
+$[\variabile{q}^{\textrm{a}}(\variabile{p}), \variabile{q}^{\textrm{c}}(\variabile{p})]$, otherwise the it is applied again to the sub-interval $[\variabile{q}^{\textrm{d}}(\variabile{p}), \variabile{q}^{\textrm{b}}(\variabile{p})]$. The bisection procedure is repeated for all the sub-intervals found along direction $\variabile{p}$, until the entire interval $[\variabile{q}^{\textrm{a}}(\variabile{p}), \variabile{q}^{\textrm{c}}(\variabile{p})]$ is investigated.
 \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=0.7\textwidth]{etendue_raymapping_tir}
+  \includegraphics[width=0.7\textwidth]{T4_1_example}
   \end{center}
-  \caption{\textbf{$\Delta U = |U_1 - U_{\textrm{t}}|$ for the TIR-collimator.}
- $U_1$ is calculated from Equation (\ref{eq:Usource}). $U_{\textrm{t}}$ is computed four times increasing every time the number of bins $\textrm{Ni}$ where $\textrm{Ni}=\{5,10,30,100\}$. }
-\label{fig:etendue_raymapping_tir}
+  \caption{\textbf{Bisection in target PS \set{T}{}{}.}\\
+$|\variabile{q}^{\textrm{c}}-\variabile{q}^{\textrm{c}}|<\textrm{tol}$, $\Pi_{\textrm{c}}= \Pi_{\textrm{a}}$.}
+\label{fig:bisec}
  \end{figure}
 \\ \indent Now, if $\lineaj\neq1$ the procedure applied to the interval 
 $[\variabile{q}^{\textrm{a}}(\variabile{p}), \variabile{q}^{\textrm{b}}(\variabile{p})]$ needs to be applied to $[\variabile{q}^{\textrm{a}}(\variabile{p}),\variabile{q}^{\textrm{c}}(\variabile{p})]$ until the source is reached, i.e. until $\lineaj=1$. If $\lineaj=1$, the source is reached by the rays traced back from the target. This means that a possible path $\Pi$ from \point{S} to \point{T} is found and the position coordinates $\variabile{q}^{\textrm{\,min}}(\Pi, \variabile{p})$ and $\variabile{q}^{\textrm{\,max}}(\Pi, \variabile{p})$ on \set{T}{}{} of the rays located at the boundaries $\partial$\set{R}{}{}$(\Pi)$ of the rays that follow that path are determined. \\ \indent 
@@ -134,7 +134,7 @@ $\variabile{q}^{\textrm{min}} = \min\{\variabile{q}^{\textrm{a}}, \variabile{q}^
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
-The explained procedure is able to determine all the possible paths that the rays can follow during their propagation from \set{S}{}{} to \set{T}{}{}. Also, the rays located on the boundaries of the regions with positive luminance on target PS \set{T}{}{} are found.\\ \indent
+\\ \indent The explained procedure is able to determine all the possible paths that the rays can follow during their propagation from \set{S}{}{} to \set{T}{}{}. Also, the rays located on the boundaries of the regions with positive luminance on target PS \set{T}{}{} are found.\\ \indent
 Next, the method is applied to two optical systems formed by curved lines. In the next section we show the results for the TIR-collimator.
 \section{Results for the TIR-collimator}\label{sec:TIR}
 % Introduction 
@@ -149,12 +149,12 @@ The source \'{e}tendue $U_1$ is calculated from Equation (\ref{eq:Usource}) obta
 \begin{equation}\label{eq:delta_raymapping}
 \Delta U =  \big|U_1-U_{\textrm{t}}\big|.
 \end{equation}
-If a small value of $\Delta U$ is obtained, then a good approximation of $U_{\textrm{t}}$ is found and therefore, the partition $Q$ used for the computation of $U_{\textrm{t}}$ is suitable for detecting correctly the boundaries $\partial$\set{R}{}{}$(\Pi)$. In Figure \ref{etendue_raymapping_tir} we show how $\Delta U$ decreases by increasing the number of bins $\textrm{Ni}$ in the partitioning $Q$.  
+If a small value of $\Delta U$ is obtained, then a good approximation of $U_{\textrm{t}}$ is found and therefore, the partition $Q$ used for the computation of $U_{\textrm{t}}$ is suitable for detecting correctly the boundaries $\partial$\set{R}{}{}$(\Pi)$. In Figure \ref{fig:etendue_raymapping_tir} we show how $\Delta U$ decreases by increasing the number of bins $\textrm{Ni}$ in the partitioning $Q$.  
 \begin{figure}[h]
   \begin{center}
   \includegraphics[width=0.7\textwidth]{etendue_raymapping_tir}
   \end{center}
-  \caption{\textbf{$\Delta U = |U_1 - U_{\textrm{t}}|$ for the TIR-collimator.}
+  \caption{\textbf{Difference between the source and the target \'{e}tendue for the TIR-collimator.}
  $U_1$ is calculated from Equation (\ref{eq:Usource}). $U_{\textrm{t}}$ is computed four times increasing every time the number of bins $\textrm{Ni}$ where $\textrm{Ni}=\{5,10,30,100\}$. }
 \label{fig:etendue_raymapping_tir}
  \end{figure}
@@ -203,32 +203,113 @@ Finally, we compare the inverse ray mapping with QMC ray tracing. The errors plo
   \begin{center}
   \includegraphics[width=0.7\textwidth]{error_tir_raymapping}
   \end{center}
-  \caption{\textbf{Ray mapping and QMC errors for the TIR-collimator.}
+  \caption{\textbf{Errors of ray mapping and QMC for the TIR-collimator.}
  The extended inverse ray mapping method is faster and more accurate than QMC ray tracing.}
 \label{fig:error_tir_raymapping}
  \end{figure}
 In Tables \ref{tab:ray_mapping_tir} the numerical results obtained for the inverse ray mapping are reported. The error values for QMC ray tracing were already reported in Chapter \ref{chap:triangulation} (Table \ref{tab:mc_error_triangulation}).
-
 \begin{table}[t] 
 \centering
 \caption{\bf Errors of the PS intensity for the TIR-collimator}
-\begin{tabular}{lllll}
- \hline  $\textrm{Ni}$\;  & RM error  & CPU-time (sec.)\\
+\begin{tabular}{llllll}
+ \hline  $\textrm{Ni}$\;  & RM error & $|\Delta U|$ & CPU-time (sec.)\\
   \hline 
- $5$   & $5.19\cdot10^{-4}$    & $269$  \\
-$10$    & $2.09\cdot 10^{-4}$   & $284$   \\
-$30$    & $3.15\cdot 10^{-6}$   & $313$  \\
- $100$   & $2.52\cdot 10^{-6}$   & $359$  \\
+ $5$    & $5.19\cdot10^{-4}$    & $1.6\cdot 10^{-1}$ & $269$  \\
+$10$    & $2.09\cdot 10^{-4}$  & $2.8\cdot 10^{-2}$ & $284$   \\
+$30$    & $3.15\cdot 10^{-6}$  & $5.7 \cdot 10^{-3}$ & $313$  \\
+$100$  & $2.52\cdot 10^{-6}$  & $5.1 \cdot 10^{-3}$ & $359$  \\
  \hline
  \end{tabular}
  \label{tab:ray_mapping_tir}
  \end{table}
-In the next section we present the method for a more complicated system: a parabolic reflector.
+In the next section we present the method for a parabolic reflector.
 \section{Results for a parabolic reflector}\label{sec:PR}
-%The parabolic reflector shown in Fig. \ref{fig:parabolic_reflector} is a very challenging example of optical system. Indeed, the rays that propagate through such a system can reflect many times along the left and the right mirror 
-%% Difference between PR and cup (show tree), no analytic boundaries
-%% Bisection procedure
-%% Divide into bins
-%% Stopping criterion
-%% Intensity
+In this section we provide the results for the parabolic reflector in Figure \ref{fig:PR}.
+This is a very challenging example of optical system. Indeed, the rays that propagate through such a system can reflect many times along the left and the right mirror. As we have seen using PS ray tracing, this leads to many different paths. Every path corresponds to a given number of reflections with each of the two reflector. In Chapter \ref{chap:triangulation} we found $17$ different paths for this parabolic reflector. Here, we apply the inverse ray mapping method to detect all this paths. \\ \indent
+The target PS of the parabolic reflector is the rectangular \set{T}{}{}$=[-\variabile{b}, \variabile{b}]\times[-1,1]$ where $\variabile{b}=17$. Likewise, the TIR-collimator we observe that the interval $[-\variabile{b}, \variabile{b}]$ in target PS needs to be divided into intervals of the same length (bins). We remind the reader that we indicate with $\textrm{Ni}$ the number of bins in which we divide the interval $[-\variabile{b}, \variabile{b}]$ along the $\variabile{q}$-axis of \set{T}{}{} and with $\nbin$ the number of bins in which we divide the interval $[-1,1]$ along the $\variabile{p}$-axis. Considering a partitioning $Q = -\variabile{b}=\variabile{q}^{0}<\variabile{q}^{1}<\cdots<\variabile{q}^{\textrm{Ni}}=\variabile{b}$ of $[-\variabile{b}, \variabile{b}]$, the inverse ray mapping explained in Section \ref{sec:raymapping_explanation} is applied to every sub-interval $[\variabile{q}^{\textrm{k}}, \variabile{q}^{\textrm{k+1}}]\subset[-\variabile{b}, \variabile{b}]$ with $\textrm{k}=0, \cdots, \textrm{Ni}-1$ and for every direction $\variabile{p}\in[-1,1]$. To determine how many bins $\textrm{Ni}$ are needed for a good calculation of the target photometric variables, we employ the same idea of the TIR-collimator. The source \'{e}tendue $U_1$ is compared to several approximations of the \'{e}tendue at the target $U_{\textrm{t}}$ each of them is given by a different partitioning $Q$ of $[-\variabile{b}, \variabile{b}]$. For the parabolic reflector all the rays emitted from the source arrive at the target. Therefore, the exact \'{e}tendue as an area in PS is computed from Equation (\ref{eq:etenduesource}) obtaining $U=U_1=8$. The approximated target \'{e}tendue $U_{\textrm{t}}$ is given by Equation (\ref{eq:etendueintegraltarget}). In Figure \ref{fig:etendue_ray_mapping_pr_bin} we show the comparison between $U_1$ and several approximations of $U_{\textrm{Ni}}$ by gradually increasing the number of bins $\textrm{Ni}$ in the partitioning $Q$ and fixing the maximum number of multiple reflections to $30$. Increasing the bins $\textrm{Ni}$, the $U_{\textrm{t}}$ increases approaching to the exact value $U_1=8$. After the division into $\textrm{Ni}=4$ bins the improvement is slightly visible. $\textrm{Ni}=4$ bins are enough to detect $30$ multiple reflections.
+\begin{figure}[t]
+  \begin{center}
+  \includegraphics[width=0.7\textwidth]{etendue_ray_mapping_pr_bin}
+  \end{center}
+  \caption{\textbf{Comparison between the exact \'{e}tendue and the approximated target \'{e}tendue by increasing the number of bins $\textrm{Ni}$.}
+ At most $30$ multiple reflections are considered. Increasing the bins $\textrm{Ni}$ gets closer to the exact value $U_1=8$.}
+\label{fig:etendue_ray_mapping_pr_bin}
+ \end{figure}
+In Figure \ref{fig:boundaries_raymapping_pr} we show rays distribution at the target PS obtained using the inverse ray mapping and considering $\textrm{Ni}=4$ and at most $30$ multiple reflections. The rays traced from the target to the source are depicted with the red dots. Most of the rays traced are the rays located on the boundaries $\partial$\set{R}{}{}$(\Pi)$ of the regions with positive luminance. 
+Only few rays are traced inside those regions. These are the rays located at the end points of every bin $[\variabile{q}^{\textrm{k}}, \variabile{q}^{\textrm{k+1}}]$ with $\textrm{k}=0, \cdots, \textrm{Ni}$. 
+\begin{figure}[t]
+  \begin{center}
+  \includegraphics[width=0.7\textwidth]{etendue_ray_mapping_pr_bin}
+  \end{center}
+  \caption{\textbf{The red dots are the rays in target PS.}
+ Considering $30$ multiple reflections, $\textrm{Ni}=4$ and $\nbin = 100$, only few rays using the inverse ray mapping.}
+\label{fig:boundaries_rays_pr_raymapping}
+ \end{figure}
+\\ \indent
+The inverse ray mapping method is able to detect $61$ different paths. Indeed $30$ multiple reflections can occur with the left reflector and $30$ with the right reflector. To those, the path that goes from the source to the target (no reflections with the reflectors) has to be added. For PS ray tracing we found at most $17$ paths for the same parabolic reflector. Hence, we claim that ray mapping is much more accurate than PS ray tracing. Also, we observe the procedure can be stopped when even more than $30$ multiple reflections are reached. The more reflections are considered the better accuracy is obtained. Again, to define a stopping criterion we use \'{e}tendue conservation. Fixing the number of bins $\textrm{Ni}=4$ and $\nbin=100$ and gradually increasing the number of multiple reflections we obtain that the approximated target \'{e}tendue $U_{\textrm{t}}$ changes as the blue line in Figure \ref{fig:etendue_pr_raymapping}. The horizontal red line represents the exact intensity $U = U_{1} = 8$. We note that the more reflections are considered the smaller value of $\Delta U = |U_1-U_{\textrm{t}}|$ is found (see also Table \ref{tab:ray_mapping_pr}). We observe that after around $30$ multiple reflections there is not a significant improvement in the computation of $U_{\textrm{t}}$. This is due to the fact that only few rays follow multiple reflections and therefore, they do not give a significant contribution to the total \'{e}tendue (the regions in PS formed by those rays are very small compared to the entire PS). This gives the insight that the inverse ray mapping has a good accuracy if around $30$ multiple reflections and $\textrm{Ni}=4$ bins are taken into account.
+\begin{figure}[t]
+  \begin{center}
+  \includegraphics[width=0.7\textwidth]{etendue_pr_raymapping}
+  \end{center}
+  \caption{\textbf{Comparison between the exact \'{e}tendue and the approximated target \'{e}tendue by increasing the number of multiple reflections.}
+Fixing the number of bins along the $\variabile{q}$-axis $\textrm{Ni}=4$ and increasing the number of reflections considered, the \'{e}tendue increases approaching to the exact value $U_1=8$.}
+\label{fig:etendue_pr_raymapping}
+ \end{figure}
+Once a stopping criterion is established, ray mapping is run and the rays on the boundaries are determined. Finally, the target intensity is calculated from Equation (\ref{eta2}). 
+In Figure \ref{fig:intensity_pr_raymapping} both the ray mapping intensity (red line) and the reference intensity (dotted blue line) are shown. The ray mapping intensity $\hat{I}_{\textrm{RM}}$ obtained considering at most $30$ multiple reflections, $\textrm{Ni}=4$ and $\nbin = 100$. The reference intensity $\hat{I}_{\textrm{ref}}$ given by QMC ray tracing with $10^8$ rays and $\nbin = 100$. The two intensities overlap.
+\begin{figure}[t]
+  \begin{center}
+  \includegraphics[width=0.7\textwidth]{intensity_pr_raymapping}
+  \end{center}
+  \caption{\textbf{Ray mapping intensity compared to a reference intensity.}
+The ray mapping error is calculated considering $\textrm{Ni}=4$ and at most $30$ multiple reflections. The reference intensity is obtained by running QMC ray tracing with $10^8$ rays.}
+\label{fig:intensity_pr_raymapping}
+ \end{figure}
+\\ \indent
+To conclude we calculate the errors between the approximated intensities $\hat{I}_{\textrm{A}} (\textrm{A}=\textrm{PS}, \textrm{QMC})$ and the reference intensity $\hat{I}_{\textrm{ref}}$. From the results in Figure \ref{tab:qmc_raymapping_pr} we observe that the RM error (red line) converges faster than QMC error (blues line) as long as an error of an order of $10^{-6}$ is desired. Ray mapping results to be around $20$ times faster than QMC ray tracing. Furthermore, it is much more accurate than QMC. Dividing the target into $\textrm{Ni}=4$ bins we are able to detect \textit{all} the possible paths that can occur. We stop the procedure when $200$ multiple reflections are reached. Our expectation is that, increasing the number of multiple reflections considered and the number of bins $\textrm{Ni}$, the accuracy can be improved even more.
 %% Error
+\begin{figure}[t]
+  \begin{center}
+  \includegraphics[width=0.7\textwidth]{error_pr_raymapping}
+  \end{center}
+  \caption{\textbf{Errors of ray mapping and QMC for the parabolic reflector.}
+The ray mapping error decreases by increasing the number of reflections considered.
+The QMC error reduces by tracing more rays.
+ The extended inverse ray mapping method is faster and more accurate than QMC ray tracing.}
+\label{tab:qmc_raymapping_pr}
+ \end{figure}
+In Tables \ref{tab:ray_mapping_pr} and \ref{tab:qmc_raymapping_pr} these numerical results are reported.
+\begin{table}[t] 
+\centering
+\caption{\bf Errors of the ray mapping intensity for the parabolic reflector}
+\begin{tabular}{llllll}
+ \hline  Number of\\
+ reflections\;  & RM error & $|\Delta U|$ & CPU-time (sec.)\\
+  \hline 
+ $5$      & $1.74\cdot 10^{-1}$  & $3.222\cdot10^{-4}$& $3.28$  \\
+$10$      & $7.52\cdot 10^{-3}$ & $1.555\cdot 10^{-5}$& $5.11$   \\
+$20$      & $9.00 \cdot 10^{-4}$ & $2.059\cdot 10^{-6}$& $6.83$  \\
+ $30$    & $5.00 \cdot 10^{-4}$ & $1.269\cdot 10^{-6}$ & $8.38$  \\
+$100$    & $2.99 \cdot 10^{-4}$ & $1.038\cdot 10^{-6}$ & $17.49$  \\
+$150$    & $2.96 \cdot 10^{-4}$ & $1.039\cdot 10^{-6}$ & $26.38$  \\
+$200$    & $2.95 \cdot 10^{-4}$ & $1.039\cdot 10^{-6}$ & $32.21$  \\
+ \hline
+ \end{tabular}
+ \label{tab:ray_mapping_pr}
+ \end{table}
+
+\begin{table}[t] 
+\centering
+\caption{\bf Errors of the QMC intensity for the parabolic reflector}
+\begin{tabular}{lllll}
+ \hline  $\nrays$\;  & QMC error & CPU-time (sec.)\\
+  \hline 
+ $10^4$     & $2.05\cdot 10^{-4}$   & $2.81$  \\
+$10^5$      & $2.87\cdot 10^{-5}$   & $25.81$   \\
+$10^6$      & $7.18 \cdot 10^{-6}$  & $257.54$  \\
+ $10^7$     & $1.15 \cdot 10^{-6}$  & $2491.32$  \\
+ \hline
+ \end{tabular}
+ \label{tab:qmc_raymapping_pr}
+ \end{table}
+\section{Conclusions}
