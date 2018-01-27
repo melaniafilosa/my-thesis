@@ -15,13 +15,13 @@ Given a partition $-1 = \variabile{p}^0<\variabile{p}^1<\cdots<\variabile{p}^{\n
 Therefore, the problem reduces to calculate the coordinates 
 $\variabile{q}^{\textrm{\,min}}(\Pi, \variabile{p})$ and $\variabile{q}^{\textrm{\,max}}(\Pi, \variabile{p})$ of the rays on $\partial$\set{R}{}{}$(\Pi)$ for every path $\Pi$.\\ \indent 
 We start from an intensity $I(p)=0$. Using the same idea of the inverse analytic ray mapping, for a given direction $\variabile{p}$, the procedure starts considering the end points $(\variabile{q}^{\,\textrm{a}}, \variabile{p})= (-\variabile{b}, \variabile{p})$ and $(\variabile{q}^{\,\textrm{b}}, \variabile{p}) = (\variabile{b}, \variabile{p})$ of \set{T}{}{} along direction $\variabile{p}$. We indicate with $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ the corresponding rays of these two points. Now, since the boundaries of the PS are unknown\footnote{More precisely, we know the boundaries of the region of the target PS but we cannot calculate exactly the boundaries of the other phase space.}, to understand from which line $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ are illuminated we apply the inverse ray tracing. We denote with $\nline$ the index of the target (line $\nline$) and with $\lineaj\in\{1,\cdots, \nline-1\}$ and $\lineak\in\{1,\cdots, \nline-1\}$ the lines from which $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ are emitted, respectively. $\Pi_\textrm{a} = (\lineaj, \nline)$ and $\Pi_\textrm{b} = (\lineak,\nline)$ are the paths followed by the two rays $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$, respectively. In particular, $\vect{r}_{\textrm{a}}\in\partial$\set{R}{}{}$(\Pi_{\textrm{a}})$ and $\vect{r}_{\textrm{b}}\in\partial$\set{R}{}{}$(\Pi_{\textrm{b}})$ At this stage we know whether the two rays are emitted or not by the same line. \\ \indent 
-If $\lineaj= \lineak$, then $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ are hit the same line before reaching the target. 
+If $\lineaj= \lineak$, then $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ hit the same line before reaching the target. 
 In case $\lineaj = 1$ a possible path from the source to the target is found and the intensity is updated according to:
 \begin{equation}
 I(p) = I(p)+\variabile{q}^{\textrm{max}}(\Pi_\textrm{a}, \variabile{p})-\variabile{q}^{\textrm{min}}(\Pi_\textrm{a}, \variabile{p}),
 \end{equation}
-where $\variabile{q}^{\textrm{min}} = \min\{\variabile{q}^{\textrm{a}}, \variabile{q}^{\textrm{b}}\}$ and $\variabile{q}^{\textrm{max}} = \max\{\variabile{q}^{\textrm{a}}, \variabile{q}^{\textrm{b}}\}$. In case $\lineaj\neq1$ the two rays $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ are traced back again using the inverse ray tracing with the corresponding coordinates of each ray on line $\lineaj$.
-\\ \indent If $\lineaj\neq \lineak$ the rays $\vect{r}_\textrm{a}$ and $\vect{r}_\textrm{b}$ are emitted by two-different lines, hence $\Pi_{\textrm{a}}\neq \Pi_{\textrm{b}}$ and belong to different regions \set{R}{}{}$(\Pi_{\textrm{a}})$ and \set{R}{}{}$(\Pi_{\textrm{b}})$ in \set{T}{}{}. To determine the other rays on the boundary $\partial$\set{R}{}{}$(\Pi_{\textrm{a}})$, the bisection method is applied to the interval $[\variabile{q}^{\,\textrm{a}}(\Pi_{\textrm{a}}, \variabile{p}), \variabile{q}^{\,\textrm{b}}(\Pi_{\textrm{b}}, \variabile{p})]$ in target PS \set{T}{}{} along direction $\variabile{p}$. Thus, this interval is halves until the coordinates in target PS of the ray that follows the same path $\Pi_{\textrm{a}}$ of ray $\vect{r}_{\textrm{a}}$ are found. \\ \indent Bisection procedure continues until the length of the segment considered becomes smaller than a fixed tolerance. 
+where $\variabile{q}^{\textrm{min}} = \min\{\variabile{q}^{\textrm{a}}, \variabile{q}^{\textrm{b}}\}$ and $\variabile{q}^{\textrm{max}} = \max\{\variabile{q}^{\textrm{a}}, \variabile{q}^{\textrm{b}}\}$. In case $\lineaj\neq1$ the two rays $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ are traced back again using the inverse ray tracing considering their corresponding coordinates on line $\lineaj$.
+\\ \indent If $\lineaj\neq \lineak$ the rays $\vect{r}_\textrm{a}$ and $\vect{r}_\textrm{b}$ are emitted by two-different lines, hence $\Pi_{\textrm{a}}\neq \Pi_{\textrm{b}}$ and belong to different regions \set{R}{}{}$(\Pi_{\textrm{a}})$ and \set{R}{}{}$(\Pi_{\textrm{b}})$ in \set{T}{}{}. To determine the other rays on the boundary $\partial$\set{R}{}{}$(\Pi_{\textrm{a}})$, the bisection method is applied to the interval $[\variabile{q}^{\,\textrm{a}}(\Pi_{\textrm{a}}, \variabile{p}), \variabile{q}^{\,\textrm{b}}(\Pi_{\textrm{b}}, \variabile{p})]$ in target PS \set{T}{}{} along direction $\variabile{p}$. Thus, this interval is halves until the coordinates in target PS of the ray that follows the same path $\Pi_{\textrm{a}}$ of $\vect{r}_{\textrm{a}}$ are found. \\ \indent Bisection procedure continues until the length of the segment considered becomes smaller than a fixed tolerance. 
 Giving as input the coordinates $\variabile{q}^{\,\textrm{a}}(\Pi_{\textrm{a}}, \variabile{p})$ and $\variabile{q}^{\,\textrm{b}}(\Pi_{\textrm{b}}, \variabile{p})$ of $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$, the path $\Pi_\textrm{a}$ and the tolerance $\textrm{tol}= 10^{-12}$, the bisection method is implemented as in Algorithm \ref{alg:bisection}.
 \begin{algorithm}
 \caption{Bisection}\label{alg:bisection}
@@ -30,10 +30,10 @@ Initialize $\textrm{step} = 0$
 \While {$|\variabile{q}^{\,\textrm{a}}-\variabile{q}^{\,\textrm{b}}|>\textrm{tol}$}
 \State $\Pi_{\textrm{m}}\gets \nline,$
 \State $\variabile{q}^{\,\textrm{m}}\gets \frac{\variabile{q}^{\,\textrm{a}}+\variabile{q}^{\,\textrm{b}}}{2},$ 
-\State $\variabile{p}^{\,\textrm{m}}\gets\variabile{p},$
-\State $\vect{r}_{\textrm{m}}\gets \variabile{q}^{\,\textrm{m}}+s \variabile{p}^{\,\textrm{m}}$ with $s>0$ the arc-length,
+%\State $\variabile{p}^{\,\textrm{m}}\gets\variabile{p},$
+\State $\vect{r}_{\textrm{m}}\gets \variabile{q}^{\,\textrm{m}}+s \variabile{p}$ with $s>0$ the arc-length,
 \While {$\textrm{step}<\mbox{length}(\Pi_\textrm{a})-1$}
-\State Apply the inverse of ray tracing to the corresponding coordinates of $\vect{r}_{\textrm{m}}$ on line $\lineaj$,
+\State Trace back $\vect{r}_{\textrm{m}}$ considering its coordinates on line $\lineaj$,
 \State Find the line $\lineak$ that the ray $\vect{r}_{\textrm{m}}$ hits.
 \State $\Pi_{\textrm{m}}\gets (\lineak,\Pi_{\textrm{m}})$.
 \If {$\lineak=1$ or $\lineak=\nline$}
@@ -42,29 +42,29 @@ Initialize $\textrm{step} = 0$
 \EndIf
 \EndWhile
 \If {$\Pi_\textrm{a} = \Pi_\textrm{m}$}
-\State $(\variabile{q}^{\,\textrm{a}}, \variabile{p}^{\,\textrm{a}})\gets (\variabile{q}^{\,\textrm{m}}, \variabile{p})$
+\State $(\variabile{q}^{\,\textrm{a}}, \variabile{p})\gets (\variabile{q}^{\,\textrm{m}}, \variabile{p})$
 \State $\vect{r}_{\textrm{a}}\gets \vect{r}_{\textrm{m}}$
 \Else 
-\State $(\variabile{q}^{\,\textrm{b}}, \variabile{p}^{\,\textrm{b}})\gets (\variabile{q}^{\,\textrm{m}}, \variabile{p}^{\,\textrm{m}})$
+\State $(\variabile{q}^{\,\textrm{b}}, \variabile{p})\gets (\variabile{q}^{\,\textrm{m}}, \variabile{p})$
 \State $\vect{r}_{\textrm{b}}\gets \vect{r}_{\textrm{m}}$
 \State $\Pi_\textrm{b}\gets \Pi_{\textrm{m}}$
 \EndIf
 \EndWhile
-\State $(\variabile{q}^{\,\textrm{c}}, \variabile{p}^{\,\textrm{c}})\gets (\variabile{q}^{\,\textrm{a}}, \variabile{p}^{\,\textrm{a}}), \Pi_\textrm{c}\gets \Pi_{\textrm{a}}.$
-\State $(\variabile{q}^{\,\textrm{d}}, \variabile{p}^{\,\textrm{d}})\gets (\variabile{q}^{\,\textrm{b}}, \variabile{p}^{\,\textrm{b}}), \Pi_\textrm{d}\gets \Pi_{\textrm{b}}.$
-\State \Return $(\variabile{q}^{\,\textrm{c}}, \variabile{p}^{\,\textrm{c}})$, $(\variabile{q}^{\,\textrm{d}}, \variabile{p}^{\,\textrm{d}})$, $\Pi_{\textrm{c}}$ and $\Pi_{\textrm{d}}$.
+\State $(\variabile{q}^{\,\textrm{c}}, \variabile{p})\gets (\variabile{q}^{\,\textrm{a}}, \variabile{p}), \Pi_\textrm{c}\gets \Pi_{\textrm{a}}.$
+\State $(\variabile{q}^{\,\textrm{d}}, \variabile{p})\gets (\variabile{q}^{\,\textrm{b}}, \variabile{p}), \Pi_\textrm{d}\gets \Pi_{\textrm{b}}.$
+\State \Return $(\variabile{q}^{\,\textrm{c}}, \variabile{p})$, $(\variabile{q}^{\,\textrm{d}}, \variabile{p})$, $\Pi_{\textrm{c}}$ and $\Pi_{\textrm{d}}$.
 \end{algorithmic}
 \end{algorithm}
 \\ \indent Once bisection stops, two points with coordinates $(\variabile{q}^{\,\textrm{c}}, \variabile{p})$ and $(\variabile{q}^{\,\textrm{d}}, \variabile{p})$ in \set{T}{}{} are found. The corresponding rays $\vect{r}_{\textrm{c}}$ and $\vect{r}_{\textrm{d}}$ follow path $\Pi_{\textrm{c}}=\Pi_{\textrm{a}}$ and $\Pi_{\textrm{d}}\neq\Pi_{\textrm{a}}$. 
-All the rays with target coordinates $(\variabile{q}, \variabile{p})$ and $\variabile{q}^{\,\textrm{a}}\leq\variabile{q}\leq\variabile{q}^{\,\textrm{c}}$ follow path $\Pi = \Pi_{\textrm{a}}$, while the rays with target coordinates $(\variabile{q}, \variabile{p})$ with $\variabile{q}^{\,\textrm{d}}\leq\variabile{q}\leq\variabile{q}^{\,\textrm{b}}$ follow another path $\Pi \neq \Pi_{\textrm{a}}.$ 
-To clarify the procedure, in Figure \ref{fig:bisec} we show an example of target PS of an optical system where Algorithm \ref{alg:bisection} is run for the interval $[\variabile{q}^{\textrm{a}}, \variabile{q}^{\textrm{b}}]$ along direction $\variabile{p}=0$. Applying bisection the coordinates $(\variabile{q}^{\textrm{c}}(\variabile{p}), \variabile{p})$ and $(\variabile{q}^{\textrm{d}}(\variabile{p}), \variabile{p})$ of two points are found. The corresponding rays follow the paths $\Pi_{\textrm{c}}$ and $\Pi_{\textrm{d}}$, where $\Pi_{\textrm{c}}= \Pi_{\textrm{a}}\neq\Pi_{\textrm{d}}$. If $\Pi_{\textrm{c}}$ is a path from the source to the target, Algorithm \ref{alg:bisection} is applied to the sub-interval 
-$[\variabile{q}^{\textrm{a}}(\variabile{p}), \variabile{q}^{\textrm{c}}(\variabile{p})]$, otherwise the it is applied again to the sub-interval $[\variabile{q}^{\textrm{d}}(\variabile{p}), \variabile{q}^{\textrm{b}}(\variabile{p})]$. The bisection procedure is repeated for all the sub-intervals found along direction $\variabile{p}$, until the entire interval $[\variabile{q}^{\textrm{a}}(\variabile{p}), \variabile{q}^{\textrm{c}}(\variabile{p})]$ is investigated.
+All the rays with target coordinates $(\variabile{q}, \variabile{p})$ and $\variabile{q}^{\,\textrm{a}}\leq\variabile{q}\leq\variabile{q}^{\,\textrm{c}}$ follow path $\Pi = \Pi_{\textrm{a}}$, while the rays with target coordinates $(\variabile{q}, \variabile{p})$ with $\variabile{q}^{\,\textrm{d}}\leq\variabile{q}\leq\variabile{q}^{\,\textrm{b}}$ follow another path $\Pi \neq \Pi_{\textrm{a}}$ (see Figure \ref{fig:bisec}). 
+%To clarify the procedure, in Figure \ref{fig:bisec} we show an example of target PS of an optical system where Algorithm \ref{alg:bisection} is run for the interval $[\variabile{q}^{\textrm{a}}, \variabile{q}^{\textrm{b}}]$ along direction $\variabile{p}=0$. Applying bisection the coordinates $(\variabile{q}^{\textrm{c}}(\variabile{p}), \variabile{p})$ and $(\variabile{q}^{\textrm{d}}(\variabile{p}), \variabile{p})$ of two points are found. The corresponding rays follow the paths $\Pi_{\textrm{c}}$ and $\Pi_{\textrm{d}}$, where $\Pi_{\textrm{c}}= \Pi_{\textrm{a}}\neq\Pi_{\textrm{d}}$. If $\Pi_{\textrm{c}}$ is a path from the source to the target, Algorithm \ref{alg:bisection} is applied to the sub-interval 
+%$[\variabile{q}^{\textrm{a}}(\variabile{p}), \variabile{q}^{\textrm{c}}(\variabile{p})]$, otherwise the it is applied again to the sub-interval $[\variabile{q}^{\textrm{d}}(\variabile{p}), \variabile{q}^{\textrm{b}}(\variabile{p})]$. The bisection procedure is repeated for all the sub-intervals found along direction $\variabile{p}$, until the entire interval $[\variabile{q}^{\textrm{a}}(\variabile{p}), \variabile{q}^{\textrm{c}}(\variabile{p})]$ is investigated.
 \begin{figure}[h]
   \begin{center}
   \includegraphics[width=0.7\textwidth]{T4_1_example}
   \end{center}
-  \caption{\textbf{Bisection in target PS \set{T}{}{}.}\\
-$|\variabile{q}^{\textrm{c}}-\variabile{q}^{\textrm{c}}|<\textrm{tol}$, $\Pi_{\textrm{c}}= \Pi_{\textrm{a}}$.}
+  \caption{\textbf{Bisection in target PS \set{T}{}{}.} Algorithm \ref{alg:bisection} is run for the interval $[\variabile{q}^{\textrm{a}}, \variabile{q}^{\textrm{b}}]$ along direction $\variabile{p}=0$. The coordinates $\variabile{q}^{\textrm{c}}$ and $\variabile{q}^{\textrm{d}}$ are found such that 
+$|\variabile{q}^{\textrm{c}}-\variabile{q}^{\textrm{d}}|<\textrm{tol}$. $\Pi_{\textrm{c}}= \Pi_{\textrm{a}}$ and $\Pi_{\textrm{d}}\neq \Pi_{\textrm{a}}$.}
 \label{fig:bisec}
  \end{figure}
 \\ \indent Now, if $\lineaj\neq1$ the procedure applied to the interval 
@@ -72,36 +72,50 @@ $[\variabile{q}^{\textrm{a}}(\variabile{p}), \variabile{q}^{\textrm{b}}(\variabi
 Finally, to detect all the possible paths that can occur along direction $\variabile{p}$ the procedure explained above is applied also to the interval $[\variabile{q}^{\textrm{d}}(\variabile{p}), \variabile{q}^{\textrm{b}}(\variabile{p})]$ along direction $\variabile{p}$. 
 The main steps of the method are outlined in the following.
 \begin{enumerate}
-\item Given a direction \variabile{p}, consider the end points $(\variabile{q}^{\,\textrm{a}}, \variabile{p})$ and $(\variabile{q}^{\,\textrm{b}}, \variabile{p})$ of the target PS \set{T}{}{}.
-\item \label{ray trace} Trace back the rays $\vect{r}_{\textrm{a}}$ and $\vect{r}_\textrm{b}$ corresponding to the coordinates  $(\variabile{q}^{\,\textrm{a}}, \variabile{p})$ and $ (\variabile{q}^{\,\textrm{b}}, \variabile{p})$ using the inverse ray tracing procedure,
-\item Determine indices $\lineaj$ and $\lineak$ of the lines that  $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$  hit.\\
+\item Given a direction \variabile{p}, consider the end points $(\variabile{q}^{\,\textrm{a}}, \variabile{p}^{\,\textrm{a}})$ and $(\variabile{q}^{\,\textrm{b}}, \variabile{p}^{\,\textrm{a}})$ of the target PS \set{T}{}{}, where $\variabile{q}^{\,\textrm{a}} = -\variabile{b}$, $\variabile{q}^{\,\textrm{b}} = \variabile{b}$ and $\variabile{p}^{\,\textrm{a}} = \variabile{p}^{\,\textrm{b}} = \variabile{p}$. Star from $\lineai=\nline$
+\item \label{ray trace} Trace back the rays $\vect{r}_{\textrm{a}}$ and $\vect{r}_\textrm{b}$ corresponding to the coordinates  $(\variabile{q}_{\lineai}^{\,\textrm{a}}, \variabile{p}_{\lineai}^{\,\textrm{a}})$ and $ (\variabile{q}_{\lineai}^{\,\textrm{b}}, \variabile{p}_{\lineai}^{\,\textrm{b}})$ using the inverse ray tracing procedure
+\footnote{If $\lineai=\nline $ then $\variabile{p}_{\lineai}^{\,\textrm{a}}=\variabile{p}_{\lineai}^{\,\textrm{b}}=\variabile{p}$, otherwise $\variabile{p}_{\lineai}^{\,\textrm{a}}\neq\variabile{p}_{\lineai}^{\,\textrm{b}}$},
+\item Determine indices $\lineaj\neq\lineai$ and $\lineak\neq\lineai$ of the lines that  $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$  hit.\\
 \item Update the paths $\Pi_\textrm{a}$ and $\Pi_\textrm{b}$ of rays $\vect{r}_\textrm{a}$ and $\vect{r}_\textrm{b}$.  $\Pi_\textrm{a} = (\lineaj, \Pi_{\textrm{a}})$ and $\Pi_\textrm{b} = (\lineak, \Pi_\textrm{b}),$
-\item If $\lineaj=\lineak \neq 1$ 
+\item If $\lineaj=\lineak \neq 1$ \& $\lineaj=\lineak \neq \nline$
 \begin{itemize}
-\item Restart the procedure from point $\ref{ray trace}$ considering the coordinates of rays $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ on line $\lineaj$ 
+\item $\lineai=\lineaj$,
+%\item Consider the coordinates of rays $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ on line $\lineaj$ 
+\item Restart the procedure from point $\ref{ray trace}$, 
 \end{itemize}
 \item If $\lineaj=\lineak= 1$ 
 \begin{itemize}
-\item A relevant path $\Pi_{\textrm{a}}$ is found. 
+\item A relevant path $\Pi_{\textrm{a}} = \Pi_{\textrm{b}}$ is found. 
 \item Determine 
 \begin{equation*}
 \begin{aligned}
-\variabile{q}^{\textrm{min}}(\Pi_{\textrm{a}}, \variabile{p})&=\min\{\variabile{q}^{\textrm{a}}(\Pi_{\textrm{a}}, \variabile{p}), \variabile{q}^{\textrm{b}}(\Pi_{\textrm{a}}, \variabile{p})\}\\ 
-\variabile{q}^{\textrm{max}}(\Pi_{\textrm{a}}, \variabile{p})&=\max\{\variabile{q}^{\textrm{a}}(\Pi_{\textrm{a}}, \variabile{p}), \variabile{q}^{\textrm{b}}(\Pi_{\textrm{a}}, \variabile{p})\},
+\variabile{q}^{\textrm{min}}(\Pi_{\textrm{a}}, \variabile{p})&=\min\{\variabile{q}^{\textrm{a}}(\Pi_{\textrm{a}}, \variabile{p}), \variabile{q}^{\textrm{b}}(\Pi_{\textrm{b}}, \variabile{p})\}\\ 
+\variabile{q}^{\textrm{max}}(\Pi_{\textrm{a}}, \variabile{p})&=\max\{\variabile{q}^{\textrm{a}}(\Pi_{\textrm{a}}, \variabile{p}), \variabile{q}^{\textrm{b}}(\Pi_{\textrm{b}}, \variabile{p})\},
 \end{aligned}
 \end{equation*}
 \item Update the intensity $$I(\variabile{p}) = I(p)+\variabile{q}^{\textrm{max}}(\Pi_{\textrm{a}}, \variabile{p})-\variabile{q}^{\textrm{min}}(\Pi_{\textrm{a}}, \variabile{p})$$
 \end{itemize}
+%\item If $\lineaj=\lineak= \nline$ stop the procedure (the rays reach the target again).
 \item If $\lineaj\neq\lineak$ 
 \begin{itemize}
 \item Apply the bisection method to the interval $[\variabile{q}^{\textrm{a}}, \variabile{q}^{\textrm{b}}]$ along direction $\variabile{p}$.
 \item Find the points with coordinates $(\variabile{q}^{\,\textrm{c}}, \variabile{p})$ and $(\variabile{q}^{\,\textrm{d}}, \variabile{p})$ in target PS \set{T}{}{} where $|\variabile{q}^{\,\textrm{c}}-\variabile{q}^{\,\textrm{d}}|<\textrm{tol}$ and $\textrm{tol}=10^{-12}$ is the tolerance in the bisection procedure. 
-\item Update $\variabile{q}^{\textrm{b}} = \variabile{q}^{\textrm{c}}$,
+\item If $\lineaj\neq\nline$
+\begin{itemize}
+\item Update $(\variabile{q}^{\textrm{b}}, \variabile{p}) = (\variabile{q}^{\textrm{c}}, \variabile{p})$,
+\item Update $(\variabile{q}_{\lineaj}^{\textrm{b}}, \variabile{p}_{\lineaj}^{\textrm{b}}) = (\variabile{q}_{\lineaj}^{\textrm{c}}, \variabile{p}_{\lineaj}^{\textrm{b}})$,
+
+\item $\lineai = \lineaj$
+
 \item Restart from $\ref{ray trace}$ with the updated coordinates,
 \end{itemize}
-\item Update $\variabile{q}^{\textrm{a}} = \variabile{q}^{\textrm{d}}$,
-\item Restart from $\ref{ray trace}$ with the updated coordinates, 
-\item If $\lineaj=\lineak= \nline$ stop the procedure (the rays reach the target again).
+\item Update $(\variabile{q}^{\textrm{a}}, \variabile{p} )= (\variabile{q}^{\textrm{d}}, , \variabile{p})$,
+\item $\Pi_{\textrm{a}} = \Pi_{\textrm{c}}$
+\item Update $(\variabile{q}_{\lineaj}^{\textrm{a}}, \variabile{p}_{\lineaj}^{\textrm{a}}) = (\variabile{q}_{\lineaj}^{\textrm{d}}, \variabile{p}_{\lineaj}^{\textrm{d}})$,
+\item Restart from $\ref{ray trace}$, 
+
+\end{itemize}
+
 \end{enumerate}
 Giving as input $I(\variabile{p})=0$ for every direction $\variabile{p}$ and the tolerance $\textrm{tol}=10^{-12}$,
 the method is developed using the recursive Algorithm \ref{alg:recursiveraymapping}.
@@ -111,10 +125,10 @@ the method is developed using the recursive Algorithm \ref{alg:recursiveraymappi
 Initialize $\lineai = \nline$, $\variabile{q}^{\,\textrm{a}}= \variabile{q}^{\,\textrm{a}}_{\lineai}=-\variabile{b}$, $\variabile{q}^{\,\textrm{b}}= \variabile{q}^{\,\textrm{b}}_{\lineai}=\variabile{b}$, $\dir{}{}=\variabile{p}^{\textrm{a}}_\lineai=\variabile{p}^{\textrm{b}}_\lineai=\textrm{const}$, $\Pi_{\textrm{a}}=({\nline})$.
 \begin{algorithmic}[1]
 \Procedure {Intensity computation}{$\variabile{q}^{\,\textrm{a}}$,  $\variabile{q}^{\,\textrm{b}}$, $\variabile{q}^{\,\textrm{a}}_{\lineai},$  $\variabile{q}^{\,\textrm{b}}_{\lineai},$ $\dir{}{}$, $\variabile{p}^{\textrm{a}}_{\lineai}$, $\variabile{p}^{\textrm{b}}_{\lineai}$, $\Pi_{\textrm{a}}$, $\lineai$}
-\State Apply the inverse ray tracing to the coordinates $(\variabile{q}^{\,\textrm{a}}_{\lineai},\variabile{p}^{\textrm{a}}_{\lineai})$ and $(\variabile{q}^{\,\textrm{b}}_{\lineai},\variabile{p}^{\textrm{b}}_{\lineai})$ on $\lineai$ of the rays $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$.
+\State Apply the inverse ray tracing to the coordinates $(\variabile{q}^{\,\textrm{a}}_{\lineai},\variabile{p}^{\textrm{a}}_{\lineai})$ and $(\variabile{q}^{\,\textrm{b}}_{\lineai},\variabile{p}^{\textrm{b}}_{\lineai})$ on $\lineai$ of $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$.
 \State Find the lines $\lineaj\neq\lineai$ and $\lineak\neq\lineai$ from which $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ are emitted, respectively.
 \State Update path $\Pi_{\textrm{a}}\gets(\lineaj, \Pi_{\textrm{a}})$
-\State Calculate the coordinates $(\variabile{q}^{\,\textrm{a}}_{\lineaj},\variabile{p}^{\textrm{a}}_{\lineaj})$ and $(\variabile{q}^{\,\textrm{b}}_{\lineaj}, \variabile{p}^{\textrm{b}}_{\lineaj})$ of $\vect{r}_{\textrm{a}}$ and $\vect{r}_{\textrm{b}}$ on line $\lineaj$
+\State Calculate the coordinates $(\variabile{q}^{\,\textrm{a}}_{\lineaj},\variabile{p}^{\textrm{a}}_{\lineaj})$ and $(\variabile{q}^{\,\textrm{b}}_{\lineaj}, \variabile{p}^{\textrm{b}}_{\lineaj})$ on line $\lineaj$
 \If {$\lineaj = \lineak$}
 \If{$\lineaj\neq1$}
 \State\Return{\Call{Intensity computation}{$\variabile{q}^{\,\textrm{a}},$  $\variabile{q}^{\,\textrm{b}},$ $\variabile{q}^{\,\textrm{a}}_{\lineaj},$ $\variabile{q}^{\,\textrm{b}}_{\lineaj},$ $\dir{}{}$, $\variabile{p}^{\textrm{a}}_{\lineaj}$, $\variabile{p}^{\textrm{b}}_{\lineaj}$, $\Pi_{\textrm{a}}$, $\lineaj$}}
@@ -127,11 +141,11 @@ $\variabile{q}^{\textrm{min}} = \min\{\variabile{q}^{\textrm{a}}, \variabile{q}^
 \State Apply bisection to the segment $[\variabile{q}^{\,\textrm{a}}(\Pi_\textrm{a}, \dir{}{}), \variabile{q}^{\,\textrm{b}}(\Pi_\textrm{b}, \dir{}{})]$
 \State Find the target coordinates $(\variabile{q}^{\,\textrm{c}},\variabile{p})$ and $(\variabile{q}^{\,\textrm{d}},\variabile{p})$ of the rays $\vect{r}_{\textrm{c}}$ and $\vect{r}_{\textrm{d}}$, where $|\variabile{q}^{\,\textrm{c}}-\variabile{q}^{\,\textrm{d}}|<\textrm{tol}$
 \If {$\lineaj\neq \nline$}
-\State\Return{\Call{Intensity computation}{$\variabile{q}^{\,\textrm{a}},$  $\variabile{q}^{\,\textrm{c}},$ $\variabile{q}^{\,\textrm{a}}_{\lineaj},$ $\variabile{q}^{\,\textrm{c}}_{\lineaj},$ $\dir{}{}$, $\variabile{p}^{\textrm{a}}_{\lineaj}$, $\variabile{p}^{\textrm{b}}_{\lineaj}$, $\Pi_{\textrm{a}}$, $\lineaj$}}
+\State\Return{\Call{Intensity computation}{$\variabile{q}^{\,\textrm{a}},$  $\variabile{q}^{\,\textrm{c}},$ $\variabile{q}^{\,\textrm{a}}_{\lineaj},$ $\variabile{q}^{\,\textrm{c}}_{\lineaj},$ $\dir{}{}$, $\variabile{p}^{\textrm{a}}_{\lineaj}$, $\variabile{p}^{\textrm{c}}_{\lineaj}$, $\Pi_{\textrm{a}}$, $\lineaj$}}
 \EndIf 
-\State\Return{\Call{Intensity computation}{$\variabile{q}^{\,\textrm{c}},$  $\variabile{q}^{\,\textrm{d}},$ $\variabile{q}^{\,\textrm{c}}_{\lineaj},$ $\variabile{q}^{\,\textrm{d}}_{\lineaj},$ $\dir{}{}$, $\variabile{p}^{\textrm{c}}_{\lineaj}$, $\variabile{p}^{\textrm{d}}_{\lineaj}$, $\Pi_{\textrm{c}}$, $\lineaj$}}
+\State\Return{\Call{Intensity computation}{$\variabile{q}^{\,\textrm{d}},$  $\variabile{q}^{\,\textrm{b}},$ $\variabile{q}^{\,\textrm{d}}_{\lineaj},$ $\variabile{q}^{\,\textrm{b}}_{\lineaj},$ $\dir{}{}$, $\variabile{p}^{\textrm{d}}_{\lineaj}$, $\variabile{p}^{\textrm{b}}_{\lineaj}$, $\Pi_{\textrm{d}}$, $\lineaj$}}
 \EndIf
-\EndProcedure
+\State \EndProcedure
 \end{algorithmic}
 \end{algorithm}
 \\ \indent The explained procedure is able to determine all the possible paths that the rays can follow during their propagation from \set{S}{}{} to \set{T}{}{}. Also, the rays located on the boundaries of the regions with positive luminance on target PS \set{T}{}{} are found.\\ \indent
@@ -139,13 +153,13 @@ Next, the method is applied to two optical systems formed by curved lines. In th
 \section{Results for the TIR-collimator}\label{sec:TIR}
 % Introduction 
 In this section we apply the extended inverse ray mapping to the TIR-collimator presented in Chapter \ref{chap:boundaries_alpha} and depicted in Figure \ref{fig:analyticlens}. The target PS of this system is the rectangular \set{T}{}{}$= [-\variabile{b}, \variabile{b}]\times[-1,1]$ with $\variabile{b}=9.7$. The aim is to detect all the possible path $\Pi$ and the rays located on the boundaries $\partial$\set{R}{}{}$(\Pi)$ of the corresponding regions in target PS. 
-\\ \indent In Chapter \ref{chap:boundaries_alpha} five different paths are found for the the TIR-collimator, and the boundaries of the corresponding regions in target PS \set{T}{}{} are in general difficult to approximate. Furthermore, along the same direction $\dir{}{}$ more than two points can be located on the boundary $\partial$\set{R}{}{}$(\Pi)$ of the region \set{R}{}{}$(\Pi)$ corresponding to a certain path $\Pi$. To determine properly all the boundaries 
+\\ \indent In Chapter \ref{chap:boundaries_alpha}, we found five different paths for the the TIR-collimator. The boundaries of the corresponding regions in target PS \set{T}{}{} are in general difficult to approximate. Furthermore, along the same direction $\dir{}{}$ more than two points can be located on the boundary $\partial$\set{R}{}{}$(\Pi)$ of the region \set{R}{}{}$(\Pi)$ corresponding to a certain path $\Pi$. To determine properly all the boundaries 
 $\partial$\set{R}{}{}$(\Pi)$, we need to divide the interval $[-\variabile{b}, \variabile{b}]$ in 
 \set{T}{}{} into intervals of the same length (bins). Hence, we consider a partitioning 
 $Q = -\variabile{b}=\variabile{q}^{0}<\variabile{q}^{1}<\cdots<\variabile{q}^{\textrm{Ni}}=\variabile{b}$ of $[-\variabile{b}, \variabile{b}]$ where $\textrm{Ni}$ is the total number of bins along the $\variabile{q}$-axis.
 For each direction $\dir{}{}\in [-1,1]$ the procedure explained in Section \ref{chap:raymapping2} is repeated for every sub-interval $[\variabile{q}^{\textrm{k}}(\dir{}{}), \variabile{q}^{\textrm{k}+1}(\dir{}{})]\subset [\variabile{q}^{\textrm{a}}(\dir{}{}), \variabile{q}^{\textrm{b}}(\dir{}{})]$ with $\textrm{k}=0, \cdots, \textrm{Ni}-1$ and $\variabile{q}^{\textrm{a}}(\dir{}{}) = -\variabile{b}$ and $\variabile{q}^{\textrm{b}}(\dir{}{}) = \variabile{b}$.\\ \indent
-To establish in how many bins \textrm{Ni} we need to divide the target, we exploit \'{e}tendue conservation. The same idea applied to determine the value of $\alpha$ for $\alpha$-shapes methods or to provide a stopping criterion for the triangulation refinement (see Chapters \ref{chap:boundaries_alpha} and \ref{chap:triangulation}) is used here. 
-The source \'{e}tendue $U_1$ is calculated from Equation (\ref{eq:Usource}) obtaining $U_1 \approx 7.7$. The target \'{e}tendue $U_\textrm{t}$ is given by Equation (\ref{eq:etenduetarg1}). $U_\textrm{t}$ is calculated several times considering every time a different partitioning $Q$ for the $\variabile{q}$-axis of the target PS. Next, the absolute value of the difference between the source and target \'{e}tendue is obtained from
+To establish in how many bins \textrm{Ni} we need to divide the target, we exploit \'{e}tendue conservation. We use the same idea applied to determine the value of $\alpha$ for $\alpha$-shapes methods and to provide a stopping criterion for the triangulation refinement (see Chapters \ref{chap:boundaries_alpha} and \ref{chap:triangulation}). 
+The source \'{e}tendue $U_1$ is calculated from Equation (\ref{eq:Usource}) obtaining, for the TIR-collimator, $U_1 \approx 7.7$. The target \'{e}tendue $U_\textrm{t}$ is given by Equation (\ref{eq:etenduetarg1}). $U_\textrm{t}$ is calculated several times considering every time a different partitioning $Q$ for the $\variabile{q}$-axis of the target PS. Next, the absolute value of the difference between the source and target \'{e}tendue is obtained from
 \begin{equation}\label{eq:delta_raymapping}
 \Delta U =  \big|U_1-U_{\textrm{t}}\big|.
 \end{equation}
@@ -158,7 +172,7 @@ If a small value of $\Delta U$ is obtained, then a good approximation of $U_{\te
  $U_1$ is calculated from Equation (\ref{eq:Usource}). $U_{\textrm{t}}$ is computed four times increasing every time the number of bins $\textrm{Ni}$ where $\textrm{Ni}=\{5,10,30,100\}$. }
 \label{fig:etendue_raymapping_tir}
  \end{figure}
-As an example, in Figure \ref{fig:boundaries_TIR_ray_mapping} we show the distribution of the rays traced using the inverse ray mapping method with $\textrm{Ni}=30$ and $\nbin = 100.$ 
+In Figure \ref{fig:boundaries_TIR_ray_mapping} we show the distribution of the rays traced using the inverse ray mapping method with $\textrm{Ni}=30$ and $\nbin = 100.$ 
 \begin{figure}[h]
   \begin{center}
   \includegraphics[width=0.7\textwidth]{boundaries_ray_mapping_tir}
@@ -167,18 +181,18 @@ As an example, in Figure \ref{fig:boundaries_TIR_ray_mapping} we show the distri
  The $\variabile{q}$-axis is divided into $\textrm{Ni}=30$ bins, the $\variabile{p}$-axis is divided into $\nbin = 100$ bins. Using the ray mapping method only few rays are traced from the target to the source (red dots). Because of numerical error, few rays outside the region with positive luminance are found (Rays rimmed in red).}
 \label{fig:boundaries_TIR_ray_mapping}
  \end{figure}
-The inverse ray mapping detects $11$ different paths from the source to the target. 
+In this case, the inverse ray mapping detects $11$ different paths from the source to the target. 
 We observe that only $5$ of them are the paths that we expected from PS ray tracing (see Chapter \ref{chap:boundaries_alpha}). 
 The inverse ray mapping also detect the following paths:
-\begin{equation}
+\begin{equation}\label{eq:paths_tir}
 \begin{array}{llll}
 \Pi_6&=(1,2,9,8,7,12), & \Pi_7&=(1,2,5,6,7,12), \\
 \Pi_8&=(1,2,2,7,12),& \Pi_9&=(1,7,12),\\
 \Pi_{10}&=(1,2,4,6,7,12),& \Pi_{11}&=(1,2,10,8,7,12).
 \end{array}\end{equation}
-Those paths are due to numerical error, the rays that follow this path are rimmed in blue in Figure \ref{fig:boundaries_TIR_ray_mapping}. The numerical error can be related to the bisection method and the inverse ray tracing that depend on a given tolerance. We remark that in the inverse ray tracing, the intersection between the ray and the lens (line $2$) is computed using the Newton-Raphson procedure.
+Those paths are due to numerical error, the rays that follow this path are rimmed in blue in Figure \ref{fig:boundaries_TIR_ray_mapping}. The numerical error can be related to the precision of the bisection method and the inverse ray tracing. We remark that in the inverse ray tracing, the intersection between the ray and the lens (line $2$) is computed using the Newton-Raphson procedure.
 To detect only the boundaries of the regions formed by the rays that follow the \textit{physical} $\Pi_{\variabile{j}}$, with $\variabile{j}\in\{1, \cdots, 5\}$, we check the index of refraction that every ray has once it arrives at the source.
-If this is equal to the same index of \point{S} ($\n=1$ for the TIR-collimator), then the ray follows a physical path, otherwise it is discarded and it is not considered for the intensity calculation. This gives the rays distribution at the target PS shown in Figure \ref{fig:boundaries_TIR_ray_mapping1}. We observe that, discarding those rays, $5$ different paths are found. These are the same paths we obtained using PS ray tracing.
+If this is equal to the same index of \point{S} ($\n=1$ for the TIR-collimator), then the ray follows a physical path, otherwise it follows one of the paths in (\ref{eq:paths_tir}) and, therefore, it is not considered for the intensity calculation. This gives the rays distribution at the target PS shown in Figure \ref{fig:boundaries_TIR_ray_mapping1} where $\textrm{Ni}=30$. We observe that, discarding those rays, $5$ different paths are found. These are the same paths we obtained using PS ray tracing.
 \begin{figure}[h]
   \begin{center}
   \includegraphics[width=0.7\textwidth]{boundaries_ray_mapping_tir2}
@@ -187,7 +201,7 @@ If this is equal to the same index of \point{S} ($\n=1$ for the TIR-collimator),
  The $\variabile{q}$-axis is divided into $\textrm{Ni}=30$ bins, the $\variabile{p}$-axis is divided into $\nbin = 100$ bins. Considering only the rays that arrive to the source with the correct index of refraction ($\nline=1$), the regions with positive luminance are computed correctly.}
 \label{fig:boundaries_TIR_ray_mapping1}
  \end{figure}
-Figure \ref{fig:boundaries_TIR_ray_mapping1} shows that the rays on the boundaries $\partial$\set{R}{}{}$(\Pi_{\variabile{j}})$ are determined for every path $\Pi_{\variabile{j}}$ with $\variabile{j}\in\{1, \cdots, 5\}$. Moreover, some rays inside the boundaries are traced. This is related to the fact that we divide the target PS along the $\variabile{q}$-axis into $\textrm{Ni}=30$ bins. As a consequence, all the rays located at the end points of every bin are traced. \\
+Figure \ref{fig:boundaries_TIR_ray_mapping1} shows that the rays on the boundaries $\partial$\set{R}{}{}$(\Pi_{\variabile{j}})$ are determined for every path $\Pi_{\variabile{j}}$ with $\variabile{j}\in\{1, \cdots, 5\}$. Moreover, some rays inside the boundaries are traced. This is related to the fact that we divide the target PS along the $\variabile{q}$-axis into $\textrm{Ni}=30$ bins. As a consequence, also the rays located at the end points of every bin are traced. \\
 \indent The target PS intensity $\hat{I}_{\textrm{PS}}$ is calculated using Equation \ref{eq:Ips}. The profile of $\hat{I}_{\textrm{PS}}$ obtained form inverse ray mapping with $\textrm{Ni}=30$ is depicted in Figure \ref{fig:intensity_tir_raymapping} with the red line. It is compared with the reference intensity (blue line) that is given by QMC ray tracing with $10^7$ rays. The picture shows that the inverse ray mapping method calculates the intensity correctly.
 \begin{figure}[t]
   \begin{center}
@@ -198,7 +212,7 @@ Figure \ref{fig:boundaries_TIR_ray_mapping1} shows that the rays on the boundari
 \label{fig:intensity_tir_raymapping}
  \end{figure}
 \\ \indent 
-Finally, we compare the inverse ray mapping with QMC ray tracing. The errors plot as a function of the CPU-time is shown in a logarithmic scale in Figure \ref{fig:error_tir_raymapping}. The approximation of the $\hat{I}_{\textrm{PS}}$ intensity is improved by increasing the number of bins $\textrm{Ni}$ in the partitioning $Q$. The approximated $\hat{I}_{\textrm{QMC}}$ intensity is calculated several times gradually increasing the number of rays $\nrays$. Both the intensity are computed using the same number of bins $\nbin=100$ in the partitioning $P$ of the $\variabile{p}$-axis. The minimum ray mapping error is obtained with $\textrm{Ni}=100$ bins. For QMC ray tracing at most $10^6$ rays are traced. We observe that the minimal error obtained using the inverse ray mapping is of an order of magnitude of $10^{-6}$, while the minimum QMC error is of the order of $10^{-5}$. Furthermore, an extrapolation of QMC error shows that the inverse ray mapping is more than $20$ times faster compared to QMC.
+Finally, we compare the inverse ray mapping with QMC ray tracing. The errors plot as a function of the CPU-time is shown in a logarithmic scale in Figure \ref{fig:error_tir_raymapping}. The approximation of the RM intensity $\hat{I}_{\textrm{RM}}$ is improved by increasing the number of bins $\textrm{Ni}$ in the partitioning $Q$. The approximated QMC intensity $\hat{I}_{\textrm{QMC}}$ is calculated several times gradually increasing the number of rays $\nrays$. Both the intensity are computed using the same number of bins $\nbin=100$ in the partitioning $P$ of the $\variabile{p}$-axis. The minimum ray mapping error is obtained with $\textrm{Ni}=100$ bins. While the minimum QMC error is achieved tracing $10^6$ rays. We observe that the minimal error obtained using the inverse ray mapping is of an order of magnitude of $10^{-6}$, while the minimum QMC error is of the order of $10^{-5}$. Furthermore, an extrapolation of QMC error shows that the inverse ray mapping is more than $20$ times faster compared to QMC.
 \begin{figure}[t]
   \begin{center}
   \includegraphics[width=0.7\textwidth]{error_tir_raymapping}
@@ -222,11 +236,11 @@ $100$  & $2.52\cdot 10^{-6}$  & $5.1 \cdot 10^{-3}$ & $359$  \\
  \end{tabular}
  \label{tab:ray_mapping_tir}
  \end{table}
-In the next section we present the method for a parabolic reflector.
+\\ \indent In the next section we present the method for a parabolic reflector.
 \section{Results for a parabolic reflector}\label{sec:PR}
 In this section we provide the results for the parabolic reflector in Figure \ref{fig:PR}.
 This is a very challenging example of optical system. Indeed, the rays that propagate through such a system can reflect many times along the left and the right mirror. As we have seen using PS ray tracing, this leads to many different paths. Every path corresponds to a given number of reflections with each of the two reflector. In Chapter \ref{chap:triangulation} we found $17$ different paths for this parabolic reflector. Here, we apply the inverse ray mapping method to detect all this paths. \\ \indent
-The target PS of the parabolic reflector is the rectangular \set{T}{}{}$=[-\variabile{b}, \variabile{b}]\times[-1,1]$ where $\variabile{b}=17$. Likewise, the TIR-collimator we observe that the interval $[-\variabile{b}, \variabile{b}]$ in target PS needs to be divided into intervals of the same length (bins). We remind the reader that we indicate with $\textrm{Ni}$ the number of bins in which we divide the interval $[-\variabile{b}, \variabile{b}]$ along the $\variabile{q}$-axis of \set{T}{}{} and with $\nbin$ the number of bins in which we divide the interval $[-1,1]$ along the $\variabile{p}$-axis. Considering a partitioning $Q = -\variabile{b}=\variabile{q}^{0}<\variabile{q}^{1}<\cdots<\variabile{q}^{\textrm{Ni}}=\variabile{b}$ of $[-\variabile{b}, \variabile{b}]$, the inverse ray mapping explained in Section \ref{sec:raymapping_explanation} is applied to every sub-interval $[\variabile{q}^{\textrm{k}}, \variabile{q}^{\textrm{k+1}}]\subset[-\variabile{b}, \variabile{b}]$ with $\textrm{k}=0, \cdots, \textrm{Ni}-1$ and for every direction $\variabile{p}\in[-1,1]$. To determine how many bins $\textrm{Ni}$ are needed for a good calculation of the target photometric variables, we employ the same idea of the TIR-collimator. The source \'{e}tendue $U_1$ is compared to several approximations of the \'{e}tendue at the target $U_{\textrm{t}}$ each of them is given by a different partitioning $Q$ of $[-\variabile{b}, \variabile{b}]$. For the parabolic reflector all the rays emitted from the source arrive at the target. Therefore, the exact \'{e}tendue as an area in PS is computed from Equation (\ref{eq:etenduesource}) obtaining $U=U_1=8$. The approximated target \'{e}tendue $U_{\textrm{t}}$ is given by Equation (\ref{eq:etendueintegraltarget}). In Figure \ref{fig:etendue_ray_mapping_pr_bin} we show the comparison between $U_1$ and several approximations of $U_{\textrm{Ni}}$ by gradually increasing the number of bins $\textrm{Ni}$ in the partitioning $Q$ and fixing the maximum number of multiple reflections to $30$. Increasing the bins $\textrm{Ni}$, the $U_{\textrm{t}}$ increases approaching to the exact value $U_1=8$. After the division into $\textrm{Ni}=4$ bins the improvement is slightly visible. $\textrm{Ni}=4$ bins are enough to detect $30$ multiple reflections.
+The target PS of the parabolic reflector is the rectangular \set{T}{}{}$=[-\variabile{b}, \variabile{b}]\times[-1,1]$ where $\variabile{b}=17$. Likewise, the TIR-collimator we divide the interval $[-\variabile{b}, \variabile{b}]$ in target PS into sub-intervals of the same length (bins). We remind the reader that we indicate with $\textrm{Ni}$ the number of bins in which we divide the interval $[-\variabile{b}, \variabile{b}]$ along the $\variabile{q}$-axis of \set{T}{}{} and with $\nbin$ the number of bins in which we divide the interval $[-1,1]$ along the $\variabile{p}$-axis. Considering a partitioning $Q = -\variabile{b}=\variabile{q}^{0}<\variabile{q}^{1}<\cdots<\variabile{q}^{\textrm{Ni}}=\variabile{b}$ of $[-\variabile{b}, \variabile{b}]$ and a direction $\variabile{p}\in[-1,1]$, the inverse ray mapping explained in Section \ref{sec:raymapping_explanation} is applied to every sub-interval $[\variabile{q}^{\textrm{k}}, \variabile{q}^{\textrm{k+1}}]\subset[-\variabile{b}, \variabile{b}]$ with $\textrm{k}=0, \cdots, \textrm{Ni}-1$ and for every direction $\variabile{p}\in[-1,1]$. To determine how many bins $\textrm{Ni}$ are needed for a good calculation of the target photometric variables, we employ the same idea of the TIR-collimator. The source \'{e}tendue $U_1$ is compared to several approximations of the \'{e}tendue at the target $U_{\textrm{t}}$ each of them is given by a different partitioning $Q$ of $[-\variabile{b}, \variabile{b}]$. For the parabolic reflector all the rays emitted from the source arrive at the target. Therefore, the exact \'{e}tendue as an area in PS is computed from Equation (\ref{eq:etenduesource}) obtaining $U=U_1=8$. The approximated target \'{e}tendue $U_{\textrm{t}}$ is given by Equation (\ref{eq:etendueintegraltarget}). In Figure \ref{fig:etendue_ray_mapping_pr_bin} we show the comparison between $U_1$ and several approximations of $U_{\textrm{t}}$ by gradually increasing the number of bins $\textrm{Ni}$ in the partitioning $Q$ while fixing the maximum number of multiple reflections to $30$. Increasing the bins $\textrm{Ni}$, the $U_{\textrm{t}}$ increases approaching to the exact value $U_1=8$. After the division into $\textrm{Ni}=4$ bins the improvement is slightly visible. We conclude that $\textrm{Ni}=4$ bins are enough to detect $30$ multiple reflections.
 \begin{figure}[t]
   \begin{center}
   \includegraphics[width=0.7\textwidth]{etendue_ray_mapping_pr_bin}
@@ -235,9 +249,9 @@ The target PS of the parabolic reflector is the rectangular \set{T}{}{}$=[-\vari
  At most $30$ multiple reflections are considered. Increasing the bins $\textrm{Ni}$ gets closer to the exact value $U_1=8$.}
 \label{fig:etendue_ray_mapping_pr_bin}
  \end{figure}
-In Figure \ref{fig:boundaries_raymapping_pr} we show rays distribution at the target PS obtained using the inverse ray mapping and considering $\textrm{Ni}=4$ and at most $30$ multiple reflections. The rays traced from the target to the source are depicted with the red dots. Most of the rays traced are the rays located on the boundaries $\partial$\set{R}{}{}$(\Pi)$ of the regions with positive luminance. 
-Only few rays are traced inside those regions. These are the rays located at the end points of every bin $[\variabile{q}^{\textrm{k}}, \variabile{q}^{\textrm{k+1}}]$ with $\textrm{k}=0, \cdots, \textrm{Ni}$. 
-\begin{figure}[t]
+\\ \indent In Figure \ref{fig:boundaries_rays_pr_raymapping} we show rays distribution at the target PS obtained using the inverse ray mapping and considering $\textrm{Ni}=4$ and at most $30$ multiple reflections. The rays traced from the target to the source are depicted with the red dots. Most of the rays traced are located on the boundaries $\partial$\set{R}{}{}$(\Pi)$ of the regions with positive luminance. 
+Only few rays are traced inside those regions. These are the rays located at the end points of every bin $[\variabile{q}^{\textrm{k}}, \variabile{q}^{\textrm{k}+1}]$ with $\textrm{k}=0, \cdots, \textrm{Ni}-1$. 
+\begin{figure}[h]
   \begin{center}
   \includegraphics[width=0.7\textwidth]{etendue_ray_mapping_pr_bin}
   \end{center}
@@ -246,8 +260,8 @@ Only few rays are traced inside those regions. These are the rays located at the
 \label{fig:boundaries_rays_pr_raymapping}
  \end{figure}
 \\ \indent
-The inverse ray mapping method is able to detect $61$ different paths. Indeed $30$ multiple reflections can occur with the left reflector and $30$ with the right reflector. To those, the path that goes from the source to the target (no reflections with the reflectors) has to be added. For PS ray tracing we found at most $17$ paths for the same parabolic reflector. Hence, we claim that ray mapping is much more accurate than PS ray tracing. Also, we observe the procedure can be stopped when even more than $30$ multiple reflections are reached. The more reflections are considered the better accuracy is obtained. Again, to define a stopping criterion we use \'{e}tendue conservation. Fixing the number of bins $\textrm{Ni}=4$ and $\nbin=100$ and gradually increasing the number of multiple reflections we obtain that the approximated target \'{e}tendue $U_{\textrm{t}}$ changes as the blue line in Figure \ref{fig:etendue_pr_raymapping}. The horizontal red line represents the exact intensity $U = U_{1} = 8$. We note that the more reflections are considered the smaller value of $\Delta U = |U_1-U_{\textrm{t}}|$ is found (see also Table \ref{tab:ray_mapping_pr}). We observe that after around $30$ multiple reflections there is not a significant improvement in the computation of $U_{\textrm{t}}$. This is due to the fact that only few rays follow multiple reflections and therefore, they do not give a significant contribution to the total \'{e}tendue (the regions in PS formed by those rays are very small compared to the entire PS). This gives the insight that the inverse ray mapping has a good accuracy if around $30$ multiple reflections and $\textrm{Ni}=4$ bins are taken into account.
-\begin{figure}[t]
+The inverse ray mapping method is able to detect $61$ different paths. Indeed $30$ multiple reflections can occur with the left reflector and $30$ with the right reflector. To those, the path that goes from the source to the target (no reflections with the reflectors) has to be added. For PS ray tracing we found at most $17$ paths for the same parabolic reflector. Hence, we claim that ray mapping is much more accurate than PS ray tracing. Also, we observe the procedure can be stopped when even more than $30$ multiple reflections are reached. The more reflections are considered the better accuracy is obtained. Again, to define a stopping criterion we use \'{e}tendue conservation. Fixing the number of bins $\textrm{Ni}=4$ and $\nbin=100$ and gradually increasing the number of multiple reflections we obtain that the approximated target \'{e}tendue $U_{\textrm{t}}$ changes as the blue line in Figure \ref{fig:etendue_pr_raymapping}. The horizontal red line represents the exact intensity $U = U_{1} = 8$. We note that the more reflections are considered the smaller value of $\Delta U = |U_1-U_{\textrm{t}}|$ is found (see also Table \ref{tab:ray_mapping_pr}). We observe that after around $30$ multiple reflections there is no significant improvement in the computation of $U_{\textrm{t}}$. This is due to the fact that only few rays follow multiple reflections and therefore, they do not give a significant contribution to the total \'{e}tendue (the regions in PS formed by those rays are very small compared to the entire PS). This gives the insight that the inverse ray mapping has a good accuracy when around $30$ multiple reflections and $\textrm{Ni}=4$ bins are taken into account.
+\begin{figure}[h]
   \begin{center}
   \includegraphics[width=0.7\textwidth]{etendue_pr_raymapping}
   \end{center}
@@ -256,7 +270,7 @@ Fixing the number of bins along the $\variabile{q}$-axis $\textrm{Ni}=4$ and inc
 \label{fig:etendue_pr_raymapping}
  \end{figure}
 Once a stopping criterion is established, ray mapping is run and the rays on the boundaries are determined. Finally, the target intensity is calculated from Equation (\ref{eta2}). 
-In Figure \ref{fig:intensity_pr_raymapping} both the ray mapping intensity (red line) and the reference intensity (dotted blue line) are shown. The ray mapping intensity $\hat{I}_{\textrm{RM}}$ obtained considering at most $30$ multiple reflections, $\textrm{Ni}=4$ and $\nbin = 100$. The reference intensity $\hat{I}_{\textrm{ref}}$ given by QMC ray tracing with $10^8$ rays and $\nbin = 100$. The two intensities overlap.
+\\ \indent In Figure \ref{fig:intensity_pr_raymapping} both the ray mapping intensity (red line) and the reference intensity (dotted blue line) are shown. The ray mapping intensity $\hat{I}_{\textrm{RM}}$ is obtained considering at most $30$ multiple reflections, $\textrm{Ni}=4$ and $\nbin = 100$. The reference intensity $\hat{I}_{\textrm{ref}}$ is given by QMC ray tracing with $10^8$ rays and $\nbin = 100$. The two intensities overlap.
 \begin{figure}[t]
   \begin{center}
   \includegraphics[width=0.7\textwidth]{intensity_pr_raymapping}
@@ -266,9 +280,8 @@ The ray mapping error is calculated considering $\textrm{Ni}=4$ and at most $30$
 \label{fig:intensity_pr_raymapping}
  \end{figure}
 \\ \indent
-To conclude we calculate the errors between the approximated intensities $\hat{I}_{\textrm{A}} (\textrm{A}=\textrm{PS}, \textrm{QMC})$ and the reference intensity $\hat{I}_{\textrm{ref}}$. From the results in Figure \ref{tab:qmc_raymapping_pr} we observe that the RM error (red line) converges faster than QMC error (blues line) as long as an error of an order of $10^{-6}$ is desired. Ray mapping results to be around $20$ times faster than QMC ray tracing. Furthermore, it is much more accurate than QMC. Dividing the target into $\textrm{Ni}=4$ bins we are able to detect \textit{all} the possible paths that can occur. We stop the procedure when $200$ multiple reflections are reached. Our expectation is that, increasing the number of multiple reflections considered and the number of bins $\textrm{Ni}$, the accuracy can be improved even more.
-%% Error
-\begin{figure}[t]
+To conclude we calculate the errors between the approximated intensity $\hat{I}_{\textrm{A}} (\textrm{A}=\textrm{RM}, \textrm{QMC})$ and the reference intensity $\hat{I}_{\textrm{ref}}$. From the results in Figure \ref{fig:error_raymapping_pr} we observe that the RM error (red line) converges faster than QMC error (blues line) as long as an error of an order of $10^{-6}$ is desired. Ray mapping results to be around $20$ times faster than QMC ray tracing. Furthermore, it is much more accurate than QMC. Our method is able to detect \textit{all} the possible paths that can occur. The procedure is stopped when $200$ multiple reflections are reached. Our expectation is that, increasing the number of multiple reflections and the number of bins $\textrm{Ni}$, the accuracy can be improved even more.
+\begin{figure}[h]
   \begin{center}
   \includegraphics[width=0.7\textwidth]{error_pr_raymapping}
   \end{center}
@@ -276,7 +289,7 @@ To conclude we calculate the errors between the approximated intensities $\hat{I
 The ray mapping error decreases by increasing the number of reflections considered.
 The QMC error reduces by tracing more rays.
  The extended inverse ray mapping method is faster and more accurate than QMC ray tracing.}
-\label{tab:qmc_raymapping_pr}
+\label{fig:error_raymapping_pr}
  \end{figure}
 In Tables \ref{tab:ray_mapping_pr} and \ref{tab:qmc_raymapping_pr} these numerical results are reported.
 \begin{table}[t] 
@@ -297,19 +310,37 @@ $200$    & $2.95 \cdot 10^{-4}$ & $1.039\cdot 10^{-6}$ & $32.21$  \\
  \end{tabular}
  \label{tab:ray_mapping_pr}
  \end{table}
-
 \begin{table}[t] 
 \centering
 \caption{\bf Errors of the QMC intensity for the parabolic reflector}
 \begin{tabular}{lllll}
  \hline  $\nrays$\;  & QMC error & CPU-time (sec.)\\
   \hline 
- $10^4$     & $2.05\cdot 10^{-4}$   & $2.81$  \\
-$10^5$      & $2.87\cdot 10^{-5}$   & $25.81$   \\
-$10^6$      & $7.18 \cdot 10^{-6}$  & $257.54$  \\
- $10^7$     & $1.15 \cdot 10^{-6}$  & $2491.32$  \\
+$10^4$     & $2.05\cdot 10^{-4}$   & $2.81$  \\
+$10^5$     & $2.87\cdot 10^{-5}$   & $25.81$   \\
+$10^6$     & $7.18 \cdot 10^{-6}$  & $257.54$  \\
+$10^7$     & $1.15 \cdot 10^{-6}$  & $2491.32$  \\
  \hline
  \end{tabular}
  \label{tab:qmc_raymapping_pr}
  \end{table}
 \section{Conclusions}
+In this chapter we present the extension of the analytic ray mapping method to system formed by curved lines. Employing the inverse ray mapping 
+% Explain the method
+\\ \indent
+We shown the results for two optical systems: the TIR-collimator and a parabolic reflector.
+% Explain the results
+\\ \indent In the next chapter we explain how to apply the method to systems with Fresnel reflection. We present the method for a system formed by the source, an ideal lens and the target.
+
+
+
+
+
+
+
+
+
+
+
+
+
