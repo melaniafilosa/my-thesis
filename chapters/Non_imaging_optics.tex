@@ -6,7 +6,7 @@ Radiometry is concerned with the measurement of electromagnetic radiation across
 \begin{equation}
 \Phi_{\textrm{r}} = \frac{\textrm{d}Q}{\textrm{d}\mytime}\,,
 \end{equation}
-where $Q$ is the energy and $T$ the time.\\
+where $Q$ is the energy and $\mytime$ the time.\\
 \indent In illumination optics the measurement of light is given in terms of the impression that it gives on the human eye. Therefore, illumination optics deals with photometric variables rather than with radiometric variables. The most important photometric variables are defined in the following using the notation adopted by Chaves in \cite{chaves2015introduction}. The luminous flux $\Phi$ (unit lumen \textrm{lm}) is defined as the \textit{perceived} power of light by the human eye.
  The radiant and the luminous flux are related by the luminous efficacy function $y$, unit \textrm{lm}/\textrm{W}, which defines how many lumen correspond to one Watt of power at a given wavelength.
  The luminous efficacy reaches its maximum  at a wavelength of $555$ $\textrm{nm}$ where it is equal to $683$ $\textrm{lm}/\textrm{W}$.
@@ -17,7 +17,7 @@ where $Q$ is the energy and $T$ the time.\\
   \begin{center}
   \includegraphics[width=7cm]{CIELuminosity}
   \end{center}
-  \caption{Luminosity function $\bar{y}(\lambda)$: relation between the eye's sensitivity and the wavelength of light. The luminosity function is dimensionless, \cite{wiki}.}
+  \caption{Luminosity function $\bar{y}(\lambda)$: relation between the eye's sensitivity and the wavelength of light. The luminosity function is dimensionless  \cite{wiki}.}
   \label{fig:luminosityfunction}
   \end{figure}
 \\ \indent The luminous flux corresponding to one Watt of radiation power at any wavelength is given by the product of $683$ $\textrm{lm/W}$ and the luminosity function at the same wavelength,
@@ -75,16 +75,16 @@ Thus, when $L(\vect{x},\myangle)$ does not depend on the position and the direct
 I(\myangle) = I_0\cos\myangle\,.
 \end{equation}
 where $I_0 = I(\myangle = 0) = LA$. \\
-\indent Finally, the \'{e}tendue $U$ (unit $[\textrm{m sr}]$) describes the ability of a source to emitt light or the capability of an optical system to receive light, \cite{zhu2011etendue}.
-The quantity $ \textrm{d}U $ is defined as:
+\indent Finally, the \'{e}tendue $U$ (unit $\textrm{m}^2\textrm{sr}$) describes the ability of a source to emitt light or the capability of an optical system to receive light \cite{zhu2011etendue}.
+The quantity $ \textrm{d}U $ of a source is defined as:
 \begin{equation}\label{etendue}
-\textrm{d}U = n^2 \cos\myangle\textrm{d}A\textrm{d}\Omega.
+\textrm{d}U = n^2  \frac{1}{L}\textrm{d}\Phi = n^2 \cos\myangle\textrm{d}A\textrm{d}\Omega,
 \end{equation}
-where $n$ is the index of refraction of the medium in which the surface $A$ is immersed. In optics the \'{e}tendue is considered to be a volume in phase space  (or an area for two-dimensional systems). This concept will be clarified in Chapter \ref{chap:PS} in which we treat the phase space in more detail.
+where $n$ is the index of refraction of the medium in which the surface $\textrm{d}A$ is immersed. In optics the \'{e}tendue is considered to be a volume in phase space  (or an area for two-dimensional systems). This concept will be clarified in Chapter \ref{chap:PS} in which we treat the phase space in more detail.
 An important property of the \'{e}tendue is that it is conserved within an optical system in absence of absorption. We now show, using the approach of Chaves in \cite{chaves2015introduction}, 
 how conservation of this quantity can be derived.
 Consider a light ray emitted from an infinitesimal area $\textrm{d}A_1$ to the area $\textrm{d}A_2$. Suppose that the centers of $\textrm{d}A_1$ and $\textrm{d}A_2$ 
-are located at a distance \variabile{d} to each other,  see Figure \ref{fig:etendue_conservation}.
+are located at a distance \variabile{d} from each other,  see Figure \ref{fig:etendue_conservation}.
 \begin{figure}[h]
  \label{fig:etendue_conservation}
      \begin{center}
@@ -94,24 +94,24 @@ are located at a distance \variabile{d} to each other,  see Figure \ref{fig:eten
 $\myangle_1$ and $\myangle_2$ are the angles made by the central ray with the normals $\nu_1$ and $\nu_2$, respectively.}
 \label{fig:etendue_conservation}
  \end{figure}
-Indicating with $\boldsymbol{\nu}_1$ and $\boldsymbol{\nu}_2$ the normals to the surfaces $\textrm{d}A_1$ and $\textrm{d}A_2$, respectively and with $\myangle_1$ and $\myangle_2$ the angles that the central ray forms with $\boldsymbol{\nu}_1$ and $\boldsymbol{\nu}_2$, respectively,
-the flux $\textrm{d}\Phi_1$ passing through $\textrm{d}A_2$ coming from $\textrm{d}A_1$ and the corresponding solid angle $\textrm{d}\Omega_1 $ are defined as:
+Indicating with $\boldsymbol{\nu}_1$ and $\boldsymbol{\nu}_2$ the normals to the surfaces $\textrm{d}A_1$ and $\textrm{d}A_2$, respectively and with $\myangle_1$ and $\myangle_2$ the angles that the ray connecting the centers of $\textrm{d}A_1$ and $\textrm{d}A_2$ forms with $\boldsymbol{\nu}_1$ and $\boldsymbol{\nu}_2$, respectively,
+the flux $\textrm{d}\Phi_1$ passing through $\textrm{d}A_2$ emitted from $\textrm{d}A_1$ and the corresponding solid angle $\textrm{d}\Omega_1 $ are defined as:
 \begin{equation}
 \begin{split}
-\textrm{d}\Phi_1 &= L \cos\myangle_1 \textrm{d}A_1 \textrm{d}\Omega_1, \\
-\textrm{d}\Omega_1 &= \frac{\textrm{d}A_2\cos(\myangle_2)}{\variabile{d}^2}\,.
+\textrm{d}\Omega_1 &= \frac{\textrm{d}A_2\cos(\myangle_2)}{\variabile{d}^2}\,,\\
+\textrm{d}\Phi_1 &= L \cos\myangle_1 \textrm{d}A_1 \textrm{d}\Omega_1. 
 \end{split}
 \end{equation}
-Similarly, the flux $\textrm{d}\Phi_2$ passing through $\textrm{d}A_1$ coming from $\textrm{d}A_2$ is equal to:
+Similarly, the flux $\textrm{d}\Phi_2$ passing through $\textrm{d}A_1$ emitted from $\textrm{d}A_2$ is equal to:
 \begin{equation}\begin{split}
-\textrm{d}\Phi_2 &= L \cos\myangle_2 \textrm{d}A_2 \textrm{d}\Omega_2\\
-\textrm{d}\Omega_2 &= \frac{\textrm{d}A_1\cos\myangle_1}{\variabile{d}^2}\,.
+\textrm{d}\Omega_2 &= \frac{\textrm{d}A_1\cos\myangle_1}{\variabile{d}^2}\,,\\
+\textrm{d}\Phi_2 &= L \cos\myangle_2 \textrm{d}A_2 \textrm{d}\Omega_2.
 \end{split}
 \end{equation}
 Then from Eq. (\ref{etendue}) we obtain the following relations: \begin{equation}
 \begin{split}
-\textrm{d}U_1 &= n^2 \textrm{d}A_1\cos\myangle_1\textrm{d}\Omega_1= \frac{n^2 \textrm{d}A_1\cos\myangle_1\textrm{d}A_2\cos\myangle_2}{\variabile{d}^2},\\
-\textrm{d}U_2 &= n^2 \textrm{d}A_2\cos\myangle_2\textrm{d}\Omega_2= \frac{ n^2 \textrm{d}A_2\cos\myangle_2\textrm{d}A_1\cos\myangle_1	`}{\variabile{d}^2}
+\textrm{d}U_1 &= n^2\cos\myangle_1 \textrm{d}A_1\textrm{d}\Omega_1= \frac{n^2\cos\myangle_1 \textrm{d}A_1\textrm{d}A_2\cos\myangle_2}{\variabile{d}^2},\\
+\textrm{d}U_2 &= n^2 \cos\myangle_2\textrm{d}A_2\textrm{d}\Omega_2= \frac{ n^2 \cos\myangle_2\textrm{d}A_2\textrm{d}A_1\cos\myangle_1}{\variabile{d}^2}.
 \end{split}
 \end{equation}
 for $\textrm{d}A_1$ and $\textrm{d}A_2$, respectively.
